@@ -4,15 +4,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Users {
-    private int user_id;
+    private int UserId;
     private String password_hash;
     private String first_name;
     private String last_name;
     private String email;
     private String role;
 
-    private Users(int user_id,String password_hash, String first_name, String last_name, String email, String role) {
-        this.user_id = user_id;
+    protected Users(int UserId,String password_hash, String first_name, String last_name, String email, String role) {
+        this.UserId = UserId;
         this.password_hash = password_hash;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -35,8 +35,8 @@ public class Users {
 //        return password_hash;
 //    }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return UserId;
     }
 
     public String getFirst_name() {
