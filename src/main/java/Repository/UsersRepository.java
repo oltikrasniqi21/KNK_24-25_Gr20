@@ -3,10 +3,7 @@ package Repository;
 import Database.DBCustomConnector;
 import models.Users;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class UsersRepository {
@@ -33,5 +30,23 @@ public class UsersRepository {
             return users;
         }
     }
+
+    public Users getById(int id) {
+        String query = "SELECT * FROM USERS WHERE user_id = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if(resultSet.next()) {
+                return Users.getInstance(resultSet);
+            }
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
 
 }
