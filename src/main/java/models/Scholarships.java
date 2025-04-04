@@ -10,17 +10,17 @@ public class Scholarships {
     private String scholarshipName;
     private String provider;
     private int amount;
-    private Date deadlineDate;
+    private Date deadline;
     private int yearRequirement;
     private String majorRequirement;
 
 
-    private Scholarships(int scholarshipId, String scholarshipName, String provider, int amount, Date deadlineDate, int yearRequirement, String majorRequirement) {
+    private Scholarships(int scholarshipId, String scholarshipName, String provider, int amount, Date deadline, int yearRequirement, String majorRequirement) {
         this.scholarshipId = scholarshipId;
         this.scholarshipName = scholarshipName;
         this.provider = provider;
         this.amount = amount;
-        this.deadlineDate = deadlineDate;
+        this.deadline = deadline;
         this.yearRequirement = yearRequirement;
         this.majorRequirement = majorRequirement;
     }
@@ -30,9 +30,10 @@ public class Scholarships {
         String scholarshipName = resultSet.getString(2);
         String provider  = resultSet.getString(3);
         int amount = resultSet.getInt(4);
-        Date deadlineDate = resultSet.getDate(5);
+        Date deadline = resultSet.getDate(5);
         int yearRequirement = resultSet.getInt(6);
         String majorRequirement = resultSet.getString(7);
+        return new Scholarships(scholarshipId,scholarshipName,provider,amount,deadline,yearRequirement,majorRequirement);
 
     }
 
@@ -52,8 +53,8 @@ public class Scholarships {
         return amount;
     }
 
-    public Date getDeadlineDate() {
-        return deadlineDate;
+    public Date getDeadline() {
+        return deadline;
     }
 
     public String getMajorRequirement() {
