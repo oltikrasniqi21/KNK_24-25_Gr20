@@ -52,7 +52,7 @@ public class Scholarships {
         return amount;
     }
 
-    public LocalDate getDeadlineDate() {
+    public Date getDeadlineDate() {
         return deadlineDate;
     }
 
