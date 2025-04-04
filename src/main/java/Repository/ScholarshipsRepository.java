@@ -23,7 +23,7 @@ public class ScholarshipsRepository {
             ResultSet resultSet = statement.executeQuery(query);
 
             while(resultSet.next()){
-                Scholarships scholarship = Scholarships.getInstance(ResultSet);
+                Scholarships scholarship = Scholarships.getInstance(resultSet);
                 scholarships.add(scholarship);
 
             }
@@ -33,18 +33,19 @@ public class ScholarshipsRepository {
         return scholarships;
     }
 
-    public Scholarships getById(int id){
+    public Scholarships getById(int id) {
         String query = "SELECT * FROM SCHOLARSHIPS WHERE ID=?";
-        try{
+        try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
 
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 return Scholarships.getInstance(resultSet);
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
+        return null;
     }
 }

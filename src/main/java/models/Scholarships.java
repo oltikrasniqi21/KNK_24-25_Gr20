@@ -1,5 +1,8 @@
 package models;
 
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class Scholarships {
@@ -7,12 +10,12 @@ public class Scholarships {
     private String scholarshipName;
     private String provider;
     private int amount;
-    private LocalDate deadlineDate;
+    private Date deadlineDate;
     private int yearRequirement;
     private String majorRequirement;
 
 
-    public Scholarships(int scholarshipId, String scholarshipName, String provider, int amount, LocalDate deadlineDate, int yearRequirement, String majorRequirement) {
+    private Scholarships(int scholarshipId, String scholarshipName, String provider, int amount, Date deadlineDate, int yearRequirement, String majorRequirement) {
         this.scholarshipId = scholarshipId;
         this.scholarshipName = scholarshipName;
         this.provider = provider;
@@ -20,6 +23,17 @@ public class Scholarships {
         this.deadlineDate = deadlineDate;
         this.yearRequirement = yearRequirement;
         this.majorRequirement = majorRequirement;
+    }
+
+    public static Scholarships getInstance(ResultSet resultSet) throws SQLException {
+        int scholarshipId = resultSet.getInt(1);
+        String scholarshipName = resultSet.getString(2);
+        String provider  = resultSet.getString(3);
+        int amount = resultSet.getInt(4);
+        Date deadlineDate = resultSet.getDate(5);
+        int yearRequirement = resultSet.getInt(6);
+        String majorRequirement = resultSet.getString(7);
+
     }
 
     public int getScholarshipId() {
