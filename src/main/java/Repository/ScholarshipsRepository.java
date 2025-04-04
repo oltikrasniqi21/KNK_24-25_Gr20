@@ -4,10 +4,7 @@ import Database.DBCustomConnector;
 import models.Scholarships;
 
 import javax.xml.transform.Result;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class ScholarshipsRepository {
@@ -34,5 +31,20 @@ public class ScholarshipsRepository {
             e.printStackTrace();
         }
         return scholarships;
+    }
+
+    public Scholarships getById(int id){
+        String query = "SELECT * FROM SCHOLARSHIPS WHERE ID=?";
+        try{
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if(resultSet.next()){
+                return Scholarships.getInstance(resultSet);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 }
