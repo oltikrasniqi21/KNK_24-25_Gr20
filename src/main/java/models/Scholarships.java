@@ -3,46 +3,48 @@ package models;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 public class Scholarships {
-    private int scholarshipId;
-    private String scholarshipName;
+    private int scholarship_id;
+    private String scholarship_name;
     private String provider;
     private int amount;
-    private Date deadline;
-    private int yearRequirement;
-    private String majorRequirement;
+    private Date deadline_date;
+    private double required_gpa;
+    private int required_year;
+    private String requred_major;
 
 
-    private Scholarships(int scholarshipId, String scholarshipName, String provider, int amount, Date deadline, int yearRequirement, String majorRequirement) {
-        this.scholarshipId = scholarshipId;
-        this.scholarshipName = scholarshipName;
+    private Scholarships(int scholarship_id, String scholarship_name, String provider, int amount, Date deadline_date,double required_gpa, int required_year, String requred_major) {
+        this.scholarship_id = scholarship_id;
+        this.scholarship_name = scholarship_name;
         this.provider = provider;
         this.amount = amount;
-        this.deadline = deadline;
-        this.yearRequirement = yearRequirement;
-        this.majorRequirement = majorRequirement;
+        this.deadline_date = deadline_date;
+        this.required_gpa = required_gpa;
+        this.required_year = required_year;
+        this.requred_major = requred_major;
     }
 
     public static Scholarships getInstance(ResultSet resultSet) throws SQLException {
-        int scholarshipId = resultSet.getInt(1);
-        String scholarshipName = resultSet.getString(2);
-        String provider  = resultSet.getString(3);
-        int amount = resultSet.getInt(4);
-        Date deadline = resultSet.getDate(5);
-        int yearRequirement = resultSet.getInt(6);
-        String majorRequirement = resultSet.getString(7);
-        return new Scholarships(scholarshipId,scholarshipName,provider,amount,deadline,yearRequirement,majorRequirement);
+        int scholarship_id = resultSet.getInt("scholarship_id");
+        String scholarship_name = resultSet.getString("scholarship_name");
+        String provider  = resultSet.getString("provider");
+        int amount = resultSet.getInt("amount");
+        Date deadline_date = resultSet.getDate("deadline_date");
+        int required_year = resultSet.getInt("required_year");
+        double required_gpa = resultSet.getDouble("required_gpa");
+        String required_major = resultSet.getString("required_major");
+        return new Scholarships(scholarship_id, scholarship_name,provider,amount,deadline_date,required_gpa, required_year,required_major);
 
     }
 
-    public int getScholarshipId() {
-        return scholarshipId;
+    public int getScholarship_id() {
+        return scholarship_id;
     }
 
-    public String getScholarshipName() {
-        return scholarshipName;
+    public String getScholarship_name() {
+        return scholarship_name;
     }
 
     public String getProvider() {
@@ -53,15 +55,19 @@ public class Scholarships {
         return amount;
     }
 
-    public Date getDeadline() {
-        return deadline;
+    public Date getDeadline_date() {
+        return deadline_date;
     }
 
-    public String getMajorRequirement() {
-        return majorRequirement;
+    public double getRequired_gpa(){
+        return  required_gpa;
     }
 
-    public int getYearRequirement() {
-        return yearRequirement;
+    public String getRequred_major() {
+        return requred_major;
+    }
+
+    public int getRequired_year() {
+        return required_year;
     }
 }

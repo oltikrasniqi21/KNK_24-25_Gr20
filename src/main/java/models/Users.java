@@ -4,16 +4,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Users {
-    private int UserId;
-    private String password_hash;
+    private int user_id;
+    private String password;
     private String first_name;
     private String last_name;
     private String email;
     private String role;
 
-    protected Users(int UserId,String password_hash, String first_name, String last_name, String email, String role) {
-        this.UserId = UserId;
-        this.password_hash = password_hash;
+    protected Users(int user_id, String password, String first_name, String last_name, String email, String role) {
+        this.user_id = user_id;
+        this.password = password;
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
@@ -22,7 +22,7 @@ public class Users {
 
     public static Users getInstance(ResultSet resultSet) throws SQLException {
         int user_id = resultSet.getInt("user_id");
-        String password_hash = resultSet.getString("password_hash");
+        String password_hash = resultSet.getString("password");
         String first_name = resultSet.getString("first_name");
         String last_name = resultSet.getString("last_name");
         String email = resultSet.getString("email");
@@ -30,13 +30,13 @@ public class Users {
 
         return new Users(user_id,password_hash,first_name,last_name,email,role);
     }
-//
-//    public String getPassword_hash() {
-//        return password_hash;
+
+//    public String getPassword() {
+//        return password;
 //    }
 
-    public int getUserId() {
-        return UserId;
+    public int getUser_id() {
+        return user_id;
     }
 
     public String getFirst_name() {
