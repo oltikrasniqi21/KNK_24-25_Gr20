@@ -38,3 +38,28 @@ CREATE TABLE applications(
 	application_date DATE NOT NULL DEFAULT CURRENT_DATE,
 	status VARCHAR(10) NOT NULL CHECK (LOWER(status) IN ('pending', 'approved', 'rejected'))
 );
+
+#fillojme me shtimin e tabelave te reja
+#feedback, faq, notification
+
+CREATE TABLE feedback(
+    feedback_id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES Users(user_id) ON DELETE CASCADE,
+    message TEXT NOT NULL,
+    submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    response TEXT
+);
+
+CREATE TABLE faq (
+    faq_id SERIAL PRIMARY KEY,
+    question TEXT NOT NULL,
+    answer TEXT NOT NULL
+);
+
+CREATE TABLE notification (
+    notification_id SERIAL PRIMARY KEY,
+    student_id INT REFERENCES Students(student_id) ON DELETE CASCADE,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    read_status BOOLEAN DEFAULT FALSE
+);
