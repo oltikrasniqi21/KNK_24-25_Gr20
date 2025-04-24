@@ -1,5 +1,7 @@
 package models;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 
@@ -10,12 +12,22 @@ public class Applications {
     private LocalDate applicationDate;
     private String status;
 
-    public Applications(int applicationId, int studentId, int scholarshipId, LocalDate applicationDate, String status) {
+    private Applications(int applicationId, int studentId, int scholarshipId, LocalDate applicationDate, String status) {
         this.applicationId = applicationId;
         this.studentId = studentId;
         this.scholarshipId = scholarshipId;
         this.applicationDate = applicationDate;
         this.status = status;
+    }
+
+    public static Applications getInstance(ResultSet resultSet) throws SQLException{
+        int id = resultSet.getInt("application_id");
+        int sid = resultSet.getInt("student_id");
+        int scid = resultSet.getInt("scholarships_id");
+        LocalDate appDate = resultSet.getDate("application_date").toLocalDate();
+        String stat = resultSet.getString("status");
+
+        return new Applications(id, sid, scid, appDate, stat);
     }
 
     public int getApplicationId() {
