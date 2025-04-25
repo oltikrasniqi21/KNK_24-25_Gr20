@@ -1,12 +1,22 @@
 package UpdateDTO;
 
 public class UpdateFaqDTO {
+    private int faqId;
     private String question;
     private String answer;
 
-    public UpdateFaqDTO(String question, String answer) {
+    public UpdateFaqDTO(int faqId, String question, String answer) {
+        this.faqId = faqId;
         this.question = question;
         this.answer = answer;
+    }
+
+    public int getFaqId() {
+        return faqId;
+    }
+
+    public void setFaqId(int faqId) {
+        this.faqId = faqId;
     }
 
     public String getQuestion() {
