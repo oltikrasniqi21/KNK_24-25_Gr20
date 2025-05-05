@@ -23,7 +23,7 @@ public class Applications {
     public static Applications getInstance(ResultSet resultSet) throws SQLException{
         int id = resultSet.getInt("application_id");
         int sid = resultSet.getInt("student_id");
-        int scid = resultSet.getInt("scholarships_id");
+        int scid = resultSet.getInt("scholarship_id");
         LocalDate appDate = resultSet.getDate("application_date").toLocalDate();
         String stat = resultSet.getString("status");
 
