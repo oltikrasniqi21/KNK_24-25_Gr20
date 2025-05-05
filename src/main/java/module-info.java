@@ -10,4 +10,7 @@ module com.example.knk_2425_gr20 {
 
     exports com.example.knk_2425_gr20;
     exports Database;
+
+    exports test to javafx.fxml;
+    opens test;
 }
