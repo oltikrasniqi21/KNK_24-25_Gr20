@@ -11,10 +11,12 @@ public class SceneManager {
 
     private Scene scene;
     private String currentPath;
+    private LanguageManager languageManager;
 
     private static final String DEFAULT_START_PAGE = SceneLocator.LOGIN_PAGE;
 
     private SceneManager(){
+        this.languageManager = LanguageManager.getInstance();
         scene = initializeScene();
     }
 
@@ -58,10 +60,11 @@ public class SceneManager {
         FXMLLoader loader = new FXMLLoader(
                 this.getClass().getResource(path)
         );
+        loader.setResources(this.languageManager.getResourceBundle());
         return loader.load();
     }
 
-    private static void reload() throws Exception{
+    public static void reload() throws Exception{
         load(instance.getCurrentPath());
     }
 

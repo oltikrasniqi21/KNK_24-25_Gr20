@@ -87,15 +87,17 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-        <Label alignment="CENTER" layoutX="89.0" layoutY="44.0" style="&#10;" text="LOGIN PAGE" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+        <Label alignment="CENTER" layoutX="89.0" layoutY="44.0" style="&#10;" text="%login.title" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
           <font>
             <Font size="29.0" />
           </font>
         </Label>
-            <TextField fx:id="txtUsername" layoutX="89.0" layoutY="123.0" prefHeight="25.0" prefWidth="163.0" promptText="Username" />
-            <PasswordField fx:id="pwdPassword" layoutX="89.0" layoutY="173.0" prefHeight="25.0" prefWidth="163.0" promptText="Password" />
-            <Button layoutX="201.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleLoginClick" text="Login" />
-            <Button layoutX="89.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleLoginCancel" text="Cancel" />
+            <TextField fx:id="txtUsername" layoutX="89.0" layoutY="123.0" prefHeight="25.0" prefWidth="163.0" promptText="%login.username" />
+            <PasswordField fx:id="pwdPassword" layoutX="89.0" layoutY="173.0" prefHeight="25.0" prefWidth="163.0" promptText="%login.password" />
+            <Button layoutX="201.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleLoginClick" text="%login.button" />
+            <Button layoutX="89.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleLoginCancel" text="%cancel.button" />
+            <Button layoutX="37.0" layoutY="19.0" mnemonicParsing="false" onAction="#handleENLanguageClick" text="%english.button" />
+            <Button layoutX="252.0" layoutY="19.0" mnemonicParsing="false" onAction="#handleSQLanguageClick" text="%shqip.button" />
       </children>
     </AnchorPane>
   </children>
