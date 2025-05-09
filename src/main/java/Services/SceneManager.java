@@ -76,4 +76,11 @@ public class SceneManager {
         return scene;
     }
 
+    public void loadScene(String path){
+        try{
+            setSceneRoot(path);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }
