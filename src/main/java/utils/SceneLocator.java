@@ -5,6 +5,7 @@ public class SceneLocator {
     public static final String STUDENT_HOME_PAGE = "/views/student_home.fxml";
     public static final String LOGIN_PAGE = "/views/login.fxml";
     public static final String CREATE_USERS_PAGE  = "/views/create_users.fxml";
+    public static final String MANAGE_STUDENTS_PAGE = "/views/manage_students.fxml";
     public static final String MANAGE_USERS_PAGE = "/views/manage_users.fxml";
     public static final String MANAGE_SCHOLARSHIPS_PAGE = "/views/manage_scholarships.fxml";
     public static final String MANAGE_APPLICATIONS_PAGE = "/views/manage_applications.fxml";
