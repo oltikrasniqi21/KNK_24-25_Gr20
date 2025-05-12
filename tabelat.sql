@@ -79,13 +79,13 @@ CREATE TABLE notification (
 //query per shtimin e admin-users
 
 INSERT INTO users (password, first_name, last_name, email, role)
-VALUES ('12345678', 'Uni', 'PR', 'unipr@gmail.com', 'admin');
+VALUES ('12345678', 'Admin', 'Pr', 'administrata@admin.uni-pr.com', 'admin');
 
 INSERT INTO users (password, first_name, last_name, email, role)
-VALUES ('12345678', 'Uni', 'PZ', 'unipz@gmail.com', 'admin');
+VALUES ('12345678', 'Admin', 'Pz', 'administrata@admin.uni-pz.com', 'admin');
 
 INSERT INTO users (password, first_name, last_name, email, role)
-VALUES ('12345678', 'Uni', 'GJK', 'unigjk@gmail.com', 'admin');
+VALUES ('12345678', 'Admin', 'Gjk', 'administrata@admin.uni-gjk.com', 'admin');
 
 INSERT INTO users (password, first_name, last_name, email, role)
-VALUES ('12345678', 'Uni', 'FZ', 'unifz@gmail.com', 'admin');
+VALUES ('12345678', 'Admin', 'Fz', 'administrata@admin.uni-fz.com', 'admin');
