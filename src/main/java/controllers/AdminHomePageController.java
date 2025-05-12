@@ -32,12 +32,19 @@ public class AdminHomePageController {
     }
 
     @FXML
-    private void handleNotifications(){
-        SceneManager.getInstance().loadScene(SceneLocator.MANAGE_NOTIFICATIONS_PAGE);
+    private void handleNotification(){
+        SceneManager.getInstance().loadScene(SceneLocator.MANAGE_ADMIN_NOTIFICATION_PAGE);
     }
 
     @FXML
     private void handleLogout(){
         SceneManager.getInstance().loadScene(SceneLocator.LOGIN_PAGE);
     }
+
+    @FXML
+    private void handleFAQ() {
+        SceneManager.getInstance().loadScene(SceneLocator.MANAGE_FAQ_PAGE);
+    }
+
+
 }
