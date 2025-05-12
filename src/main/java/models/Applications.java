@@ -1,50 +1,49 @@
 package models;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.time.LocalDate;
 
 
 public class Applications {
-    private int application_id;
-    private int student_id;
-    private int scholarship_id;
-    private Date application_date;
+    private int applicationId;
+    private int studentId;
+    private int scholarshipId;
+    private LocalDate applicationDate;
     private String status;
 
-    private Applications(int application_id, int student_id, int scholarship_id, Date application_date, String status) {
-        this.application_id = application_id;
-        this.student_id = student_id;
-        this.scholarship_id = scholarship_id;
-        this.application_date = application_date;
+    private Applications(int applicationId, int studentId, int scholarshipId, LocalDate applicationDate, String status) {
+        this.applicationId = applicationId;
+        this.studentId = studentId;
+        this.scholarshipId = scholarshipId;
+        this.applicationDate = applicationDate;
         this.status = status;
     }
 
-    public static Applications getInstance(ResultSet resultSet) throws SQLException {
-        int application_id = resultSet.getInt("application_id");
-        int student_id = resultSet.getInt("student_id");
-        int scholarship_id = resultSet.getInt("scholarship_id");
-        Date application_date = resultSet.getDate("application_date");
-        String status = resultSet.getString("status");
+    public static Applications getInstance(ResultSet resultSet) throws SQLException{
+        int id = resultSet.getInt("application_id");
+        int sid = resultSet.getInt("student_id");
+        int scid = resultSet.getInt("scholarship_id");
+        LocalDate appDate = resultSet.getDate("application_date").toLocalDate();
+        String stat = resultSet.getString("status");
 
-        return new Applications(application_id, student_id,scholarship_id, application_date,status);
+        return new Applications(id, sid, scid, appDate, stat);
     }
 
-    public int getApplication_id() {
-        return application_id;
+    public int getApplicationId() {
+        return applicationId;
     }
 
-    public int getStudent_id() {
-        return student_id;
+    public int getStudentId() {
+        return studentId;
     }
 
-    public int getScholarship_id() {
-        return scholarship_id;
+    public int getScholarshipId() {
+        return scholarshipId;
     }
 
-    public Date getApplication_date() {
-        return application_date;
+    public LocalDate getApplicationDate() {
+        return applicationDate;
     }
 
     public String getStatus() {
