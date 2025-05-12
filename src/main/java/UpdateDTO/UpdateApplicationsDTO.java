@@ -1,12 +1,18 @@
 package UpdateDTO;
 
 public class UpdateApplicationsDTO {
+    private int id;
     private String status;
 
     public UpdateApplicationsDTO() {};
 
-    public UpdateApplicationsDTO(String status) {
+    public UpdateApplicationsDTO(int id, String status) {
+        this.id = id;
         this.status = status;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getStatus() {
