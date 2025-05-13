@@ -75,6 +75,16 @@ CREATE TABLE notification (
     read_status BOOLEAN DEFAULT FALSE
 );
 
+CREATE TABLE News (
+  news_id SERIAL PRIMARY KEY,
+  title TEXT NOT NULL,
+  content TEXT NOT NULL,
+  scholarship_id INT REFERENCES Scholarships(scholarship_id) ON DELETE SET NULL,
+  posted_by INT REFERENCES Users(user_id),
+  posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  visible_until DATE
+);
+
 
 //query per shtimin e admin-users
 
