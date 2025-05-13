@@ -9,6 +9,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import utils.SceneLocator;
+import javafx.stage.Stage;
+
 
 import java.net.URL;
 import java.sql.Connection;
@@ -27,47 +29,46 @@ public class LoginController {
     @FXML
     private PasswordField pwdPassword;
 
-    public LoginController(){
+    public LoginController() {
 
     }
 
     @FXML
-    private void handleLoginClick(){
+    private void handleLoginClick() {
         String email = txtUsername.getText();
         String password = pwdPassword.getText();
 
-        try{
+        try {
             Connection conn = DBCustomConnector.getConnection();
             String query = "SELECT role FROM users WHERE email = ? AND password = ?";
             PreparedStatement statement = conn.prepareStatement(query);
-            statement.setString(1,email);
-            statement.setString(2,password);
+            statement.setString(1, email);
+            statement.setString(2, password);
 
             ResultSet rs = statement.executeQuery();
 
-            if(sceneManager == null){
+            if (sceneManager == null) {
                 sceneManager = SceneManager.getInstance();
             }
 
-            if(rs.next()){
+            if (rs.next()) {
                 String role = rs.getString("role");
 
-                if(role.equalsIgnoreCase("admin")){
+                if (role.equalsIgnoreCase("admin")) {
                     sceneManager.loadScene(SceneLocator.ADMIN_HOME_PAGE);
-                }else if(role.equalsIgnoreCase("student")){
+                } else if (role.equalsIgnoreCase("student")) {
                     sceneManager.loadScene(SceneLocator.STUDENT_HOME_PAGE);
                 }
-            }else
-            {
+            } else {
                 showAlert("Login failed", "Incorrect email or password");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             showAlert("Databases Error!", e.getMessage());
         }
     }
 
-    private void showAlert(String title, String message){
+    private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
         alert.setContentText(message);
@@ -76,23 +77,24 @@ public class LoginController {
 
     @FXML
     private void handleLoginCancel(){
-        txtUsername.clear();
-        pwdPassword.clear();
+        SceneManager.getInstance().loadScene(SceneLocator.SIGNUP_PAGE);
     }
 
+
     @FXML
-    private void handleSQLanguageClick() throws Exception{
+    private void handleSQLanguageClick() throws Exception {
         loadLanguage(new Locale("sq"));
     }
 
     @FXML
-    private void handleENLanguageClick() throws Exception{
+    private void handleENLanguageClick() throws Exception {
         loadLanguage(Locale.ENGLISH);
     }
 
-    private void loadLanguage(Locale locale) throws Exception{
+    private void loadLanguage(Locale locale) throws Exception {
         languageManager.setLocale(locale);
         SceneManager.reload();
     }
+
 
 }
