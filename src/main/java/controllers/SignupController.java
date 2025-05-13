@@ -13,6 +13,8 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
+
 import javafx.stage.FileChooser;
 
 
@@ -72,7 +74,10 @@ public class SignupController implements Initializable {
             showAlert("Missing Information", "Please fill out all fields.");
             return;
         }
-
+        if (!isValidStudentEmail(email)) {
+            showAlert("Invalid Email", "Email must be a valid university student address (e.g. user@student.uni-pr.edu)");
+            return;
+        }
 
         String pdfPath = null;
         if (selectedPdfFile != null) {
@@ -133,6 +138,10 @@ public class SignupController implements Initializable {
         alert.setTitle(title);
         alert.setContentText(message);
         alert.show();
+    }
+    private boolean isValidStudentEmail(String email) {
+        String regex = "^[\\w.-]+@student\\.uni-[a-z]{2,10}\\.edu$";
+        return Pattern.matches(regex, email);
     }
 
 
