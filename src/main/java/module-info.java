@@ -16,4 +16,7 @@ module com.example.knk_2425_gr20 {
 
     exports controllers to javafx.fxml;
     opens controllers;
+
+
+
 }
