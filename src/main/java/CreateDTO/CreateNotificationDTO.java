@@ -3,7 +3,7 @@ package CreateDTO;
 import java.sql.Timestamp;
 
 public class CreateNotificationDTO {
-    private int student_id;
+    private Integer student_id;
     private String message;
     private Timestamp created_at;
     private boolean read_status;
@@ -17,7 +17,7 @@ public class CreateNotificationDTO {
         this.is_broadcast = is_broadcast;
     }
 
-    public int getStudent_id() {
+    public Integer getStudent_id() {
         return student_id;
     }
 

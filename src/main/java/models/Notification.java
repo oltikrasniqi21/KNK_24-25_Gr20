@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 
 public class Notification {
     private int notification_id;
-    private int student_id;
+    private Integer student_id;
     private String message;
     private Timestamp created_at;
     private boolean read_status;
