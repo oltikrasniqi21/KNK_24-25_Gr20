@@ -28,6 +28,7 @@ public class AdminHomePageController {
 
     @FXML
     private void handleFeedback(){
+
         SceneManager.getInstance().loadScene(SceneLocator.MANAGE_FEEDBACK_PAGE);
     }
 

@@ -32,18 +32,16 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NotificationController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -85,14 +83,14 @@
       </menus>
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-         <children>
-            <Label layoutX="266.0" layoutY="14.0" text="%notificationHeader" />
-            <Label layoutX="92.0" layoutY="62.0" text="%title" />
-            <TextField fx:id="titleFieldNotification" layoutX="160.0" layoutY="58.0" />
-            <TextArea fx:id="messageAreaNotification" layoutX="160.0" layoutY="98.0" prefHeight="72.0" prefWidth="149.0" />
-            <Label layoutX="92.0" layoutY="98.0" text="%message" />
-            <Button fx:id="sendBtnNotification" layoutX="178.0" layoutY="187.0" mnemonicParsing="false" onAction="#handleSendNotification" text="%sendNotification" />
-         </children>
+      <children>
+        <Label alignment="CENTER" layoutX="155.0" layoutY="177.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+          <font>
+            <Font size="18.0" />
+          </font>
+        </Label>
+            <Label layoutX="290.0" layoutY="59.0" text="feedback" />
+      </children>
     </AnchorPane>
   </children>
 </VBox>

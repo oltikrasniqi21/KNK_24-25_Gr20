@@ -53,4 +53,43 @@ public class FaqRepository extends BaseRepository<Faq, CreateFaqDTO, UpdateFaqDT
         }
         return null;
     }
+
+    public ArrayList<Faq> getAll() {
+        ArrayList<Faq> faqs = new ArrayList<>();
+        String query = "SELECT * FROM faq ORDER BY faq_id";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                faqs.add(fromResultSet(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return faqs;
+    }
+
+    public boolean delete(int faqId) {
+        String query = "DELETE FROM faq WHERE faq_id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setInt(1, faqId);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean addFaq(String question, String answer) {
+        CreateFaqDTO dto = new CreateFaqDTO(question, answer);
+        return create(dto) != null;
+    }
+
+    public boolean update(int faqId, String question, String answer) {
+        UpdateFaqDTO dto = new UpdateFaqDTO(faqId, question, answer);
+        return this.update(dto) != null;
+    }
+
 }

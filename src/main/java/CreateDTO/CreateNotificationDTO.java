@@ -3,19 +3,24 @@ package CreateDTO;
 import java.sql.Timestamp;
 
 public class CreateNotificationDTO {
-    private int student_id;
+    private Integer student_id;
     private String message;
     private Timestamp created_at;
     private boolean read_status;
+    private boolean is_broadcast;
 
-    public CreateNotificationDTO(int student_id, String message, Timestamp created_at, boolean read_status) {
+    public CreateNotificationDTO(int student_id, String message, Timestamp created_at, boolean read_status, boolean is_broadcast) {
         this.student_id = student_id;
         this.message = message;
         this.created_at = created_at;
         this.read_status = read_status;
+        this.is_broadcast = is_broadcast;
     }
 
-    public int getStudent_id() {
+    public CreateNotificationDTO() {
+    }
+
+    public Integer getStudent_id() {
         return student_id;
     }
 
@@ -29,5 +34,29 @@ public class CreateNotificationDTO {
 
     public boolean isRead_status() {
         return read_status;
+    }
+
+    public boolean is_broadcast() {
+        return is_broadcast;
+    }
+
+    public void setStudent_id(Integer student_id) {
+        this.student_id = student_id;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setCreated_at(Timestamp created_at) {
+        this.created_at = created_at;
+    }
+
+    public void setRead_status(boolean read_status) {
+        this.read_status = read_status;
+    }
+
+    public void setIs_broadcast(boolean is_broadcast) {
+        this.is_broadcast = is_broadcast;
     }
 }
