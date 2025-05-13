@@ -17,6 +17,9 @@ public class CreateNotificationDTO {
         this.is_broadcast = is_broadcast;
     }
 
+    public CreateNotificationDTO() {
+    }
+
     public Integer getStudent_id() {
         return student_id;
     }
@@ -35,5 +38,25 @@ public class CreateNotificationDTO {
 
     public boolean is_broadcast() {
         return is_broadcast;
+    }
+
+    public void setStudent_id(Integer student_id) {
+        this.student_id = student_id;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setCreated_at(Timestamp created_at) {
+        this.created_at = created_at;
+    }
+
+    public void setRead_status(boolean read_status) {
+        this.read_status = read_status;
+    }
+
+    public void setIs_broadcast(boolean is_broadcast) {
+        this.is_broadcast = is_broadcast;
     }
 }
