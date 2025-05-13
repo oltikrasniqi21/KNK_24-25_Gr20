@@ -10,5 +10,6 @@ public class SceneLocator {
     public static final String MANAGE_SCHOLARSHIPS_PAGE = "/views/manage_scholarships.fxml";
     public static final String MANAGE_APPLICATIONS_PAGE = "/views/manage_applications.fxml";
     public static final String MANAGE_FEEDBACK_PAGE = "/views/manage_feedback.fxml";
-    public static final String MANAGE_NOTIFICATIONS_PAGE = "/views/manage_notifications.fxml";
+    public static final String MANAGE_ADMIN_NOTIFICATION_PAGE = "/views/admin_notification.fxml";
+    public static final String MANAGE_FAQ_PAGE = "/views/faq.fxml";
 }

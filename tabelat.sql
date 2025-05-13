@@ -74,3 +74,18 @@ CREATE TABLE notification (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     read_status BOOLEAN DEFAULT FALSE
 );
+
+
+//query per shtimin e admin-users
+
+INSERT INTO users (password, first_name, last_name, email, role)
+VALUES ('12345678', 'Admin', 'Pr', 'administrata@admin.uni-pr.com', 'admin');
+
+INSERT INTO users (password, first_name, last_name, email, role)
+VALUES ('12345678', 'Admin', 'Pz', 'administrata@admin.uni-pz.com', 'admin');
+
+INSERT INTO users (password, first_name, last_name, email, role)
+VALUES ('12345678', 'Admin', 'Gjk', 'administrata@admin.uni-gjk.com', 'admin');
+
+INSERT INTO users (password, first_name, last_name, email, role)
+VALUES ('12345678', 'Admin', 'Fz', 'administrata@admin.uni-fz.com', 'admin');
