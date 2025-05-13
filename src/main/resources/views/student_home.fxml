@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="controllers.StudentNotificationController">
+<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StudentNotificationController">
     <children>
         <Label layoutX="251.0" layoutY="29.0" text="Welcome Student!" />
       <TableView fx:id="notificationTable" layoutX="446.0" layoutY="71.0" prefHeight="200.0" prefWidth="153.0">
