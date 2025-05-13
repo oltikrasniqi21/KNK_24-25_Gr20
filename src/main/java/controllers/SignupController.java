@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
@@ -144,17 +143,5 @@ public class SignupController implements Initializable {
         return Pattern.matches(regex, email);
     }
 
-
-    @FXML
-    private void handleENLanguageClick() throws Exception {
-        LanguageManager.getInstance().setLocale(Locale.ENGLISH);
-        SceneManager.reload();
-    }
-
-    @FXML
-    private void handleSQLanguageClick() throws Exception {
-        LanguageManager.getInstance().setLocale(new Locale("sq"));
-        SceneManager.reload();
-    }
 
 }

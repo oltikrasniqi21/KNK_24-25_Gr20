@@ -89,33 +89,31 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label layoutX="233.0" layoutY="14.0" prefHeight="9.0" prefWidth="175.0" text="\%Sign Up">
+            <Label layoutX="233.0" layoutY="14.0" prefHeight="9.0" prefWidth="175.0" text="%signup.title">
                <font>
                   <Font size="28.0" />
                </font>
             </Label>
-            <TextField fx:id="emailField" layoutX="271.0" layoutY="60.0" />
-            <PasswordField fx:id="passwordField" layoutX="271.0" layoutY="88.0" />
-            <Text layoutX="198.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%Email" wrappingWidth="69.0673828125" />
-            <Text layoutX="196.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%Password" />
+            <TextField fx:id="emailField" layoutX="271.0" layoutY="60.0" promptText="Email" />
+            <PasswordField fx:id="passwordField" layoutX="271.0" layoutY="88.0" promptText="Password" />
+            <Text layoutX="156.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%signup.email" wrappingWidth="114.40380859375" />
+            <Text layoutX="144.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%signup.password" />
             <ComboBox fx:id="universityComboBox" layoutX="271.0" layoutY="118.0" prefHeight="24.0" prefWidth="171.0" />
             <ComboBox fx:id="facultyComboBox" layoutX="271.0" layoutY="150.0" prefHeight="24.0" prefWidth="171.0" />
             <ComboBox fx:id="majorComboBox" layoutX="271.0" layoutY="183.0" prefHeight="24.0" prefWidth="171.0" />
             <ComboBox fx:id="yearComboBox" layoutX="271.0" layoutY="219.0" prefHeight="24.0" prefWidth="171.0" />
             <ComboBox fx:id="semesterComboBox" layoutX="271.0" layoutY="256.0" prefHeight="24.0" prefWidth="171.0" />
-            <Button fx:id="cancelButton" layoutX="227.0" layoutY="329.0" mnemonicParsing="false" onAction="#handleSignupCancel" prefHeight="24.0" prefWidth="78.0" text="\%Cancel" />
-            <Button fx:id="signupButon" layoutX="386.0" layoutY="329.0" mnemonicParsing="false" onAction="#handleSignupClick" prefHeight="24.0" prefWidth="78.0" text="\%SignUp" />
-            <Text layoutX="194.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%University" />
-            <Text layoutX="201.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%Faculty" />
-            <Text layoutX="202.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%Major" />
-            <Text layoutX="205.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%Year" />
-            <Text layoutX="198.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%Priority" />
+            <Button fx:id="cancelButton" layoutX="227.0" layoutY="329.0" mnemonicParsing="false" onAction="#handleSignupCancel" prefHeight="24.0" prefWidth="78.0" text="%cancel.button" />
+            <Button fx:id="signupButon" layoutX="386.0" layoutY="329.0" mnemonicParsing="false" onAction="#handleSignupClick" prefHeight="24.0" prefWidth="78.0" text="%signup.button" />
+            <Text layoutX="175.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%university" />
+            <Text layoutX="201.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%faculty" />
+            <Text layoutX="202.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%major" />
+            <Text layoutX="205.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%year" />
+            <Text layoutX="198.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%priority" />
             <ComboBox fx:id="priorityComboBox" layoutX="271.0" layoutY="288.0" prefHeight="24.0" prefWidth="171.0" />
-            <Text layoutX="188.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%Semester" />
-            <Button layoutX="46.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleSQLanguageClick" text="\%SQ" />
-            <Button layoutX="104.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleENLanguageClick" text="\%EN" />
-            <Button fx:id="btnChooseFile" layoutX="507.0" layoutY="60.0" mnemonicParsing="false" onAction="#handleChooseFile" text="\%Choose File" />
-            <Label fx:id="lblSelectedFile" layoutX="497.0" layoutY="100.0" text="\%&quot;No file selected&quot;" />
+            <Text layoutX="188.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%semester" />
+            <Button fx:id="btnChooseFile" layoutX="507.0" layoutY="60.0" mnemonicParsing="false" onAction="#handleChooseFile" text="%btn.choosefile" />
+            <Label fx:id="lblSelectedFile" layoutX="497.0" layoutY="100.0" text="%noFileSelected" />
          </children>
     </AnchorPane>
   </children>
