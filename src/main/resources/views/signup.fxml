@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignupController">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="New" />
+            <MenuItem mnemonicParsing="false" text="Open…" />
+            <Menu mnemonicParsing="false" text="Open Recent" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Close" />
+            <MenuItem mnemonicParsing="false" text="Save" />
+            <MenuItem mnemonicParsing="false" text="Save As…" />
+            <MenuItem mnemonicParsing="false" text="Revert" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Preferences…" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Undo" />
+            <MenuItem mnemonicParsing="false" text="Redo" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Cut" />
+            <MenuItem mnemonicParsing="false" text="Copy" />
+            <MenuItem mnemonicParsing="false" text="Paste" />
+            <MenuItem mnemonicParsing="false" text="Delete" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Select All" />
+            <MenuItem mnemonicParsing="false" text="Unselect All" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+         <children>
+            <Label layoutX="233.0" layoutY="14.0" prefHeight="9.0" prefWidth="175.0" text="\%Sign Up">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <TextField fx:id="emailField" layoutX="271.0" layoutY="60.0" />
+            <PasswordField fx:id="passwordField" layoutX="271.0" layoutY="88.0" />
+            <Text layoutX="198.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%Email" wrappingWidth="69.0673828125" />
+            <Text layoutX="196.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%Password" />
+            <ComboBox fx:id="universityComboBox" layoutX="271.0" layoutY="118.0" prefHeight="24.0" prefWidth="171.0" />
+            <ComboBox fx:id="facultyComboBox" layoutX="271.0" layoutY="150.0" prefHeight="24.0" prefWidth="171.0" />
+            <ComboBox fx:id="majorComboBox" layoutX="271.0" layoutY="183.0" prefHeight="24.0" prefWidth="171.0" />
+            <ComboBox fx:id="yearComboBox" layoutX="271.0" layoutY="219.0" prefHeight="24.0" prefWidth="171.0" />
+            <ComboBox fx:id="semesterComboBox" layoutX="271.0" layoutY="256.0" prefHeight="24.0" prefWidth="171.0" />
+            <Button fx:id="cancelButton" layoutX="227.0" layoutY="329.0" mnemonicParsing="false" onAction="#handleSignupCancel" prefHeight="24.0" prefWidth="78.0" text="\%Cancel" />
+            <Button fx:id="signupButon" layoutX="386.0" layoutY="329.0" mnemonicParsing="false" onAction="#handleSignupClick" prefHeight="24.0" prefWidth="78.0" text="\%SignUp" />
+            <Text layoutX="194.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%University" />
+            <Text layoutX="201.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%Faculty" />
+            <Text layoutX="202.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%Major" />
+            <Text layoutX="205.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%Year" />
+            <Text layoutX="198.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%Priority" />
+            <ComboBox fx:id="priorityComboBox" layoutX="271.0" layoutY="288.0" prefHeight="24.0" prefWidth="171.0" />
+            <Text layoutX="188.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%Semester" />
+            <Button layoutX="46.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleSQLanguageClick" text="\%SQ" />
+            <Button layoutX="104.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleENLanguageClick" text="\%EN" />
+            <Button fx:id="btnChooseFile" layoutX="507.0" layoutY="60.0" mnemonicParsing="false" onAction="#handleChooseFile" text="\%Choose File" />
+            <Label fx:id="lblSelectedFile" layoutX="497.0" layoutY="100.0" text="\%&quot;No file selected&quot;" />
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>
