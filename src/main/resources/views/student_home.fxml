@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="root" prefHeight="400.0" prefWidth="600.0">
+<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="controllers.StudentNotificationController">
     <children>
-        <Label layoutX="200.0" layoutY="150.0" text="Welcome Student!" />
+        <Label layoutX="251.0" layoutY="29.0" text="Welcome Student!" />
+      <TableView fx:id="notificationTable" layoutX="446.0" layoutY="71.0" prefHeight="200.0" prefWidth="153.0">
+        <columns>
+          <TableColumn fx:id="messageColumn" prefWidth="108.66665649414062" text="C1" />
+          <TableColumn fx:id="dateColumn" prefWidth="42.0" text="C2" />
+        </columns>
+      </TableView>
+      <Button layoutX="465.0" layoutY="46.0" mnemonicParsing="false" onAction="#onViewNotificationsClicked" text="%viewNotificationsBtn" />
     </children>
 </AnchorPane>

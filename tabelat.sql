@@ -110,3 +110,10 @@ ALTER TABLE Notification ADD COLUMN is_broadcast BOOLEAN DEFAULT false;
 
 INSERT INTO Notification (message, created_at, read_status, is_broadcast)
 VALUES ('Welcome students!', CURRENT_TIMESTAMP, false, true);
+
+
+
+
+//shtimi i nje studenti per testim
+INSERT INTO users (password, first_name, last_name, email, role)
+VALUES ('12345678', 'filan', 'fisteku', 'stdtest@student.uni-pr.com', 'student');
