@@ -3,6 +3,7 @@ package test;
 import Services.SceneManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import utils.SceneLocator;
 
 public class SceneManagerTest extends Application {
     @Override
@@ -11,4 +12,8 @@ public class SceneManagerTest extends Application {
         stage.setScene(sceneManager.getScene());
         stage.show();
     }
+
+
+
+
 }
