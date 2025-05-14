@@ -1,6 +1,8 @@
 package Repository;
 
 import Database.DBCustomConnector;
+import UpdateDTO.UpdateScholarshipDTO;
+import models.Scholarships;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -44,6 +46,8 @@ abstract class BaseRepository<Model, CreateModelDto, UpdateModelDto> {
         }
         return models;
     }
+
+    public abstract Scholarships update(UpdateScholarshipDTO update);
 
     public boolean delete(int id){
         String query = "DELETE FROM " + this.tableName + " WHERE ID = ?";

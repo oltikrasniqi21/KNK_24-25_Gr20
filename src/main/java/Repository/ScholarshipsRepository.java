@@ -1,51 +1,75 @@
 package Repository;
 
-import Database.DBCustomConnector;
+import CreateDTO.CreateScholarshipDTO;
+import UpdateDTO.UpdateScholarshipDTO;
 import models.Scholarships;
 
-import javax.xml.transform.Result;
 import java.sql.*;
-import java.util.ArrayList;
 
-public class ScholarshipsRepository {
-    private Connection connection;
+public class ScholarshipsRepository extends BaseRepository<Scholarships, CreateScholarshipDTO, UpdateScholarshipDTO>{
+    //connection krijohet tek BaseRepository
 
     public ScholarshipsRepository(){
-        this.connection = DBCustomConnector.getConnection();
+        super("scholarships");
     }
 
-    public ArrayList<Scholarships> getAll(){
-        ArrayList<Scholarships> scholarships = new ArrayList<>();
-        String query = "SELECT * FROM SCHOLARSHIPS";
+    public Scholarships fromResultSet(ResultSet res) throws SQLException{
+        return Scholarships.getInstance(res);
+    }
 
+    @Override
+    public Scholarships create(CreateScholarshipDTO create) {
+        String query = """
+                INSERT INTO SCHOLARSHIPS VALUES(?,?,?,?,?,?,?)
+                """;
         try{
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
-
-            while(resultSet.next()){
-                Scholarships scholarship = Scholarships.getInstance(resultSet);
-                scholarships.add(scholarship);
-
+            PreparedStatement statement = this.connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1,create.getScholarship_name());
+            statement.setString(2,create.getProvider());
+            statement.setInt(3,create.getAmount());
+            statement.setDate(4,create.getDeadline_date());
+            statement.setDouble(5,create.getRequired_gpa());
+            statement.setInt(6,create.getRequired_year());
+            statement.setString(7,create.getRequred_major());
+            statement.executeQuery();
+            ResultSet set =statement.getGeneratedKeys();
+            if(set.next()){
+                int id = set.getInt(1);
+                return this.getById(id);
             }
-        } catch (SQLException e) {
+        }catch (SQLException e){
             e.printStackTrace();
         }
-        return scholarships;
+        return null;
     }
 
-    public Scholarships getById(int id) {
-        String query = "SELECT * FROM SCHOLARSHIPS WHERE ID=?";
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, id);
-            ResultSet resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                return Scholarships.getInstance(resultSet);
+    @Override
+    public Scholarships update(UpdateScholarshipDTO update) {
+        String query= """
+                UPDATE SCHOLARSHIPS SET
+                AMOUNT = ?,
+                DEADLINE_DATE = ?,
+                REQUIRED_GPA = ?,
+                REQUIRED_YEAR = ?,
+                REQUIRED_MAJOR = ?
+                WHERE SCHOLARSHIP_ID = ?
+                """;
+        try{
+            PreparedStatement statement = this.connection.prepareStatement(query);
+            statement.setInt(1, update.getAmount());
+            statement.setDate(2, update.getDeadline_date());
+            statement.setDouble(3, update.getRequired_gpa());
+            statement.setInt(4, update.getRequired_year());
+            statement.setString(5, update.getRequred_major());
+            statement.setInt(6, update.getScholarship_id());
+            int updateRow = statement.executeUpdate();
+            if(updateRow == 1){
+                return this.getById(update.getScholarship_id());
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return null;
     }
 }
