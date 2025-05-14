@@ -2,12 +2,14 @@ package controllers;
 
 import CreateDTO.CreateNotificationDTO;
 import Repository.NotificationRepository;
+import Services.SceneManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import models.Notification;
+import utils.SceneLocator;
 
 import java.sql.Timestamp;
 
@@ -58,5 +60,10 @@ public class NotificationController {
     private void clearFields() {
         titleFieldNotification.clear();
         messageAreaNotification.clear();
+    }
+
+    @FXML
+    private void handleBack(){
+        SceneManager.getInstance().loadScene(SceneLocator.ADMIN_HOME_PAGE);
     }
 }

@@ -32,21 +32,17 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FaqAdminController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StudentFaqController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -87,28 +83,11 @@
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-        <Label alignment="CENTER" layoutX="155.0" layoutY="177.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
-          <font>
-            <Font size="18.0" />
-          </font>
-        </Label>
             <Label layoutX="304.0" layoutY="14.0" text="%FAQ" />
-            <TableView fx:id="faqTable" layoutX="203.0" layoutY="161.0" prefHeight="200.0" prefWidth="200.0">
-              <columns>
-                <TableColumn fx:id="questionCol" prefWidth="75.0" text="C1" />
-                <TableColumn fx:id="answerCol" prefWidth="75.0" text="C2" />
-              </columns>
-            </TableView>
-            <Label layoutX="36.0" layoutY="57.0" text="%questionFaq" />
-            <TextField fx:id="txtQuestion" layoutX="128.0" layoutY="53.0" />
-            <Label layoutX="320.0" layoutY="57.0" text="%answerFaq" />
-            <TextArea fx:id="txtAnswer" layoutX="403.0" layoutY="45.0" prefHeight="42.0" prefWidth="190.0" />
-            <Button layoutX="271.0" layoutY="95.0" mnemonicParsing="false" onAction="#handleAdd" text="%addBtn" />
-            <Button layoutX="155.0" layoutY="95.0" mnemonicParsing="false" onAction="#handleUpdate" text="%updateBtn" />
-            <Button layoutX="370.0" layoutY="95.0" mnemonicParsing="false" onAction="#handleDelete" text="%deleteBtn" />
-            <Button layoutX="14.0" layoutY="19.0" mnemonicParsing="false" onAction="#handleBack" text="%btnBack" />
+            <Button layoutX="14.0" layoutY="19.0" mnemonicParsing="false" onAction="#handleBackStd" text="%btnBack" />
+            <Accordion fx:id="faqAccordion" layoutX="113.0" layoutY="66.0" prefHeight="242.0" prefWidth="414.0" />
       </children>
     </AnchorPane>
   </children>

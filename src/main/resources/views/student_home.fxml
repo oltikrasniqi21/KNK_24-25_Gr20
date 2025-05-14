@@ -5,16 +5,23 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StudentNotificationController">
+<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="462.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StudentNotificationController">
     <children>
         <Label layoutX="251.0" layoutY="29.0" text="Welcome Student!" />
-      <TableView fx:id="notificationTable" layoutX="446.0" layoutY="71.0" prefHeight="200.0" prefWidth="153.0">
-        <columns>
-          <TableColumn fx:id="messageColumn" prefWidth="108.66665649414062" text="C1" />
-          <TableColumn fx:id="dateColumn" prefWidth="42.0" text="C2" />
-        </columns>
-      </TableView>
       <Button layoutX="465.0" layoutY="46.0" mnemonicParsing="false" onAction="#onViewNotificationsClicked" text="%viewNotificationsBtn" />
+      <VBox fx:id="notificationPane" layoutX="253.0" layoutY="71.0" prefHeight="329.0" prefWidth="347.0">
+         <children>
+            <TableView fx:id="notificationTable" prefHeight="329.0" prefWidth="219.0">
+              <columns>
+                <TableColumn fx:id="messageColumn" prefWidth="235.33331298828125" text="%messageNotificationStd" />
+                <TableColumn fx:id="dateColumn" prefWidth="110.66668701171875" text="%dateNotificationStd" />
+              </columns>
+            </TableView>
+         </children>
+      </VBox>
+      <Button layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleLogout" text="%btn.logout" />
+      <Button layoutY="83.0" mnemonicParsing="false" onAction="#handleFaqStd" prefHeight="25.0" prefWidth="164.0" text="%viewFaq" />
     </children>
 </AnchorPane>
