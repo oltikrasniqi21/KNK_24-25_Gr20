@@ -1,12 +1,14 @@
 package controllers;
 
 import Repository.FaqRepository;
+import Services.SceneManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import models.Faq;
 import models.Faq;
+import utils.SceneLocator;
 
 public class FaqAdminController {
     @FXML private TableView<Faq> faqTable;
@@ -71,5 +73,10 @@ public class FaqAdminController {
     private void clearFields() {
         txtQuestion.clear();
         txtAnswer.clear();
+    }
+
+    @FXML
+    private void handleBack(){
+        SceneManager.getInstance().loadScene(SceneLocator.ADMIN_HOME_PAGE);
     }
 }

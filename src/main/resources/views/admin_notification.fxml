@@ -92,6 +92,7 @@
             <TextArea fx:id="messageAreaNotification" layoutX="160.0" layoutY="98.0" prefHeight="72.0" prefWidth="149.0" />
             <Label layoutX="92.0" layoutY="98.0" text="%message" />
             <Button fx:id="sendBtnNotification" layoutX="178.0" layoutY="187.0" mnemonicParsing="false" onAction="#handleSendNotification" text="%sendNotification" />
+            <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleBack" text="%btnBack" />
          </children>
     </AnchorPane>
   </children>

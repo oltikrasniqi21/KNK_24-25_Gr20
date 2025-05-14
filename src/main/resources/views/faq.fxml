@@ -108,6 +108,7 @@
             <Button layoutX="271.0" layoutY="95.0" mnemonicParsing="false" onAction="#handleAdd" text="%addBtn" />
             <Button layoutX="155.0" layoutY="95.0" mnemonicParsing="false" onAction="#handleUpdate" text="%updateBtn" />
             <Button layoutX="370.0" layoutY="95.0" mnemonicParsing="false" onAction="#handleDelete" text="%deleteBtn" />
+            <Button layoutX="14.0" layoutY="19.0" mnemonicParsing="false" onAction="#handleBack" text="%btnBack" />
       </children>
     </AnchorPane>
   </children>
