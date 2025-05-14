@@ -13,9 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="685.0" xmlns="http://javafx.com/javafx/23.0.1"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="controllers.ManageStudentsController">
+<VBox prefHeight="400.0" prefWidth="685.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageStudentsController">
    <children>
       <MenuBar VBox.vgrow="NEVER">
          <menus>
@@ -58,29 +56,27 @@
       </MenuBar>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="375.0" prefWidth="705.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label alignment="CENTER" layoutX="270.0" layoutY="14.0" text="%label.studentsList"
-                   textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+            <Label alignment="CENTER" layoutX="270.0" layoutY="14.0" text="%label.studentsList" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
             <TextField layoutX="17.0" layoutY="63.0" promptText="%prompt.searchStudent" />
-            <Button fx:id="btnSearch" layoutX="183.0" layoutY="63.0" mnemonicParsing="false"
-                    onAction="#handleSearchClick" prefHeight="25.0" prefWidth="59.0" text="%button.search" />
-            <TableView layoutX="7.0" layoutY="97.0" prefHeight="272.0" prefWidth="673.0">
+            <Button fx:id="btnSearch" layoutX="183.0" layoutY="63.0" mnemonicParsing="false" onAction="#handleSearchClick" prefHeight="25.0" prefWidth="59.0" text="%button.search" />
+            <TableView fx:id="studentsTable" layoutY="96.0" prefHeight="364.0" prefWidth="780.0">
                <columns>
-                  <TableColumn id="userIdColumn" prefWidth="75.0" text="%column.id" />
-                  <TableColumn id="gpaCloumn" prefWidth="75.0" text="%column.gpa" />
-                  <TableColumn id="yearColumn" prefWidth="75.0" text="%column.year" />
-                  <TableColumn id="universityCloumn" prefWidth="75.0" text="%column.university" />
-                  <TableColumn id="facultyColumn" prefWidth="75.0" text="%column.faculty" />
-                  <TableColumn id="majorColumn" prefWidth="75.0" text="%column.major" />
-                  <TableColumn id="coursesColumn" prefWidth="75.0" text="%column.semester" />
-                  <TableColumn id="priorityColumn" prefWidth="75.0" text="%column.priority" />
+                  <TableColumn fx:id="idColumn" prefWidth="50.0" text="ID" />
+                  <TableColumn fx:id="gpaColumn" prefWidth="70.0" text="Mesatarja" />
+                  <TableColumn fx:id="yearColumn" prefWidth="50.0" text="Viti" />
+                  <TableColumn fx:id="universityColumn" prefWidth="120.0" text="Universiteti" />
+                  <TableColumn fx:id="facultyColumn" prefWidth="120.0" text="Fakulteti" />
+                  <TableColumn fx:id="majorColumn" prefWidth="120.0" text="Drejtimi" />
+                  <TableColumn fx:id="semesterColumn" prefWidth="70.0" text="Semestri" />
+                  <TableColumn fx:id="priorityColumn" prefWidth="80.0" text="Prioriteti" />
+                  <TableColumn fx:id="statusColumn" prefWidth="80.0" text="Statusi" />
                </columns>
             </TableView>
-            <Button fx:id="btnBack" layoutX="621.0" layoutY="26.0" mnemonicParsing="false"
-                    onAction="#handleBackClick" prefHeight="25.0" prefWidth="49.0" text="%button.back" />
+            <Button fx:id="btnBack" layoutX="621.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleBackClick" prefHeight="25.0" prefWidth="49.0" text="%button.back" />
          </children>
       </AnchorPane>
    </children>

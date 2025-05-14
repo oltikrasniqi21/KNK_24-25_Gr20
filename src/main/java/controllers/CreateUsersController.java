@@ -62,13 +62,14 @@ public class CreateUsersController {
                 }
 
                 // Insert user
-                String query = "INSERT INTO users (password, first_name, last_name, email, role) VALUES (?, ?, ?, ?, ?)";
+                String query = "INSERT INTO users (password, first_name, last_name, email, role,status) VALUES (?, ?, ?, ?, ?,?)";
                 try (PreparedStatement statement = conn.prepareStatement(query)) {
                     statement.setString(1, password); // ⚠️ Consider hashing the password!
                     statement.setString(2, emri);
                     statement.setString(3, mbiemri);
                     statement.setString(4, email);
                     statement.setString(5, "admin");
+                    statement.setNull(6, java.sql.Types.VARCHAR);
 
                     int rowsInserted = statement.executeUpdate();
                     if (rowsInserted > 0) {

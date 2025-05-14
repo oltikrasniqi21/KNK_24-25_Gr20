@@ -15,11 +15,11 @@ public class Students extends Users {
     private String priority;
     private String proofDocument;
 
-    private Students(int user_id, String password, String first_name, String last_name, String email, String role,
+    private Students(int user_id, String password, String first_name, String last_name, String email, String role,String status,
                      double gpa, int year_of_study,
 //                     String levelOfStudy,
                      String university, String faculty, String major, int courses_left, String priority,String proofDocument) {
-        super(user_id, password,first_name, last_name,email,role);
+        super(user_id, password,first_name, last_name,email,role,status);
         this.gpa = gpa;
         this.year_of_study = year_of_study;
 //        this.levelOfStudy = levelOfStudy;
@@ -82,9 +82,9 @@ public class Students extends Users {
         int courses_left = resultSet.getInt("courses_left");
         String priority = resultSet.getString("priority");
         String proofDocument = resultSet.getString("proof_document");
+        String status = resultSet.getString("status");
 
-
-        return new Students(user_id,password_hash,first_name,last_name,email,role,
+        return new Students(user_id,password_hash,first_name,last_name,email,role,status,
         gpa,year_of_study,
 //                levelOfStudy,
                 university, faculty,major, courses_left, priority,proofDocument);
