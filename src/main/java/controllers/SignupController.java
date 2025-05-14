@@ -44,10 +44,10 @@ public class SignupController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        universityComboBox.getItems().addAll("University of Prishtina", "UBT", "AAB", "RIT Kosovo");
-        facultyComboBox.getItems().addAll("Engineering", "Medicine", "Law", "Economics", "Arts");
-        majorComboBox.getItems().addAll("Computer Science", "Business", "Civil Engineering", "Law", "Medicine");
-        yearComboBox.getItems().addAll("1", "2", "3", "4");
+        universityComboBox.getItems().addAll("University of Prishtina", "University of Prizren", "University of Gjilan", "University of Gjakova", "University of Mitrovica");
+        facultyComboBox.getItems().addAll("FIEK", "Medicine", "Law", "Economics", "Arts","FIM","FIN","Architecture","Education");
+        majorComboBox.getItems().addAll("Software Engineer", "Business", "Civil Engineering", "Law", "Dentistry","Robotics Engineering","Data Science","Cyber Security");
+        yearComboBox.getItems().addAll("1", "2", "3", "4", "5", "6");
     }
 
     @FXML
