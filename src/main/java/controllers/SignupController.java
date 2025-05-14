@@ -1,11 +1,16 @@
 package controllers;
 
+import Services.SceneManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import Database.DBCustomConnector;
 import Services.SignupService;
+import utils.SceneLocator;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -89,11 +94,24 @@ public class SignupController implements Initializable {
         try {
             signupService.signupStudent(password, firstName, lastName, email,
                     Integer.parseInt(year), university, faculty, major);
-            showInfo("Signup Successful", "Your account has been created.");
+
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("Signup Successful");
+            successAlert.setContentText("Your account has been created.");
+            successAlert.show();
+
+            PauseTransition delay = new PauseTransition(Duration.seconds(2));
+            delay.setOnFinished(event -> {
+                successAlert.close();
+                SceneManager.getInstance().loadScene(SceneLocator.LOGIN_PAGE);
+            });
+            delay.play();
+
         } catch (Exception e) {
             e.printStackTrace();
             showAlert("Error", "Signup failed: " + e.getMessage());
         }
+
     }
 
     @FXML
@@ -106,6 +124,10 @@ public class SignupController implements Initializable {
         facultyComboBox.setValue(null);
         majorComboBox.setValue(null);
         yearComboBox.setValue(null);
+    }
+    @FXML
+    private void handleBackClick() {
+        SceneManager.getInstance().loadScene(SceneLocator.LOGIN_PAGE);
     }
 
     @FXML

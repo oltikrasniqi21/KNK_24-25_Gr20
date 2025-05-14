@@ -62,6 +62,12 @@ public class LoginController {
         }
     }
 
+    @FXML
+    private void handleSignupRedirect() {
+        SceneManager.getInstance().loadScene(SceneLocator.SIGNUP_PAGE);
+    }
+
+
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -71,7 +77,8 @@ public class LoginController {
 
     @FXML
     private void handleLoginCancel(){
-        SceneManager.getInstance().loadScene(SceneLocator.SIGNUP_PAGE);
+        txtUsername.clear();
+        pwdPassword.clear();
     }
 
 
