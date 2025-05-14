@@ -38,6 +38,7 @@ public class ScholarshipsRepository extends BaseRepository<Scholarships, CreateS
                 return this.getById(id);
             }
         }catch (SQLException e){
+            System.out.println("Scholarship nuk u krijua!");
             e.printStackTrace();
         }
         return null;
@@ -67,6 +68,7 @@ public class ScholarshipsRepository extends BaseRepository<Scholarships, CreateS
                 return this.getById(update.getScholarship_id());
             }
         } catch (SQLException e) {
+            System.out.println("Scholarship nuk u perditsua!");
             e.printStackTrace();
         }
 
