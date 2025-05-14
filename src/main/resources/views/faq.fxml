@@ -97,8 +97,8 @@
             <Label layoutX="304.0" layoutY="14.0" text="%FAQ" />
             <TableView fx:id="faqTable" layoutX="203.0" layoutY="161.0" prefHeight="200.0" prefWidth="200.0">
               <columns>
-                <TableColumn fx:id="questionCol" prefWidth="75.0" text="C1" />
-                <TableColumn fx:id="answerCol" prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="questionCol" prefWidth="99.3333740234375" text="%questionAdmin" />
+                <TableColumn fx:id="answerCol" prefWidth="99.33331298828125" text="%answerAdmin" />
               </columns>
             </TableView>
             <Label layoutX="36.0" layoutY="57.0" text="%questionFaq" />
