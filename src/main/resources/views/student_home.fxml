@@ -10,7 +10,7 @@
 <AnchorPane fx:id="root" prefHeight="400.0" prefWidth="462.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StudentNotificationController">
     <children>
         <Label layoutX="251.0" layoutY="29.0" text="Welcome Student!" />
-      <Button layoutX="465.0" layoutY="46.0" mnemonicParsing="false" onAction="#onViewNotificationsClicked" text="%viewNotificationsBtn" />
+      <Button fx:id="btnViewNotifications" layoutX="465.0" layoutY="46.0" mnemonicParsing="false" onAction="#onViewNotificationsClicked" text="%viewNotificationBtn" />
       <VBox fx:id="notificationPane" layoutX="253.0" layoutY="71.0" prefHeight="329.0" prefWidth="347.0">
          <children>
             <TableView fx:id="notificationTable" prefHeight="329.0" prefWidth="219.0">

@@ -2,7 +2,7 @@ module com.example.knk_2425_gr20 {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
-    requires java.desktop;
+    requires javafx.graphics;
 
 
     opens com.example.knk_2425_gr20 to javafx.fxml;
