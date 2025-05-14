@@ -99,3 +99,21 @@ VALUES ('12345678', 'Admin', 'Gjk', 'administrata@admin.uni-gjk.com', 'admin');
 
 INSERT INTO users (password, first_name, last_name, email, role)
 VALUES ('12345678', 'Admin', 'Fz', 'administrata@admin.uni-fz.com', 'admin');
+
+
+
+//modifikim i tabeles Notification, qe me mujt mi kriju admin-i nje notification per generalStudents,
+//e jo me logjiken 1to1, nje notification per nje student specifik...
+//dmth studentId mbetet NULL
+
+ALTER TABLE Notification ADD COLUMN is_broadcast BOOLEAN DEFAULT false;
+
+INSERT INTO Notification (message, created_at, read_status, is_broadcast)
+VALUES ('Welcome students!', CURRENT_TIMESTAMP, false, true);
+
+
+
+
+//shtimi i nje studenti per testim
+INSERT INTO users (password, first_name, last_name, email, role)
+VALUES ('12345678', 'filan', 'fisteku', 'stdtest@student.uni-pr.com', 'student');
