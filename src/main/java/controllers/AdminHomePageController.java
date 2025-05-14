@@ -47,5 +47,7 @@ public class AdminHomePageController {
         SceneManager.getInstance().loadScene(SceneLocator.MANAGE_FAQ_PAGE);
     }
 
+    @FXML
+    private void handleNews(){SceneManager.getInstance().loadScene(SceneLocator.NEWS_ADMIN);}
 
 }
