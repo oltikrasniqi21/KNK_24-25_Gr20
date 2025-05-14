@@ -35,10 +35,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:controller="controllers.NewsController"
-      prefHeight="400.0" prefWidth="640.0"
-      xmlns="http://javafx.com/javafx/17.0.12"
-      xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NewsController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="436.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
       <children>
@@ -50,14 +47,17 @@
             <Label layoutX="24.0" layoutY="228.0" prefHeight="18.0" prefWidth="139.0" text="%visibility.label" />
             <ChoiceBox fx:id="scholarshipChoiceBox" layoutX="22.0" layoutY="297.0" prefHeight="26.0" prefWidth="200.0" />
             <Label layoutX="24.0" layoutY="279.0" text="%scholarships.label" />
-            <TableView layoutX="248.0" layoutY="76.0" prefHeight="291.0" prefWidth="382.0">
+            <TableView fx:id="newsTable" layoutX="248.0" layoutY="76.0" prefHeight="291.0" prefWidth="382.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                  <TableColumn fx:id="newsTitleCol" text="%news.title.col" />
+                  <TableColumn fx:id="newsScholarshipCol" text="%news.scholarship.col" />
+                  <TableColumn fx:id="newsVisibleUntilCol" text="%news.visibleUntil.col" />
+                  <TableColumn fx:id="newsActionCol" text="%news.action.col" />
               </columns>
             </TableView>
             <Button layoutX="126.0" layoutY="341.0" mnemonicParsing="false" onAction="#publishNews" prefHeight="26.0" prefWidth="96.0" text="%btn.newsPublish" />
             <Button layoutX="19.0" layoutY="341.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" text="%btn.newsCancel" />
+            <Button layoutX="529.0" layoutY="32.0" mnemonicParsing="false" text="\%news.btn.back" />
       </children>
     </AnchorPane>
   </children>
