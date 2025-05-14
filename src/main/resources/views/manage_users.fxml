@@ -1,112 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!--
-  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
-  All rights reserved. Use is subject to license terms.
-
-  This file is available and licensed under the following license:
-
-  Redistribution and use in source and binary forms, with or without
-  modification, are permitted provided that the following conditions
-  are met:
-
-  - Redistributions of source code must retain the above copyright
-    notice, this list of conditions and the following disclaimer.
-  - Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in
-    the documentation and/or other materials provided with the distribution.
-  - Neither the name of Oracle Corporation nor the names of its
-    contributors may be used to endorse or promote products derived
-    from this software without specific prior written permission.
-
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
--->
-
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageUsersController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
-        <Menu mnemonicParsing="false" text="File">
+        <Menu mnemonicParsing="false" text="%menu.file">
           <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
+            <MenuItem text="%menuitem.new" />
+            <MenuItem text="%menuitem.open" />
+            <Menu text="%menuitem.openrecent" />
+            <SeparatorMenuItem />
+            <MenuItem text="%menuitem.close" />
+            <MenuItem text="%menuitem.save" />
+            <MenuItem text="%menuitem.save_as" />
+            <MenuItem text="%menuitem.revert" />
+            <SeparatorMenuItem />
+            <MenuItem text="%menuitem.preferences" />
+            <SeparatorMenuItem />
+            <MenuItem text="%menuitem.quit" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
+        <Menu text="%menu.edit">
           <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
+            <MenuItem text="%menuitem.undo" />
+            <MenuItem text="%menuitem.redo" />
+            <SeparatorMenuItem />
+            <MenuItem text="%menuitem.cut" />
+            <MenuItem text="%menuitem.copy" />
+            <MenuItem text="%menuitem.paste" />
+            <MenuItem text="%menuitem.delete" />
+            <SeparatorMenuItem />
+            <MenuItem text="%menuitem.select_all" />
+            <MenuItem text="%menuitem.unselect_all" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Help">
+        <Menu text="%menu.help">
           <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+            <MenuItem text="%menuitem.about" />
           </items>
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane VBox.vgrow="ALWAYS">
       <children>
-        <Label alignment="CENTER" layoutX="34.0" layoutY="20.0" style="&#10;" text="Menaxhimi i Userave" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+        <Label layoutX="34.0" layoutY="20.0" text="%label.manage_users">
           <font>
             <Font size="18.0" />
           </font>
         </Label>
-            <TextField layoutX="34.0" layoutY="58.0" promptText="Kerko Userin" />
-            <Button fx:id="btnSearch" layoutX="200.0" layoutY="58.0" mnemonicParsing="false" onAction="#handleSearchClick" prefHeight="25.0" prefWidth="59.0" text="Kerko" />
-            <TableView layoutX="34.0" layoutY="105.0" prefHeight="240.0" prefWidth="574.0">
-              <columns>
-                <TableColumn id="userIdColumn" prefWidth="75.0" text="Id" />
-                <TableColumn id="firstNameColumn" prefWidth="75.0" text="Emri" />
-                  <TableColumn id="lastNameColumn" prefWidth="75.0" text="Mbiemri" />
-                  <TableColumn id="emailColumn" prefWidth="75.0" text="Email" />
-                  <TableColumn id="roleColumn" prefWidth="75.0" text="Role" />
-                  <TableColumn id="actionColumn" prefWidth="75.0" text="Aksione" />
-              </columns>
-            </TableView>
-            <Button fx:id="btnAddUser" layoutX="220.0" layoutY="21.0" mnemonicParsing="false" onAction="#handleAddUserClick" text="Shto User" />
-            <Button fx:id="btnBack" layoutX="558.0" layoutY="21.0" mnemonicParsing="false" onAction="#handleBackClick" prefHeight="25.0" prefWidth="49.0" text="Back" />
+        <TextField layoutX="34.0" layoutY="58.0" promptText="%textfield.search_user" />
+        <Button fx:id="btnSearch" layoutX="200.0" layoutY="58.0" onAction="#handleSearchClick" text="%button.search" />
+        <TableView layoutX="34.0" layoutY="105.0" prefHeight="240.0" prefWidth="574.0">
+          <columns>
+            <TableColumn fx:id="userIdColumn" prefWidth="75.0" text="%column.id" />
+            <TableColumn fx:id="firstNameColumn" prefWidth="75.0" text="%column.firstname" />
+            <TableColumn fx:id="lastNameColumn" prefWidth="75.0" text="%column.lastname" />
+            <TableColumn fx:id="emailColumn" prefWidth="75.0" text="%column.email" />
+            <TableColumn fx:id="roleColumn" prefWidth="75.0" text="%column.role" />
+            <TableColumn fx:id="actionColumn" prefWidth="75.0" text="%column.actions" />
+          </columns>
+        </TableView>
+        <Button fx:id="btnAddUser" layoutX="220.0" layoutY="21.0" onAction="#handleAddUserClick" text="%button.add_user" />
+        <Button fx:id="btnBack" layoutX="558.0" layoutY="21.0" onAction="#handleBackClick" prefHeight="25.0" prefWidth="49.0" text="%button.back" />
       </children>
     </AnchorPane>
   </children>

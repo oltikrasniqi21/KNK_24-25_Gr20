@@ -1,37 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--
-  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
-  All rights reserved. Use is subject to license terms.
-
-  This file is available and licensed under the following license:
-
-  Redistribution and use in source and binary forms, with or without
-  modification, are permitted provided that the following conditions
-  are met:
-
-  - Redistributions of source code must retain the above copyright
-    notice, this list of conditions and the following disclaimer.
-  - Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in
-    the documentation and/or other materials provided with the distribution.
-  - Neither the name of Oracle Corporation nor the names of its
-    contributors may be used to endorse or promote products derived
-    from this software without specific prior written permission.
-
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
--->
-
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -45,69 +13,74 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="685.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageStudentsController">
+<VBox prefHeight="400.0" prefWidth="685.0" xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controllers.ManageStudentsController">
    <children>
       <MenuBar VBox.vgrow="NEVER">
          <menus>
-            <Menu mnemonicParsing="false" text="File">
+            <Menu mnemonicParsing="false" text="%menu.file">
                <items>
-                  <MenuItem mnemonicParsing="false" text="New" />
-                  <MenuItem mnemonicParsing="false" text="Open…" />
-                  <Menu mnemonicParsing="false" text="Open Recent" />
+                  <MenuItem mnemonicParsing="false" text="%menu.file.new" />
+                  <MenuItem mnemonicParsing="false" text="%menu.file.open" />
+                  <Menu mnemonicParsing="false" text="%menu.file.openRecent" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Close" />
-                  <MenuItem mnemonicParsing="false" text="Save" />
-                  <MenuItem mnemonicParsing="false" text="Save As…" />
-                  <MenuItem mnemonicParsing="false" text="Revert" />
+                  <MenuItem mnemonicParsing="false" text="%menu.file.close" />
+                  <MenuItem mnemonicParsing="false" text="%menu.file.save" />
+                  <MenuItem mnemonicParsing="false" text="%menu.file.saveAs" />
+                  <MenuItem mnemonicParsing="false" text="%menu.file.revert" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Preferences…" />
+                  <MenuItem mnemonicParsing="false" text="%menu.file.preferences" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Quit" />
+                  <MenuItem mnemonicParsing="false" text="%menu.file.quit" />
                </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Edit">
+            <Menu mnemonicParsing="false" text="%menu.edit">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Undo" />
-                  <MenuItem mnemonicParsing="false" text="Redo" />
+                  <MenuItem mnemonicParsing="false" text="%menu.edit.undo" />
+                  <MenuItem mnemonicParsing="false" text="%menu.edit.redo" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Cut" />
-                  <MenuItem mnemonicParsing="false" text="Copy" />
-                  <MenuItem mnemonicParsing="false" text="Paste" />
-                  <MenuItem mnemonicParsing="false" text="Delete" />
+                  <MenuItem mnemonicParsing="false" text="%menu.edit.cut" />
+                  <MenuItem mnemonicParsing="false" text="%menu.edit.copy" />
+                  <MenuItem mnemonicParsing="false" text="%menu.edit.paste" />
+                  <MenuItem mnemonicParsing="false" text="%menu.edit.delete" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Select All" />
-                  <MenuItem mnemonicParsing="false" text="Unselect All" />
+                  <MenuItem mnemonicParsing="false" text="%menu.edit.selectAll" />
+                  <MenuItem mnemonicParsing="false" text="%menu.edit.unselectAll" />
                </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Help">
+            <Menu mnemonicParsing="false" text="%menu.help">
                <items>
-                  <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+                  <MenuItem mnemonicParsing="false" text="%menu.help.about" />
                </items>
             </Menu>
          </menus>
       </MenuBar>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="375.0" prefWidth="705.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label alignment="CENTER" layoutX="270.0" layoutY="14.0" style="&#10;" text="Lista e Studentave" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+            <Label alignment="CENTER" layoutX="270.0" layoutY="14.0" text="%label.studentsList"
+                   textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField layoutX="17.0" layoutY="63.0" promptText="Kerko Studentin" />
-            <Button fx:id="btnSearch" layoutX="183.0" layoutY="63.0" mnemonicParsing="false" onAction="#handleSearchClick" prefHeight="25.0" prefWidth="59.0" text="Kerko" />
+            <TextField layoutX="17.0" layoutY="63.0" promptText="%prompt.searchStudent" />
+            <Button fx:id="btnSearch" layoutX="183.0" layoutY="63.0" mnemonicParsing="false"
+                    onAction="#handleSearchClick" prefHeight="25.0" prefWidth="59.0" text="%button.search" />
             <TableView layoutX="7.0" layoutY="97.0" prefHeight="272.0" prefWidth="673.0">
                <columns>
-                  <TableColumn id="userIdColumn" prefWidth="75.0" text="Id" />
-                  <TableColumn id="gpaCloumn" prefWidth="75.0" text="GPA" />
-                  <TableColumn id="yearColumn" prefWidth="75.0" text="Viti" />
-                  <TableColumn id="universityCloumn" prefWidth="75.0" text="Universiteti" />
-                  <TableColumn id="facultyColumn" prefWidth="75.0" text="Fakulteti" />
-                  <TableColumn id="majorColumn" prefWidth="75.0" text="Drejtimi" />
-                  <TableColumn id="coursesColumn" prefWidth="75.0" text="Semestri" />
-                  <TableColumn id="priorityColumn" prefWidth="75.0" text="Prioriteti" />
+                  <TableColumn id="userIdColumn" prefWidth="75.0" text="%column.id" />
+                  <TableColumn id="gpaCloumn" prefWidth="75.0" text="%column.gpa" />
+                  <TableColumn id="yearColumn" prefWidth="75.0" text="%column.year" />
+                  <TableColumn id="universityCloumn" prefWidth="75.0" text="%column.university" />
+                  <TableColumn id="facultyColumn" prefWidth="75.0" text="%column.faculty" />
+                  <TableColumn id="majorColumn" prefWidth="75.0" text="%column.major" />
+                  <TableColumn id="coursesColumn" prefWidth="75.0" text="%column.semester" />
+                  <TableColumn id="priorityColumn" prefWidth="75.0" text="%column.priority" />
                </columns>
             </TableView>
-            <Button fx:id="btnBack" layoutX="621.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleBackClick" prefHeight="25.0" prefWidth="49.0" text="Back" />
+            <Button fx:id="btnBack" layoutX="621.0" layoutY="26.0" mnemonicParsing="false"
+                    onAction="#handleBackClick" prefHeight="25.0" prefWidth="49.0" text="%button.back" />
          </children>
       </AnchorPane>
    </children>
