@@ -47,6 +47,23 @@ public class UsersRepository {
         }
     }
 
+    public String getStudentNameById(int studentId){
+        String query = "SELECT first_name, last_name FROM users WHERE user_id = ?";
+        try{
+            PreparedStatement preparedStatement = this.connection.prepareStatement(query);
+            preparedStatement.setInt(1, studentId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if(resultSet.next()){
+                String firstName = resultSet.getString("first_name");
+                String lastName = resultSet.getString("last_name");
+                return firstName + " " + lastName;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 
 }
