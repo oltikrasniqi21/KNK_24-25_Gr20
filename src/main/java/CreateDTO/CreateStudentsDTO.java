@@ -10,7 +10,6 @@ public class CreateStudentsDTO {
     private String university;
     private String faculty;
     private String major;
-    //private Integer coursesLeft;
     private String priority;
 
     public CreateStudentsDTO(String firstName, String lastName, String email, String password, Double gpa, Integer yearOfStudy, String university, String faculty, String major, String priority) {
@@ -23,7 +22,6 @@ public class CreateStudentsDTO {
         this.university = university;
         this.faculty = faculty;
         this.major = major;
-       // this.coursesLeft = coursesLeft;
         this.priority = priority;
     }
 
@@ -98,14 +96,6 @@ public class CreateStudentsDTO {
     public void setMajor(String major) {
         this.major = major;
     }
-
-    //public Integer getCoursesLeft() {
-       // return coursesLeft;
-    //}
-
-   // public void setCoursesLeft(Integer coursesLeft) {
-        //this.coursesLeft = coursesLeft;
-   // }
 
     public String getPriority() {
         return priority;
