@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
@@ -34,6 +33,7 @@ public class SignupController implements Initializable {
     @FXML private TextField emailField;
     @FXML private PasswordField passwordField;
     @FXML private Label lblSelectedFile;
+    @FXML private Label passwordHintLabel;
 
     @FXML private ComboBox<String> universityComboBox;
     @FXML private ComboBox<String> facultyComboBox;
@@ -48,6 +48,17 @@ public class SignupController implements Initializable {
         facultyComboBox.getItems().addAll("FIEK", "Medicine", "Law", "Economics", "Arts","FIM","FIN","Architecture","Education");
         majorComboBox.getItems().addAll("Software Engineer", "Business", "Civil Engineering", "Law", "Dentistry","Robotics Engineering","Data Science","Cyber Security");
         yearComboBox.getItems().addAll("1", "2", "3", "4", "5", "6");
+
+        passwordField.textProperty().addListener((obs, oldVal, newVal) -> {
+            if (!isValidPassword(newVal)) {
+                passwordHintLabel.setText("Weak password");
+                passwordHintLabel.setStyle("-fx-text-fill: red;");
+            } else {
+                passwordHintLabel.setText("Strong password");
+                passwordHintLabel.setStyle("-fx-text-fill: green;");
+            }
+        });
+
     }
 
     @FXML
@@ -62,7 +73,6 @@ public class SignupController implements Initializable {
         String year = yearComboBox.getValue();
 
 
-
         if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty() ||
                 university == null || faculty == null || major == null || year == null){
             showAlert("Missing Information", "Please fill out all fields.");
@@ -74,6 +84,18 @@ public class SignupController implements Initializable {
             return;
         }
 
+        if (!isValidPassword(password)) {
+            showAlert(
+                    "Invalid Password",
+                    "Password must contain:\n" +
+                            "• At least 8 characters\n" +
+                            "• At least one uppercase letter\n" +
+                            "• At least one lowercase letter\n" +
+                            "• At least one digit\n" +
+                            "• At least one special character (e.g. !@#$%^&*)"
+            );
+            return;
+        }
 
         if (selectedPdfFile != null) {
             try {
@@ -112,6 +134,13 @@ public class SignupController implements Initializable {
             showAlert("Error", "Signup failed: " + e.getMessage());
         }
 
+    }
+    private boolean isValidPassword(String password) {
+        return password.length() >= 8 &&
+                password.matches(".*[A-Z].*") &&
+                password.matches(".*[a-z].*") &&
+                password.matches(".*\\d.*") &&
+                password.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*");
     }
 
     @FXML
