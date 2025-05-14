@@ -52,7 +52,7 @@ public class Notification {
         return read_status;
     }
 
-    public boolean isIs_broadcast() {
+    public boolean is_broadcast() {
         return is_broadcast;
     }
 }

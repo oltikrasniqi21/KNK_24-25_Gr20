@@ -72,4 +72,24 @@ public class NotificationRepository extends BaseRepository<Notification, CreateN
         return null;
     }
 
+    public List<Notification> getNotificationsForStudents() {
+        List<Notification> notifications = new ArrayList<>();
+        String sql = """
+                SELECT * FROM notification
+                WHERE is_broadcast = true
+                ORDER BY created_at DESC
+            """;
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                notifications.add(Notification.getInstance(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return notifications;
+    }
 }
