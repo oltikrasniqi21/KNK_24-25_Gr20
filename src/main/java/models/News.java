@@ -29,7 +29,10 @@ public class News {
             int newsId = rs.getInt("news_id");
             String title = rs.getString("title");
             String content = rs.getString("content");
-            Integer scholarshipId = rs.getObject("scholarship_id") != null ? rs.getInt("scholarship_id") : null;
+            int scholarshipId = rs.getInt("scholarship_id");
+            if (rs.wasNull()) {
+                scholarshipId = 0; // Default value for null
+            }
             int postedBy = rs.getInt("posted_by");
             Timestamp postedAt = rs.getTimestamp("posted_at");
             Date visibleUntil = rs.getDate("visible_until");
