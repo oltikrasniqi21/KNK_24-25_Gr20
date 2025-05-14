@@ -77,22 +77,23 @@
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="374.0" prefWidth="634.0" VBox.vgrow="ALWAYS">
       <children>
             <Accordion layoutX="103.0" layoutY="86.0" />
-            <Button layoutX="55.0" layoutY="86.0" mnemonicParsing="false" onAction="#handleManageStudents" prefHeight="43.0" prefWidth="188.0" text="%btn.manageStudents" />
-            <Button layoutX="55.0" layoutY="143.0" mnemonicParsing="false" onAction="#handleManageScholarships" prefHeight="43.0" prefWidth="188.0" text="%btn.manageScholarship" />
-            <Button layoutX="55.0" layoutY="202.0" mnemonicParsing="false" onAction="#handleViewApplications" prefHeight="43.0" prefWidth="188.0" text="%btn.viewApplication" />
-            <Button layoutX="55.0" layoutY="259.0" mnemonicParsing="false" onAction="#handleFeedback" prefHeight="43.0" prefWidth="188.0" text="%btn.feedback" />
-            <Button layoutX="55.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleNotification" prefHeight="43.0" prefWidth="188.0" text="%btn.notification" />
+            <Button layoutX="39.0" layoutY="86.0" mnemonicParsing="false" onAction="#handleManageStudents" prefHeight="43.0" prefWidth="188.0" text="%btn.manageStudents" />
+            <Button layoutX="39.0" layoutY="143.0" mnemonicParsing="false" onAction="#handleManageScholarships" prefHeight="43.0" prefWidth="188.0" text="%btn.manageScholarship" />
+            <Button layoutX="39.0" layoutY="202.0" mnemonicParsing="false" onAction="#handleViewApplications" prefHeight="43.0" prefWidth="188.0" text="%btn.viewApplication" />
+            <Button layoutX="39.0" layoutY="259.0" mnemonicParsing="false" onAction="#handleFeedback" prefHeight="43.0" prefWidth="188.0" text="%btn.feedback" />
+            <Button layoutX="39.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleNotification" prefHeight="43.0" prefWidth="188.0" text="%btn.notification" />
             <Text layoutX="320.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%admin_title">
                <font>
                   <Font size="44.0" />
                </font>
             </Text>
             <Button layoutX="420.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="43.0" prefWidth="188.0" text="%btn.logout" />
-            <Button layoutX="55.0" layoutY="28.0" mnemonicParsing="false" onAction="#handleManageUsers" prefHeight="43.0" prefWidth="188.0" text="%btn.manageUsers" />
-            <Button layoutX="257.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleFAQ" prefHeight="43.0" prefWidth="188.0" text="%btn.faq" />
+            <Button layoutX="39.0" layoutY="28.0" mnemonicParsing="false" onAction="#handleManageUsers" prefHeight="43.0" prefWidth="188.0" text="%btn.manageUsers" />
+            <Button layoutX="242.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleFAQ" prefHeight="43.0" prefWidth="188.0" text="%btn.faq" />
+            <Button layoutX="445.0" layoutY="317.0" mnemonicParsing="false" prefHeight="43.0" onAction="#handleNews" prefWidth="188.0" text="%btn.news" />
       </children>
     </AnchorPane>
   </children>
