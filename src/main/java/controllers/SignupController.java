@@ -27,7 +27,6 @@ public class SignupController implements Initializable {
     @FXML private TextField firstNameField;
     @FXML private TextField lastNameField;
     @FXML private TextField emailField;
-    @FXML private TextField gpaField;
     @FXML private PasswordField passwordField;
     @FXML private Label lblSelectedFile;
 
@@ -35,8 +34,6 @@ public class SignupController implements Initializable {
     @FXML private ComboBox<String> facultyComboBox;
     @FXML private ComboBox<String> majorComboBox;
     @FXML private ComboBox<String> yearComboBox;
-    @FXML private ComboBox<String> semesterComboBox;
-    @FXML private ComboBox<String> priorityComboBox;
 
     private File selectedPdfFile;
 
@@ -46,8 +43,6 @@ public class SignupController implements Initializable {
         facultyComboBox.getItems().addAll("Engineering", "Medicine", "Law", "Economics", "Arts");
         majorComboBox.getItems().addAll("Computer Science", "Business", "Civil Engineering", "Law", "Medicine");
         yearComboBox.getItems().addAll("1", "2", "3", "4");
-        semesterComboBox.getItems().addAll("Spring", "Fall");
-        priorityComboBox.getItems().addAll("High", "Medium", "Low");
     }
 
     @FXML
@@ -56,16 +51,15 @@ public class SignupController implements Initializable {
         String lastName = lastNameField.getText();
         String email = emailField.getText().trim().toLowerCase();
         String password = passwordField.getText();
-        String gpaText = gpaField.getText();
         String university = universityComboBox.getValue();
         String faculty = facultyComboBox.getValue();
         String major = majorComboBox.getValue();
         String year = yearComboBox.getValue();
-        String semester = semesterComboBox.getValue();
-        String priority = priorityComboBox.getValue();
+
+
 
         if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty() ||
-                university == null || faculty == null || major == null || year == null || priority == null) {
+                university == null || faculty == null || major == null || year == null){
             showAlert("Missing Information", "Please fill out all fields.");
             return;
         }
@@ -75,27 +69,6 @@ public class SignupController implements Initializable {
             return;
         }
 
-        double parsedGpa;
-        try {
-            parsedGpa = Double.parseDouble(gpaText.trim());
-            if (parsedGpa < 5.0|| parsedGpa > 10.0) {
-                showAlert("Invalid GPA", "GPA must be between 5.0 and 10.0.");
-                return;
-            }
-        } catch (NumberFormatException e) {
-            showAlert("Invalid GPA", "Please enter a valid GPA number (e.g., 8.75).");
-            return;
-        }
-
-        try {
-            if (signupService.isEmailTaken(email)) {
-                showAlert("Duplicate Email", "This email is already registered.");
-                return;
-            }
-        } catch (SQLException e) {
-            showAlert("Database Error", "Failed to validate email uniqueness.");
-            return;
-        }
 
         if (selectedPdfFile != null) {
             try {
@@ -114,8 +87,8 @@ public class SignupController implements Initializable {
         }
 
         try {
-            signupService.signupStudent(password, firstName, lastName, email, parsedGpa,
-                    Integer.parseInt(year), university, faculty, major, priority);
+            signupService.signupStudent(password, firstName, lastName, email,
+                    Integer.parseInt(year), university, faculty, major);
             showInfo("Signup Successful", "Your account has been created.");
         } catch (Exception e) {
             e.printStackTrace();
@@ -125,14 +98,14 @@ public class SignupController implements Initializable {
 
     @FXML
     private void handleSignupCancel() {
+        firstNameField.clear();
+        lastNameField.clear();
         emailField.clear();
         passwordField.clear();
         universityComboBox.setValue(null);
         facultyComboBox.setValue(null);
         majorComboBox.setValue(null);
         yearComboBox.setValue(null);
-        semesterComboBox.setValue(null);
-        priorityComboBox.setValue(null);
     }
 
     @FXML
