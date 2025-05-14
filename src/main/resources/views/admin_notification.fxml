@@ -97,8 +97,8 @@
             <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleBack" text="%btnBack" />
             <TableView fx:id="notificationTable" layoutX="328.0" layoutY="58.0" prefHeight="255.0" prefWidth="298.0">
               <columns>
-                <TableColumn fx:id="messageColumn" prefWidth="221.3333740234375" text="C1" />
-                <TableColumn fx:id="editColumn" minWidth="0.0" prefWidth="75.33331298828125" text="C2" />
+                <TableColumn fx:id="messageColumn" prefWidth="221.3333740234375" text="%notificationHeader" />
+                <TableColumn fx:id="editColumn" minWidth="0.0" prefWidth="75.33331298828125" text="%notificationModify" />
               </columns>
             </TableView>
          </children>
