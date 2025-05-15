@@ -2,6 +2,7 @@ package controllers;
 
 import Database.DBCustomConnector;
 import Services.LanguageManager;
+import Services.LoginService;
 import Services.SceneManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -39,21 +40,14 @@ public class LoginController {
         String password = pwdPassword.getText();
 
         try {
-            Connection conn = DBCustomConnector.getConnection();
-            String query = "SELECT role FROM users WHERE email = ? AND password = ?";
-            PreparedStatement statement = conn.prepareStatement(query);
-            statement.setString(1, email);
-            statement.setString(2, password);
-
-            ResultSet rs = statement.executeQuery();
+            LoginService loginService = new LoginService(DBCustomConnector.getConnection());
+            String role = loginService.authenticate(email, password);
 
             if (sceneManager == null) {
                 sceneManager = SceneManager.getInstance();
             }
 
-            if (rs.next()) {
-                String role = rs.getString("role");
-
+            if (role != null) {
                 if (role.equalsIgnoreCase("admin")) {
                     sceneManager.loadScene(SceneLocator.ADMIN_HOME_PAGE);
                 } else if (role.equalsIgnoreCase("student")) {
@@ -64,9 +58,15 @@ public class LoginController {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            showAlert("Databases Error!", e.getMessage());
+            showAlert("Database Error!", e.getMessage());
         }
     }
+
+    @FXML
+    private void handleSignupRedirect() {
+        SceneManager.getInstance().loadScene(SceneLocator.SIGNUP_PAGE);
+    }
+
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -77,7 +77,8 @@ public class LoginController {
 
     @FXML
     private void handleLoginCancel(){
-        SceneManager.getInstance().loadScene(SceneLocator.SIGNUP_PAGE);
+        txtUsername.clear();
+        pwdPassword.clear();
     }
 
 
