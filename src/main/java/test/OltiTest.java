@@ -14,8 +14,7 @@ public class OltiTest {
                 "STEM","MASHT",1000, LocalDate.of(2025,5,19)
                 ,8.0, 2, "Mjeksi");
 
-//        scholarshipsRepository.create(scholarshipDTO);
-
+        scholarshipsRepository.create(scholarshipDTO);
         UpdateScholarshipDTO updateScholarshipDTO = new UpdateScholarshipDTO(
                 2,1200, LocalDate.of(2025,10,20),9.2,2,"FIEK"
         );
@@ -23,8 +22,4 @@ public class OltiTest {
         scholarshipsRepository.update(updateScholarshipDTO);
         scholarshipsRepository.delete(2);
     }
-
-
-
-
 }

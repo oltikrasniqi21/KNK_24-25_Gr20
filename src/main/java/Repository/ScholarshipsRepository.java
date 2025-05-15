@@ -17,6 +17,11 @@ public class ScholarshipsRepository extends BaseRepository<Scholarships, CreateS
         return Scholarships.getInstance(res);
     }
 
+    public String getScholarshipName(int id){
+        Scholarships scholarship = this.getById(id);
+        return scholarship.getScholarship_name();
+    }
+
     @Override
     public Scholarships create(CreateScholarshipDTO create) {
         String query = """
@@ -54,7 +59,7 @@ public class ScholarshipsRepository extends BaseRepository<Scholarships, CreateS
                 REQUIRED_GPA = ?,
                 REQUIRED_YEAR = ?,
                 REQUIRED_MAJOR = ?
-                WHERE SCHOLARSHIP_ID = ?
+                WHERE ID = ?
                 """;
         try{
             PreparedStatement statement = this.connection.prepareStatement(query);
