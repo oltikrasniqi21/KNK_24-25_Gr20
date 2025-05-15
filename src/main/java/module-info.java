@@ -3,6 +3,7 @@ module com.example.knk_2425_gr20 {
     requires javafx.fxml;
     requires java.sql;
     requires javafx.graphics;
+    requires java.desktop;
 
 
     opens com.example.knk_2425_gr20 to javafx.fxml;
@@ -17,6 +18,9 @@ module com.example.knk_2425_gr20 {
     exports controllers to javafx.fxml;
     opens controllers;
 
+
+    opens models to javafx.base;
+    exports models;
 
 
 }
