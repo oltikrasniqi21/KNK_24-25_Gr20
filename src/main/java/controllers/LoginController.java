@@ -1,6 +1,7 @@
 package controllers;
 
 import Database.DBCustomConnector;
+import Services.CurrentUser;
 import Services.LanguageManager;
 import Services.SceneManager;
 import javafx.fxml.FXML;
@@ -40,7 +41,7 @@ public class LoginController {
 
         try {
             Connection conn = DBCustomConnector.getConnection();
-            String query = "SELECT role FROM users WHERE email = ? AND password = ?";
+            String query = "SELECT id,role FROM users WHERE email = ? AND password = ?";
             PreparedStatement statement = conn.prepareStatement(query);
             statement.setString(1, email);
             statement.setString(2, password);
@@ -52,7 +53,10 @@ public class LoginController {
             }
 
             if (rs.next()) {
+                int userId = rs.getInt("id");
                 String role = rs.getString("role");
+
+                CurrentUser.setUser(userId, role);
 
                 if (role.equalsIgnoreCase("admin")) {
                     sceneManager.loadScene(SceneLocator.ADMIN_HOME_PAGE);

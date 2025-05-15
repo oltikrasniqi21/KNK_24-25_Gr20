@@ -20,7 +20,7 @@ public class Feedback {
     }
 
     public static Feedback getInstance(ResultSet rs) throws SQLException {
-        int feedback_id = rs.getInt("feedback_id");
+        int feedback_id = rs.getInt("id");
         int user_id = rs.getInt("user_id");
         String message = rs.getString("message");
         Timestamp submitted_at = rs.getTimestamp("submitted_at");
