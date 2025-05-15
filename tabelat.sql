@@ -57,17 +57,17 @@ CREATE TABLE scholarships(
 	required_year INTEGER CHECK (required_year IS NULL OR (required_year BETWEEN 1 AND 5)),
 	required_major VARCHAR(50)
 );
---
---CREATE TABLE review(
---    review_id SERIAL PRIMARY KEY,
---    application_id INTEGER NOT NULL,
---    admin_id INTEGER NOT NULL,
---    review_notes VARCHAR(100),
---    review_date DATE NOT NULL DEFAULT CURRENT_DATE,
---
---	FOREIGN KEY(application_id) REFERENCES applications(application_id) ON DELETE CASCADE,
---	FOREIGN KEY(admin_id) REFERENCES users(user_id) ON DELETE CASCADE
---);
+
+CREATE TABLE review(
+    review_id SERIAL PRIMARY KEY,
+    application_id INTEGER NOT NULL,
+    admin_id INTEGER NOT NULL,
+    review_notes VARCHAR(100),
+    review_date DATE NOT NULL DEFAULT CURRENT_DATE,
+
+	FOREIGN KEY(application_id) REFERENCES applications(application_id) ON DELETE CASCADE,
+	FOREIGN KEY(admin_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
 
 
 CREATE TABLE applications(
