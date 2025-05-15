@@ -12,8 +12,4 @@ public class SceneManagerTest extends Application {
         stage.setScene(sceneManager.getScene());
         stage.show();
     }
-
-
-
-
 }

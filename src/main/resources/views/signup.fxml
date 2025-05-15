@@ -46,7 +46,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignupController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignupController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -94,7 +94,7 @@
                   <Font size="28.0" />
                </font>
             </Label>
-            <TextField fx:id="emailField" layoutX="142.0" layoutY="145.0" promptText="%signup.email" />
+        <TextField fx:id="emailField" layoutX="142.0" layoutY="145.0" promptText="%signup.email" />
             <PasswordField fx:id="passwordField" layoutX="142.0" layoutY="183.0" promptText="%signup.password" />
             <Text layoutX="14.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%signup.email" wrappingWidth="114.40380859375" />
             <Text layoutX="10.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%signup.password" />

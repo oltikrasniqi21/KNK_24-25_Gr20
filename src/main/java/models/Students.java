@@ -11,9 +11,9 @@ public class Students extends Users {
     private String faculty;
     private String major;
     private String priority;
+    private String proofDocument;
 
-
-    private Students(int user_id, String password, String first_name, String last_name, String email, String role,
+ private Students(int user_id, String password, String first_name, String last_name, String email, String role,
                      Double gpa, int year_of_study, String university, String faculty, String major, String priority) {
         super(user_id, password,first_name, last_name,email,role);
         this.gpa = gpa;
@@ -22,6 +22,7 @@ public class Students extends Users {
         this.faculty = faculty;
         this.major = major;
         this.priority = priority;
+        this.proofDocument = proofDocument;
     }
 
     public Double getGpa() {
@@ -64,10 +65,11 @@ public class Students extends Users {
         String faculty = resultSet.getString("faculty");
         String major = resultSet.getString("major");
         String priority = resultSet.getString("priority");
+        String proofDocument = resultSet.getString("proof_document");
+        String status = resultSet.getString("status");
 
-        return new Students(user_id,password_hash,first_name,last_name,email,role,
+return new Students(user_id,password_hash,first_name,last_name,email,role,
         gpa,year_of_study, university, faculty,major, priority);
-
 
     }
 

@@ -55,11 +55,12 @@ public class NotificationRepository extends BaseRepository<Notification, CreateN
 
     @Override
     public Notification update(UpdateNotificationDTO dto) {
-        String query = "UPDATE notification SET read_status = ? WHERE notification_id = ? RETURNING *";
+        String query = "UPDATE notification SET message = ?, read_status = ? WHERE notification_id = ? RETURNING *";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
-            stmt.setBoolean(1, dto.isRead_status());
-            stmt.setInt(2, dto.getNotificationId());
+            stmt.setString(1, dto.getMessage());
+            stmt.setBoolean(2, dto.isRead_status());
+            stmt.setInt(3, dto.getNotificationId());
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
@@ -72,4 +73,25 @@ public class NotificationRepository extends BaseRepository<Notification, CreateN
         return null;
     }
 
+
+    public List<Notification> getNotificationsForStudents() {
+        List<Notification> notifications = new ArrayList<>();
+        String sql = """
+                SELECT * FROM notification
+                WHERE is_broadcast = true
+                ORDER BY created_at DESC
+            """;
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                notifications.add(Notification.getInstance(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return notifications;
+    }
 }

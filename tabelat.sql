@@ -1,3 +1,31 @@
+ALTER TABLE applications
+RENAME COLUMN application_id TO id;
+
+ALTER TABLE faq
+RENAME COLUMN faq_id TO id;
+
+ALTER TABLE feedback
+RENAME COLUMN feedback_id TO id;
+
+ALTER TABLE news
+RENAME COLUMN news_id TO id;
+
+ALTER TABLE notification
+RENAME COLUMN notification_id TO id;
+
+ALTER TABLE review
+RENAME COLUMN review_id TO id;
+
+ALTER TABLE scholarships
+RENAME COLUMN scholarship_id TO id;
+
+ALTER TABLE students
+RENAME COLUMN student_id TO id;
+
+ALTER TABLE users
+RENAME COLUMN user_id TO id;
+
+
 CREATE TABLE users(
 	user_id SERIAL PRIMARY KEY,
 	password VARCHAR(255) NOT NULL,
@@ -31,17 +59,17 @@ CREATE TABLE scholarships(
 	required_year INTEGER CHECK (required_year IS NULL OR (required_year BETWEEN 1 AND 5)),
 	required_major VARCHAR(50)
 );
---
---CREATE TABLE review(
---    review_id SERIAL PRIMARY KEY,
---    application_id INTEGER NOT NULL,
---    admin_id INTEGER NOT NULL,
---    review_notes VARCHAR(100),
---    review_date DATE NOT NULL DEFAULT CURRENT_DATE,
---
---	FOREIGN KEY(application_id) REFERENCES applications(application_id) ON DELETE CASCADE,
---	FOREIGN KEY(admin_id) REFERENCES users(user_id) ON DELETE CASCADE
---);
+
+CREATE TABLE review(
+    review_id SERIAL PRIMARY KEY,
+    application_id INTEGER NOT NULL,
+    admin_id INTEGER NOT NULL,
+    review_notes VARCHAR(100),
+    review_date DATE NOT NULL DEFAULT CURRENT_DATE,
+
+	FOREIGN KEY(application_id) REFERENCES applications(application_id) ON DELETE CASCADE,
+	FOREIGN KEY(admin_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
 
 
 CREATE TABLE applications(
@@ -119,3 +147,8 @@ VALUES ('Welcome students!', CURRENT_TIMESTAMP, false, true);
 //shtimi i nje studenti per testim
 INSERT INTO users (password, first_name, last_name, email, role)
 VALUES ('12345678', 'filan', 'fisteku', 'stdtest@student.uni-pr.com', 'student');
+
+ALTER TABLE students ADD COLUMN proof_document TEXT;
+
+ALTER TABLE users
+ADD COLUMN status VARCHAR(20) DEFAULT 'pending';

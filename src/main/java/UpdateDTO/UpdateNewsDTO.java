@@ -6,15 +6,13 @@ public class UpdateNewsDTO {
     private int newsId;
     private String title;
     private String content;
-    private Integer scholarshipId;
-    private Date visibleUntil;
+    private Integer scholarshipTagId;
 
-    public UpdateNewsDTO(int newsId, String title, String content, Integer scholarshipId, Date visibleUntil) {
+    public UpdateNewsDTO(int newsId, String title, String content, Integer scholarshipTagId) {
         this.newsId = newsId;
         this.title = title;
         this.content = content;
-        this.scholarshipId = scholarshipId;
-        this.visibleUntil = visibleUntil;
+        this.scholarshipTagId = scholarshipTagId;
     }
 
     public void setNewsId(int newsId) {
@@ -29,13 +27,11 @@ public class UpdateNewsDTO {
         this.content = content;
     }
 
-    public void setScholarshipId(Integer scholarshipId) {
-        this.scholarshipId = scholarshipId;
+    public void setScholarshipTagId(Integer scholarshipTagId) {
+        this.scholarshipTagId = scholarshipTagId;
     }
 
-    public void setVisibleUntil(Date visibleUntil) {
-        this.visibleUntil = visibleUntil;
-    }
+
 
     public int getNewsId() {
         return newsId;
@@ -49,11 +45,8 @@ public class UpdateNewsDTO {
         return content;
     }
 
-    public Integer getScholarshipId() {
-        return scholarshipId;
+    public Integer getScholarshipTagId() {
+        return scholarshipTagId;
     }
 
-    public Date getVisibleUntil() {
-        return visibleUntil;
-    }
 }

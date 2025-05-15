@@ -12,6 +12,8 @@ public class Notification {
     private boolean read_status;
     private boolean is_broadcast;
 
+
+
     protected Notification(int notification_id, int student_id, String message, Timestamp created_at, boolean read_status, boolean is_broadcast) {
         this.notification_id = notification_id;
         this.student_id = student_id;
@@ -52,7 +54,11 @@ public class Notification {
         return read_status;
     }
 
-    public boolean isIs_broadcast() {
+    public boolean is_broadcast() {
         return is_broadcast;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }
