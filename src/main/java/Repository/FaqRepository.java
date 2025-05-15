@@ -37,7 +37,7 @@ public class FaqRepository extends BaseRepository<Faq, CreateFaqDTO, UpdateFaqDT
 
     @Override
     public Faq update(UpdateFaqDTO dto) {
-        String query = "UPDATE faq SET question = ?, answer = ? WHERE faq_id = ? RETURNING *";
+        String query = "UPDATE faq SET question = ?, answer = ? WHERE id = ? RETURNING *";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setString(1, dto.getQuestion());
@@ -54,33 +54,6 @@ public class FaqRepository extends BaseRepository<Faq, CreateFaqDTO, UpdateFaqDT
         return null;
     }
 
-    public ArrayList<Faq> getAll() {
-        ArrayList<Faq> faqs = new ArrayList<>();
-        String query = "SELECT * FROM faq ORDER BY faq_id";
-        try {
-            PreparedStatement stmt = connection.prepareStatement(query);
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                faqs.add(fromResultSet(rs));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return faqs;
-    }
-
-    public boolean delete(int faqId) {
-        String query = "DELETE FROM faq WHERE faq_id = ?";
-        try {
-            PreparedStatement stmt = connection.prepareStatement(query);
-            stmt.setInt(1, faqId);
-            return stmt.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
 
     public boolean addFaq(String question, String answer) {
         CreateFaqDTO dto = new CreateFaqDTO(question, answer);

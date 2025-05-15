@@ -6,7 +6,7 @@ public class CreateFeedbackDTO {
     private int user_id;
     private String message;
     private Timestamp submitted_at;
-    private String response; // optional
+    private String response;
 
     public CreateFeedbackDTO(int user_id, String message, Timestamp submitted_at, String response) {
         this.user_id = user_id;

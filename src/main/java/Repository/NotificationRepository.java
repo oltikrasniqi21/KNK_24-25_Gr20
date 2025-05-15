@@ -55,7 +55,7 @@ public class NotificationRepository extends BaseRepository<Notification, CreateN
 
     @Override
     public Notification update(UpdateNotificationDTO dto) {
-        String query = "UPDATE notification SET message = ?, read_status = ? WHERE notification_id = ? RETURNING *";
+        String query = "UPDATE notification SET message = ?, read_status = ? WHERE id = ? RETURNING *";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setString(1, dto.getMessage());

@@ -111,4 +111,9 @@ public class StudentHomePageController implements Initializable {
             return new SimpleStringProperty(formatted);
         });
     }
+
+    @FXML
+    private void loadFeedbackForm() {
+        loadCenterContent(SceneLocator.STUDENT_FEEDBACK_PAGE);
+    }
 }
