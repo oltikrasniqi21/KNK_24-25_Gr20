@@ -1,89 +1,61 @@
 package controllers;
 
-import Services.LanguageManager;
 import Services.SceneManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
+import Database.DBCustomConnector;
+import Services.SignupService;
+import utils.SceneLocator;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
+
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
-
 import javafx.stage.FileChooser;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+ 
 public class SignupController implements Initializable {
 
+    private final SignupService signupService;
+ public SignupController() {
+        this.signupService = new SignupService(DBCustomConnector.getConnection());
+    }
 
-    private SceneManager sceneManager;
-    private final LanguageManager languageManager = LanguageManager.getInstance();
+    @FXML private TextField firstNameField;
+    @FXML private TextField lastNameField;
+    @FXML private TextField emailField;
+    @FXML private PasswordField passwordField;
+    @FXML private Label lblSelectedFile;
+    @FXML private Label passwordHintLabel;
 
-    @FXML
-    private TextField emailField;
-    @FXML
-    private PasswordField passwordField;
-    @FXML
-    private Label lblSelectedFile;
-    @FXML
-    private TextField NameField;
-    @FXML
-    private TextField SurnameField;
-
-    @FXML
-    private ComboBox<String> universityComboBox;
-    @FXML
-    private ComboBox<String> facultyComboBox;
-    @FXML
-    private ComboBox<String> majorComboBox;
-    @FXML
-    private ComboBox<String> yearComboBox;
-    @FXML
-    private ComboBox<String> semesterComboBox;
-    @FXML
-    private ComboBox<String> priorityComboBox;
-
+    @FXML private ComboBox<String> universityComboBox;
+    @FXML private ComboBox<String> facultyComboBox;
+    @FXML private ComboBox<String> majorComboBox;
+    @FXML private ComboBox<String> yearComboBox;
 
     private File selectedPdfFile;
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        universityComboBox.getItems().addAll("University of Prishtina", "UBT", "AAB", "RIT Kosovo");
-        facultyComboBox.getItems().addAll("Engineering", "Medicine", "Law", "Economics", "Arts");
-        majorComboBox.getItems().addAll("Computer Science", "Business", "Civil Engineering", "Law", "Medicine");
-        yearComboBox.getItems().addAll("1", "2", "3", "4");
-        semesterComboBox.getItems().addAll("Spring", "Fall");
-        priorityComboBox.getItems().addAll("veteran", "disabled", "none");
-        priorityComboBox.setValue("none");
-    }
-
-    @FXML
-    private void handleSignupClick() throws IOException {
-        String name = NameField.getText();
-        String surname = SurnameField.getText();
-        String email = emailField.getText();
+ 
         String password = passwordField.getText();
         String university = universityComboBox.getValue();
         String faculty = facultyComboBox.getValue();
         String major = majorComboBox.getValue();
         String year = yearComboBox.getValue();
-        String semester = semesterComboBox.getValue();
-        String priority = priorityComboBox.getValue();
-        if ("none".equalsIgnoreCase(priority)) {
-            priority = null;
-        }
-
-        if (name.isEmpty() || surname.isEmpty() || email.isEmpty() || password.isEmpty() || university == null || faculty == null ||
-                major == null || year == null || semester == null) {
+ if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty() ||
+                university == null || faculty == null || major == null || year == null){
             showAlert("Missing Information", "Please fill out all fields.");
             return;
         }
@@ -93,17 +65,55 @@ public class SignupController implements Initializable {
             return;
         }
 
-        String pdfPath = null;
+        if (!isValidPassword(password)) {
+            showAlert(
+                    "Invalid Password",
+                    "Password must contain:\n" +
+                            "• At least 8 characters\n" +
+                            "• At least one uppercase letter\n" +
+                            "• At least one lowercase letter\n" +
+                            "• At least one digit\n" +
+                            "• At least one special character (e.g. !@#$%^&*)"
+            );
+            return;
+        }
+
         if (selectedPdfFile != null) {
-            File uploadDir = new File("uploads");
-            if (!uploadDir.exists() && !uploadDir.mkdirs()) {
-                showAlert("Directory Error", "Failed to create upload directory.");
+
+            try {
+                File uploadDir = new File("uploads");
+                if (!uploadDir.exists() && !uploadDir.mkdirs()) {
+                    showAlert("Directory Error", "Failed to create upload directory.");
+                    return;
+                }
+
+                File dest = new File(uploadDir, selectedPdfFile.getName());
+                Files.copy(selectedPdfFile.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                showAlert("File Upload Error", "Could not save your document.");
                 return;
             }
+        }
 
-            File dest = new File(uploadDir, selectedPdfFile.getName());
-            Files.copy(selectedPdfFile.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            pdfPath = dest.getAbsolutePath();
+        try {
+            signupService.signupStudent(password, firstName, lastName, email,
+                    Integer.parseInt(year), university, faculty, major);
+
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("Signup Successful");
+            successAlert.setContentText("Your account has been created.");
+            successAlert.show();
+
+            PauseTransition delay = new PauseTransition(Duration.seconds(2));
+            delay.setOnFinished(event -> {
+                successAlert.close();
+                SceneManager.getInstance().loadScene(SceneLocator.LOGIN_PAGE);
+            });
+            delay.play();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Error", "Signup failed: " + e.getMessage());
         }
 
         // DATABASE INSERTION
@@ -151,17 +161,28 @@ public class SignupController implements Initializable {
             showAlert("Connection Error", "Database connection failed: " + e.getMessage());
         }
     }
+    private boolean isValidPassword(String password) {
+        return password.length() >= 8 &&
+                password.matches(".*[A-Z].*") &&
+                password.matches(".*[a-z].*") &&
+                password.matches(".*\\d.*") &&
+                password.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*");
+    }
 
     @FXML
     private void handleSignupCancel() {
+        firstNameField.clear();
+        lastNameField.clear();
         emailField.clear();
         passwordField.clear();
         universityComboBox.setValue(null);
         facultyComboBox.setValue(null);
         majorComboBox.setValue(null);
         yearComboBox.setValue(null);
-        semesterComboBox.setValue(null);
-        priorityComboBox.setValue(null);
+    }
+    @FXML
+    private void handleBackClick() {
+        SceneManager.getInstance().loadScene(SceneLocator.LOGIN_PAGE);
     }
 
     @FXML
@@ -178,7 +199,6 @@ public class SignupController implements Initializable {
         } else {
             lblSelectedFile.setText("No file selected");
         }
-
     }
 
     private void showAlert(String title, String message) {
@@ -194,22 +214,9 @@ public class SignupController implements Initializable {
         alert.setContentText(message);
         alert.show();
     }
+
     private boolean isValidStudentEmail(String email) {
         String regex = "^[\\w.-]+@student\\.uni-[a-z]{2,10}\\.edu$";
         return Pattern.matches(regex, email);
     }
-
-
-    @FXML
-    private void handleENLanguageClick() throws Exception {
-        LanguageManager.getInstance().setLocale(Locale.ENGLISH);
-        SceneManager.reload();
-    }
-
-    @FXML
-    private void handleSQLanguageClick() throws Exception {
-        LanguageManager.getInstance().setLocale(new Locale("sq"));
-        SceneManager.reload();
-    }
-
 }
