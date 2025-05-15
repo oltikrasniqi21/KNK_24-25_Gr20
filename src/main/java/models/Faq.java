@@ -4,18 +4,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Faq {
-    private int faq_id;
+    private int id;
     private String question;
     private String answer;
 
-    protected Faq(int faq_id, String question, String answer) {
-        this.faq_id = faq_id;
+    protected Faq(int id, String question, String answer) {
+        this.id = id;
         this.question = question;
         this.answer = answer;
     }
 
     public static Faq getInstance(ResultSet rs) throws SQLException {
-        int faq_id = rs.getInt("faq_id");
+        int faq_id = rs.getInt("id");
         String question = rs.getString("question");
         String answer = rs.getString("answer");
 
@@ -23,7 +23,7 @@ public class Faq {
     }
 
     public int getFaq_id() {
-        return faq_id;
+        return id;
     }
 
     public String getQuestion() {

