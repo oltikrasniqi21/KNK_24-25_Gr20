@@ -46,7 +46,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignupController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignupController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -94,10 +94,10 @@
                   <Font size="28.0" />
                </font>
             </Label>
-            <TextField fx:id="emailField" layoutX="271.0" layoutY="60.0" />
-            <PasswordField fx:id="passwordField" layoutX="271.0" layoutY="88.0" />
-            <Text layoutX="198.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%Email" wrappingWidth="69.0673828125" />
-            <Text layoutX="196.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%Password" />
+            <TextField fx:id="emailField" layoutX="88.0" layoutY="60.0" />
+            <PasswordField fx:id="passwordField" layoutX="88.0" layoutY="88.0" />
+            <Text layoutX="32.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%Email" wrappingWidth="69.0673828125" />
+            <Text layoutX="16.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%Password" />
             <ComboBox fx:id="universityComboBox" layoutX="271.0" layoutY="118.0" prefHeight="24.0" prefWidth="171.0" />
             <ComboBox fx:id="facultyComboBox" layoutX="271.0" layoutY="150.0" prefHeight="24.0" prefWidth="171.0" />
             <ComboBox fx:id="majorComboBox" layoutX="271.0" layoutY="183.0" prefHeight="24.0" prefWidth="171.0" />
@@ -116,6 +116,10 @@
             <Button layoutX="104.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleENLanguageClick" text="\%EN" />
             <Button fx:id="btnChooseFile" layoutX="507.0" layoutY="60.0" mnemonicParsing="false" onAction="#handleChooseFile" text="\%Choose File" />
             <Label fx:id="lblSelectedFile" layoutX="497.0" layoutY="100.0" text="\%&quot;No file selected&quot;" />
+             <TextField fx:id="NameField" layoutX="340.0" layoutY="60.0" />
+             <TextField fx:id="SurnameField" layoutX="340.0" layoutY="88.0" />
+             <Label layoutX="284.0" layoutY="64.0" text="%Name" />
+             <Label layoutX="277.0" layoutY="91.0" text="%Surname" />
          </children>
     </AnchorPane>
   </children>
