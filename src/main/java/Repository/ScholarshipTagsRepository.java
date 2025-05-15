@@ -8,7 +8,7 @@ import java.sql.*;
 
 public class ScholarshipTagsRepository extends BaseRepository<ScholarshipTags, CreateScholarshipTagsDTO, UpdateScholarshipTagsDTO> {
     public ScholarshipTagsRepository() {
-        super("scholarship_tags", "scholarship_tags_id");
+        super("scholarship_tags");
     }
 
     @Override

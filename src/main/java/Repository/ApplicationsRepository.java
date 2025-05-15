@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class ApplicationsRepository extends BaseRepository<Applications, CreateApplicationDto, UpdateApplicationsDTO>{
 
     public ApplicationsRepository(){
-        super("applications","application_id");
+        super("applications");
     }
 
     public Applications fromResultSet(ResultSet resultSet) throws SQLException{

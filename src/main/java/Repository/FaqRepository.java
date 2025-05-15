@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class FaqRepository extends BaseRepository<Faq, CreateFaqDTO, UpdateFaqDTO> {
 
     public FaqRepository() {
-        super("faq","faq_id"); // your table name
+        super("faq"); // your table name
     }
 
     @Override

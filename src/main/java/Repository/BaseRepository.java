@@ -10,17 +10,15 @@ import java.util.ArrayList;
 abstract class BaseRepository<Model, CreateModelDto, UpdateModelDto> {
     protected Connection connection;
     private String tableName;
-    private String idColName;
 
-    public BaseRepository(String tableName, String idColName){
+    public BaseRepository(String tableName){
         this.connection = DBCustomConnector.getConnection();
         this.tableName = tableName;
-        this.idColName = idColName;
     }
     abstract Model fromResultSet(ResultSet res) throws SQLException;
 
     public Model getById(int id){
-        String query = "SELECT * FROM " + this.tableName + " WHERE " + this.idColName + " = ?";
+        String query = "SELECT * FROM " + this.tableName + " WHERE ID = ?";
 
         try{
             PreparedStatement statement = this.connection.prepareStatement(query);
@@ -51,7 +49,7 @@ abstract class BaseRepository<Model, CreateModelDto, UpdateModelDto> {
     }
 
     public boolean delete(int id){
-        String query = "DELETE FROM " + this.tableName + " WHERE " + this.idColName+ " = ?";
+        String query = "DELETE FROM " + this.tableName + " WHERE ID = ?";
         try{
             PreparedStatement preparedStatement = this.connection.prepareStatement(query);
             preparedStatement.setInt(1,id);

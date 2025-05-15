@@ -28,7 +28,7 @@ public class Scholarships {
     }
 
     public static Scholarships getInstance(ResultSet resultSet) throws SQLException {
-        int scholarship_id = resultSet.getInt("scholarship_id");
+        int scholarship_id = resultSet.getInt("id");
         String scholarship_name = resultSet.getString("scholarship_name");
         String provider  = resultSet.getString("provider");
         int amount = resultSet.getInt("amount");

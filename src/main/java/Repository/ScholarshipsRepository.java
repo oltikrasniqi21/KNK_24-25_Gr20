@@ -10,7 +10,7 @@ public class ScholarshipsRepository extends BaseRepository<Scholarships, CreateS
     //connection krijohet tek BaseRepository
 
     public ScholarshipsRepository(){
-        super("scholarships", "scholarship_id");
+        super("scholarships");
     }
 
     public Scholarships fromResultSet(ResultSet res) throws SQLException{
