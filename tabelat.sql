@@ -122,3 +122,7 @@ ALTER TABLE students ADD COLUMN proof_document TEXT;
 
 ALTER TABLE users
 ADD COLUMN status VARCHAR(20) DEFAULT 'pending';
+
+UPDATE users
+SET role = NULL
+WHERE LOWER(role) = 'admin';
