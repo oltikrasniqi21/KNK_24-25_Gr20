@@ -19,16 +19,12 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
-import javafx.stage.FileChooser;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
- 
+
 public class SignupController implements Initializable {
 
     private final SignupService signupService;
- public SignupController() {
+
+    public SignupController() {
         this.signupService = new SignupService(DBCustomConnector.getConnection());
     }
 
@@ -48,13 +44,36 @@ public class SignupController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
- 
+        universityComboBox.getItems().addAll("University of Prishtina", "University of Prizren", "University of Gjilan", "University of Gjakova", "University of Mitrovica");
+        facultyComboBox.getItems().addAll("FIEK", "Medicine", "Law", "Economics", "Arts","FIM","FIN","Architecture","Education");
+        majorComboBox.getItems().addAll("Software Engineer", "Business", "Civil Engineering", "Law", "Dentistry","Robotics Engineering","Data Science","Cyber Security");
+        yearComboBox.getItems().addAll("1", "2", "3", "4", "5", "6");
+
+        passwordField.textProperty().addListener((obs, oldVal, newVal) -> {
+            if (!isValidPassword(newVal)) {
+                passwordHintLabel.setText("Weak password");
+                passwordHintLabel.setStyle("-fx-text-fill: red;");
+            } else {
+                passwordHintLabel.setText("Strong password");
+                passwordHintLabel.setStyle("-fx-text-fill: green;");
+            }
+        });
+
+    }
+
+    @FXML
+    private void handleSignupClick() {
+        String firstName = firstNameField.getText();
+        String lastName = lastNameField.getText();
+        String email = emailField.getText().trim().toLowerCase();
         String password = passwordField.getText();
         String university = universityComboBox.getValue();
         String faculty = facultyComboBox.getValue();
         String major = majorComboBox.getValue();
         String year = yearComboBox.getValue();
- if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty() ||
+
+
+        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty() ||
                 university == null || faculty == null || major == null || year == null){
             showAlert("Missing Information", "Please fill out all fields.");
             return;
@@ -79,7 +98,6 @@ public class SignupController implements Initializable {
         }
 
         if (selectedPdfFile != null) {
-
             try {
                 File uploadDir = new File("uploads");
                 if (!uploadDir.exists() && !uploadDir.mkdirs()) {
@@ -116,50 +134,6 @@ public class SignupController implements Initializable {
             showAlert("Error", "Signup failed: " + e.getMessage());
         }
 
-        // DATABASE INSERTION
-        try (Connection conn = Database.DBCustomConnector.getConnection()) {
-            conn.setAutoCommit(false);
-
-            String insertUserSQL = "INSERT INTO users (password, first_name, last_name, email, role,status) VALUES (?, ?, ?, ?, ?,?) RETURNING user_id";
-            try (PreparedStatement userStmt = conn.prepareStatement(insertUserSQL)) {
-                userStmt.setString(1, password);
-                userStmt.setString(2, name); // Placeholder, use separate fields if needed
-                userStmt.setString(3, surname);
-                userStmt.setString(4, email);
-                userStmt.setString(5, "student");
-                userStmt.setString(6, "pending");
-
-
-
-                ResultSet rs = userStmt.executeQuery();
-                if (rs.next()) {
-                    int userId = rs.getInt("user_id");
-
-                    String insertStudentSQL = "INSERT INTO students (student_id, gpa, year_of_study, university, faculty, major, courses_left, priority, proof_document) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                    try (PreparedStatement studentStmt = conn.prepareStatement(insertStudentSQL)) {
-                        studentStmt.setInt(1, userId);
-                        studentStmt.setDouble(2, 0.0); // Replace with real input if you collect GPA
-                        studentStmt.setInt(3, Integer.parseInt(year));
-                        studentStmt.setString(4, university);
-                        studentStmt.setString(5, faculty);
-                        studentStmt.setString(6, major);
-                        studentStmt.setInt(7, 3); // Replace with real input if needed
-                        studentStmt.setString(8, priority);
-                        studentStmt.setString(9, pdfPath);
-
-                        studentStmt.executeUpdate();
-                    }
-                }
-
-                conn.commit();
-                showInfo("Success", "Student registered successfully!");
-            } catch (SQLException e) {
-                conn.rollback();
-                showAlert("Database Error", "Transaction failed: " + e.getMessage());
-            }
-        } catch (SQLException e) {
-            showAlert("Connection Error", "Database connection failed: " + e.getMessage());
-        }
     }
     private boolean isValidPassword(String password) {
         return password.length() >= 8 &&
