@@ -17,7 +17,6 @@ public class ApplicationsRepository extends BaseRepository<Applications, CreateA
         return Applications.getInstance(resultSet);
     }
 
-
     public Applications create(CreateApplicationDto applicationsDto){
         String query = """
                 INSERT INTO APPLICATIONS(STUDENT_ID, SCHOLARSHIP_ID, APPLICATION_DATE, STATUS)

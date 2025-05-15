@@ -1,7 +1,9 @@
 package Repository;
 import CreateDTO.CreateFaqDTO;
 import UpdateDTO.UpdateFaqDTO;
+import UpdateDTO.UpdateScholarshipDTO;
 import models.Faq;
+import models.Scholarships;
 
 import java.sql.*;
 import java.util.ArrayList;
