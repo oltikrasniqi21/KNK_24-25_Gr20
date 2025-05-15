@@ -44,7 +44,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="397.0" prefWidth="569.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+<VBox prefHeight="397.0" prefWidth="569.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -98,6 +98,7 @@
             <Button layoutX="170.0" layoutY="243.0" mnemonicParsing="false" onAction="#handleLoginCancel" text="%cancel.button" />
             <Button layoutX="32.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleENLanguageClick" text="%english.button" />
             <Button layoutX="412.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleSQLanguageClick" text="%shqip.button" />
+            <Label fx:id="lblSignup" layoutX="186.0" layoutY="291.0" onMouseClicked="#handleSignupRedirect" prefHeight="16.0" prefWidth="210.0" text="%signup.redirect" />
       </children>
     </AnchorPane>
   </children>

@@ -4,12 +4,8 @@ import Services.SceneManager;
 import javafx.fxml.FXML;
 import utils.SceneLocator;
 
-public class ManageStudentsController {
+public class ListStudentsController {
 
-    @FXML
-    private void handleAddStudentClick(){
-
-    }
 
     @FXML
     private void handleSearchClick(){
