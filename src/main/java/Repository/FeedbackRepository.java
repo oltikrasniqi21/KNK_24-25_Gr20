@@ -42,7 +42,7 @@ public class FeedbackRepository extends BaseRepository<Feedback, CreateFeedbackD
 
     @Override
     public Feedback update(UpdateFeedbackDTO dto) {
-        String query = "UPDATE feedback SET response = ? WHERE feedback_id = ? RETURNING *";
+        String query = "UPDATE feedback SET response = ? WHERE id = ? RETURNING *";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setString(1, dto.getResponse());
