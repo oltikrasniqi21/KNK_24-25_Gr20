@@ -24,7 +24,7 @@ public class News {
     }
 
         public static News getInstance(ResultSet rs) throws SQLException {
-            int newsId = rs.getInt("news_id");
+            int newsId = rs.getInt("id");
             String title = rs.getString("title");
             String content = rs.getString("content");
             int scholarshipTagId = rs.getInt("scholarship_tag_id");
