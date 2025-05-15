@@ -115,6 +115,23 @@ CREATE TABLE News (
   posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 );
 
+CREATE TABLE faculties (
+  faculty_id SERIAL PRIMARY KEY,
+  university_id INT NOT NULL REFERENCES universities(university_id) ON DELETE CASCADE,
+  name TEXT NOT NULL
+);
+
+
+CREATE TABLE majors (
+  major_id SERIAL PRIMARY KEY,
+  faculty_id INT NOT NULL REFERENCES faculties(faculty_id) ON DELETE CASCADE,
+  name TEXT NOT NULL
+);
+
+CREATE TABLE scholarship_tags (
+  tag_id SERIAL PRIMARY KEY,
+  tag_name TEXT UNIQUE NOT NULL
+);
 
 //query per shtimin e admin-users
 
