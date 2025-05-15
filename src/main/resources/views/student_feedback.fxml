@@ -89,7 +89,7 @@
             <TextArea fx:id="feedbackTextArea" layoutX="228.0" layoutY="56.0" prefHeight="65.0" prefWidth="238.0" promptText="%enterFeedbackPrompt" />
             <Label layoutX="265.0" layoutY="14.0" text="%feedbackTitle" />
             <Button layoutX="273.0" layoutY="145.0" mnemonicParsing="false" onAction="#handleSubmitFeedback" text="%submitFeedbackButton" />
-            <Label fx:id="statusLabel" layoutX="332.0" layoutY="121.0" textFill="#0fdb38" />
+            <Label fx:id="statusLabel" layoutX="230.0" layoutY="121.0" prefHeight="17.0" prefWidth="238.0" textFill="#0fdb38" />
          </children>
     </AnchorPane>
   </children>

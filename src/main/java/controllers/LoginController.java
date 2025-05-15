@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import utils.SceneLocator;
 import javafx.stage.Stage;
 
@@ -72,6 +73,7 @@ public class LoginController {
         }
     }
 
+
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -101,4 +103,7 @@ public class LoginController {
     }
 
 
+    public void handleSignupRedirect(MouseEvent mouseEvent) {
+        SceneManager.getInstance().loadScene(SceneLocator.SIGNUP_PAGE);
+    }
 }
