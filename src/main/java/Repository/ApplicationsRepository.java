@@ -47,7 +47,7 @@ public class ApplicationsRepository extends BaseRepository<Applications, CreateA
 
     @Override
     public Applications update(UpdateApplicationsDTO updateDto) {
-        String query = "UPDATE applications SET STATUS = ? WHERE application_id = ?";
+        String query = "UPDATE applications SET STATUS = ? WHERE id = ?";
         try{
             PreparedStatement statement = this.connection.prepareStatement(query);
             statement.setString(1, updateDto.getStatus());

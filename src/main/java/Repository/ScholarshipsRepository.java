@@ -50,7 +50,7 @@ public class ScholarshipsRepository {
     }
 
     public String getScholarshipName(int scholarshipId){
-        String query = "SELECT scholarship_name FROM scholarships WHERE scholarship_id = ?";
+        String query = "SELECT scholarship_name FROM scholarships WHERE id = ?";
         try{
             PreparedStatement preparedStatement = this.connection.prepareStatement(query);
             preparedStatement.setInt(1, scholarshipId);
@@ -66,7 +66,7 @@ public class ScholarshipsRepository {
     }
 
     public Double getScholarshipRequiredGPA(int scholarshipId){
-        String query = "SELECT required_gpa FROM scholarships WHERE scholarship_id = ?";
+        String query = "SELECT required_gpa FROM scholarships WHERE id = ?";
         try{
             PreparedStatement preparedStatement = this.connection.prepareStatement(query);
             preparedStatement.setInt(1, scholarshipId);
