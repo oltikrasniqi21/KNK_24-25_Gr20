@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 public class FeedbackRepository extends BaseRepository<Feedback, CreateFeedbackDTO, UpdateFeedbackDTO> {
 
     public FeedbackRepository() {
-        super("feedback");
+        super("feedback","feedback_id");
     }
 
     @Override

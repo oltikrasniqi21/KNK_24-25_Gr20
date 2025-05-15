@@ -1,24 +1,24 @@
 package CreateDTO;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class CreateScholarshipDTO {
     private String scholarship_name;
     private String provider;
     private int amount;
-    private java.sql.Date deadline_date;
+    private LocalDate deadline_date;
     private double required_gpa;
     private int required_year;
-    private String requred_major;
+    private String required_major;
 
-    public CreateScholarshipDTO(String scholarship_name, String provider, int amount, java.sql.Date deadline_date, double required_gpa, int required_year, String requred_major) {
+    public CreateScholarshipDTO(String scholarship_name, String provider, int amount, LocalDate deadline_date, double required_gpa, int required_year, String requred_major) {
         this.scholarship_name = scholarship_name;
         this.provider = provider;
         this.amount = amount;
         this.deadline_date = deadline_date;
         this.required_gpa = required_gpa;
         this.required_year = required_year;
-        this.requred_major = requred_major;
+        this.required_major = requred_major;
     }
 
     public void setScholarship_name(String scholarship_name) {
@@ -33,7 +33,7 @@ public class CreateScholarshipDTO {
         this.amount = amount;
     }
 
-    public void setDeadline_date(Date deadline_date) {
+    public void setDeadline_date(LocalDate deadline_date) {
         this.deadline_date = deadline_date;
     }
 
@@ -45,8 +45,8 @@ public class CreateScholarshipDTO {
         this.required_year = required_year;
     }
 
-    public void setRequred_major(String requred_major) {
-        this.requred_major = requred_major;
+    public void setRequired_major(String required_major) {
+        this.required_major = required_major;
     }
 
     public String getScholarship_name() {
@@ -61,7 +61,7 @@ public class CreateScholarshipDTO {
         return amount;
     }
 
-    public Date getDeadline_date() {
+    public LocalDate getDeadline_date() {
         return deadline_date;
     }
 
@@ -73,8 +73,8 @@ public class CreateScholarshipDTO {
         return required_year;
     }
 
-    public String getRequred_major() {
-        return requred_major;
+    public String getRequired_major() {
+        return required_major;
     }
 }
 

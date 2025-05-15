@@ -1,16 +1,17 @@
 package UpdateDTO;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class UpdateScholarshipDTO {
     private int scholarship_id;
     private int amount;
-    private Date deadline_date;
+    private LocalDate deadline_date;
     private double required_gpa;
     private int required_year;
     private String requred_major;
 
-    public UpdateScholarshipDTO(int scholarship_id, int amount, Date deadline_date,double required_gpa, int required_year, String requred_major) {
+    public UpdateScholarshipDTO(int scholarship_id, int amount, LocalDate deadline_date,double required_gpa, int required_year, String requred_major) {
         this.scholarship_id = scholarship_id;
         this.amount = amount;
         this.deadline_date = deadline_date;
@@ -27,7 +28,7 @@ public class UpdateScholarshipDTO {
         this.amount = amount;
     }
 
-    public void setDeadline_date(Date deadline_date) {
+    public void setDeadline_date(LocalDate deadline_date) {
         this.deadline_date = deadline_date;
     }
 
@@ -51,7 +52,7 @@ public class UpdateScholarshipDTO {
         return amount;
     }
 
-    public Date getDeadline_date() {
+    public LocalDate getDeadline_date() {
         return deadline_date;
     }
 

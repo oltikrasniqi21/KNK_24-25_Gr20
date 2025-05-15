@@ -13,7 +13,7 @@ import java.util.List;
 public class NotificationRepository extends BaseRepository<Notification, CreateNotificationDTO, UpdateNotificationDTO> {
 
     public NotificationRepository() {
-        super("notification");
+        super("notification","notification_id");
     }
 
     @Override

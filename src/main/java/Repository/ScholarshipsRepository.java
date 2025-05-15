@@ -10,7 +10,7 @@ public class ScholarshipsRepository extends BaseRepository<Scholarships, CreateS
     //connection krijohet tek BaseRepository
 
     public ScholarshipsRepository(){
-        super("scholarships");
+        super("scholarships", "scholarship_id");
     }
 
     public Scholarships fromResultSet(ResultSet res) throws SQLException{
@@ -20,18 +20,19 @@ public class ScholarshipsRepository extends BaseRepository<Scholarships, CreateS
     @Override
     public Scholarships create(CreateScholarshipDTO create) {
         String query = """
-                INSERT INTO SCHOLARSHIPS VALUES(?,?,?,?,?,?,?)
+                INSERT INTO SCHOLARSHIPS(SCHOLARSHIP_NAME, PROVIDER, AMOUNT, DEADLINE_DATE,
+                    REQUIRED_GPA, REQUIRED_YEAR, REQUIRED_MAJOR) VALUES(?,?,?,?,?,?,?)
                 """;
         try{
             PreparedStatement statement = this.connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1,create.getScholarship_name());
             statement.setString(2,create.getProvider());
             statement.setInt(3,create.getAmount());
-            statement.setDate(4,create.getDeadline_date());
+            statement.setDate(4, java.sql.Date.valueOf(create.getDeadline_date()));
             statement.setDouble(5,create.getRequired_gpa());
             statement.setInt(6,create.getRequired_year());
-            statement.setString(7,create.getRequred_major());
-            statement.executeQuery();
+            statement.setString(7,create.getRequired_major());
+            statement.execute();
             ResultSet set =statement.getGeneratedKeys();
             if(set.next()){
                 int id = set.getInt(1);
@@ -58,7 +59,7 @@ public class ScholarshipsRepository extends BaseRepository<Scholarships, CreateS
         try{
             PreparedStatement statement = this.connection.prepareStatement(query);
             statement.setInt(1, update.getAmount());
-            statement.setDate(2, update.getDeadline_date());
+            statement.setDate(2, java.sql.Date.valueOf(update.getDeadline_date()));
             statement.setDouble(3, update.getRequired_gpa());
             statement.setInt(4, update.getRequired_year());
             statement.setString(5, update.getRequred_major());
@@ -74,4 +75,5 @@ public class ScholarshipsRepository extends BaseRepository<Scholarships, CreateS
 
         return null;
     }
+
 }

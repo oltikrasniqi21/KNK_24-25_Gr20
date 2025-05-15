@@ -8,7 +8,7 @@ import java.sql.*;
 
 public class MajorsRepository extends BaseRepository<Majors, CreateMajorsDTO, UpdateMajorsDTO> {
     public MajorsRepository() {
-        super("majors");
+        super("majors","major_id");
     }
 
     @Override

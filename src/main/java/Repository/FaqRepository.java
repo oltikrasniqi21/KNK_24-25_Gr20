@@ -1,7 +1,9 @@
 package Repository;
 import CreateDTO.CreateFaqDTO;
 import UpdateDTO.UpdateFaqDTO;
+import UpdateDTO.UpdateScholarshipDTO;
 import models.Faq;
+import models.Scholarships;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,7 +11,7 @@ import java.util.ArrayList;
 public class FaqRepository extends BaseRepository<Faq, CreateFaqDTO, UpdateFaqDTO> {
 
     public FaqRepository() {
-        super("faq"); // your table name
+        super("faq","faq_id"); // your table name
     }
 
     @Override

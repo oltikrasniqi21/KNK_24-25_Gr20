@@ -10,13 +10,12 @@ import java.util.ArrayList;
 public class ApplicationsRepository extends BaseRepository<Applications, CreateApplicationDto, UpdateApplicationsDTO>{
 
     public ApplicationsRepository(){
-        super("applications");
+        super("applications","application_id");
     }
 
     public Applications fromResultSet(ResultSet resultSet) throws SQLException{
         return Applications.getInstance(resultSet);
     }
-
 
     public Applications create(CreateApplicationDto applicationsDto){
         String query = """

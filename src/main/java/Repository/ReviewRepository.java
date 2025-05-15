@@ -8,7 +8,7 @@ import java.sql.*;
 
 public class ReviewRepository extends BaseRepository<Review, CreateReviewDto, UpdateReviewDTO>{
     public ReviewRepository(){
-        super("review");
+        super("review","review_id");
     }
 
 

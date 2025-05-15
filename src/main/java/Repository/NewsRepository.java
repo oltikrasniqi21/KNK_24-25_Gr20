@@ -13,7 +13,7 @@ import java.util.List;
 
 public class NewsRepository extends BaseRepository<News, CreateNewsDTO, UpdateNewsDTO>{
 
-    public NewsRepository(){ super("news");}
+    public NewsRepository(){ super("news","news_id");}
 
     @Override
     News fromResultSet(ResultSet res) throws SQLException {
