@@ -38,6 +38,8 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -87,12 +89,18 @@
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
             <Label layoutX="266.0" layoutY="14.0" text="%notificationHeader" />
-            <Label layoutX="92.0" layoutY="62.0" text="%title" />
-            <TextField fx:id="titleFieldNotification" layoutX="160.0" layoutY="58.0" />
-            <TextArea fx:id="messageAreaNotification" layoutX="160.0" layoutY="98.0" prefHeight="72.0" prefWidth="149.0" />
-            <Label layoutX="92.0" layoutY="98.0" text="%message" />
-            <Button fx:id="sendBtnNotification" layoutX="178.0" layoutY="187.0" mnemonicParsing="false" onAction="#handleSendNotification" text="%sendNotification" />
+            <Label layoutX="61.0" layoutY="74.0" text="%title" />
+            <TextField fx:id="titleFieldNotification" layoutX="141.0" layoutY="70.0" />
+            <TextArea fx:id="messageAreaNotification" layoutX="141.0" layoutY="108.0" prefHeight="72.0" prefWidth="149.0" />
+            <Label layoutX="63.0" layoutY="108.0" text="%message" />
+            <Button fx:id="sendBtnNotification" layoutX="159.0" layoutY="187.0" mnemonicParsing="false" onAction="#handleSendNotification" text="%sendNotification" />
             <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleBack" text="%btnBack" />
+            <TableView fx:id="notificationTable" layoutX="328.0" layoutY="58.0" prefHeight="255.0" prefWidth="298.0">
+              <columns>
+                <TableColumn fx:id="messageColumn" prefWidth="221.3333740234375" text="%notificationHeader" />
+                <TableColumn fx:id="editColumn" minWidth="0.0" prefWidth="75.33331298828125" text="%notificationModify" />
+              </columns>
+            </TableView>
          </children>
     </AnchorPane>
   </children>
