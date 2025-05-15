@@ -38,11 +38,13 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StudentFeedbackController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FeedbackController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -85,13 +87,19 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label layoutX="81.0" layoutY="56.0" text="%giveFeedbackLabel" />
-            <TextArea fx:id="feedbackTextArea" layoutX="228.0" layoutY="56.0" prefHeight="65.0" prefWidth="238.0" promptText="%enterFeedbackPrompt" />
-            <Label layoutX="265.0" layoutY="14.0" text="%feedbackTitle" />
-            <Button layoutX="273.0" layoutY="145.0" mnemonicParsing="false" onAction="#handleSubmitFeedback" text="%submitFeedbackButton" />
-            <Label fx:id="statusLabel" layoutX="230.0" layoutY="121.0" prefHeight="17.0" prefWidth="238.0" textFill="#0fdb38" />
-            <Label layoutX="305.0" layoutY="187.0" text="%responseTitle" />
-            <TextArea fx:id="responseTextArea" layoutX="230.0" layoutY="204.0" prefHeight="65.0" prefWidth="238.0" promptText="%responsePrompt" wrapText="true" />
+            <Label layoutX="277.0" layoutY="14.0" text="%feedbackTitle" />
+            <TableView fx:id="feedbackTable" layoutX="139.0" layoutY="103.0" prefHeight="203.0" prefWidth="249.0">
+              <columns>
+                <TableColumn fx:id="studentIdCol" prefWidth="75.0" text="%studentIdCol" />
+                <TableColumn fx:id="messageCol" prefWidth="75.0" text="%messageCol" />
+                  <TableColumn fx:id="timeStampCol" prefWidth="48.0" text="%timeStampCol" />
+                  <TableColumn fx:id="responseCol" prefWidth="48.0" text="%responseCol" />
+              </columns>
+            </TableView>
+            <TextArea fx:id="responseTextArea" layoutX="419.0" layoutY="115.0" prefHeight="71.0" prefWidth="190.0" promptText="%promptResponse" />
+            <Button layoutX="457.0" layoutY="192.0" mnemonicParsing="false" onAction="#handleSubmitResponse" text="%submitResponse" />
+            <Label fx:id="statusLabel" layoutX="500.0" layoutY="225.0" />
+            <Button layoutX="14.0" layoutY="19.0" mnemonicParsing="false" onAction="#handleBack" text="%btnBack" />
          </children>
     </AnchorPane>
   </children>
