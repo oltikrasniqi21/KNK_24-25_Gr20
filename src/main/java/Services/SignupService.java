@@ -44,7 +44,7 @@ public class SignupService {
                 if (rs.next()) {
                     int userId = rs.getInt(1);
 
-                    String insertStudentSQL = "INSERT INTO students (student_id, gpa, year_of_study, university, faculty, major, priority) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    String insertStudentSQL = "INSERT INTO students (id, gpa, year_of_study, university, faculty, major, priority) VALUES (?, ?, ?, ?, ?, ?, ?)";
                     try (PreparedStatement studentStmt = connection.prepareStatement(insertStudentSQL)) {
                         studentStmt.setInt(1, userId);
                         studentStmt.setNull(2, java.sql.Types.DOUBLE);
