@@ -1,3 +1,31 @@
+ALTER TABLE applications
+RENAME COLUMN application_id TO id;
+
+ALTER TABLE faq
+RENAME COLUMN faq_id TO id;
+
+ALTER TABLE feedback
+RENAME COLUMN feedback_id TO id;
+
+ALTER TABLE news
+RENAME COLUMN news_id TO id;
+
+ALTER TABLE notification
+RENAME COLUMN notification_id TO id;
+
+ALTER TABLE review
+RENAME COLUMN review_id TO id;
+
+ALTER TABLE scholarships
+RENAME COLUMN scholarship_id TO id;
+
+ALTER TABLE students
+RENAME COLUMN student_id TO id;
+
+ALTER TABLE users
+RENAME COLUMN user_id TO id;
+
+
 CREATE TABLE users(
 	user_id SERIAL PRIMARY KEY,
 	password VARCHAR(255) NOT NULL,
