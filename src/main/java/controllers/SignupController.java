@@ -16,7 +16,10 @@ import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
 import javafx.stage.FileChooser;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class SignupController implements Initializable {
 
@@ -30,6 +33,10 @@ public class SignupController implements Initializable {
     private PasswordField passwordField;
     @FXML
     private Label lblSelectedFile;
+    @FXML
+    private TextField NameField;
+    @FXML
+    private TextField SurnameField;
 
     @FXML
     private ComboBox<String> universityComboBox;
@@ -55,11 +62,14 @@ public class SignupController implements Initializable {
         majorComboBox.getItems().addAll("Computer Science", "Business", "Civil Engineering", "Law", "Medicine");
         yearComboBox.getItems().addAll("1", "2", "3", "4");
         semesterComboBox.getItems().addAll("Spring", "Fall");
-        priorityComboBox.getItems().addAll("High", "Medium", "Low");
+        priorityComboBox.getItems().addAll("veteran", "disabled", "none");
+        priorityComboBox.setValue("none");
     }
 
     @FXML
     private void handleSignupClick() throws IOException {
+        String name = NameField.getText();
+        String surname = SurnameField.getText();
         String email = emailField.getText();
         String password = passwordField.getText();
         String university = universityComboBox.getValue();
@@ -68,12 +78,16 @@ public class SignupController implements Initializable {
         String year = yearComboBox.getValue();
         String semester = semesterComboBox.getValue();
         String priority = priorityComboBox.getValue();
+        if ("none".equalsIgnoreCase(priority)) {
+            priority = null;
+        }
 
-        if (email.isEmpty() || password.isEmpty() || university == null || faculty == null ||
-                major == null || year == null || semester == null || priority == null) {
+        if (name.isEmpty() || surname.isEmpty() || email.isEmpty() || password.isEmpty() || university == null || faculty == null ||
+                major == null || year == null || semester == null) {
             showAlert("Missing Information", "Please fill out all fields.");
             return;
         }
+
         if (!isValidStudentEmail(email)) {
             showAlert("Invalid Email", "Email must be a valid university student address (e.g. user@student.uni-pr.edu)");
             return;
@@ -82,12 +96,9 @@ public class SignupController implements Initializable {
         String pdfPath = null;
         if (selectedPdfFile != null) {
             File uploadDir = new File("uploads");
-            if (!uploadDir.exists()) {
-                boolean created = uploadDir.mkdirs();
-                if (!created) {
-                    showAlert("Directory Error", "Failed to create upload directory.");
-                    return;
-                }
+            if (!uploadDir.exists() && !uploadDir.mkdirs()) {
+                showAlert("Directory Error", "Failed to create upload directory.");
+                return;
             }
 
             File dest = new File(uploadDir, selectedPdfFile.getName());
@@ -95,6 +106,50 @@ public class SignupController implements Initializable {
             pdfPath = dest.getAbsolutePath();
         }
 
+        // DATABASE INSERTION
+        try (Connection conn = Database.DBCustomConnector.getConnection()) {
+            conn.setAutoCommit(false);
+
+            String insertUserSQL = "INSERT INTO users (password, first_name, last_name, email, role,status) VALUES (?, ?, ?, ?, ?,?) RETURNING user_id";
+            try (PreparedStatement userStmt = conn.prepareStatement(insertUserSQL)) {
+                userStmt.setString(1, password);
+                userStmt.setString(2, name); // Placeholder, use separate fields if needed
+                userStmt.setString(3, surname);
+                userStmt.setString(4, email);
+                userStmt.setString(5, "student");
+                userStmt.setString(6, "pending");
+
+
+
+                ResultSet rs = userStmt.executeQuery();
+                if (rs.next()) {
+                    int userId = rs.getInt("user_id");
+
+                    String insertStudentSQL = "INSERT INTO students (student_id, gpa, year_of_study, university, faculty, major, courses_left, priority, proof_document) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    try (PreparedStatement studentStmt = conn.prepareStatement(insertStudentSQL)) {
+                        studentStmt.setInt(1, userId);
+                        studentStmt.setDouble(2, 0.0); // Replace with real input if you collect GPA
+                        studentStmt.setInt(3, Integer.parseInt(year));
+                        studentStmt.setString(4, university);
+                        studentStmt.setString(5, faculty);
+                        studentStmt.setString(6, major);
+                        studentStmt.setInt(7, 3); // Replace with real input if needed
+                        studentStmt.setString(8, priority);
+                        studentStmt.setString(9, pdfPath);
+
+                        studentStmt.executeUpdate();
+                    }
+                }
+
+                conn.commit();
+                showInfo("Success", "Student registered successfully!");
+            } catch (SQLException e) {
+                conn.rollback();
+                showAlert("Database Error", "Transaction failed: " + e.getMessage());
+            }
+        } catch (SQLException e) {
+            showAlert("Connection Error", "Database connection failed: " + e.getMessage());
+        }
     }
 
     @FXML
