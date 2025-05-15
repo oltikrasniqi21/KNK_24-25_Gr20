@@ -13,7 +13,7 @@ public class AdminHomePageController {
 
     @FXML
     private void handleManageStudents(){
-        SceneManager.getInstance().loadScene(SceneLocator.MANAGE_STUDENTS_PAGE);
+        SceneManager.getInstance().loadScene(SceneLocator.LIST_STUDENTS_PAGE);
     }
 
     @FXML

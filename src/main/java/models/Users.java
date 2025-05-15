@@ -10,14 +10,16 @@ public class Users {
     private String last_name;
     private String email;
     private String role;
+    private String status;
 
-    protected Users(int user_id, String password, String first_name, String last_name, String email, String role) {
+    protected Users(int user_id, String password, String first_name, String last_name, String email, String role,String status) {
         this.user_id = user_id;
         this.password = password;
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
         this.role = role;
+        this.status = status;
     }
 
     public static Users getInstance(ResultSet resultSet) throws SQLException {
@@ -27,8 +29,9 @@ public class Users {
         String last_name = resultSet.getString("last_name");
         String email = resultSet.getString("email");
         String role = resultSet.getString("role");
+        String status= resultSet.getString("status");
 
-        return new Users(user_id,password_hash,first_name,last_name,email,role);
+        return new Users(user_id,password_hash,first_name,last_name,email,role,status);
     }
 
 //    public String getPassword() {
@@ -53,5 +56,9 @@ public class Users {
 
     public String getRole() {
         return role;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }
