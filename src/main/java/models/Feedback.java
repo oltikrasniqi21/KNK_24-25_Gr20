@@ -5,14 +5,14 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 
 public class Feedback {
-    private int feedback_id;
+    private int id;
     private int user_id;
     private String message;
     private Timestamp submitted_at;
     private String response; // optional
 
-    protected Feedback(int feedback_id, int user_id, String message, Timestamp submitted_at, String response) {
-        this.feedback_id = feedback_id;
+    protected Feedback(int id, int user_id, String message, Timestamp submitted_at, String response) {
+        this.id = id;
         this.user_id = user_id;
         this.message = message;
         this.submitted_at = submitted_at;
@@ -30,7 +30,7 @@ public class Feedback {
     }
 
     public int getFeedback_id() {
-        return feedback_id;
+        return id;
     }
 
     public int getUser_id() {

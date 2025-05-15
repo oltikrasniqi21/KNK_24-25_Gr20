@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 
 public class Notification {
-    private int notification_id;
+    private int id;
     private Integer student_id;
     private String message;
     private Timestamp created_at;
@@ -14,8 +14,8 @@ public class Notification {
 
 
 
-    protected Notification(int notification_id, int student_id, String message, Timestamp created_at, boolean read_status, boolean is_broadcast) {
-        this.notification_id = notification_id;
+    protected Notification(int id, int student_id, String message, Timestamp created_at, boolean read_status, boolean is_broadcast) {
+        this.id = id;
         this.student_id = student_id;
         this.message = message;
         this.created_at = created_at;
@@ -24,7 +24,7 @@ public class Notification {
     }
 
     public static Notification getInstance(ResultSet rs) throws SQLException {
-        int notification_id = rs.getInt("notification_id");
+        int notification_id = rs.getInt("id");
         int student_id = rs.getInt("student_id");
         String message = rs.getString("message");
         Timestamp created_at = rs.getTimestamp("created_at");
@@ -35,7 +35,7 @@ public class Notification {
     }
 
     public int getNotification_id() {
-        return notification_id;
+        return id;
     }
 
     public int getStudent_id() {
