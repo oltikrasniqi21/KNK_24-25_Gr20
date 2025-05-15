@@ -9,40 +9,34 @@ public class News {
     private int newsId;
     private String title;
     private String content;
-    private int scholarshipId;
+    private int scholarshipTagId;
     private int postedBy;
     private Timestamp postedAt;
-    private Date visibleUntil;
 
 
-    protected News(int newsId, String title, String content, int scholarshipId, int postedBy, Timestamp postedAt, Date visibleUntil) {
+    protected News(int newsId, String title, String content, int scholarshipTagId, int postedBy, Timestamp postedAt) {
         this.newsId = newsId;
         this.title = title;
         this.content = content;
-        this.scholarshipId = scholarshipId;
+        this.scholarshipTagId = scholarshipTagId;
         this.postedBy = postedBy;
         this.postedAt = postedAt;
-        this.visibleUntil = visibleUntil;
     }
 
         public static News getInstance(ResultSet rs) throws SQLException {
             int newsId = rs.getInt("news_id");
             String title = rs.getString("title");
             String content = rs.getString("content");
-            int scholarshipId = rs.getInt("scholarship_id");
+            int scholarshipTagId = rs.getInt("scholarship_tag_id");
             if (rs.wasNull()) {
-                scholarshipId = 0; // Default value for null
+                scholarshipTagId = 0; // Default value for null
             }
             int postedBy = rs.getInt("posted_by");
             Timestamp postedAt = rs.getTimestamp("posted_at");
-            Date visibleUntil = rs.getDate("visible_until");
 
-            return new News(newsId, title, content, scholarshipId, postedBy, postedAt,visibleUntil);
+            return new News(newsId, title, content, scholarshipTagId, postedBy, postedAt);
         }
 
-    public Date getVisibleUntil() {
-        return visibleUntil;
-    }
 
     public Timestamp getPostedAt() {
         return postedAt;
@@ -52,8 +46,8 @@ public class News {
         return postedBy;
     }
 
-    public int getScholarshipId() {
-        return scholarshipId;
+    public int getScholarshipTagId() {
+        return scholarshipTagId;
     }
 
     public String getContent() {

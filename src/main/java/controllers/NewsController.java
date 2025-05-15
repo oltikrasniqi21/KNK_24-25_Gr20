@@ -1,17 +1,18 @@
 package controllers;
 
+import Services.SceneManager;
 import javafx.collections.ObservableList;
 import CreateDTO.CreateNewsDTO;
 import Repository.NewsRepository;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.Callback;
 import models.News;
+import utils.SceneLocator;
 
-import java.sql.Date;
+
 
 public class NewsController {
 
@@ -19,8 +20,7 @@ public class NewsController {
     private TextArea titleField;
     @FXML
     private TextArea contentField;
-    @FXML
-    private DatePicker visibilityDatePicker;
+
     @FXML
     private ChoiceBox<Integer> scholarshipChoiceBox;
 
@@ -30,8 +30,6 @@ public class NewsController {
     private TableColumn<News, String> newsTitleCol;
     @FXML
     private TableColumn<News, String> newsScholarshipCol;
-    @FXML
-    private TableColumn<News, Date> newsVisibleUntilCol;
     @FXML
     private TableColumn<News, Void> newsActionCol;
 
@@ -43,16 +41,15 @@ public class NewsController {
         // Get the values from the form fields
         String title = titleField.getText();
         String content = contentField.getText();
-        Date visibleUntil = Date.valueOf(visibilityDatePicker.getValue());
 
         // If the scholarshipChoiceBox is not null, get selected value
-        Integer scholarshipId = scholarshipChoiceBox.getValue() != null ? scholarshipChoiceBox.getValue() : null;
+        Integer scholarshipTagId = scholarshipChoiceBox.getValue() != null ? scholarshipChoiceBox.getValue() : null;
 
         // Assuming the logged-in user ID is available, this could be hardcoded or fetched from the session
         int postedBy = 1; // Replace with actual user ID logic
 
         // Create the DTO object with the gathered data
-        CreateNewsDTO createNewsDTO = new CreateNewsDTO(title, content, scholarshipId, postedBy, visibleUntil);
+        CreateNewsDTO createNewsDTO = new CreateNewsDTO(title, content, scholarshipTagId, postedBy);
 
         // Call the repository to insert the news into the database
         newsRepository.create(createNewsDTO);
@@ -65,7 +62,6 @@ public class NewsController {
         // Clear the form fields after publishing
         titleField.clear();
         contentField.clear();
-        visibilityDatePicker.setValue(null);
         scholarshipChoiceBox.setValue(null);
     }
 
@@ -103,13 +99,14 @@ public class NewsController {
     public void initialize() {
         // Set up columns
         newsTitleCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
-        newsScholarshipCol.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getScholarshipId())));
-        newsVisibleUntilCol.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getVisibleUntil()));
+        newsScholarshipCol.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getScholarshipTagId())));
 
         // Load news data into table
         loadNews();
 
         addDeleteButtonToTable();
+
+        newsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     private void loadNews() {
@@ -141,5 +138,10 @@ public class NewsController {
             loadNews();
 
         }
+    }
+
+    @FXML
+    private void backToAdmin(javafx.event.ActionEvent event){
+        SceneManager.getInstance().loadScene(SceneLocator.ADMIN_HOME_PAGE);
     }
 }

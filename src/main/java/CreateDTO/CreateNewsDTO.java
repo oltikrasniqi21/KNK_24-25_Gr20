@@ -6,16 +6,14 @@ import java.sql.Timestamp;
 public class CreateNewsDTO {
     private String title;
     private String content;
-    private Integer scholarshipId; //Integer pasiqe mundet me qene null
+    private Integer scholarshipTagId; //Integer pasiqe mundet me qene null
     private int postedBy;
-    private Date visibleUntil;
 
-    public CreateNewsDTO(String title, String content, Integer scholarshipId, int postedBy, Date visibleUntil) {
+    public CreateNewsDTO(String title, String content, Integer scholarshipTagId, int postedBy) {
         this.title = title;
         this.content = content;
-        this.scholarshipId = scholarshipId;
+        this.scholarshipTagId = scholarshipTagId;
         this.postedBy = postedBy;
-        this.visibleUntil = visibleUntil;
     }
 
     public String getTitle() {
@@ -26,17 +24,15 @@ public class CreateNewsDTO {
         return content;
     }
 
-    public Integer getScholarshipId() {
-        return scholarshipId;
+    public Integer getScholarshipTagId() {
+        return scholarshipTagId;
     }
 
     public int getPostedBy() {
         return postedBy;
     }
 
-    public Date getVisibleUntil() {
-        return visibleUntil;
-    }
+
 
 
 }
