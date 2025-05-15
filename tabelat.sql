@@ -117,3 +117,8 @@ VALUES ('Welcome students!', CURRENT_TIMESTAMP, false, true);
 //shtimi i nje studenti per testim
 INSERT INTO users (password, first_name, last_name, email, role)
 VALUES ('12345678', 'filan', 'fisteku', 'stdtest@student.uni-pr.com', 'student');
+
+ALTER TABLE students ADD COLUMN proof_document TEXT;
+
+ALTER TABLE users
+ADD COLUMN status VARCHAR(20) DEFAULT 'pending';

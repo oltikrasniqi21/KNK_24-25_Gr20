@@ -34,6 +34,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NewsController">
   <children>
@@ -43,21 +44,23 @@
             <TextArea fx:id="contentField" layoutX="22.0" layoutY="147.0" prefHeight="71.0" prefWidth="200.0" />
             <Label layoutX="22.0" layoutY="58.0" prefHeight="18.0" prefWidth="72.0" text="%title.label" />
             <Label layoutX="22.0" layoutY="129.0" text="%content.label" />
-            <DatePicker fx:id="visibilityDatePicker" layoutX="23.0" layoutY="246.0" prefHeight="26.0" prefWidth="200.0" />
-            <Label layoutX="24.0" layoutY="228.0" prefHeight="18.0" prefWidth="139.0" text="%visibility.label" />
             <ChoiceBox fx:id="scholarshipChoiceBox" layoutX="22.0" layoutY="297.0" prefHeight="26.0" prefWidth="200.0" />
             <Label layoutX="24.0" layoutY="279.0" text="%scholarships.label" />
-            <TableView fx:id="newsTable" layoutX="248.0" layoutY="76.0" prefHeight="291.0" prefWidth="382.0">
+            <TableView fx:id="newsTable" layoutX="248.0" layoutY="76.0" prefHeight="291.0" prefWidth="358.0" >
               <columns>
                   <TableColumn fx:id="newsTitleCol" text="%news.title.col" />
                   <TableColumn fx:id="newsScholarshipCol" text="%news.scholarship.col" />
-                  <TableColumn fx:id="newsVisibleUntilCol" text="%news.visibleUntil.col" />
                   <TableColumn fx:id="newsActionCol" text="%news.action.col" />
               </columns>
             </TableView>
             <Button layoutX="126.0" layoutY="341.0" mnemonicParsing="false" onAction="#publishNews" prefHeight="26.0" prefWidth="96.0" text="%btn.newsPublish" />
             <Button layoutX="19.0" layoutY="341.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" text="%btn.newsCancel" />
-            <Button layoutX="529.0" layoutY="32.0" mnemonicParsing="false" text="\%news.btn.back" />
+            <Button fx:id="backButton" layoutX="529.0" layoutY="32.0" mnemonicParsing="false" onAction="#backToAdmin" text="%news.btn.back" />
+            <Label layoutX="25.0" layoutY="17.0" text="%add.news.title">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
       </children>
     </AnchorPane>
   </children>
