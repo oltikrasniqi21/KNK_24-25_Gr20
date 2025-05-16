@@ -1,20 +1,20 @@
 package UpdateDTO;
 
 public class UpdateFeedbackDTO {
-    private int feedbackId;
+    private int id;
     private String response;
 
-    public UpdateFeedbackDTO(int feedbackId, String response) {
-        this.feedbackId = feedbackId;
+    public UpdateFeedbackDTO(int id, String response) {
+        this.id = id;
         this.response = response;
     }
 
     public int getFeedbackId() {
-        return feedbackId;
+        return id;
     }
 
-    public void setFeedbackId(int feedbackId) {
-        this.feedbackId = feedbackId;
+    public void setFeedbackId(int id) {
+        this.id = id;
     }
 
     public String getResponse() {

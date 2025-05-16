@@ -39,7 +39,7 @@ public class CreateUsersController {
             String email = txtEmail.getText();
             String password = pwdPassword.getText();
 
-            String emailRegex = "^[^@\\s]+@admin\\.uni\\-[a-z]{2,3}\\.com$";
+            String emailRegex = "^[^@\\s]+@admin\\.uni\\-[a-z]{2,3}\\.edu$";
             Pattern pattern = Pattern.compile(emailRegex);
 
             // Input validation
@@ -53,7 +53,6 @@ public class CreateUsersController {
                 return;
             }
 
-            // Use a single connection for both operations
             try (Connection conn = DBCustomConnector.getConnection()) {
                 // Check for existing email
                 if (emailExists(conn, email)) {
@@ -61,19 +60,24 @@ public class CreateUsersController {
                     return;
                 }
 
-                // Insert user
-                String query = "INSERT INTO users (password, first_name, last_name, email, role,status) VALUES (?, ?, ?, ?, ?,?)";
+                // Generate salt and hash password
+                String salt = utils.PasswordUtils.getSalt();
+                String hashedPassword = utils.PasswordUtils.hashPassword(password, salt);
+                String passwordToStore = salt + "$" + hashedPassword;
+
+                // Insert admin user with hashed password
+                String query = "INSERT INTO users (password, first_name, last_name, email, role, status) VALUES (?, ?, ?, ?, ?, ?)";
                 try (PreparedStatement statement = conn.prepareStatement(query)) {
-                    statement.setString(1, password); // ⚠️ Consider hashing the password!
+                    statement.setString(1, passwordToStore);
                     statement.setString(2, emri);
                     statement.setString(3, mbiemri);
                     statement.setString(4, email);
                     statement.setString(5, "admin");
-                    statement.setNull(6, java.sql.Types.VARCHAR);
+                    statement.setNull(6, java.sql.Types.VARCHAR); // or setString(6, "pending");
 
                     int rowsInserted = statement.executeUpdate();
                     if (rowsInserted > 0) {
-                        showAlert("Success", "User added successfully.");
+                        showAlert("Success", "Admin user added successfully.");
                         clearFields();
                     } else {
                         showAlert("Error", "Failed to add user.");
@@ -85,7 +89,7 @@ public class CreateUsersController {
             }
         }
 
-        private boolean emailExists(Connection conn, String email) throws SQLException {
+    private boolean emailExists(Connection conn, String email) throws SQLException {
             String sql = "SELECT COUNT(*) FROM users WHERE email = ?";
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setString(1, email);

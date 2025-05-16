@@ -3,6 +3,7 @@ package Repository;
 import CreateDTO.CreateApplicationDto;
 import UpdateDTO.UpdateApplicationsDTO;
 import models.Applications;
+import models.ApplicationsDetails;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,7 +17,6 @@ public class ApplicationsRepository extends BaseRepository<Applications, CreateA
     public Applications fromResultSet(ResultSet resultSet) throws SQLException{
         return Applications.getInstance(resultSet);
     }
-
 
     public Applications create(CreateApplicationDto applicationsDto){
         String query = """
@@ -46,7 +46,7 @@ public class ApplicationsRepository extends BaseRepository<Applications, CreateA
 
     @Override
     public Applications update(UpdateApplicationsDTO updateDto) {
-        String query = "UPDATE APPLICATIONS SET STATUS = ? WHERE ID = ?";
+        String query = "UPDATE applications SET STATUS = ? WHERE id = ?";
         try{
             PreparedStatement statement = this.connection.prepareStatement(query);
             statement.setString(1, updateDto.getStatus());
@@ -57,6 +57,54 @@ public class ApplicationsRepository extends BaseRepository<Applications, CreateA
                 return this.getById(updateDto.getId());
             }
         }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ApplicationsDetails getApplicationDetailsById(int applicationId){
+        String query = """
+                SELECT
+                u.first_name || ' ' || u.last_name AS student_name,
+                u.email,
+                s.gpa,
+                s.courses_left,
+                s.priority,
+                s.year_of_study,
+                sc.scholarship_name,
+                sc.required_gpa,
+                sc.required_year,
+                sc.deadline_date,
+                a.status,
+                a.application_date
+                FROM applications a
+                JOIN students s ON a.student_id = s.student_id
+                JOIN users u ON s.student_id = u.user_id
+                JOIN scholarships sc ON a.scholarship_id = sc.scholarship_id
+                WHERE a.application_id = ?""";
+
+        try{
+            PreparedStatement preparedStatement = this.connection.prepareStatement(query);
+            preparedStatement.setInt(1, applicationId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()){
+                return new ApplicationsDetails(
+                        resultSet.getString("student_name"),
+                        resultSet.getString("email"),
+                        resultSet.getDouble("gpa"),
+                        resultSet.getInt("courses_left"),
+                        resultSet.getString("priority"),
+                        resultSet.getString("scholarship_name"),
+                        resultSet.getDouble("required_gpa"),
+                        resultSet.getInt("required_year"),
+                        resultSet.getDate("deadline_date"),
+                        resultSet.getString("status"),
+                        resultSet.getInt("year_of_study"),
+                        resultSet.getDate("application_date")
+                );
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;

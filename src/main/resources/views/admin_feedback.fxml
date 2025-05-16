@@ -37,14 +37,14 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<VBox prefHeight="397.0" prefWidth="569.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FeedbackController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -86,20 +86,21 @@
       </menus>
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-      <children>
-        <Label alignment="CENTER" layoutX="208.0" layoutY="60.0" style="&#10;" text="%login.title" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
-          <font>
-            <Font size="29.0" />
-          </font>
-        </Label>
-            <TextField fx:id="txtUsername" layoutX="203.0" layoutY="138.0" prefHeight="25.0" prefWidth="163.0" promptText="%login.username" />
-            <PasswordField fx:id="pwdPassword" layoutX="203.0" layoutY="186.0" prefHeight="25.0" prefWidth="163.0" promptText="%login.password" />
-            <Button layoutX="299.0" layoutY="243.0" mnemonicParsing="false" onAction="#handleLoginClick" text="%login.button" />
-            <Button layoutX="170.0" layoutY="243.0" mnemonicParsing="false" onAction="#handleLoginCancel" text="%cancel.button" />
-            <Button layoutX="32.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleENLanguageClick" text="%english.button" />
-            <Button layoutX="412.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleSQLanguageClick" text="%shqip.button" />
-            <Label fx:id="lblSignup" layoutX="186.0" layoutY="291.0" onMouseClicked="#handleSignupRedirect" prefHeight="16.0" prefWidth="210.0" text="%signup.redirect" />
-      </children>
+         <children>
+            <Label layoutX="277.0" layoutY="14.0" text="%feedbackTitle" />
+            <TableView fx:id="feedbackTable" layoutX="139.0" layoutY="103.0" prefHeight="203.0" prefWidth="249.0">
+              <columns>
+                <TableColumn fx:id="studentIdCol" prefWidth="75.0" text="%studentIdCol" />
+                <TableColumn fx:id="messageCol" prefWidth="75.0" text="%messageCol" />
+                  <TableColumn fx:id="timeStampCol" prefWidth="48.0" text="%timeStampCol" />
+                  <TableColumn fx:id="responseCol" prefWidth="48.0" text="%responseCol" />
+              </columns>
+            </TableView>
+            <TextArea fx:id="responseTextArea" layoutX="419.0" layoutY="115.0" prefHeight="71.0" prefWidth="190.0" promptText="%promptResponse" />
+            <Button layoutX="457.0" layoutY="192.0" mnemonicParsing="false" onAction="#handleSubmitResponse" text="%submitResponse" />
+            <Label fx:id="statusLabel" layoutX="500.0" layoutY="225.0" />
+            <Button layoutX="14.0" layoutY="19.0" mnemonicParsing="false" onAction="#handleBack" text="%btnBack" />
+         </children>
     </AnchorPane>
   </children>
 </VBox>

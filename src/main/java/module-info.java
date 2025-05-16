@@ -6,6 +6,7 @@ module com.example.knk_2425_gr20 {
     requires java.desktop;
 
 
+
     opens com.example.knk_2425_gr20 to javafx.fxml;
     opens Database to javafx.fxml;
 

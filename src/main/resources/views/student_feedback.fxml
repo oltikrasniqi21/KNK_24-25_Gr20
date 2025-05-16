@@ -37,14 +37,12 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<VBox prefHeight="397.0" prefWidth="569.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StudentFeedbackController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -86,20 +84,15 @@
       </menus>
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-      <children>
-        <Label alignment="CENTER" layoutX="208.0" layoutY="60.0" style="&#10;" text="%login.title" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
-          <font>
-            <Font size="29.0" />
-          </font>
-        </Label>
-            <TextField fx:id="txtUsername" layoutX="203.0" layoutY="138.0" prefHeight="25.0" prefWidth="163.0" promptText="%login.username" />
-            <PasswordField fx:id="pwdPassword" layoutX="203.0" layoutY="186.0" prefHeight="25.0" prefWidth="163.0" promptText="%login.password" />
-            <Button layoutX="299.0" layoutY="243.0" mnemonicParsing="false" onAction="#handleLoginClick" text="%login.button" />
-            <Button layoutX="170.0" layoutY="243.0" mnemonicParsing="false" onAction="#handleLoginCancel" text="%cancel.button" />
-            <Button layoutX="32.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleENLanguageClick" text="%english.button" />
-            <Button layoutX="412.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleSQLanguageClick" text="%shqip.button" />
-            <Label fx:id="lblSignup" layoutX="186.0" layoutY="291.0" onMouseClicked="#handleSignupRedirect" prefHeight="16.0" prefWidth="210.0" text="%signup.redirect" />
-      </children>
+         <children>
+            <Label layoutX="81.0" layoutY="56.0" text="%giveFeedbackLabel" />
+            <TextArea fx:id="feedbackTextArea" layoutX="228.0" layoutY="56.0" prefHeight="65.0" prefWidth="238.0" promptText="%enterFeedbackPrompt" />
+            <Label layoutX="265.0" layoutY="14.0" text="%feedbackTitle" />
+            <Button layoutX="273.0" layoutY="145.0" mnemonicParsing="false" onAction="#handleSubmitFeedback" text="%submitFeedbackButton" />
+            <Label fx:id="statusLabel" layoutX="230.0" layoutY="121.0" prefHeight="17.0" prefWidth="238.0" textFill="#0fdb38" />
+            <Label layoutX="305.0" layoutY="187.0" text="%responseTitle" />
+            <TextArea fx:id="responseTextArea" layoutX="230.0" layoutY="204.0" prefHeight="65.0" prefWidth="238.0" promptText="%responsePrompt" wrapText="true" />
+         </children>
     </AnchorPane>
   </children>
 </VBox>

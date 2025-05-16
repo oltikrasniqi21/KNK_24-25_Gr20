@@ -82,5 +82,18 @@ public class NewsRepository extends BaseRepository<News, CreateNewsDTO, UpdateNe
         return newsList;
     }
 
+    public boolean delete(int newsId) {
+        String query = "DELETE FROM news WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, newsId);
+            int affectedRows = stmt.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
 }
 

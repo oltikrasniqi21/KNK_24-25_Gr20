@@ -1,13 +1,16 @@
 package controllers;
 
 import Database.DBCustomConnector;
+import Services.CurrentUser;
 import Services.LanguageManager;
+import Services.LoginService;
 import Services.SceneManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import utils.SceneLocator;
 import javafx.stage.Stage;
 
@@ -40,19 +43,18 @@ public class LoginController {
 
         try {
             Connection conn = DBCustomConnector.getConnection();
-            String query = "SELECT role FROM users WHERE email = ? AND password = ?";
-            PreparedStatement statement = conn.prepareStatement(query);
-            statement.setString(1, email);
-            statement.setString(2, password);
+            LoginService loginService = new LoginService(conn);
 
-            ResultSet rs = statement.executeQuery();
+            String role = loginService.authenticate(email, password);
 
             if (sceneManager == null) {
                 sceneManager = SceneManager.getInstance();
             }
 
-            if (rs.next()) {
-                String role = rs.getString("role");
+            if (role != null) {
+                // You may want to fetch the user ID too if it's not a superadmin
+                int userId = fetchUserIdByEmail(conn, email);
+                CurrentUser.setUser(userId, role);
 
                 if (role.equalsIgnoreCase("admin")) {
                     sceneManager.loadScene(SceneLocator.ADMIN_HOME_PAGE);
@@ -64,9 +66,23 @@ public class LoginController {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            showAlert("Databases Error!", e.getMessage());
+            showAlert("Database Error!", e.getMessage());
         }
     }
+
+    private int fetchUserIdByEmail(Connection conn, String email) throws Exception {
+        String query = "SELECT id FROM users WHERE email = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, email);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("id");
+                }
+            }
+        }
+        return -1; // For superadmin you might use -1 or 0, as they might not be in DB
+    }
+
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -97,4 +113,7 @@ public class LoginController {
     }
 
 
+    public void handleSignupRedirect(MouseEvent mouseEvent) {
+        SceneManager.getInstance().loadScene(SceneLocator.SIGNUP_PAGE);
+    }
 }

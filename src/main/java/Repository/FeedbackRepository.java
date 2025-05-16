@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FeedbackRepository extends BaseRepository<Feedback, CreateFeedbackDTO, UpdateFeedbackDTO> {
 
@@ -42,7 +44,7 @@ public class FeedbackRepository extends BaseRepository<Feedback, CreateFeedbackD
 
     @Override
     public Feedback update(UpdateFeedbackDTO dto) {
-        String query = "UPDATE feedback SET response = ? WHERE feedback_id = ? RETURNING *";
+        String query = "UPDATE feedback SET response = ? WHERE id = ? RETURNING *";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setString(1, dto.getResponse());
@@ -57,4 +59,20 @@ public class FeedbackRepository extends BaseRepository<Feedback, CreateFeedbackD
         }
         return null;
     }
+
+    public List<Feedback> findAll() {
+        List<Feedback> list = new ArrayList<>();
+        String query = "SELECT * FROM feedback ORDER BY submitted_at DESC";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                list.add(fromResultSet(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 }
