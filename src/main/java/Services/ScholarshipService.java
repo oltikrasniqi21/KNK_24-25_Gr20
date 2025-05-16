@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class ScholarshipService{
     private ScholarshipsRepository scholarshipRepository;
+    private CreateScholarshipDTO scholarshipDTO;
 
     public ScholarshipService(){
         this.scholarshipRepository = new ScholarshipsRepository();
@@ -37,13 +38,17 @@ public class ScholarshipService{
             throw new InvalidFieldException(LocaleMessages.DEADLINE);
         }
 
-        if(scholarshipDTO.getRequired_year()<1 || scholarshipDTO.getRequired_year()>6){
-            throw new InvalidFieldException(LocaleMessages.DEADLINE);
-        }
+
 
         System.out.println("Service working...");
         Alert alert = new Alert(Alert.AlertType.INFORMATION, LocaleMessages.SUCESSFUL_ADD_BUNDLE);
-        alert.show();
+        alert.showAndWait();
         return scholarshipRepository.create(scholarshipDTO); //Funksioni create e kthen Scholarships model
     }
+
+//    private boolean isYearValid(){
+//        if(scholarshipDTO.getRequired_year()<1 || scholarshipDTO.getRequired_year()>6){
+//            throw new InvalidFieldException(LocaleMessages.YEAR);
+//        }
+//    }
 }
