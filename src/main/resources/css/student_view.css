@@ -1,4 +1,35 @@
+#leftVbox {
+    -fx-background-color: #00A859; /* A brighter green */
+    -fx-padding: 20 0 20 20;
+    -fx-background-radius: 0 20 20 0; /* rounded on the right side */
+}
+
 .button {
-    -fx-background-color: red;
+    -fx-background-color: transparent;
     -fx-text-fill: white;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 1px;
+    -fx-border-color: transparent;
+    -fx-font-size: 14px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-translate-x: 100%; /* Moves it fully to the right */
+    -fx-padding: 5 20 5 5;
+}
+
+.button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+}
+
+.button:selected, .button:focused {
+    -fx-background-color: #f0f2f5;
+    -fx-text-fill: #00A859;
+    -fx-background-radius: 20 0 0 20; /* rounded on the right side */
+    -fx-border-radius: 20 0 0 20;;
+    -fx-border-color: #f0f2f5;
+}
+
+
+/* Overall background */
+Pane {
+    -fx-background-color: #f0f2f5; /* light gray, similar to right panel */
 }
