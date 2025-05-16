@@ -37,7 +37,6 @@ public class Scholarships {
         double required_gpa = resultSet.getDouble("required_gpa");
         String required_major = resultSet.getString("required_major");
         return new Scholarships(scholarship_id, scholarship_name,provider,amount,deadline_date,required_gpa, required_year,required_major);
-
     }
 
     public int getScholarship_id() {
