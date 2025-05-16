@@ -34,67 +34,24 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminHomePageController">
-  <children>
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="374.0" prefWidth="634.0" VBox.vgrow="ALWAYS">
-      <children>
-            <Accordion layoutX="103.0" layoutY="86.0" />
-            <Button layoutX="39.0" layoutY="86.0" mnemonicParsing="false" onAction="#handleManageStudents" prefHeight="43.0" prefWidth="188.0" text="%btn.listStudents" />
-            <Button layoutX="39.0" layoutY="143.0" mnemonicParsing="false" onAction="#handleManageScholarships" prefHeight="43.0" prefWidth="188.0" text="%btn.manageScholarship" />
-            <Button layoutX="39.0" layoutY="202.0" mnemonicParsing="false" onAction="#handleViewApplications" prefHeight="43.0" prefWidth="188.0" text="%btn.viewApplication" />
-            <Button layoutX="39.0" layoutY="259.0" mnemonicParsing="false" onAction="#handleFeedback" prefHeight="43.0" prefWidth="188.0" text="%btn.feedback" />
-            <Button layoutX="39.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleNotification" prefHeight="43.0" prefWidth="188.0" text="%btn.notification" />
-            <Text layoutX="320.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%admin_title">
-               <font>
-                  <Font size="44.0" />
-               </font>
-            </Text>
-            <Button layoutX="420.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="43.0" prefWidth="188.0" text="%btn.logout" />
-            <Button layoutX="39.0" layoutY="28.0" mnemonicParsing="false" onAction="#handleManageUsers" prefHeight="43.0" prefWidth="188.0" text="%btn.manageUsers" />
-            <Button layoutX="242.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleFAQ" prefHeight="43.0" prefWidth="188.0" text="%btn.faq" />
-            <Button layoutX="445.0" layoutY="317.0" mnemonicParsing="false" prefHeight="43.0" onAction="#handleNews" prefWidth="188.0" text="%btn.news" />
-      </children>
-    </AnchorPane>
-  </children>
-</VBox>
+<BorderPane fx:id="mainLayout" prefHeight="469.0" prefWidth="603.0" stylesheets="@../css/admin_view.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminHomePageController">
+   <left>
+      <VBox fx:id="leftVbox" prefHeight="386.0" prefWidth="209.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#handleNotification" prefHeight="43.0" prefWidth="188.0" text="%btn.notification" />
+            <Button mnemonicParsing="false" onAction="#handleManageScholarships" prefHeight="43.0" prefWidth="188.0" text="%btn.manageScholarship" />
+            <Button mnemonicParsing="false" onAction="#handleViewApplications" prefHeight="43.0" prefWidth="188.0" text="%btn.viewApplication" />
+            <Button mnemonicParsing="false" onAction="#handleManageUsers" prefHeight="43.0" prefWidth="188.0" text="%btn.manageUsers" />
+            <Button mnemonicParsing="false" onAction="#handleNews" prefHeight="43.0" prefWidth="188.0" text="%btn.news" />
+            <Button mnemonicParsing="false" onAction="#handleManageStudents" prefHeight="43.0" prefWidth="188.0" text="%btn.listStudents" />
+            <Button mnemonicParsing="false" onAction="#handleFAQ" prefHeight="43.0" prefWidth="188.0" text="%btn.faq" />
+            <Button mnemonicParsing="false" onAction="#handleFeedback" prefHeight="43.0" prefWidth="188.0" text="%btn.feedback" />
+            <Button mnemonicParsing="false" onAction="#handleLogout" prefHeight="43.0" prefWidth="188.0" text="%btn.logout" />
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <Pane prefHeight="386.0" prefWidth="364.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
