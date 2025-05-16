@@ -35,6 +35,7 @@ CREATE TABLE users(
 	role VARCHAR(10) NOT NULL CHECK (LOWER(role) IN ('student', 'admin'))
 );
 
+ALTER TABLE students ADD COLUMN document_path TEXT;
 
 CREATE TABLE students (
     id INTEGER PRIMARY KEY REFERENCES users(user_id) ON DELETE CASCADE,
@@ -43,7 +44,6 @@ CREATE TABLE students (
     university VARCHAR(50) NOT NULL,
     faculty VARCHAR(50) NOT NULL,
     major VARCHAR(50) NOT NULL,
-    courses_left INTEGER NOT NULL CHECK (courses_left >= 0),
     priority VARCHAR(100) CHECK(priority IS NULL OR LOWER(priority) IN ('veteran', 'disabled'))
 );
 

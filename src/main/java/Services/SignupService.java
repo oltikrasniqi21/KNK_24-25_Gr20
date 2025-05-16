@@ -22,7 +22,7 @@ public class SignupService {
     }
 
     public void signupStudent(String password, String firstName, String lastName, String email,
-                              int yearOfStudy, String university, String faculty, String major) throws SQLException {
+                              int yearOfStudy, String university, String faculty, String major, String documentPath) throws SQLException {
 
         // Step 1: Generate salt and hash password
         String salt = PasswordUtils.getSalt();
@@ -44,7 +44,7 @@ public class SignupService {
                 if (rs.next()) {
                     int userId = rs.getInt(1);
 
-                    String insertStudentSQL = "INSERT INTO students (id, gpa, year_of_study, university, faculty, major, priority) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    String insertStudentSQL = "INSERT INTO students (id, gpa, year_of_study, university, faculty, major, priority,document_path) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                     try (PreparedStatement studentStmt = connection.prepareStatement(insertStudentSQL)) {
                         studentStmt.setInt(1, userId);
                         studentStmt.setNull(2, java.sql.Types.DOUBLE);
@@ -53,6 +53,7 @@ public class SignupService {
                         studentStmt.setString(5, faculty);
                         studentStmt.setString(6, major);
                         studentStmt.setNull(7, java.sql.Types.VARCHAR);
+                        studentStmt.setString(8, documentPath);
                         studentStmt.executeUpdate();
                     }
                 }

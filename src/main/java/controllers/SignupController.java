@@ -98,6 +98,8 @@ public class SignupController implements Initializable {
         }
         String filePath = null;
 
+        String filePath = null;
+
         if (selectedPdfFile != null) {
             try {
                 File uploadDir = new File("uploads");
@@ -121,7 +123,7 @@ public class SignupController implements Initializable {
 
         try {
             signupService.signupStudent(password, firstName, lastName, email,
-                    Integer.parseInt(year), university, faculty, major);
+                    Integer.parseInt(year), university, faculty, major, filePath);
 
             Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
             successAlert.setTitle("Signup Successful");
