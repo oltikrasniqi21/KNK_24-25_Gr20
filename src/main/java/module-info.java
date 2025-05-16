@@ -4,7 +4,7 @@ module com.example.knk_2425_gr20 {
     requires java.sql;
     requires javafx.graphics;
     requires java.desktop;
-    requires io.github.cdimascio.dotenv.java;
+
 
 
     opens com.example.knk_2425_gr20 to javafx.fxml;
