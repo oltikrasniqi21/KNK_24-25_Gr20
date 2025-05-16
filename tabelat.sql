@@ -60,6 +60,7 @@ CREATE TABLE scholarships(
 	required_major VARCHAR(50)
 );
 
+
 CREATE TABLE review(
     review_id SERIAL PRIMARY KEY,
     application_id INTEGER NOT NULL,
@@ -84,7 +85,7 @@ CREATE TABLE applications(
 #feedback, faq, notification
 
 CREATE TABLE feedback(
-    feedback_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     user_id INT REFERENCES Users(user_id) ON DELETE CASCADE,
     message TEXT NOT NULL,
     submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -92,27 +93,27 @@ CREATE TABLE feedback(
 );
 
 CREATE TABLE faq (
-    faq_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     question TEXT NOT NULL,
     answer TEXT NOT NULL
 );
 
 CREATE TABLE notification (
-    notification_id SERIAL PRIMARY KEY,
-    student_id INT REFERENCES Students(student_id) ON DELETE CASCADE,
+    id SERIAL PRIMARY KEY,
+    student_id INT REFERENCES Students(id) ON DELETE CASCADE,
     message TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    read_status BOOLEAN DEFAULT FALSE
+    read_status BOOLEAN DEFAULT FALSE,
+    is_broadcast BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE News (
-  news_id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   title TEXT NOT NULL,
   content TEXT NOT NULL,
-  scholarship_id INT REFERENCES Scholarships(scholarship_id) ON DELETE SET NULL,
+  scholarship_tag_id INT REFERENCES scholarship_tags(tag_id) ON DELETE SET NULL,
   posted_by INT REFERENCES Users(user_id),
   posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  visible_until DATE
 );
 
 
@@ -132,11 +133,6 @@ VALUES ('12345678', 'Admin', 'Fz', 'administrata@admin.uni-fz.com', 'admin');
 
 
 
-//modifikim i tabeles Notification, qe me mujt mi kriju admin-i nje notification per generalStudents,
-//e jo me logjiken 1to1, nje notification per nje student specifik...
-//dmth studentId mbetet NULL
-
-ALTER TABLE Notification ADD COLUMN is_broadcast BOOLEAN DEFAULT false;
 
 INSERT INTO Notification (message, created_at, read_status, is_broadcast)
 VALUES ('Welcome students!', CURRENT_TIMESTAMP, false, true);
@@ -158,3 +154,12 @@ WHERE LOWER(role) = 'admin';
 
  INSERT INTO users (password, first_name, last_name, email, role, status)
  VALUES ('bypass', 'Super', 'Admin', 'superadmin@internal', 'admin', 'active');
+
+
+
+ //olsa jom:
+ //duhet edhe ni alter table per not null contraint te students se
+ //nuk pe len me kriju account me kolonen courses_left null
+
+ ALTER TABLE students
+ ALTER COLUMN courses_left DROP NOT NULL;

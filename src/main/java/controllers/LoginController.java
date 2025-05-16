@@ -1,6 +1,7 @@
 package controllers;
 
 import Database.DBCustomConnector;
+import Services.CurrentUser;
 import Services.LanguageManager;
 import Services.LoginService;
 import Services.SceneManager;
@@ -9,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import utils.SceneLocator;
 import javafx.stage.Stage;
 
@@ -40,7 +42,9 @@ public class LoginController {
         String password = pwdPassword.getText();
 
         try {
-            LoginService loginService = new LoginService(DBCustomConnector.getConnection());
+            Connection conn = DBCustomConnector.getConnection();
+            LoginService loginService = new LoginService(conn);
+
             String role = loginService.authenticate(email, password);
 
             if (sceneManager == null) {
@@ -48,6 +52,10 @@ public class LoginController {
             }
 
             if (role != null) {
+                // You may want to fetch the user ID too if it's not a superadmin
+                int userId = fetchUserIdByEmail(conn, email);
+                CurrentUser.setUser(userId, role);
+
                 if (role.equalsIgnoreCase("admin")) {
                     sceneManager.loadScene(SceneLocator.ADMIN_HOME_PAGE);
                 } else if (role.equalsIgnoreCase("student")) {
@@ -62,9 +70,17 @@ public class LoginController {
         }
     }
 
-    @FXML
-    private void handleSignupRedirect() {
-        SceneManager.getInstance().loadScene(SceneLocator.SIGNUP_PAGE);
+    private int fetchUserIdByEmail(Connection conn, String email) throws Exception {
+        String query = "SELECT id FROM users WHERE email = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, email);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("id");
+                }
+            }
+        }
+        return -1; // For superadmin you might use -1 or 0, as they might not be in DB
     }
 
 
@@ -77,8 +93,7 @@ public class LoginController {
 
     @FXML
     private void handleLoginCancel(){
-        txtUsername.clear();
-        pwdPassword.clear();
+        SceneManager.getInstance().loadScene(SceneLocator.SIGNUP_PAGE);
     }
 
 
@@ -98,4 +113,7 @@ public class LoginController {
     }
 
 
+    public void handleSignupRedirect(MouseEvent mouseEvent) {
+        SceneManager.getInstance().loadScene(SceneLocator.SIGNUP_PAGE);
+    }
 }

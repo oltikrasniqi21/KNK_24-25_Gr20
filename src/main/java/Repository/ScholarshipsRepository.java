@@ -1,117 +1,84 @@
 package Repository;
 
-import Database.DBCustomConnector;
+import CreateDTO.CreateScholarshipDTO;
+import UpdateDTO.UpdateScholarshipDTO;
 import models.Scholarships;
 
-import javax.xml.transform.Result;
 import java.sql.*;
-import java.util.ArrayList;
 
-public class ScholarshipsRepository {
-    private Connection connection;
+public class ScholarshipsRepository extends BaseRepository<Scholarships, CreateScholarshipDTO, UpdateScholarshipDTO>{
+    //connection krijohet tek BaseRepository
 
     public ScholarshipsRepository(){
-        this.connection = DBCustomConnector.getConnection();
+        super("scholarships");
     }
 
-    public ArrayList<Scholarships> getAll(){
-        ArrayList<Scholarships> scholarships = new ArrayList<>();
-        String query = "SELECT * FROM SCHOLARSHIPS";
+    public Scholarships fromResultSet(ResultSet res) throws SQLException{
+        return Scholarships.getInstance(res);
+    }
 
+    public String getScholarshipName(int id){
+        Scholarships scholarship = this.getById(id);
+        return scholarship.getScholarship_name();
+    }
+
+    @Override
+    public Scholarships create(CreateScholarshipDTO create) {
+        String query = """
+                INSERT INTO SCHOLARSHIPS(SCHOLARSHIP_NAME, PROVIDER, AMOUNT, DEADLINE_DATE,
+                    REQUIRED_GPA, REQUIRED_YEAR, REQUIRED_MAJOR) VALUES(?,?,?,?,?,?,?)
+                """;
         try{
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
+            PreparedStatement statement = this.connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1,create.getScholarship_name());
+            statement.setString(2,create.getProvider());
+            statement.setInt(3,create.getAmount());
+            statement.setDate(4, java.sql.Date.valueOf(create.getDeadline_date()));
+            statement.setDouble(5,create.getRequired_gpa());
+            statement.setInt(6,create.getRequired_year());
+            statement.setString(7,create.getRequired_major());
+            statement.execute();
+            ResultSet set =statement.getGeneratedKeys();
+            if(set.next()){
+                int id = set.getInt(1);
+                return this.getById(id);
+            }
+        }catch (SQLException e){
+            System.out.println("Scholarship nuk u krijua!");
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-            while(resultSet.next()){
-                Scholarships scholarship = Scholarships.getInstance(resultSet);
-                scholarships.add(scholarship);
-
+    @Override
+    public Scholarships update(UpdateScholarshipDTO update) {
+        String query= """
+                UPDATE SCHOLARSHIPS SET
+                AMOUNT = ?,
+                DEADLINE_DATE = ?,
+                REQUIRED_GPA = ?,
+                REQUIRED_YEAR = ?,
+                REQUIRED_MAJOR = ?
+                WHERE ID = ?
+                """;
+        try{
+            PreparedStatement statement = this.connection.prepareStatement(query);
+            statement.setInt(1, update.getAmount());
+            statement.setDate(2, java.sql.Date.valueOf(update.getDeadline_date()));
+            statement.setDouble(3, update.getRequired_gpa());
+            statement.setInt(4, update.getRequired_year());
+            statement.setString(5, update.getRequred_major());
+            statement.setInt(6, update.getScholarship_id());
+            int updateRow = statement.executeUpdate();
+            if(updateRow == 1){
+                return this.getById(update.getScholarship_id());
             }
         } catch (SQLException e) {
+            System.out.println("Scholarship nuk u perditsua!");
             e.printStackTrace();
         }
-        return scholarships;
-    }
 
-    public Scholarships getById(int id) {
-        String query = "SELECT * FROM SCHOLARSHIPS WHERE ID=?";
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, id);
-            ResultSet resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                return Scholarships.getInstance(resultSet);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         return null;
     }
-
-    public String getScholarshipName(int scholarshipId){
-        String query = "SELECT scholarship_name FROM scholarships WHERE id = ?";
-        try{
-            PreparedStatement preparedStatement = this.connection.prepareStatement(query);
-            preparedStatement.setInt(1, scholarshipId);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if(resultSet.next()){
-                return resultSet.getString("scholarship_name");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public Double getScholarshipRequiredGPA(int scholarshipId){
-        String query = "SELECT required_gpa FROM scholarships WHERE id = ?";
-        try{
-            PreparedStatement preparedStatement = this.connection.prepareStatement(query);
-            preparedStatement.setInt(1, scholarshipId);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if(resultSet.next()){
-                return resultSet.getDouble("required_gpa");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public Integer getScholarshipRequiredYear(int scholarshipId){
-        String query = "SELECT required_gpa FROM scholarships WHERE scholarship_id = ?";
-        try{
-            PreparedStatement preparedStatement = this.connection.prepareStatement(query);
-            preparedStatement.setInt(1, scholarshipId);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if(resultSet.next()){
-                return resultSet.getInt("required_year");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public Date getScholarshipDeadline(int scholarshipId){
-        String query = "SELECT required_gpa FROM scholarships WHERE scholarship_id = ?";
-        try{
-            PreparedStatement preparedStatement = this.connection.prepareStatement(query);
-            preparedStatement.setInt(1, scholarshipId);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if(resultSet.next()){
-                return resultSet.getDate("deadline_date");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
 
 }
