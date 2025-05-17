@@ -69,8 +69,6 @@ public class ManageUniversitiesController implements Initializable {
     @FXML
     private TextField majorNameField;
 
-    // Model classes for TableView
-// Place these as static inner classes in ManageUniversitiesController
 
     public static class UniversityItem {
         private final int id;

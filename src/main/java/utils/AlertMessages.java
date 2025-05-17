@@ -1,5 +1,7 @@
 package utils;
 
+import javafx.scene.control.Alert;
+
 public class AlertMessages {
     public static final String INVALID_FIELD_BUNDLE = "invalid.field";
     public static final String EMPTY_FIELD_BUNDLE = "empty.field";
@@ -14,4 +16,35 @@ public class AlertMessages {
     public static final String YEAR = "label.year";
     public static final String MAJOR = "label.major";
     public static final String AMOUNT = "label.amount";
+
+    public static final String INVALID_PASSWORD = "Invalid Password";
+    public static final String PASSWORD_REQUIREMENTS = """
+            Password must contain:
+            • At least 8 characters
+            • At least one uppercase letter
+            • At least one lowercase letter
+            • At least one digit
+            • At least one special character (e.g. !@#$%^&*)""";
+
+    public static final String INVALID_EMAIL = "Invalid Email";
+    public static final String EMAIL_REQUIREMENTS = "Email must be a valid university student address (e.g. user@student.uni-pr.edu)";
+
+    public static final String MISSING_INFO = "Missing Information";
+    public static final String FILL_ALL_FIELDS = "Please fill out all fields.";
+
+    public static final String FILE_UPLOAD_ERROR = "File Upload Error";
+    public static final String FILE_SAVE_FAIL = "Could not save your document.";
+
+    public static final String SIGNUP_SUCCESS = "Signup Successful";
+    public static final String SIGNUP_SUCCESS_MESSAGE = "Your account has been created.";
+
+    public static final String SELECT_PDF = "Select PDF Document";
+    public static final String NO_FILE_SELECTED = "No file selected";
+
+    public static void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.show();
+    }
 }
