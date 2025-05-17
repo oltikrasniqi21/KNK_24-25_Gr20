@@ -45,9 +45,8 @@
                   <TableColumn fx:id="studentUniversityColumn" prefWidth="120.0" text="University" />
                   <TableColumn fx:id="studentFacultyColumn" prefWidth="120.0" text="Faculty" />
                   <TableColumn fx:id="studentMajorColumn" prefWidth="86.0" text="Major" />
-                  <TableColumn fx:id="studentSemesterColumn" prefWidth="64.0" text="Semester" />
                   <TableColumn fx:id="studentPriorityColumn" minWidth="0.0" prefWidth="68.0" text="Priority" />
-                  <TableColumn fx:id="studentsStringTableColumnStatus" prefWidth="132.0" text="Status" />
+                  <TableColumn fx:id="studentsStringTableColumnStatus" prefWidth="65.0" text="Status" />
                </columns>
             </TableView>
 

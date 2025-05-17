@@ -23,7 +23,7 @@ public class Users {
     }
 
     public static Users getInstance(ResultSet resultSet) throws SQLException {
-        int user_id = resultSet.getInt("user_id");
+        int user_id = resultSet.getInt("id");
         String password_hash = resultSet.getString("password");
         String first_name = resultSet.getString("first_name");
         String last_name = resultSet.getString("last_name");

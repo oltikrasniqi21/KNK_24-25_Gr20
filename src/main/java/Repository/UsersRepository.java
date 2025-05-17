@@ -114,4 +114,22 @@ public List<Students> getAllStudents() {
         return students;
     }
 
+    public List<Users> getAllStudentUsers() {
+        String query = "SELECT * FROM users WHERE role = 'student' ORDER BY id";
+        List<Users> users = new ArrayList<>();
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+            while (rs.next()) {
+                users.add(Users.getInstance(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+
+
+
+
 }
