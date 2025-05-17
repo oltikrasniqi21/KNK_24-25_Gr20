@@ -96,6 +96,7 @@ public class SignupController implements Initializable {
             );
             return;
         }
+        String filePath = null;
 
         if (selectedPdfFile != null) {
             try {
@@ -107,11 +108,16 @@ public class SignupController implements Initializable {
 
                 File dest = new File(uploadDir, selectedPdfFile.getName());
                 Files.copy(selectedPdfFile.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+                filePath = dest.getAbsolutePath();
+
             } catch (IOException e) {
                 showAlert("File Upload Error", "Could not save your document.");
                 return;
             }
         }
+
+
 
         try {
             signupService.signupStudent(password, firstName, lastName, email,

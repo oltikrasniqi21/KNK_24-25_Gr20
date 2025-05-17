@@ -60,6 +60,15 @@ CREATE TABLE scholarships(
 	required_major VARCHAR(50)
 );
 
+CREATE TABLE applications(
+	application_id SERIAL PRIMARY KEY,
+	student_id INTEGER NOT NULL REFERENCES students(student_id) ON DELETE CASCADE,
+	scholarship_id INTEGER NOT NULL REFERENCES scholarships(scholarship_id) ON DELETE CASCADE,
+	application_date DATE NOT NULL DEFAULT CURRENT_DATE,
+	status VARCHAR(10) NOT NULL CHECK (LOWER(status) IN ('pending', 'approved', 'rejected'))
+);
+
+
 
 CREATE TABLE review(
     review_id SERIAL PRIMARY KEY,
@@ -73,16 +82,6 @@ CREATE TABLE review(
 );
 
 
-CREATE TABLE applications(
-	application_id SERIAL PRIMARY KEY,
-	student_id INTEGER NOT NULL REFERENCES students(student_id) ON DELETE CASCADE,
-	scholarship_id INTEGER NOT NULL REFERENCES scholarships(scholarship_id) ON DELETE CASCADE,
-	application_date DATE NOT NULL DEFAULT CURRENT_DATE,
-	status VARCHAR(10) NOT NULL CHECK (LOWER(status) IN ('pending', 'approved', 'rejected'))
-);
-
-#fillojme me shtimin e tabelave te reja
-#feedback, faq, notification
 
 CREATE TABLE feedback(
     id SERIAL PRIMARY KEY,

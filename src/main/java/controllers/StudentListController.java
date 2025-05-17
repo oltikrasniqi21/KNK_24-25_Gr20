@@ -1,75 +1,108 @@
 package controllers;
 
-import Database.DBCustomConnector;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import Repository.UsersRepository;
+import Services.SceneManager;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.TextField;
 import models.Students;
-import java.sql.*;
+import utils.SceneLocator;
+
+import java.util.List;
 
 public class StudentListController {
-    @FXML private TableView<Students> studentsTable;
-    @FXML private TableColumn<Students, Integer> idColumn;
-    @FXML private TableColumn<Students, Double> gpaColumn;
-    @FXML private TableColumn<Students, Integer> yearColumn;
-    @FXML private TableColumn<Students, String> universityColumn;
-    @FXML private TableColumn<Students, String> facultyColumn;
-    @FXML private TableColumn<Students, String> majorColumn;
-    @FXML private TableColumn<Students, Integer> semesterColumn;
-    @FXML private TableColumn<Students, String> priorityColumn;
-    @FXML private TableColumn<Students, String> statusColumn;
-
-    private ObservableList<Students> studentData = FXCollections.observableArrayList();
+    @FXML
+    private TableView<Students> studentslitsTable;
+    @FXML
+    private TextField searchField;
 
     @FXML
+    private TableColumn<Students, Integer> StudentIdColumn;
+    @FXML
+    private TableColumn<Students, String> studentNameColumn;
+    @FXML
+    private TableColumn<Students, Double> studentGpaColumn;
+    @FXML
+    private TableColumn<Students, Integer> studentYearColumn;
+    @FXML
+    private TableColumn<Students, String> studentUniversityColumn;
+    @FXML
+    private TableColumn<Students, String> studentFacultyColumn;
+    @FXML
+    private TableColumn<Students, String> studentMajorColumn;
+    @FXML
+    private TableColumn<Students, String> studentPriorityColumn;
+    @FXML
+    private TableColumn<Students, String> studentsStringTableColumnStatus;
+
+    private UsersRepository usersRepository;
+
+    public StudentListController() {
+        usersRepository = new UsersRepository();
+    }
+
     public void initialize() {
-        setupTableColumns();
-        loadStudentData();
+
+        StudentIdColumn.setCellValueFactory(cellData ->
+                new SimpleIntegerProperty(cellData.getValue().getUser_id()).asObject());
+
+        studentNameColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(
+                        cellData.getValue().getFirst_name() + " " + cellData.getValue().getLast_name()
+                ));
+
+        studentGpaColumn.setCellValueFactory(cellData ->
+                new SimpleDoubleProperty(cellData.getValue().getGpa()).asObject());
+
+        studentYearColumn.setCellValueFactory(cellData ->
+                new SimpleIntegerProperty(cellData.getValue().getYear_of_study()).asObject());
+
+        studentUniversityColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getUniversity()));
+
+        studentFacultyColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getFaculty()));
+
+        studentMajorColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getMajor()));
+
+        studentPriorityColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getPriority()));
+
+        studentsStringTableColumnStatus.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getStatus()));
+
+        loadStudents();
     }
 
-    private void setupTableColumns() {
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("user_id"));
-        gpaColumn.setCellValueFactory(new PropertyValueFactory<>("gpa"));
-        yearColumn.setCellValueFactory(new PropertyValueFactory<>("year_of_study"));
-        universityColumn.setCellValueFactory(new PropertyValueFactory<>("university"));
-        facultyColumn.setCellValueFactory(new PropertyValueFactory<>("faculty"));
-        majorColumn.setCellValueFactory(new PropertyValueFactory<>("major"));
-        semesterColumn.setCellValueFactory(new PropertyValueFactory<>("courses_left"));
-        priorityColumn.setCellValueFactory(new PropertyValueFactory<>("priority"));
-        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-    }
 
-    private void loadStudentData() {
-        String query = "SELECT u.*, s.* FROM users u JOIN students s ON u.user_id = s.student_id WHERE u.role = 'student'";
-
-        try (Connection conn = DBCustomConnector.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
-
-            studentData.clear();
-
-            while (rs.next()) {
-                Students student = Students.getInstance(rs);
-                studentData.add(student);
-                System.out.println("Added student: " + student.getFirst_name()); // Debug
-            }
-
-            studentsTable.setItems(studentData);
-            System.out.println("Total students loaded: " + studentData.size()); // Debug
-
-        } catch (SQLException e) {
-            System.err.println("Error loading students:");
+    private void loadStudents() {
+        try {
+            List<Students> students = usersRepository.getAllStudents();
+            studentslitsTable.getItems().setAll(students);
+        } catch (Exception e) {
             e.printStackTrace();
-
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Database Error");
-            alert.setHeaderText("Failed to load student data");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
         }
+    }
+
+
+    @FXML
+    private void handleSearch() {
+        String searchTerm = searchField.getText().trim();
+        if (searchTerm.isEmpty()) {
+            loadStudents();
+        } else {
+            List<Students> filteredStudents = usersRepository.searchStudents(searchTerm);
+            studentslitsTable.getItems().setAll(filteredStudents);
+        }
+    }
+
+    @FXML
+    private void handleClose() {
+        SceneManager.getInstance().loadScene(SceneLocator.ADMIN_HOME_PAGE);
     }
 }
