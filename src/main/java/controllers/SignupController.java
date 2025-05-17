@@ -98,8 +98,6 @@ public class SignupController implements Initializable {
         }
         String filePath = null;
 
-        String filePath = null;
-
         if (selectedPdfFile != null) {
             try {
                 File uploadDir = new File("uploads");
