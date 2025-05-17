@@ -1,3 +1,5 @@
+-- all the queries to create the database Projekti-KNK
+
 CREATE TABLE users(
 	id SERIAL PRIMARY KEY,
 	password VARCHAR(255) NOT NULL,
@@ -12,11 +14,8 @@ CREATE TABLE students (
     id INTEGER PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
     gpa NUMERIC(3,2) CHECK(gpa IS NULL OR gpa BETWEEN 6.00 AND 10.00),
     year_of_study INTEGER NOT NULL CHECK (year_of_study BETWEEN 1 AND 5),
-    --  TODO: add foreign key to universities table
     university VARCHAR(50) NOT NULL,
-    -- TODO: add foreign key to faculties table
     faculty VARCHAR(50) NOT NULL,
-    -- TODO: add foreign key to majors table
     major VARCHAR(50) NOT NULL,
     priority VARCHAR(100) CHECK(priority IS NULL OR LOWER(priority) IN ('veteran', 'disabled')),
     document_path TEXT
@@ -108,6 +107,15 @@ CREATE TABLE majors (
   name TEXT NOT NULL
 );
 
--- query per shtimin e admin-users
-INSERT INTO users (password, first_name, last_name, email, role)
-VALUES ('xYuxIvrm88eLIeDH4v0QuA==$t61RBLC5SAt044Q7nmA3lq08zALjrSQwyVMn6lJblI0=', 'Admin', 'PR', 'admin@admin.uni-pr.com', 'admin');
+
+
+
+--query to drop all tables in database
+DO $$ DECLARE
+    r RECORD;
+BEGIN
+
+    FOR r IN (SELECT tablename FROM pg_tables WHERE schemaname = 'public') LOOP
+        EXECUTE 'DROP TABLE IF EXISTS public.' || quote_ident(r.tablename) || ' CASCADE';
+    END LOOP;
+END $$;
