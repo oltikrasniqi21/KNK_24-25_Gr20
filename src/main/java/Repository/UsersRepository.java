@@ -67,22 +67,23 @@ public class UsersRepository {
         return null;
     }
 
-public List<Students> getAllStudents() {
-    String query = "SELECT u.id, u.password, u.first_name, u.last_name, u.email, u.role, u.status, " +
-            "s.gpa, s.year_of_study, s.university, s.faculty, s.major, s.priority " +
-            "FROM users u JOIN students s ON u.id = s.id " +
-            "WHERE u.role = 'student'";
-    List<Students> students = new ArrayList<>();
-    try (Statement statement = connection.createStatement();
-         ResultSet resultSet = statement.executeQuery(query)) {
-        while (resultSet.next()) {
-            students.add(Students.getInstance(resultSet));
+    public List<Students> getAllStudents() {
+        String query = "SELECT u.id, u.password, u.first_name, u.last_name, u.email, u.role, u.status, " +
+                "s.gpa, s.year_of_study, s.university, s.faculty, s.major, s.priority " +
+                "FROM users u JOIN students s ON u.id = s.id " +
+                "WHERE u.role = 'student' AND u.status = 'validated'";
+        List<Students> students = new ArrayList<>();
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+            while (resultSet.next()) {
+                students.add(Students.getInstance(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return students;
     }
-    return students;
-}
+
 
 
     public List<Students> searchStudents(String searchTerm) {
@@ -129,7 +130,30 @@ public List<Students> getAllStudents() {
     }
 
 
+    public List<Users> searchUsers(String searchTerm) {
+        String query = "SELECT * FROM users WHERE role = 'student' AND (" +
+                "LOWER(first_name) LIKE ? OR " +
+                "LOWER(last_name) LIKE ? OR " +
+                "LOWER(email) LIKE ?)";
 
+        List<Users> users = new ArrayList<>();
+        String likeTerm = "%" + searchTerm.toLowerCase() + "%";
+
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, likeTerm);
+            ps.setString(2, likeTerm);
+            ps.setString(3, likeTerm);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                users.add(Users.getInstance(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return users;
+    }
 
 
 }

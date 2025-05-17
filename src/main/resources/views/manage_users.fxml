@@ -61,7 +61,7 @@
             <Font size="18.0" />
           </font>
         </Label>
-        <TextField layoutX="34.0" layoutY="58.0" promptText="%textfield.search_user" />
+        <TextField fx:id="searchTextField" layoutX="34.0" layoutY="58.0" promptText="%textfield.search_user" />
         <Button fx:id="btnSearch" layoutX="200.0" layoutY="58.0" onAction="#handleSearchClick" text="%button.search" />
         <TableView fx:id="usersTable" layoutX="34.0" layoutY="105.0" prefHeight="240.0" prefWidth="574.0">
           <columns>
