@@ -19,7 +19,7 @@ public class MajorsRepository extends BaseRepository<Majors, CreateMajorsDTO, Up
     @Override
     public Majors create(CreateMajorsDTO majorsDTO) {
         String query = """
-            INSERT INTO majors(facultyId, name)
+            INSERT INTO majors(faculty_id, name)
             VALUES (?, ?)
         """;
         try {
@@ -40,7 +40,7 @@ public class MajorsRepository extends BaseRepository<Majors, CreateMajorsDTO, Up
     }
 
     @Override
-    Majors update(UpdateMajorsDTO majorsDTO) {
+    public Majors update(UpdateMajorsDTO majorsDTO) {
         String query = "UPDATE majors SET name = ? WHERE majorId = ?";
         try {
             PreparedStatement statement = this.connection.prepareStatement(query);
