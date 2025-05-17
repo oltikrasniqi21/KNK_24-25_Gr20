@@ -16,6 +16,7 @@
             <Button mnemonicParsing="false" onAction="#loadFeedbackForm" prefHeight="26.0" prefWidth="243.0" text="%giveFeedbackBtn" />
             <Button fx:id="btnViewNotifications" mnemonicParsing="false" onAction="#onViewNotificationsClicked" prefHeight="26.0" prefWidth="260.0" text="%viewNotificationsBtn" />
             <Button fx:id="btnViewApplication" mnemonicParsing="false" onAction="#onViewApplicationClicked" prefHeight="26.0" prefWidth="260.0" text="%viewApplication" />
+            <Button fx:id="btnViewProfile" mnemonicParsing="false" onAction="#handleViewProfileClick" prefHeight="26.0" prefWidth="260.0" text="%viewProfile" />
          </children>
       </VBox>
    </left>

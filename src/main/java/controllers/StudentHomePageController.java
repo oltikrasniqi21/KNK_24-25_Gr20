@@ -95,6 +95,10 @@ public class StudentHomePageController implements Initializable {
         }
     }
 
+    @FXML private void handleViewProfileClick(){
+        SceneManager.getInstance().loadScene(SceneLocator.MY_PROFILE_PAGE);
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.bundle = resources; // Capture the resource bundle

@@ -42,6 +42,10 @@ public class Scholarships {
         return new Scholarships(scholarship_id, scholarship_name,provider,amount,deadline_date,required_gpa, required_year,required_major,status);
     }
 
+    public String toString(){
+        return this.provider.toUpperCase() + " - " +  this.scholarship_name.toUpperCase();
+    }
+
     public int getScholarship_id() {
         return scholarship_id;
     }
