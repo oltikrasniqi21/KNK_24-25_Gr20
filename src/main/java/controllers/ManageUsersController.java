@@ -3,6 +3,7 @@ package controllers;
 import Repository.UsersRepository;
 import Services.SceneManager;
 import Database.DBCustomConnector;
+import Services.StudentDocumentService;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
@@ -45,9 +46,11 @@ public class ManageUsersController {
     private TableColumn<Users, Void> actionButtonColumn;
 
     private final UsersRepository usersRepository;
+    private final StudentDocumentService documentService;
 
     public ManageUsersController() {
         this.usersRepository = new UsersRepository();
+        this.documentService = new StudentDocumentService(DBCustomConnector.getConnection());
     }
 
     @FXML
@@ -100,8 +103,7 @@ public class ManageUsersController {
 
     private void openUserPdf(int userId) {
         new Thread(() -> {
-
-            // documentService.openStudentDocument(userId);
+            documentService.openStudentDocument(userId);
         }).start();
     }
 
@@ -129,7 +131,6 @@ public class ManageUsersController {
         String searchTerm = searchTextField.getText().trim();
 
         if (searchTerm.isEmpty()) {
-
             loadUsers();
         } else {
             try {
@@ -182,7 +183,6 @@ public class ManageUsersController {
             showAlert("Database Error", e.getMessage());
         }
     }
-
 
     private void showAlert(String title, String message) {
         javafx.application.Platform.runLater(() -> {

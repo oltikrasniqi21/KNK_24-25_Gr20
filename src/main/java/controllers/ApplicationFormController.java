@@ -3,6 +3,7 @@ package controllers;
 import CreateDTO.CreateApplicationDto;
 import Repository.ApplicationsRepository;
 import Repository.ScholarshipsRepository;
+import Repository.UsersRepository;
 import Services.CurrentUser;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,11 +31,13 @@ public class ApplicationFormController {
     private File transcriptFile;
     private final ScholarshipsRepository scholarshipsRepository;
     private final ApplicationsRepository applicationsRepository;
+    private final UsersRepository usersRepository;
 
 
     public ApplicationFormController(){
         scholarshipsRepository = new ScholarshipsRepository();
         applicationsRepository = new ApplicationsRepository();
+        usersRepository = new UsersRepository();
     }
     @FXML
     public void initialize(){
@@ -104,6 +107,7 @@ public class ApplicationFormController {
             );
 
             applicationsRepository.create(applicationDto);
+            usersRepository.updateStudentGPA(CurrentUser.getUserId(), gpa);
 
             showAlert("Sukses", "Ju aplikuat me sukses!");
             resetForm();

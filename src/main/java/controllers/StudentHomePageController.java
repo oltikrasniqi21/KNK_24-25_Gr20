@@ -29,6 +29,12 @@ public class StudentHomePageController implements Initializable {
     private VBox notificationPane;
 
     @FXML
+    private VBox leftVbox;
+
+    private List<javafx.scene.control.Button> menuButtons;
+    private int currentIndex = 0;
+
+    @FXML
     private TableView<Notification> notificationTable;
 
     @FXML
@@ -101,7 +107,7 @@ public class StudentHomePageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.bundle = resources; // Capture the resource bundle
+        this.bundle = resources;
 
         notificationPane.setVisible(false);
         notificationPane.setManaged(false);
@@ -114,7 +120,45 @@ public class StudentHomePageController implements Initializable {
             String formatted = timestamp.toLocalDateTime().format(formatter);
             return new SimpleStringProperty(formatted);
         });
+
+        // ===== Navigimi me tastierë për VBox me butona =====
+        menuButtons = leftVbox.getChildren().stream()
+                .filter(node -> node instanceof javafx.scene.control.Button)
+                .map(node -> (javafx.scene.control.Button) node)
+                .toList();
+
+        if (!menuButtons.isEmpty()) {
+            menuButtons.get(currentIndex).requestFocus();
+        }
+        leftVbox.setOnKeyPressed(event -> handleKeyPress(event));
+
+        javafx.application.Platform.runLater(() -> leftVbox.requestFocus());
     }
+
+    private void handleKeyPress(javafx.scene.input.KeyEvent event) {
+        switch (event.getCode()) {
+            case UP -> {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    menuButtons.get(currentIndex).requestFocus();
+                }
+                event.consume();
+            }
+            case DOWN -> {
+                if (currentIndex < menuButtons.size() - 1) {
+                    currentIndex++;
+                    menuButtons.get(currentIndex).requestFocus();
+                }
+                event.consume();
+            }
+            case ENTER -> {
+                menuButtons.get(currentIndex).fire(); // e aktivizon butonin aktual
+                event.consume();
+            }
+        }
+    }
+
+
 
     @FXML
     private void loadFeedbackForm() {

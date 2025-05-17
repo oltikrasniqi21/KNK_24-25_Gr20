@@ -20,7 +20,7 @@ public class Review {
     }
 
     public static Review getInstance(ResultSet resultSet) throws SQLException {
-        int id = resultSet.getInt("review_id");
+        int id = resultSet.getInt("id");
         int appId = resultSet.getInt("application_id");
         int admID = resultSet.getInt("admin_id");
         String notes = resultSet.getString("review_notes");

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class UsersRepository {
 
-    private Connection connection;
+    private final Connection connection;
     public UsersRepository() {
         this.connection = DBCustomConnector.getConnection();
     }
@@ -153,6 +153,19 @@ public class UsersRepository {
         }
 
         return users;
+    }
+
+    public void updateStudentGPA(int studentId, double gpa){
+        String query = "UPDATE students SET gpa = ? WHERE id = ?";
+        try{
+            PreparedStatement preparedStatement = this.connection.prepareStatement(query);
+            preparedStatement.setDouble(1,gpa);
+            preparedStatement.setInt(2, studentId);
+            preparedStatement.execute();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
 
