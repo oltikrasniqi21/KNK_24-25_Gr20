@@ -41,7 +41,7 @@ public class MajorsRepository extends BaseRepository<Majors, CreateMajorsDTO, Up
 
     @Override
     public Majors update(UpdateMajorsDTO majorsDTO) {
-        String query = "UPDATE majors SET name = ? WHERE majorId = ?";
+        String query = "UPDATE majors SET name = ? WHERE id = ?";
         try {
             PreparedStatement statement = this.connection.prepareStatement(query);
             statement.setString(1, majorsDTO.getName());

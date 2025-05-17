@@ -10,7 +10,7 @@ import java.util.List;
 
 public class UsersRepository {
 
-    private Connection connection;
+    private final Connection connection;
     public UsersRepository() {
         this.connection = DBCustomConnector.getConnection();
     }
