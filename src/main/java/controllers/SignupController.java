@@ -87,12 +87,13 @@ public class SignupController implements Initializable {
         if (!isValidPassword(password)) {
             showAlert(
                     "Invalid Password",
-                    "Password must contain:\n" +
-                            "• At least 8 characters\n" +
-                            "• At least one uppercase letter\n" +
-                            "• At least one lowercase letter\n" +
-                            "• At least one digit\n" +
-                            "• At least one special character (e.g. !@#$%^&*)"
+                    """
+                            Password must contain:
+                            • At least 8 characters
+                            • At least one uppercase letter
+                            • At least one lowercase letter
+                            • At least one digit
+                            • At least one special character (e.g. !@#$%^&*)"""
             );
             return;
         }
@@ -116,9 +117,6 @@ public class SignupController implements Initializable {
                 return;
             }
         }
-
-
-
         try {
             signupService.signupStudent(password, firstName, lastName, email,
                     Integer.parseInt(year), university, faculty, major, filePath);

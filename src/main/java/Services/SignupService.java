@@ -24,14 +24,14 @@ public class SignupService {
     public void signupStudent(String password, String firstName, String lastName, String email,
                               int yearOfStudy, String university, String faculty, String major, String documentPath) throws SQLException {
 
-        // Step 1: Generate salt and hash password
+
         String salt = PasswordUtils.getSalt();
         String hashedPassword = PasswordUtils.hashPassword(password, salt);
         String passwordToStore = salt + "$" + hashedPassword;
 
         connection.setAutoCommit(false);
         try {
-            // Step 2: Insert user with passwordToStore
+
             String insertUserSQL = "INSERT INTO users (password, first_name, last_name, email, role) VALUES (?, ?, ?, ?, 'student')";
             try (PreparedStatement userStmt = connection.prepareStatement(insertUserSQL, Statement.RETURN_GENERATED_KEYS)) {
                 userStmt.setString(1, passwordToStore); // ← this is the hashed+salted password
