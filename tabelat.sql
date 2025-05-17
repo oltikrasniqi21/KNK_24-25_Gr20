@@ -37,7 +37,7 @@ CREATE TABLE users(
 
 
 CREATE TABLE students (
-    student_id INTEGER PRIMARY KEY REFERENCES users(user_id) ON DELETE CASCADE,
+    id INTEGER PRIMARY KEY REFERENCES users(user_id) ON DELETE CASCADE,
     gpa NUMERIC(3,2) CHECK(gpa IS NULL OR gpa BETWEEN 6.00 AND 10.00),
     year_of_study INTEGER NOT NULL CHECK (year_of_study BETWEEN 1 AND 5),
     university VARCHAR(50) NOT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE scholarships(
 	amount INTEGER NOT NULL CHECK (amount >0),
 	deadline_date DATE NOT NULL,
 	required_gpa NUMERIC(3,2) CHECK (required_gpa IS NULL OR (required_gpa BETWEEN 6.00 AND 10.00)),
-	required_year INTEGER CHECK (required_year IS NULL OR (required_year BETWEEN 1 AND 5)),
+	required_year INTEGER NOT NULL,
 	required_major VARCHAR(50)
 );
 
