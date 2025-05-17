@@ -56,7 +56,7 @@
         </MenuBar>
         <AnchorPane VBox.vgrow="ALWAYS">
             <children>
-                <Button fx:id="btnAddUser" layoutX="227.0" layoutY="21.0" onAction="#handleAddScholarshipClick" text="%add_scholarship" />
+                <Button fx:id="btnAddScholarship" layoutX="227.0" layoutY="21.0" onAction="#handleAddScholarshipClick" text="%add_scholarship" />
                 <Label layoutX="34.0" layoutY="20.0" text="%manage_scholarships">
                     <font>
                         <Font size="18.0" />
@@ -64,7 +64,7 @@
                 </Label>
                 <TextField fx:id="searchStudent" layoutX="34.0" layoutY="58.0" promptText="%search_scholarship" />
                 <Button fx:id="btnSearch" layoutX="200.0" layoutY="58.0" onAction="#handleSearchClick" text="%search" />
-                <TableView layoutX="8.0" layoutY="105.0" prefHeight="240.0" prefWidth="622.0">
+                <TableView fx:id="scholarshipsTable" layoutX="8.0" layoutY="105.0" prefHeight="240.0" prefWidth="622.0">
                     <columns>
                         <TableColumn fx:id="scholarshipsIdColumn" prefWidth="75.0" text="%column.id" />
                         <TableColumn fx:id="scholarshipsNameColumn" prefWidth="75.0" text="%column.name" />
@@ -77,6 +77,7 @@
                     </columns>
                 </TableView>
                 <Button fx:id="btnBack" layoutX="528.0" layoutY="21.0" onAction="#handleBackClick" prefHeight="26.0" prefWidth="80.0" text="%back" />
+            <Button fx:id="btnEdit" layoutX="355.0" layoutY="71.0" mnemonicParsing="false" onAction="#handleEditClick" prefHeight="26.0" prefWidth="60.0" text="%edit" />
             </children>
         </AnchorPane>
     </children>
