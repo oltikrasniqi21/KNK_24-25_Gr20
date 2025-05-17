@@ -34,6 +34,6 @@
       <TextField fx:id="gpaField" layoutX="195.0" layoutY="150.0" prefHeight="25.0" prefWidth="210.0" />
       <Label fx:id="selectedFileLabel" layoutX="208.0" layoutY="197.0" mnemonicParsing="false" onMouseClicked="#handleUploadTranscript" text="Zgjedh PDF" />
       <Text layoutX="300.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Asnje skedar i zgjedhur" />
-      <Button layoutX="260.0" layoutY="256.0" mnemonicParsing="false" onAction="#handleSubmitApplication" text="Apliko" />
+      <Button layoutX="260.0" layoutY="256.0" mnemonicParsing="false" onAction="#handleSubmitApplication" style="-fx-background-color: green; -fx-text-fill: white;" text="Apliko" />
    </children>
 </AnchorPane>
