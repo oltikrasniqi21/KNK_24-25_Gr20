@@ -47,8 +47,6 @@ CREATE TABLE students (
     priority VARCHAR(100) CHECK(priority IS NULL OR LOWER(priority) IN ('veteran', 'disabled'))
 );
 
-
-
 CREATE TABLE scholarships(
 	scholarship_id SERIAL PRIMARY KEY,
 	scholarship_name VARCHAR(100) NOT NULL,
@@ -57,9 +55,9 @@ CREATE TABLE scholarships(
 	deadline_date DATE NOT NULL,
 	required_gpa NUMERIC(3,2) CHECK (required_gpa IS NULL OR (required_gpa BETWEEN 6.00 AND 10.00)),
 	required_year INTEGER NOT NULL,
-	required_major VARCHAR(50)
+	required_major VARCHAR(50),
+	status VARCHAR(20)
 );
-
 
 CREATE TABLE review(
     review_id SERIAL PRIMARY KEY,
