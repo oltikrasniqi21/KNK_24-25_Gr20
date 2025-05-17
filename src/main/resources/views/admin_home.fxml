@@ -50,7 +50,7 @@
             <Button mnemonicParsing="false" onAction="#handleFAQ" prefHeight="43.0" prefWidth="188.0" text="%btn.faq" />
             <Button mnemonicParsing="false" onAction="#handleFeedback" prefHeight="43.0" prefWidth="188.0" text="%btn.feedback" />
             <Button mnemonicParsing="false" onAction="#handleLogout" prefHeight="43.0" prefWidth="188.0" text="%btn.logout" />
-            <Button fx:id="addUniversitiesButton" mnemonicParsing="false" onAction="#handleAddUniversitiesClick" text="%btn.addUniversities" />
+            <Button fx:id="addUniversitiesButton" mnemonicParsing="false" onAction="#handleAddUniversities" text="%btn.addUniversities" />
          </children>
       </VBox>
    </left>

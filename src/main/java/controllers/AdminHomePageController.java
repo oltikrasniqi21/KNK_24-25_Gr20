@@ -72,4 +72,8 @@ public class AdminHomePageController {
     @FXML
     private void handleNews(){loadCenterContent(SceneLocator.NEWS_ADMIN);}
 
+    @FXML
+    private void handleAddUniversities(){loadCenterContent(SceneLocator.MANAGE_UNIVERSITIES);}
+
 }
+
