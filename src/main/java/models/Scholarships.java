@@ -70,4 +70,8 @@ public class Scholarships {
     public int getRequired_year() {
         return required_year;
     }
+
+    public String toString(){
+        return this.scholarship_name;
+    }
 }

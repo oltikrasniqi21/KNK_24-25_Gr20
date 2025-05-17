@@ -20,7 +20,7 @@ public class ApplicationsRepository extends BaseRepository<Applications, CreateA
 
     public Applications create(CreateApplicationDto applicationsDto){
         String query = """
-                INSERT INTO APPLICATIONS(STUDENT_ID, SCHOLARSHIP_ID, APPLICATION_DATE, TRANSCRIPT_PATH, GPA)
+                INSERT INTO APPLICATIONS(STUDENT_ID, SCHOLARSHIP_ID, APPLICATION_DATE, GPA, TRANSCRIPT_PATH)
                 VALUES(?,?,?,?,?)
                 """;
         try{
@@ -29,8 +29,8 @@ public class ApplicationsRepository extends BaseRepository<Applications, CreateA
             statement.setInt(1, applicationsDto.getSid());
             statement.setInt(2, applicationsDto.getScid());
             statement.setDate(3, Date.valueOf(applicationsDto.getApplication_date()));
-            statement.setString(4, applicationsDto.getTranscript_path());
-            statement.setDouble(5, applicationsDto.getGpa());
+            statement.setDouble(4, applicationsDto.getGpa());
+            statement.setString(5, applicationsDto.getTranscript_path());
             statement.execute();
 
             ResultSet resultSet = statement.getGeneratedKeys();
@@ -69,7 +69,6 @@ public class ApplicationsRepository extends BaseRepository<Applications, CreateA
                 u.first_name || ' ' || u.last_name AS student_name,
                 u.email,
                 a.gpa,
-                s.courses_left,
                 s.priority,
                 s.year_of_study,
                 sc.scholarship_name,
@@ -95,7 +94,6 @@ public class ApplicationsRepository extends BaseRepository<Applications, CreateA
                         resultSet.getString("student_name"),
                         resultSet.getString("email"),
                         resultSet.getDouble("gpa"),
-                        resultSet.getInt("courses_left"),
                         resultSet.getString("priority"),
                         resultSet.getString("scholarship_name"),
                         resultSet.getDouble("required_gpa"),
