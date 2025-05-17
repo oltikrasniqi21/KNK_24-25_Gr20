@@ -5,13 +5,18 @@ import Repository.ScholarshipsRepository;
 import Repository.UsersRepository;
 import Services.SceneManager;
 import UpdateDTO.UpdateApplicationsDTO;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import models.Applications;
 import models.ApplicationsDetails;
 import utils.SceneLocator;
 
+import java.awt.*;
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +31,8 @@ public class ManageApplicationController {
     private TableColumn<Applications, String> scholarshipNameColumn;
     @FXML
     private TableColumn<Applications, String> applicationDateColumn;
+    @FXML
+    private TableColumn<Applications, String> gpaColumn;
     @FXML
     private TableColumn<Applications, String> statusColumn;
 
@@ -55,27 +62,32 @@ public class ManageApplicationController {
     public void initialize(){
         applicationIdColumn.setCellValueFactory(cellData ->{
             Applications applications = cellData.getValue();
-            return new javafx.beans.property.SimpleIntegerProperty(applications.getApplicationId()).asObject();
+            return new SimpleIntegerProperty(applications.getApplicationId()).asObject();
         });
 
         studentNameColumn.setCellValueFactory(cellData ->{
             Applications applications = cellData.getValue();
-            return new javafx.beans.property.SimpleStringProperty(getStudentNameById(applications.getStudentId()));
+            return new SimpleStringProperty(getStudentNameById(applications.getStudentId()));
         });
 
         scholarshipNameColumn.setCellValueFactory(cellData ->{
             Applications applications = cellData.getValue();
-            return new javafx.beans.property.SimpleStringProperty(getScholarshipNameById(applications.getScholarshipId()));
+            return new SimpleStringProperty(getScholarshipNameById(applications.getScholarshipId()));
         });
 
         applicationDateColumn.setCellValueFactory(cellData ->{
             Applications applications = cellData.getValue();
-            return new javafx.beans.property.SimpleStringProperty(applications.getApplicationDate().toString());
+            return new SimpleStringProperty(applications.getApplicationDate().toString());
+        });
+
+        gpaColumn.setCellValueFactory(cellData ->{
+            Applications applications = cellData.getValue();
+            return new SimpleStringProperty(String.valueOf(applications.getGpa()));
         });
 
         statusColumn.setCellValueFactory(cellData ->{
             Applications applications = cellData.getValue();
-            return new javafx.beans.property.SimpleStringProperty(applications.getStatus());
+            return new SimpleStringProperty(applications.getStatus());
         });
 
         applicationsTable.setOnMouseClicked(event -> {
@@ -119,7 +131,7 @@ public class ManageApplicationController {
 
     private void displayApplicationDetails(Applications selectedApplication) {
         ApplicationsDetails details = applicationsRepository.getApplicationDetailsById(selectedApplication.getApplicationId());
-        if (details != null){
+        if (details != null ){
             studentField.setText(details.studentName);
             emailField.setText(details.email);
             gpaField.setText(String.valueOf(details.gpa));
@@ -132,6 +144,29 @@ public class ManageApplicationController {
             statusField.setText(details.status);
             currentYearField.setText(String.valueOf(details.currentYear));
             applicationDateField.setText(details.applicationDate.toString());
+        }
+    }
+
+    @FXML
+    private void handleViewTranscript(){
+        Applications selectedApplication = applicationsTable.getSelectionModel().getSelectedItem();
+        if (selectedApplication != null){
+            ApplicationsDetails details = applicationsRepository.getApplicationDetailsById(selectedApplication.getApplicationId());
+            if (details != null && details.transcriptPath != null && !details.transcriptPath.isEmpty()){
+                File file = new File(details.transcriptPath);
+                if (file.exists()){
+                    try{
+                        Desktop.getDesktop().open(file);
+                    } catch(Exception e){
+                        e.printStackTrace();
+                        new Alert(Alert.AlertType.ERROR, "Gabim gjate hapjes se transkriptes.").showAndWait();
+                    }
+                }else {
+                    new Alert(Alert.AlertType.ERROR, "Transkripta nuk u gjet ne path-in e dhene.").showAndWait();
+                }
+            }else {
+                new Alert(Alert.AlertType.ERROR, "Nuk ka transkripte te lidhur me kete aplikim.").showAndWait();
+            }
         }
     }
 

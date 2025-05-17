@@ -7,14 +7,16 @@ public class CreateApplicationDto {
     private int sid;
     private int scid;
     private LocalDate application_date;
-    private String status;
+    private String transcript_path;
+    private double gpa;
 
-    public CreateApplicationDto(int id, int sid, int scid, LocalDate application_date, String status) {
+    public CreateApplicationDto(int id, int sid, int scid, LocalDate application_date, String transcript_path, double gpa) {
         this.id = id;
         this.sid = sid;
         this.scid = scid;
         this.application_date = application_date;
-        this.status = status;
+        this.transcript_path = transcript_path;
+        this.gpa = gpa;
     }
 
     public int getId() {
@@ -49,11 +51,19 @@ public class CreateApplicationDto {
         this.application_date = application_date;
     }
 
-    public String getStatus() {
-        return status;
+    public double getGpa() {
+        return gpa;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setGpa(double gpa) {
+        this.gpa = gpa;
+    }
+
+    public String getTranscript_path() {
+        return transcript_path;
+    }
+
+    public void setTranscript_path(String transcript_path) {
+        this.transcript_path = transcript_path;
     }
 }

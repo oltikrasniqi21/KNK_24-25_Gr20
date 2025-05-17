@@ -20,8 +20,8 @@ public class ApplicationsRepository extends BaseRepository<Applications, CreateA
 
     public Applications create(CreateApplicationDto applicationsDto){
         String query = """
-                INSERT INTO APPLICATIONS(STUDENT_ID, SCHOLARSHIP_ID, APPLICATION_DATE, STATUS)
-                VALUES(?,?,?,?)
+                INSERT INTO APPLICATIONS(STUDENT_ID, SCHOLARSHIP_ID, APPLICATION_DATE, TRANSCRIPT_PATH, GPA)
+                VALUES(?,?,?,?,?)
                 """;
         try{
             PreparedStatement statement = this.connection.prepareStatement(
@@ -29,7 +29,8 @@ public class ApplicationsRepository extends BaseRepository<Applications, CreateA
             statement.setInt(1, applicationsDto.getSid());
             statement.setInt(2, applicationsDto.getScid());
             statement.setDate(3, Date.valueOf(applicationsDto.getApplication_date()));
-            statement.setString(4, applicationsDto.getStatus());
+            statement.setString(4, applicationsDto.getTranscript_path());
+            statement.setDouble(5, applicationsDto.getGpa());
             statement.execute();
 
             ResultSet resultSet = statement.getGeneratedKeys();
@@ -67,7 +68,7 @@ public class ApplicationsRepository extends BaseRepository<Applications, CreateA
                 SELECT
                 u.first_name || ' ' || u.last_name AS student_name,
                 u.email,
-                s.gpa,
+                a.gpa,
                 s.courses_left,
                 s.priority,
                 s.year_of_study,
@@ -76,12 +77,13 @@ public class ApplicationsRepository extends BaseRepository<Applications, CreateA
                 sc.required_year,
                 sc.deadline_date,
                 a.status,
-                a.application_date
+                a.application_date,
+                a.transcript_path
                 FROM applications a
-                JOIN students s ON a.student_id = s.student_id
-                JOIN users u ON s.student_id = u.user_id
-                JOIN scholarships sc ON a.scholarship_id = sc.scholarship_id
-                WHERE a.application_id = ?""";
+                JOIN students s ON a.student_id = s.id
+                JOIN users u ON s.id = u.id
+                JOIN scholarships sc ON a.scholarship_id = sc.id
+                WHERE a.id = ?""";
 
         try{
             PreparedStatement preparedStatement = this.connection.prepareStatement(query);
@@ -101,7 +103,8 @@ public class ApplicationsRepository extends BaseRepository<Applications, CreateA
                         resultSet.getDate("deadline_date"),
                         resultSet.getString("status"),
                         resultSet.getInt("year_of_study"),
-                        resultSet.getDate("application_date")
+                        resultSet.getDate("application_date"),
+                        resultSet.getString("transcript_path")
                 );
             }
         } catch (Exception e) {
