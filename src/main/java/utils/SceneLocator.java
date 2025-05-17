@@ -20,4 +20,5 @@ public class SceneLocator {
     public static final String STUDENT_FEEDBACK_PAGE = "/views/student_feedback.fxml";
     public static final String MANAGE_ADMIN_FEEDBACK_PAGE = "/views/admin_feedback.fxml";
     public static final String MY_PROFILE_PAGE = "/views/my_profile.fxml";
+    public static final String MANAGE_UNIVERSITIES = "/views/manage_universities.fxml";
 }
