@@ -61,22 +61,21 @@
             <Font size="18.0" />
           </font>
         </Label>
-        <TextField layoutX="34.0" layoutY="58.0" promptText="%textfield.search_user" />
+        <TextField fx:id="searchTextField" layoutX="34.0" layoutY="58.0" promptText="%textfield.search_user" />
         <Button fx:id="btnSearch" layoutX="200.0" layoutY="58.0" onAction="#handleSearchClick" text="%button.search" />
-        <TableView layoutX="34.0" layoutY="105.0" prefHeight="240.0" prefWidth="574.0">
+        <TableView fx:id="usersTable" layoutX="34.0" layoutY="105.0" prefHeight="240.0" prefWidth="574.0">
           <columns>
-            <TableColumn fx:id="userIdColumn" prefWidth="75.0" text="%column.id" />
-            <TableColumn fx:id="firstNameColumn" prefWidth="75.0" text="%column.firstname" />
-            <TableColumn fx:id="lastNameColumn" prefWidth="75.0" text="%column.lastname" />
-            <TableColumn fx:id="emailColumn" prefWidth="75.0" text="%column.email" />
-            <TableColumn fx:id="roleColumn" prefWidth="75.0" text="%column.role" />
-            <TableColumn fx:id="actionColumn" prefWidth="75.0" text="%column.actions" />
+            <TableColumn fx:id="userIdColumn" prefWidth="80" text="%column.id" />
+            <TableColumn fx:id="userNameColumn" prefWidth="113.0" text="%column.name" />
+            <TableColumn fx:id="userEmailColumn" prefWidth="135.0" text="%column.email" />
+            <TableColumn fx:id="userStatusColumn" prefWidth="103.0" text="%column.status" />
+            <TableColumn fx:id="actionButtonColumn" prefWidth="142.0" text="%column.document" />
           </columns>
         </TableView>
         <Button fx:id="btnAddUser" layoutX="220.0" layoutY="21.0" onAction="#handleAddUserClick" text="%button.add_user" />
         <Button fx:id="btnBack" layoutX="558.0" layoutY="21.0" onAction="#handleBackClick" prefHeight="25.0" prefWidth="49.0" text="%button.back" />
-            <Button layoutX="377.0" layoutY="21.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0" text="%button.validate" />
-            <Button layoutX="452.0" layoutY="21.0" mnemonicParsing="false" text="%button.reject" />
+            <Button fx:id="validateButton" layoutX="377.0" layoutY="21.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0" text="%button.validate" underline="true" onAction="#handleValidate"  />
+            <Button  fx:id="rejectButton" layoutX="452.0" layoutY="21.0" mnemonicParsing="false" text="%button.reject" underline="true" onAction="#handleReject" />
       </children>
     </AnchorPane>
   </children>

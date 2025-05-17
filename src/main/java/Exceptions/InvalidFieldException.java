@@ -7,5 +7,6 @@ public class InvalidFieldException extends RuntimeException{
         super("Fusha "+fieldName+" nuk validohet!");
         String localeMessage = LocaleMessages.getLocalizedMessage(LocaleMessages.INVALID_FIELD_BUNDLE,fieldName);
         Alert alert = new Alert(Alert.AlertType.ERROR, localeMessage );
+        alert.showAndWait();
     }
 }

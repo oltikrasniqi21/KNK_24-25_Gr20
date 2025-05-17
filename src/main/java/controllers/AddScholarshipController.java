@@ -1,6 +1,7 @@
 package controllers;
 
 import CreateDTO.CreateScholarshipDTO;
+import Exceptions.EmptyFieldException;
 import Repository.ScholarshipsRepository;
 import Services.SceneManager;
 import Services.ScholarshipService;
@@ -33,22 +34,50 @@ public class AddScholarshipController {
         SceneManager.getInstance().loadScene(SceneLocator.MANAGE_SCHOLARSHIPS_PAGE);
     }
 
+    private void checkEmptyFields(){
+        if (nameField.getText().isEmpty() ||
+                providerField.getText().isEmpty() ||
+                majorField.getText().isEmpty() ||
+                amountField.getText().isEmpty() ||
+                yearField.getText().isEmpty() ||
+                gpaField.getText().isEmpty() ||
+                deadlineField.getValue() == null) {
+            throw new EmptyFieldException();
+        }
+    };
+
     @FXML private void handleSaveClick(){
-        String name = nameField.getText();
-        String provider = providerField.getText();
-        String major = majorField.getText();
-        int amount = Integer.parseInt(amountField.getText());
-        int year = Integer.parseInt(yearField.getText());
-        double gpa = Double.parseDouble(gpaField.getText());
-        LocalDate deadline = deadlineField.getValue();
+            try{
+                checkEmptyFields();
 
-        CreateScholarshipDTO scholarshipDTO = new CreateScholarshipDTO(name,provider,amount,deadline,gpa,year,major);
-        scholarshipService.create(scholarshipDTO);
-        System.out.println("SaveClick Working...");
+                String name = nameField.getText().toLowerCase();
+                String provider = providerField.getText().toLowerCase();
+                String major = majorField.getText().toLowerCase();
+                int amount = Integer.parseInt(amountField.getText());
+                int year = Integer.parseInt(yearField.getText());
+                double gpa = Double.parseDouble(gpaField.getText());
+                LocalDate deadline = deadlineField.getValue();
 
+                CreateScholarshipDTO scholarshipDTO = new CreateScholarshipDTO(name, provider, amount, deadline, gpa, year, major);
+                scholarshipService.create(scholarshipDTO);
+                clearFields();
+                System.out.println("SaveClick Working...");
+            }catch (EmptyFieldException e) {
+                e.getMessage();
+            }
     }
 
     @FXML private void handleClearClick(){
+        clearFields();
+    }
 
+    private void clearFields(){
+        nameField.clear();
+        providerField.clear();
+        majorField.clear();
+        amountField.clear();
+        yearField.clear();
+        gpaField.clear();
+        deadlineField.setValue(null);
     }
 }

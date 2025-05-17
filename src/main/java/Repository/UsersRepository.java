@@ -1,10 +1,12 @@
 package Repository;
 
 import Database.DBCustomConnector;
+import models.Students;
 import models.Users;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class UsersRepository {
 
@@ -63,6 +65,94 @@ public class UsersRepository {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public List<Students> getAllStudents() {
+        String query = "SELECT u.id, u.password, u.first_name, u.last_name, u.email, u.role, u.status, " +
+                "s.gpa, s.year_of_study, s.university, s.faculty, s.major, s.priority " +
+                "FROM users u JOIN students s ON u.id = s.id " +
+                "WHERE u.role = 'student' AND u.status = 'validated'";
+        List<Students> students = new ArrayList<>();
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+            while (resultSet.next()) {
+                students.add(Students.getInstance(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return students;
+    }
+
+
+
+    public List<Students> searchStudents(String searchTerm) {
+        String query = "SELECT u.id, u.password, u.first_name, u.last_name, u.email, u.role, u.status, " +
+                "s.gpa, s.year_of_study, s.university, s.faculty, s.major, s.priority " +
+                "FROM users u JOIN students s ON u.id = s.id " +
+                "WHERE u.role = 'student' AND " +
+                "(LOWER(u.first_name) LIKE ? OR " +
+                "LOWER(u.last_name) LIKE ? OR " +
+                "LOWER(s.university) LIKE ? OR " +
+                "LOWER(s.faculty) LIKE ? OR " +
+                "LOWER(s.major) LIKE ?)";
+
+        List<Students> students = new ArrayList<>();
+        String likeTerm = "%" + searchTerm.toLowerCase() + "%";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            for (int i = 1; i <= 5; i++) {
+                preparedStatement.setString(i, likeTerm);
+            }
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                students.add(Students.getInstance(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return students;
+    }
+
+    public List<Users> getAllStudentUsers() {
+        String query = "SELECT * FROM users WHERE role = 'student' ORDER BY id";
+        List<Users> users = new ArrayList<>();
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+            while (rs.next()) {
+                users.add(Users.getInstance(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+
+    public List<Users> searchUsers(String searchTerm) {
+        String query = "SELECT * FROM users WHERE role = 'student' AND (" +
+                "LOWER(first_name) LIKE ? OR " +
+                "LOWER(last_name) LIKE ? OR " +
+                "LOWER(email) LIKE ?)";
+
+        List<Users> users = new ArrayList<>();
+        String likeTerm = "%" + searchTerm.toLowerCase() + "%";
+
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, likeTerm);
+            ps.setString(2, likeTerm);
+            ps.setString(3, likeTerm);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                users.add(Users.getInstance(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return users;
     }
 
 
