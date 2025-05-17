@@ -10,6 +10,7 @@ public class CreateScholarshipDTO {
     private double required_gpa;
     private int required_year;
     private String required_major;
+    private String status;
 
     public CreateScholarshipDTO(String scholarship_name, String provider, int amount, LocalDate deadline_date, double required_gpa, int required_year, String requred_major) {
         this.scholarship_name = scholarship_name;
@@ -19,6 +20,7 @@ public class CreateScholarshipDTO {
         this.required_gpa = required_gpa;
         this.required_year = required_year;
         this.required_major = requred_major;
+        this.status = "active";
     }
 
     public void setScholarship_name(String scholarship_name) {
@@ -75,6 +77,10 @@ public class CreateScholarshipDTO {
 
     public String getRequired_major() {
         return required_major;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }
 

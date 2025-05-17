@@ -14,9 +14,10 @@ public class Scholarships {
     private double required_gpa;
     private int required_year;
     private String requred_major;
+    private String status;
 
 
-    private Scholarships(int scholarship_id, String scholarship_name, String provider, int amount, LocalDate deadline_date,double required_gpa, int required_year, String requred_major) {
+    private Scholarships(int scholarship_id, String scholarship_name, String provider, int amount, LocalDate deadline_date,double required_gpa, int required_year, String requred_major,String status) {
         this.scholarship_id = scholarship_id;
         this.scholarship_name = scholarship_name;
         this.provider = provider;
@@ -25,6 +26,7 @@ public class Scholarships {
         this.required_gpa = required_gpa;
         this.required_year = required_year;
         this.requred_major = requred_major;
+        this.status= status;
     }
 
     public static Scholarships getInstance(ResultSet resultSet) throws SQLException {
@@ -36,7 +38,8 @@ public class Scholarships {
         int required_year = resultSet.getInt("required_year");
         double required_gpa = resultSet.getDouble("required_gpa");
         String required_major = resultSet.getString("required_major");
-        return new Scholarships(scholarship_id, scholarship_name,provider,amount,deadline_date,required_gpa, required_year,required_major);
+        String status = resultSet.getString("status");
+        return new Scholarships(scholarship_id, scholarship_name,provider,amount,deadline_date,required_gpa, required_year,required_major,status);
     }
 
     public int getScholarship_id() {
@@ -69,5 +72,9 @@ public class Scholarships {
 
     public int getRequired_year() {
         return required_year;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

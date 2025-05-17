@@ -1,6 +1,7 @@
 package UpdateDTO;
 
-import java.sql.Date;
+import models.Scholarships;
+
 import java.time.LocalDate;
 
 public class UpdateScholarshipDTO {
@@ -10,6 +11,7 @@ public class UpdateScholarshipDTO {
     private double required_gpa;
     private int required_year;
     private String requred_major;
+    private String status;
 
     public UpdateScholarshipDTO(int scholarship_id, int amount, LocalDate deadline_date,double required_gpa, int required_year, String requred_major) {
         this.scholarship_id = scholarship_id;
@@ -18,6 +20,17 @@ public class UpdateScholarshipDTO {
         this.required_gpa = required_gpa;
         this.required_year = required_year;
         this.requred_major = requred_major;
+        this.status = "active";
+    }
+
+    public UpdateScholarshipDTO(Scholarships scholarship) {
+        this.scholarship_id = scholarship.getScholarship_id();
+        this.amount = scholarship.getAmount();
+        this.deadline_date = scholarship.getDeadline_date();
+        this.required_gpa = scholarship.getRequired_gpa();
+        this.required_year = scholarship.getRequired_year();
+        this.requred_major = scholarship.getRequred_major();
+        this.status = "active";
     }
 
     public void setScholarship_id(int scholarship_id) {
@@ -66,5 +79,17 @@ public class UpdateScholarshipDTO {
 
     public String getRequred_major() {
         return requred_major;
+    }
+
+    public void setActiveStatus(Boolean status) {
+        if (status) {
+            this.status = "active";
+        }else{
+            this.status = "deactive";
+        }
+    }
+
+    public String getStatus() {
+        return status;
     }
 }
