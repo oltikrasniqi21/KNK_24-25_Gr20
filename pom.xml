@@ -79,7 +79,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>com.example.knk_2425_gr20/com.example.knk_2425_gr20.HelloApplication</mainClass>
+                    <mainClass>com.example.knk_2425_gr20/com.example.knk_2425_gr20.KNK2025_GR20</mainClass>
                 </configuration>
             </plugin>
         </plugins>

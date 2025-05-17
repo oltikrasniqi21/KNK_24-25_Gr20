@@ -19,7 +19,7 @@ public class FacultiesRepository extends BaseRepository<Faculties, CreateFaculti
     @Override
     public Faculties create(CreateFacultiesDTO facultiesDTO) {
         String query = """
-            INSERT INTO faculties(universityId, name)
+            INSERT INTO faculties(university_id, name)
             VALUES (?, ?)
         """;
         try {
@@ -40,8 +40,8 @@ public class FacultiesRepository extends BaseRepository<Faculties, CreateFaculti
     }
 
     @Override
-    Faculties update(UpdateFacultiesDTO facultiesDTO) {
-        String query = "UPDATE faculties SET name = ? WHERE facultyId = ?";
+    public Faculties update(UpdateFacultiesDTO facultiesDTO) {
+        String query = "UPDATE faculties SET name = ? WHERE id = ?";
         try {
             PreparedStatement statement = this.connection.prepareStatement(query);
             statement.setString(1, facultiesDTO.getName());

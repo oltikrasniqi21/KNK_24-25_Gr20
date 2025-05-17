@@ -32,10 +32,12 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="mainLayout" prefHeight="469.0" prefWidth="603.0" stylesheets="@../css/admin_view.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminHomePageController">
+<BorderPane fx:id="mainLayout" prefHeight="469.0" prefWidth="603.0" stylesheets="@../css/admin_view.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminHomePageController">
    <left>
       <VBox fx:id="leftVbox" prefHeight="386.0" prefWidth="209.0" BorderPane.alignment="CENTER">
          <children>
@@ -48,6 +50,7 @@
             <Button mnemonicParsing="false" onAction="#handleFAQ" prefHeight="43.0" prefWidth="188.0" text="%btn.faq" />
             <Button mnemonicParsing="false" onAction="#handleFeedback" prefHeight="43.0" prefWidth="188.0" text="%btn.feedback" />
             <Button mnemonicParsing="false" onAction="#handleLogout" prefHeight="43.0" prefWidth="188.0" text="%btn.logout" />
+            <Button fx:id="addUniversitiesButton" mnemonicParsing="false" onAction="#handleAddUniversities" text="%btn.addUniversities" />
          </children>
       </VBox>
    </left>
