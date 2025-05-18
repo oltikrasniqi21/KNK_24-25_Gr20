@@ -6,7 +6,6 @@ public class ApplicationsDetails {
     public String studentName;
     public String email;
     public double gpa;
-    public int coursesLeft;
     public String priority;
     public String scholarshipName;
     public double requiredGpa;
@@ -18,12 +17,11 @@ public class ApplicationsDetails {
     public String transcriptPath;
 
 
-    public ApplicationsDetails(String studentName, String email, double gpa, int coursesLeft, String priority, String scholarshipName,
+    public ApplicationsDetails(String studentName, String email, double gpa, String priority, String scholarshipName,
                                double requiredGpa, int requiredYear, Date deadline, String status, int currentYear, Date applicationDate, String transcriptPath) {
         this.studentName = studentName;
         this.email = email;
         this.gpa = gpa;
-        this.coursesLeft = coursesLeft;
         this.priority = priority;
         this.scholarshipName = scholarshipName;
         this.requiredGpa = requiredGpa;

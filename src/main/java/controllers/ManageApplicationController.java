@@ -39,7 +39,6 @@ public class ManageApplicationController {
     @FXML private TextField studentField;
     @FXML private TextField emailField;
     @FXML private TextField gpaField;
-    @FXML private TextField coursesLeftField;
     @FXML private TextField priorityField;
     @FXML private TextField scholarshipField;
     @FXML private TextField requiredGpaField;
@@ -135,7 +134,6 @@ public class ManageApplicationController {
             studentField.setText(details.studentName);
             emailField.setText(details.email);
             gpaField.setText(String.valueOf(details.gpa));
-            coursesLeftField.setText(String.valueOf(details.coursesLeft));
             priorityField.setText(details.priority);
             scholarshipField.setText(details.scholarshipName);
             requiredGpaField.setText(String.valueOf(details.requiredGpa));

@@ -4,6 +4,7 @@ import CreateDTO.CreateApplicationDto;
 import Repository.ApplicationsRepository;
 import Repository.ScholarshipsRepository;
 import Repository.UsersRepository;
+import Services.ApplicationService;
 import Services.CurrentUser;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,7 +20,9 @@ import java.io.File;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class ApplicationFormController {
@@ -32,12 +35,14 @@ public class ApplicationFormController {
     private final ScholarshipsRepository scholarshipsRepository;
     private final ApplicationsRepository applicationsRepository;
     private final UsersRepository usersRepository;
+    private final ApplicationService applicationService;
 
 
     public ApplicationFormController(){
         scholarshipsRepository = new ScholarshipsRepository();
         applicationsRepository = new ApplicationsRepository();
         usersRepository = new UsersRepository();
+        applicationService = new ApplicationService();
     }
     @FXML
     public void initialize(){
@@ -46,6 +51,7 @@ public class ApplicationFormController {
 
     private void loadScholarships(){
         List<Scholarships> scholarships = scholarshipsRepository.getAll();
+        scholarshipComboBox.getItems().clear();
         scholarshipComboBox.getItems().addAll(scholarships);
 
         if (!scholarships.isEmpty()){
@@ -106,12 +112,20 @@ public class ApplicationFormController {
                     gpa
             );
 
-            applicationsRepository.create(applicationDto);
-            usersRepository.updateStudentGPA(CurrentUser.getUserId(), gpa);
+            String validationMessage = applicationService.validateApplication(applicationDto);
+            if (validationMessage != null){
+                showAlert("Gabim", validationMessage);
+                return;
+            }
 
-            showAlert("Sukses", "Ju aplikuat me sukses!");
-            resetForm();
-
+            Applications created = applicationService.createApplication(applicationDto);
+            if (created != null){
+                usersRepository.updateStudentGPA(CurrentUser.getUserId(), gpa);
+                showAlert("Sukses", "Ju aplikuat me sukses!");
+                resetForm();
+            }else {
+                showAlert("Gabim", "Aplikimi deshtoi!");
+            }
         }catch (Exception e){
             e.printStackTrace();
         }
