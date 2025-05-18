@@ -41,6 +41,8 @@ public class AlertMessages {
     public static final String SELECT_PDF = "Select PDF Document";
     public static final String NO_FILE_SELECTED = "No file selected";
 
+    public static final String ERROR = "Error";
+
     public static void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);

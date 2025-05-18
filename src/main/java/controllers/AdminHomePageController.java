@@ -1,5 +1,6 @@
 package controllers;
 
+import Services.LanguageManager;
 import Services.SceneManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,8 +18,8 @@ public class AdminHomePageController {
 
     private void loadCenterContent(String fxmlFile) {
         try {
-            // Load the resource bundle inside the method
-            ResourceBundle bundle = ResourceBundle.getBundle("languages.message");
+
+            ResourceBundle bundle = LanguageManager.getInstance().getResourceBundle();
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile), bundle);
             Node content = loader.load();
@@ -27,7 +28,6 @@ public class AdminHomePageController {
             e.printStackTrace();
         }
     }
-
 
     @FXML
     private void handleManageUsers(){
@@ -74,6 +74,8 @@ public class AdminHomePageController {
 
     @FXML
     private void handleAddUniversities(){loadCenterContent(SceneLocator.MANAGE_UNIVERSITIES);}
+    @FXML
+    private void handleStatistics(){loadCenterContent(SceneLocator.STATISTICS);}
 
 }
 
