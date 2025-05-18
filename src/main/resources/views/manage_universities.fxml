@@ -11,63 +11,63 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="TOP_CENTER" spacing="20" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageUniversitiesController">
-  <TitledPane text="Manage Universities">
+  <TitledPane text="%manage.Universities">
     <VBox spacing="10">
       <padding>
-        <Insets top="10" right="10" bottom="10" left="10"/>
+        <Insets bottom="10" left="10" right="10" top="10" />
       </padding>
       <TableView fx:id="universityTable" prefHeight="150">
         <columns>
-          <TableColumn fx:id="universityNameColumn" text="Name"/>
-          <TableColumn fx:id="universityCityColumn" text="City"/>
-          <TableColumn fx:id="universityCountryColumn" text="Country"/>
+          <TableColumn fx:id="universityNameColumn" text="%name" />
+          <TableColumn fx:id="universityCityColumn" text="%city" />
+          <TableColumn fx:id="universityCountryColumn" text="%country" />
         </columns>
       </TableView>
       <HBox spacing="10">
-        <TextField fx:id="universityNameField" promptText="University name"/>
-        <TextField fx:id="universityCityField" promptText="City"/>
-        <TextField fx:id="universityCountryField" promptText="Country"/>
-        <Button text="Add" onAction="#onAddUniversity" style="-fx-background-color: #1caf1c;" />
-        <Button text="Delete" onAction="#onDeleteUniversity" style="-fx-background-color: #ff0000;" />
+        <TextField fx:id="universityNameField" promptText="%uni.name" />
+        <TextField fx:id="universityCityField" promptText="%uni.city" />
+        <TextField fx:id="universityCountryField" promptText="%uni.country" />
+        <Button onAction="#onAddUniversity" style="-fx-background-color: #1caf1c;" text="%btn.add" />
+        <Button onAction="#onDeleteUniversity" style="-fx-background-color: #ff0000;" text="%btn.delete" />
       </HBox>
     </VBox>
   </TitledPane>
 
-  <TitledPane text="Manage Faculties">
+  <TitledPane text="%manage.Faculties">
     <VBox spacing="10">
       <padding>
-        <Insets top="10" right="10" bottom="10" left="10"/>
+        <Insets bottom="10" left="10" right="10" top="10" />
       </padding>
-      <ComboBox fx:id="universityFilterForFaculty" promptText="Select University" />
+      <ComboBox fx:id="universityFilterForFaculty" promptText="%select.uni" />
       <TableView fx:id="facultyTable" prefHeight="150">
         <columns>
-          <TableColumn fx:id="facultyNameColumn" text="Faculty Name" />
+          <TableColumn fx:id="facultyNameColumn" text="%faculty" />
         </columns>
       </TableView>
       <HBox spacing="10">
-        <TextField fx:id="facultyNameField" promptText="Faculty name" />
-        <Button onAction="#onAddFaculty" text="Add" style="-fx-background-color: #1caf1c;" />
-        <Button onAction="#onDeleteFaculty" text="Delete" style="-fx-background-color: #ff0000;" />
+        <TextField fx:id="facultyNameField" promptText="%faculty.name" />
+        <Button onAction="#onAddFaculty" style="-fx-background-color: #1caf1c;" text="%btn.add" />
+        <Button onAction="#onDeleteFaculty" style="-fx-background-color: #ff0000;" text="%btn.delete" />
       </HBox>
     </VBox>
   </TitledPane>
 
-  <TitledPane text="Manage Majors">
+  <TitledPane text="%manage.Majors">
     <VBox spacing="10">
       <padding>
-        <Insets top="10" right="10" bottom="10" left="10"/>
+        <Insets bottom="10" left="10" right="10" top="10" />
       </padding>
-      <ComboBox fx:id="universityFilterForMajor" promptText="Select University" />
-      <ComboBox fx:id="facultyFilterForMajor" promptText="Select Faculty" />
+      <ComboBox fx:id="universityFilterForMajor" promptText="%select.uni" />
+      <ComboBox fx:id="facultyFilterForMajor" promptText="%select.faculty" />
       <TableView fx:id="majorTable" prefHeight="150">
         <columns>
-          <TableColumn fx:id="majorNameColumn" text="Major Name" />
+          <TableColumn fx:id="majorNameColumn" text="%major" />
         </columns>
       </TableView>
       <HBox spacing="10">
-        <TextField fx:id="majorNameField" promptText="Major name" />
-        <Button onAction="#onAddMajor" text="Add" style="-fx-background-color: #1caf1c;" />
-        <Button onAction="#onDeleteMajor" text="Delete" style="-fx-background-color: #ff0000;" />
+        <TextField fx:id="majorNameField" promptText="%major.name" />
+        <Button onAction="#onAddMajor" style="-fx-background-color: #1caf1c;" text="%btn.add" />
+        <Button onAction="#onDeleteMajor" style="-fx-background-color: #ff0000;" text="%btn.delete" />
       </HBox>
     </VBox>
   </TitledPane>

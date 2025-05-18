@@ -6,21 +6,18 @@ import Services.LanguageManager;
 import Services.LoginService;
 import Services.SceneManager;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import utils.SceneLocator;
-import javafx.stage.Stage;
 
 
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Locale;
-import java.util.ResourceBundle;
+
+import static utils.AlertMessages.showAlert;
 
 public class LoginController {
     private SceneManager sceneManager;
@@ -83,13 +80,6 @@ public class LoginController {
         return -1; // For superadmin you might use -1 or 0, as they might not be in DB
     }
 
-
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setContentText(message);
-        alert.show();
-    }
 
     @FXML
     private void handleLoginCancel(){
