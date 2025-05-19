@@ -18,6 +18,17 @@ public class AlertMessages {
     public static final String YEAR = "label.year";
     public static final String MAJOR = "label.major";
     public static final String AMOUNT = "label.amount";
+    public static final String NAME = "label.name";
+    public static final String EMAIL = "label.email";
+    public static final String LAST_NAME = "label.lastName";
+
+    public static final String WEAK_PASSWORD = "weak.password";
+    public static final String STRONG_PASSWORD = "strong.password";
+    public static final String MATCH = "match.password";
+    public static final String NO_MATCH = "noMatch.password";
+    public static final String NO_STRONG_PASS_ERROR = "noStrongPassError.password";
+    public static final String PASSWORD_HINT = "signup.passwordHint";
+
 
     public static final String INVALID_PASSWORD = "Invalid Password";
     public static final String PASSWORD_REQUIREMENTS = """

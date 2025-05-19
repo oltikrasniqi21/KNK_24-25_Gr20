@@ -17,11 +17,11 @@ public class LocaleAlertMessages {
         return MessageFormat.format(pattern, fieldNameBundle); //e vendos fieldname ne placeholder
     }
 
-    public static String getLocalizedMessage(String placeholder) {
+    public static String getLocalizedMessage(String message) {
         LanguageManager languageManager = LanguageManager.getInstance();
         ResourceBundle bundle = languageManager.getResourceBundle();
 
-        String errorString = bundle.getString(placeholder); //merr njeren nga static final exception Strings e cila eshte string ne language properties qe permban nje placeholder
-        return errorString;
+        String messageString = bundle.getString(message); //merr njeren nga static final Strings ne language properties qe permban nje placeholder
+        return messageString;
     }
 }
