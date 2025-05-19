@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import utils.SceneLocator;
 
 
@@ -22,6 +24,8 @@ import static utils.AlertMessages.showAlert;
 public class LoginController {
     private SceneManager sceneManager;
     private final LanguageManager languageManager = LanguageManager.getInstance();
+
+
 
     @FXML
     private TextField txtUsername;
