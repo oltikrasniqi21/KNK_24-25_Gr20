@@ -1,14 +1,17 @@
 package controllers;
 
+import Services.DashboardService;
 import Services.LanguageManager;
 import Services.SceneManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.chart.PieChart;
 import javafx.scene.layout.BorderPane;
 import utils.SceneLocator;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class AdminHomePageController {
@@ -30,6 +33,31 @@ public class AdminHomePageController {
     }
 
     @FXML
+    private PieChart usersStatusPieChart;
+
+    @FXML
+    private PieChart applicationStatusPieChart;
+
+    private DashboardService dashboardService = new DashboardService();
+
+    public void initialize(){
+        Map<String, Integer> statusContent = dashboardService.getUserStatusCounts();
+
+        statusContent.forEach((status, count) -> {
+            PieChart.Data slice = new PieChart.Data(status, count);
+            usersStatusPieChart.getData().add(slice);
+        });
+
+        Map<String, Integer> applicationContent = dashboardService.getApplicationStatusCounts();
+
+        applicationContent.forEach((status, count) -> {
+            PieChart.Data slice = new PieChart.Data(status, count);
+            applicationStatusPieChart.getData().add(slice);
+        });
+
+    }
+
+    @FXML
     private void handleManageUsers(){
         loadCenterContent(SceneLocator.MANAGE_USERS_PAGE);
     }
@@ -39,6 +67,8 @@ public class AdminHomePageController {
         loadCenterContent(SceneLocator.LIST_STUDENTS_PAGE);
     }
 
+    @FXML
+    private void handleDashboardClick(){SceneManager.getInstance().loadScene(SceneLocator.ADMIN_HOME_PAGE);}
     @FXML
     private void handleManageScholarships(){
         loadCenterContent(SceneLocator.MANAGE_SCHOLARSHIPS_PAGE);

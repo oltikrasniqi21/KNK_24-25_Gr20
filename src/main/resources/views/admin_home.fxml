@@ -32,30 +32,41 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="mainLayout" prefHeight="469.0" prefWidth="603.0" stylesheets="@../css/admin_view.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminHomePageController">
+<BorderPane fx:id="mainLayout" prefHeight="566.0" prefWidth="807.0" stylesheets="@../css/admin_view.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminHomePageController">
    <left>
-      <VBox fx:id="leftVbox" prefHeight="386.0" prefWidth="209.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="leftVbox" prefHeight="470.0" prefWidth="249.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#handleNotification" prefHeight="43.0" prefWidth="188.0" text="%btn.notification" />
-            <Button mnemonicParsing="false" onAction="#handleManageScholarships" prefHeight="43.0" prefWidth="188.0" text="%btn.manageScholarship" />
-            <Button mnemonicParsing="false" onAction="#handleViewApplications" prefHeight="43.0" prefWidth="188.0" text="%btn.viewApplication" />
-            <Button mnemonicParsing="false" onAction="#handleManageUsers" prefHeight="43.0" prefWidth="188.0" text="%btn.manageUsers" />
-            <Button mnemonicParsing="false" onAction="#handleNews" prefHeight="43.0" prefWidth="188.0" text="%btn.news" />
-            <Button mnemonicParsing="false" onAction="#handleManageStudents" prefHeight="43.0" prefWidth="188.0" text="%btn.listStudents" />
-            <Button mnemonicParsing="false" onAction="#handleFAQ" prefHeight="43.0" prefWidth="188.0" text="%btn.faq" />
-            <Button mnemonicParsing="false" onAction="#handleFeedback" prefHeight="43.0" prefWidth="188.0" text="%btn.feedback" />
-            <Button mnemonicParsing="false" onAction="#handleLogout" prefHeight="43.0" prefWidth="188.0" text="%btn.logout" />
-            <Button mnemonicParsing="false" onAction="#handleAddUniversities" text="%btn.addUniversities" />
-            <Button mnemonicParsing="false" onAction="#handleStatistics" text="%btn.statistics" />
+            <Button fx:id="dashboardBtn" onAction="#handleDashboardClick" prefHeight="45.0" prefWidth="293.0" text="%dashboard.label" />
+            <Button mnemonicParsing="false" onAction="#handleStatistics" prefHeight="43.0" prefWidth="294.0" text="%btn.statistics" />
+            <Button mnemonicParsing="false" onAction="#handleNotification" prefHeight="43.0" prefWidth="328.0" text="%btn.notification" />
+            <Button mnemonicParsing="false" onAction="#handleManageScholarships" prefHeight="43.0" prefWidth="421.0" text="%btn.manageScholarship" />
+            <Button mnemonicParsing="false" onAction="#handleViewApplications" prefHeight="43.0" prefWidth="301.0" text="%btn.viewApplication" />
+            <Button mnemonicParsing="false" onAction="#handleManageUsers" prefHeight="43.0" prefWidth="248.0" text="%btn.manageUsers" />
+            <Button mnemonicParsing="false" onAction="#handleNews" prefHeight="43.0" prefWidth="356.0" text="%btn.news" />
+            <Button mnemonicParsing="false" onAction="#handleManageStudents" prefHeight="43.0" prefWidth="368.0" text="%btn.listStudents" />
+            <Button mnemonicParsing="false" onAction="#handleFAQ" prefHeight="43.0" prefWidth="337.0" text="%btn.faq" />
+            <Button mnemonicParsing="false" onAction="#handleFeedback" prefHeight="43.0" prefWidth="434.0" text="%btn.feedback" />
+            <Button mnemonicParsing="false" onAction="#handleAddUniversities" prefHeight="43.0" prefWidth="296.0" text="%btn.addUniversities" />
+            <Button mnemonicParsing="false" onAction="#handleLogout" prefHeight="43.0" prefWidth="331.0" text="%btn.logout" />
          </children>
       </VBox>
    </left>
    <center>
-      <Pane prefHeight="386.0" prefWidth="364.0" BorderPane.alignment="CENTER" />
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <content>
+            <VBox prefHeight="234.0" prefWidth="558.0">
+               <children>
+                  <HBox prefHeight="234.0" prefWidth="200.0">
+                     <children>
+                        <PieChart fx:id="usersStatusPieChart" prefHeight="262.0" prefWidth="251.0" title="%userStatus.pieChart" />
+                        <PieChart fx:id="applicationStatusPieChart" prefHeight="234.0" prefWidth="306.0" title="%applicationStatus.pieChart" />
+                     </children></HBox>
+               </children>
+            </VBox>
+         </content></ScrollPane>
    </center>
 </BorderPane>

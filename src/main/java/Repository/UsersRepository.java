@@ -7,7 +7,9 @@ import models.Users;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UsersRepository {
 
@@ -232,6 +234,31 @@ public class UsersRepository {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public Map<String, Integer> countUsersByStatus() {
+        String query = """
+            SELECT status, COUNT(*) AS user_count
+            FROM users
+            GROUP BY status
+            """;
+
+        Map<String, Integer> statusCounts = new HashMap<>();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                String status = resultSet.getString("status");
+                int count = resultSet.getInt("user_count");
+                statusCounts.put(status, count);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return statusCounts;
     }
 
 
