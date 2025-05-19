@@ -101,7 +101,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="118.0" prefWidth="606.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Button layoutX="154.0" layoutY="16.0" mnemonicParsing="false" onAction="#handleLoginClick" text="%login.button">
+                  <Button layoutX="154.0" layoutY="16.0" mnemonicParsing="false" onAction="#handleLoginClick" text="%login.button" defaultButton="true">
                      <styleClass>
                         <String fx:value="loginButton" />
                         <String fx:value="Button" />
