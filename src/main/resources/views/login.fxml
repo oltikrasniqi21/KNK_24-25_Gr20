@@ -38,13 +38,13 @@
 
 <BorderPane fx:id="backgroundPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.7976931348623157E308" minWidth="-1.7976931348623157E308" prefHeight="382.0" prefWidth="762.0" stylesheets="@../css/login_view.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
    <center>
-      <VBox fx:id="rightVBox" alignment="CENTER" maxHeight="650.0" maxWidth="650.0" minHeight="-1.7976931348623157E308" minWidth="150.0" prefWidth="300.0" spacing="10" BorderPane.alignment="CENTER">
+      <VBox fx:id="rightVBox" alignment="CENTER" maxHeight="650.0" maxWidth="650.0" minHeight="-1.7976931348623157E308" minWidth="150.0" prefWidth="300.0" spacing="30" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="loginTitle" text="%login.title" />
             <TextField fx:id="txtUsername" maxWidth="1.7976931348623157E308" minWidth="150.0" prefHeight="35.0" promptText="%login.username" styleClass="nameInput" />
             <PasswordField fx:id="pwdPassword" maxWidth="1.7976931348623157E308" minWidth="150.0" prefHeight="35.0" promptText="%login.password" styleClass="passwordInput" />
-            <HBox alignment="CENTER" spacing="10">
-            <Button mnemonicParsing="false" onAction="#handleLoginCancel" prefHeight="25.0" prefWidth="89.0" text="%cancel.button">
+            <HBox alignment="CENTER" maxWidth="Infinity" spacing="10">
+            <Button mnemonicParsing="false" onAction="#handleLoginCancel" prefHeight="26.0" prefWidth="69.0" text="%cancel.button">
                <styleClass>
                   <String fx:value="cancelButton" />
                   <String fx:value="Button" />
@@ -58,8 +58,7 @@
             </Button>
             </HBox>
             <Label fx:id="lblSignup" onMouseClicked="#handleSignupRedirect" prefHeight="18.0" prefWidth="206.0" styleClass="signupLink" text="%signup.redirect" textAlignment="CENTER" />
-            <HBox prefHeight="45.0" prefWidth="280.0">
-               <children>
+            <HBox fx:id="languagesHbox" alignment="CENTER" maxWidth="Infinity" spacing="10">
                   <Button layoutX="31.0" layoutY="9.0" mnemonicParsing="false" onAction="#handleENLanguageClick" prefHeight="27.0" prefWidth="109.0" text="%english.button">
                      <styleClass>
                         <String fx:value="englishButton" />
@@ -72,7 +71,6 @@
                         <String fx:value="Button" />
                      </styleClass>
                   </Button>
-               </children>
             </HBox>
          </children>
       </VBox>
