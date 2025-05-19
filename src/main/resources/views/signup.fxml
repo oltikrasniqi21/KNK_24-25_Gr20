@@ -38,92 +38,111 @@
 <?import javafx.scene.text.*?>
 
 <BorderPane fx:id="backgroundPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.7976931348623157E308" minWidth="-1.7976931348623157E308" prefHeight="555.0" prefWidth="762.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignupController">
-   <center>
-      <HBox fx:id="centerHbox" maxHeight="650.0" maxWidth="650.0" minHeight="-1.7976931348623157E308" minWidth="150.0" prefHeight="517.0" prefWidth="650.0" BorderPane.alignment="CENTER">
-         <children>
-            <VBox alignment="CENTER" prefHeight="370.0" prefWidth="326.0">
-               <children>
-                  <Label fx:id="signupTitle" prefHeight="35.0" prefWidth="250.0" text="%signup.title">
-                     <font>
-                        <Font size="28.0" />
-                     </font>
-                  </Label>
-                  <HBox prefHeight="31.0" prefWidth="325.0">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%signup.firstName" wrappingWidth="114.80859375" />
-                        <TextField fx:id="firstNameField" promptText="%signup.firstName" styleClass="stringInput" />
-                     </children></HBox>
-                  <HBox prefHeight="39.0" prefWidth="325.0">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%signup.lastName" wrappingWidth="114.986328125" />
-                        <TextField fx:id="lastNameField" promptText="%signup.lastName" styleClass="stringInput" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="35.0" prefWidth="325.0">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%signup.email" wrappingWidth="114.40380859375" />
-                    <TextField fx:id="emailField" promptText="%signup.email" styleClass="stringInput" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="21.0" prefWidth="325.0">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%signup.password" wrappingWidth="117.408203125" />
-                        <PasswordField fx:id="passwordField" promptText="%signup.password" styleClass="stringInput" />
-                     </children>
-                  </HBox>
-                  <Label fx:id="passwordHintLabel" text="%signup.passwordHint" />
-                  <HBox prefHeight="36.0" prefWidth="319.0">
-                     <children>
-                        <Button fx:id="btnChooseFile" mnemonicParsing="false" onAction="#handleChooseFile" text="%btn.choosefile" />
-                        <Label fx:id="lblSelectedFile" text="%noFileSelected" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="50.0" prefWidth="325.0">
-                     <children>
-                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#handleBackClick" text="%signup.backButton" />
-                        <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleSignupCancel" prefHeight="24.0" prefWidth="134.0" text="%cancel.button" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" prefHeight="370.0" prefWidth="251.0">
-               <children>
-                  <HBox prefHeight="30.0" prefWidth="244.0">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%university" />
-                        <Region HBox.hgrow="ALWAYS" />
-                        <ComboBox fx:id="universityComboBox" minWidth="140.0" prefHeight="44.0" prefWidth="160.0" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="40.0" prefWidth="244.0">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%faculty" />
-                        <Region HBox.hgrow="ALWAYS" />
-                        <ComboBox fx:id="facultyComboBox" minWidth="140.0" prefHeight="24.0" prefWidth="160.0" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="44.0" prefWidth="244.0">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%major" />
-                        <Region HBox.hgrow="ALWAYS" />
-                        <ComboBox fx:id="majorComboBox" minWidth="140.0" prefHeight="24.0" prefWidth="160.0" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="47.0" prefWidth="244.0">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%year" />
-                        <Region HBox.hgrow="ALWAYS" />
-                        <ComboBox fx:id="yearComboBox" minWidth="140.0" prefHeight="24.0" prefWidth="160.0" />
-                     </children>
-                  </HBox>
-                  <Button fx:id="signupButton" defaultButton="true" mnemonicParsing="false" onAction="#handleSignupClick" prefHeight="26.0" prefWidth="162.0" text="%signup.button" />
-               </children>
-            </VBox>
-         </children>
-      </HBox>
-   </center>
    <stylesheets>
       <URL value="@../css/login_view.css" />
       <URL value="@../css/signup_view.css" />
    </stylesheets>
+   <center>
+      <VBox fx:id="centerHbox" maxHeight="650.0" maxWidth="650.0" minHeight="-1.7976931348623157E308" minWidth="150.0" prefWidth="650.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox fx:id="titleVbox" alignment="CENTER" prefHeight="0.0" prefWidth="590.0">
+               <children>
+                  <Label fx:id="signupTitle" text="%signup.title">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <HBox maxHeight="650.0" maxWidth="650.0" minHeight="-1.7976931348623157E308" minWidth="150.0" prefHeight="293.0" prefWidth="590.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="290.0" prefWidth="326.0">
+                     <children>
+                        <HBox prefHeight="31.0" prefWidth="325.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%signup.firstName" wrappingWidth="114.80859375" />
+                              <TextField fx:id="firstNameField" promptText="%signup.firstName" styleClass="stringInput" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="39.0" prefWidth="325.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%signup.lastName" wrappingWidth="114.986328125" />
+                              <TextField fx:id="lastNameField" promptText="%signup.lastName" styleClass="stringInput" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="35.0" prefWidth="325.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%signup.email" wrappingWidth="114.40380859375" />
+                          <TextField fx:id="emailField" promptText="%signup.email" styleClass="stringInput" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="21.0" prefWidth="325.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%signup.password" wrappingWidth="115.408203125" />
+                              <PasswordField fx:id="passwordField" prefWidth="185.0" promptText="%signup.password" styleClass="stringInput" />
+                           </children>
+                        </HBox>
+                        <Label fx:id="passwordHintLabel" text="%signup.passwordHint" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="370.0" prefWidth="251.0">
+                     <children>
+                        <HBox prefHeight="30.0" prefWidth="244.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%university" />
+                              <Region HBox.hgrow="ALWAYS" />
+                              <ComboBox fx:id="universityComboBox" minWidth="140.0" prefHeight="44.0" prefWidth="160.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="40.0" prefWidth="244.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%faculty" />
+                              <Region HBox.hgrow="ALWAYS" />
+                              <ComboBox fx:id="facultyComboBox" minWidth="140.0" prefHeight="24.0" prefWidth="160.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="44.0" prefWidth="244.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%major" />
+                              <Region HBox.hgrow="ALWAYS" />
+                              <ComboBox fx:id="majorComboBox" minWidth="140.0" prefHeight="24.0" prefWidth="160.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="47.0" prefWidth="244.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%year" />
+                              <Region HBox.hgrow="ALWAYS" />
+                              <ComboBox fx:id="yearComboBox" minWidth="140.0" prefHeight="24.0" prefWidth="160.0" />
+                           </children>
+                        </HBox>
+                        <Label />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <VBox fx:id="buttonVbox1" alignment="CENTER" prefHeight="0.0" prefWidth="590.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="36.0" prefWidth="319.0">
+                     <children>
+                        <Button fx:id="btnChooseFile" mnemonicParsing="false" onAction="#handleChooseFile" prefWidth="160.0" text="%btn.choosefile" />
+                        <Label fx:id="lblSelectedFile" text="%noFileSelected" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button fx:id="signupButton" defaultButton="true" mnemonicParsing="false" onAction="#handleSignupClick" prefHeight="26.0" prefWidth="160.0" text="%signup.button" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox fx:id="buttonVbox2" alignment="CENTER" prefHeight="50.0" prefWidth="590.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="55.0" prefWidth="590.0">
+                     <children>
+                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#handleBackClick" prefWidth="160.0" text="%signup.backButton" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleSignupCancel" prefHeight="24.0" prefWidth="160.0" text="%cancel.button" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children></VBox>
+   </center>
 </BorderPane>
