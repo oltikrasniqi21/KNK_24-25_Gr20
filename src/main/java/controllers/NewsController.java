@@ -34,7 +34,7 @@ public class NewsController {
     private TableColumn<News, Void> newsActionCol;
 
 
-    private NewsRepository newsRepository = new NewsRepository();
+    private final NewsRepository newsRepository = new NewsRepository();
 
     @FXML
     private void publishNews() {

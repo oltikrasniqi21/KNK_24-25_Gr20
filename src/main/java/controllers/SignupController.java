@@ -2,7 +2,6 @@ package controllers;
 
 import Services.SceneManager;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
@@ -15,13 +14,10 @@ import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.*;
 
 import static utils.AlertMessages.*;
 
-public class SignupController implements Initializable {
-    private final SignupService signupService;
+public class SignupController {
 
     public SignupController() {
         this.signupService = new SignupService(DBCustomConnector.getConnection());
@@ -54,11 +50,12 @@ public class SignupController implements Initializable {
     @FXML
     private ComboBox<String> yearComboBox;
 
+    private SignupService signupService = new SignupService(DBCustomConnector.getConnection());
+
     private File selectedPdfFile;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
+    @FXML
+    public void initialize() {
         signupService.loadUniversities(universityComboBox);
         yearComboBox.getItems().addAll("1", "2", "3", "4", "5", "6");
 
@@ -89,7 +86,6 @@ public class SignupController implements Initializable {
         VBox.setMargin(buttonVbox2, new Insets(5, 0, 0, 0));
     }
 
-
     @FXML
     private void handleSignupClick() {
         String firstName = firstNameField.getText();
@@ -109,6 +105,10 @@ public class SignupController implements Initializable {
 
         if (!signupService.isValidStudentEmail(email)) {
             showAlert(INVALID_EMAIL, EMAIL_REQUIREMENTS);
+            return;
+        }
+        if (!signupService.emailContainsNameAndSurname(email, firstName, lastName)) {
+            showAlert(INVALID_EMAIL, "Email must contain your first and last name.");
             return;
         }
 
