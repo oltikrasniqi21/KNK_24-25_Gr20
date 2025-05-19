@@ -121,3 +121,8 @@ BEGIN
         EXECUTE 'DROP TABLE IF EXISTS public.' || quote_ident(r.tablename) || ' CASCADE';
     END LOOP;
 END $$;
+
+
+//boni qit query per modifikim t kolonave te scholarships
+ALTER TABLE scholarships
+ADD COLUMN status VARCHAR(20);
