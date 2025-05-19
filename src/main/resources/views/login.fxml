@@ -44,13 +44,7 @@
             <TextField fx:id="txtUsername" maxWidth="1.7976931348623157E308" minWidth="150.0" prefHeight="35.0" promptText="%login.username" styleClass="nameInput" />
             <PasswordField fx:id="pwdPassword" maxWidth="1.7976931348623157E308" minWidth="150.0" prefHeight="35.0" promptText="%login.password" styleClass="passwordInput" />
             <HBox alignment="CENTER" maxWidth="Infinity" spacing="10">
-            <Button mnemonicParsing="false" onAction="#handleLoginCancel" prefHeight="26.0" prefWidth="69.0" text="%cancel.button">
-               <styleClass>
-                  <String fx:value="cancelButton" />
-                  <String fx:value="Button" />
-               </styleClass>
-            </Button>
-            <Button defaultButton="true" mnemonicParsing="false" onAction="#handleLoginClick" text="%login.button">
+            <Button defaultButton="true" maxWidth="1.7976931348623157E308" minWidth="150.0" mnemonicParsing="false" onAction="#handleLoginClick" prefHeight="35.0" text="%login.button">
                <styleClass>
                   <String fx:value="loginButton" />
                   <String fx:value="Button" />

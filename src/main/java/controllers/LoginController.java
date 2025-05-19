@@ -103,11 +103,6 @@ public class LoginController {
     }
 
 
-    @FXML
-    private void handleLoginCancel(){
-        SceneManager.getInstance().loadScene(SceneLocator.SIGNUP_PAGE);
-    }
-
 
     @FXML
     private void handleSQLanguageClick() throws Exception {
