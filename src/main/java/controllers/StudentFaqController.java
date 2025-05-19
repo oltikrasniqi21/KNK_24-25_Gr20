@@ -1,6 +1,7 @@
 package controllers;
 
 import Database.DBCustomConnector;
+import Services.FaqService;
 import Services.SceneManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,6 +9,7 @@ import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
+import models.Faq;
 import utils.SceneLocator;
 
 import java.net.URL;
@@ -27,6 +29,7 @@ public class StudentFaqController implements Initializable {
 
     @FXML
     private Accordion faqAccordion;
+    private final FaqService faqService = new FaqService();
 
 
     @Override
@@ -35,28 +38,13 @@ public class StudentFaqController implements Initializable {
     }
 
     public void loadFAQs() {
-        String query = "SELECT question, answer FROM faq";
-
-        try (Connection conn = DBCustomConnector.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
-
-            while (rs.next()) {
-                String question = rs.getString("question");
-                String answer = rs.getString("answer");
-
-                Label answerLabel = new Label(answer);
-                answerLabel.setWrapText(true); // Allows multiline answers
-
-                TitledPane pane = new TitledPane(question, answerLabel);
-                faqAccordion.getPanes().add(pane);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        for (Faq faq : faqService.getAllFaqs()) {
+            Label answerLabel = new Label(faq.getAnswer());
+            answerLabel.setWrapText(true);
+            TitledPane pane = new TitledPane(faq.getQuestion(), answerLabel);
+            faqAccordion.getPanes().add(pane);
         }
     }
-
 
     @FXML
     private void handleBackStd() {

@@ -2,6 +2,7 @@ package controllers;
 
 import CreateDTO.CreateNotificationDTO;
 import Repository.NotificationRepository;
+import Services.NotificationService;
 import Services.SceneManager;
 import UpdateDTO.UpdateNotificationDTO;
 import javafx.fxml.FXML;
@@ -28,7 +29,8 @@ public class NotificationController {
     @FXML
     private TableColumn<Notification, Void> editColumn;
 
-    private final NotificationRepository notificationRepository = new NotificationRepository();
+    private final NotificationService notificationService = new NotificationService();
+
 
     @FXML
     private void initialize() {
@@ -44,7 +46,7 @@ public class NotificationController {
             dto.setMessage(notification.getMessage());
             dto.setRead_status(notification.isRead_status());
 
-            Notification success = notificationRepository.update(dto);
+            Notification success = notificationService.update(dto);
             if (success == null) {
                 showAlert(Alert.AlertType.ERROR, "Failed to update notification in the database.");
             }
@@ -60,7 +62,7 @@ public class NotificationController {
 
     private void loadNotifications() {
         notificationTable.getItems().clear();
-        notificationTable.getItems().addAll(notificationRepository.getAll());
+        notificationTable.getItems().addAll(notificationService.getAllNotifications());
     }
 
     private void addEditButtonToTable() {
@@ -101,7 +103,7 @@ public class NotificationController {
             dto.setMessage(newMessage);
             dto.setRead_status(notification.isRead_status());
 
-            notificationRepository.update(dto);
+            notificationService.update(dto);
             notificationTable.refresh();
         });
     }
@@ -125,7 +127,7 @@ public class NotificationController {
         dto.setRead_status(false);
         dto.setIs_broadcast(true);
 
-        Notification created = notificationRepository.create(dto);
+        Notification created = notificationService.create(dto);
 
         if (created != null) {
             showAlert(Alert.AlertType.INFORMATION, "Notification sent successfully!");
