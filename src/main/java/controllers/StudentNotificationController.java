@@ -41,7 +41,6 @@ public class StudentNotificationController implements Initializable {
 
     private boolean notificationsVisible = false;
 
-    private final NotificationRepository notificationRepository = new NotificationRepository();
     private ResourceBundle bundle;
 
     @Override
@@ -62,22 +61,9 @@ public class StudentNotificationController implements Initializable {
     }
 
 
-    @FXML
-    private void onViewNotificationsClicked() {
-        notificationsVisible = !notificationsVisible;
-        notificationPane.setVisible(notificationsVisible);
-        notificationPane.setManaged(notificationsVisible);
-
-        if (notificationsVisible) {
-            loadNotifications();
-            btnViewNotifications.setText(bundle.getString("hideNotificationsBtn"));
-        } else {
-            btnViewNotifications.setText(bundle.getString("viewNotificationsBtn"));
-        }
-    }
-
     private final NotificationService notificationService = new NotificationService();
 
+    //perdoret te homepage controller tash
     @FXML
     public void loadNotifications() {
         List<Notification> notificationList = notificationService.getNotificationsForCurrentStudent();
@@ -86,15 +72,6 @@ public class StudentNotificationController implements Initializable {
     }
 
 
-    @FXML
-    private void handleLogout(){
-        SceneManager.getInstance().loadScene(SceneLocator.LOGIN_PAGE);
-    }
-
-    @FXML
-    private void handleFaqStd() {
-        SceneManager.getInstance().loadScene(SceneLocator.MANAGE_FAQ_STUDENT_PAGE);
-    }
 
 
 }

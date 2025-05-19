@@ -1,6 +1,7 @@
 package controllers;
 
 import Repository.FeedbackRepository;
+import Services.FeedbackService;
 import Services.SceneManager;
 import UpdateDTO.UpdateFeedbackDTO;
 import javafx.collections.FXCollections;
@@ -24,8 +25,8 @@ public class FeedbackController {
     @FXML private TextArea responseTextArea;
     @FXML private Label statusLabel;
 
-    private FeedbackRepository feedbackRepository = new FeedbackRepository();
-    private ObservableList<Feedback> feedbackList = FXCollections.observableArrayList();
+    private final FeedbackService feedbackService = new FeedbackService();
+    private final ObservableList<Feedback> feedbackList = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
@@ -39,8 +40,7 @@ public class FeedbackController {
     }
 
     private void loadFeedback() {
-        // TODO: replace with actual fetching from DB (e.g., feedbackRepository.findAll())
-        List<Feedback> feedbacks = feedbackRepository.findAll(); // Implement this if needed
+        List<Feedback> feedbacks = feedbackService.getAllFeedback();
         feedbackList.setAll(feedbacks);
         feedbackTable.setItems(feedbackList);
     }
@@ -60,16 +60,17 @@ public class FeedbackController {
         }
 
         UpdateFeedbackDTO updateDTO = new UpdateFeedbackDTO(selected.getFeedback_id(), responseText);
-        Feedback updated = feedbackRepository.update(updateDTO);
+        Feedback updated = feedbackService.submitResponse(updateDTO);
 
         if (updated != null) {
             statusLabel.setText("Response submitted.");
-            loadFeedback(); // refresh table
+            loadFeedback();
             responseTextArea.clear();
         } else {
             statusLabel.setText("Failed to update response.");
         }
     }
+
 
     @FXML
     private void handleBack(){
