@@ -170,6 +170,13 @@ public class ManageScholarshipsController {
             } else {
                 System.out.println("User cancelled the action.");
             }
+
+            try{
+                SceneManager.reload();
+            }catch (Exception e){
+                e.getMessage();
+            }
+
         }
     }
 }

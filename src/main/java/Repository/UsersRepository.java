@@ -1,6 +1,7 @@
 package Repository;
 
 import Database.DBCustomConnector;
+import UpdateDTO.UpdateUserDTO;
 import models.Students;
 import models.Users;
 
@@ -37,12 +38,32 @@ public class UsersRepository {
         String query = "SELECT * FROM USERS WHERE id = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1,id);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if(resultSet.next()) {
                 return Users.getInstance(resultSet);
             }
             return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public String getHashedPassword(int id){
+        String query = "SELECT password FROM users where id = ?";
+
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if(resultSet.next()){
+                return resultSet.getString("password");
+            }
+            return null;
+
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -165,7 +186,52 @@ public class UsersRepository {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
 
+    public Users updateInfo(UpdateUserDTO updateUserDTO){
+        String query = """
+                UPDATE users SET
+                first_name = ?,
+                last_name = ?,
+                email = ?,
+                role = ?
+                WHERE ID = ?
+                """;
+        try{
+            PreparedStatement preparedStatement = this.connection.prepareStatement(query);
+            preparedStatement.setString(1, updateUserDTO.getFirstName());
+            preparedStatement.setString(2, updateUserDTO.getLastName());
+            preparedStatement.setString(3, updateUserDTO.getEmail());
+            preparedStatement.setString(4, updateUserDTO.getRole());
+            preparedStatement.setInt(5, updateUserDTO.getId());
+            int updateRow = preparedStatement.executeUpdate();
+            if(updateRow == 1){
+                return this.getById(updateUserDTO.getId());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Users updatePassword(UpdateUserDTO updateUserDTO){
+        String query = """
+                UPDATE users SET
+                password = ?
+                WHERE ID = ?
+                """;
+        try{
+            PreparedStatement preparedStatement = this.connection.prepareStatement(query);
+            preparedStatement.setString(1,updateUserDTO.getPassword());
+            preparedStatement.setInt(2, updateUserDTO.getId());
+            int updateRow = preparedStatement.executeUpdate();
+            if(updateRow == 1){
+                return this.getById(updateUserDTO.getId());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

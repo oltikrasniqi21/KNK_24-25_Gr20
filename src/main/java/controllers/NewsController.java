@@ -91,7 +91,6 @@ public class NewsController {
                 };
             }
         };
-
         newsActionCol.setCellFactory(cellFactory);
     }
 
@@ -103,9 +102,7 @@ public class NewsController {
 
         // Load news data into table
         loadNews();
-
         addDeleteButtonToTable();
-
         newsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
