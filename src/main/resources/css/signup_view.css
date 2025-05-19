@@ -8,9 +8,76 @@
 }
 
 #centerHbox{
-    -fx-background-color: #f0f0f0;
+    -fx-background-color: #f0f0f0 !important;
     -fx-background-radius: 30px;
     -fx-padding: 30px;
     -fx-spacing: 15px;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 12, 0.5, 0, 2);
+}
+
+.stringInput{
+    -fx-padding: 10 14;
+    -fx-margin: 20;
+    -fx-font-size: 14px;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-background-color: white;
+}
+
+#centerHbox VBox {
+    -fx-spacing: 10px;
+}
+
+#signupTitle {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-padding: 10 0 20 0;
+}
+
+#lblSelectedFile{
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-padding: 10 0 20 0;
+}
+
+
+
+.combo-box {
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-padding: 6 12;
+    -fx-background-color: white;
+}
+
+#signupButton, #btnChooseFile {
+    -fx-background-color: #00A859;
+    -fx-text-fill: white;
+    -fx-background-radius: 8px;
+    -fx-font-size: 14px;
+    -fx-padding: 6 12;
+}
+
+#cancelButton, #backButton {
+    -fx-background-color: #aaaaaa;
+    -fx-text-fill: white;
+    -fx-background-radius: 8px;
+    -fx-font-size: 14px;
+    -fx-padding: 6 12;
+}
+
+#lblSelectedFile {
+    -fx-text-fill: #555;
+    -fx-padding: 4 0 0 10;
+}
+
+#passwordHintLabel, #lblSelectedFile {
+    -fx-text-fill: #666;
+    -fx-font-size: 12px;
+    -fx-padding: 4 0 12 0;
 }
