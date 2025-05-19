@@ -10,12 +10,12 @@
 
 <AnchorPane prefHeight="400" prefWidth="600" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ApplicationFormController">
    <children>
-      <Text layoutX="195.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apliko Per Burse">
+      <Text layoutX="195.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%applyScholarship">
          <font>
             <Font name="System Bold" size="27.0" />
          </font>
       </Text>
-      <Text layoutX="47.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zgjedhe bursen:">
+      <Text layoutX="47.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%chooseScholarship">
          <font>
             <Font size="15.0" />
          </font>
@@ -25,15 +25,15 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <Text layoutX="47.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ngarko Transkripten:">
+      <Text layoutX="47.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%transcriptupload">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
       <ComboBox fx:id="scholarshipComboBox" layoutX="195.0" layoutY="105.0" prefHeight="25.0" prefWidth="210.0" />
       <TextField fx:id="gpaField" layoutX="195.0" layoutY="150.0" prefHeight="25.0" prefWidth="210.0" />
-      <Label fx:id="selectedFileLabel" layoutX="208.0" layoutY="197.0" mnemonicParsing="false" onMouseClicked="#handleUploadTranscript" text="Zgjedh PDF" />
+      <Label fx:id="selectedFileLabel" layoutX="208.0" layoutY="197.0" mnemonicParsing="false" onMouseClicked="#handleUploadTranscript" text="%choosepdf" />
       <Text layoutX="300.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Asnje skedar i zgjedhur" />
-      <Button layoutX="260.0" layoutY="256.0" mnemonicParsing="false" onAction="#handleSubmitApplication" style="-fx-background-color: green; -fx-text-fill: white;" text="Apliko" />
+      <Button layoutX="260.0" layoutY="256.0" mnemonicParsing="false" onAction="#handleSubmitApplication" style="-fx-background-color: green; -fx-text-fill: white;" text="%applybtn" />
    </children>
 </AnchorPane>
