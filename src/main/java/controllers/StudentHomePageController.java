@@ -2,6 +2,7 @@ package controllers;
 
 
 import Repository.NotificationRepository;
+import Services.CurrentUser;
 import Services.SceneManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -23,6 +24,7 @@ import java.sql.Timestamp;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
+import Services.NotificationService;
 
 public class StudentHomePageController implements Initializable {
     @FXML
@@ -56,12 +58,15 @@ public class StudentHomePageController implements Initializable {
     private BorderPane mainLayout; // Reference to the main BorderPane (from FXML)
 
     // Method to load Notifications into the center
+    private final NotificationService notificationService = new NotificationService();
+
     @FXML
     public void loadNotifications() {
-        List<Notification> notificationList = notificationRepository.getNotificationsForStudents();
+        List<Notification> notificationList = notificationService.getNotificationsForCurrentStudent();
         ObservableList<Notification> observableList = FXCollections.observableArrayList(notificationList);
         notificationTable.setItems(observableList);
     }
+
 
     // Method to load FAQ into the center
     @FXML

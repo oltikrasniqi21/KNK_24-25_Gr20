@@ -1,6 +1,8 @@
 package controllers;
 
+import CreateDTO.CreateNotificationDTO;
 import Repository.ApplicationsRepository;
+import Repository.NotificationRepository;
 import Repository.ScholarshipsRepository;
 import Repository.UsersRepository;
 import Services.SceneManager;
@@ -17,6 +19,7 @@ import utils.SceneLocator;
 
 import java.awt.*;
 import java.io.File;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -116,8 +119,30 @@ public class ManageApplicationController {
             int appId = selectedApplication.getApplicationId();
             UpdateApplicationsDTO updateDTO = new UpdateApplicationsDTO(appId, status);
             applicationsRepository.update(updateDTO);
+
+            if ("Approved".equalsIgnoreCase(status)) {
+                sendNotificationToStudent(selectedApplication.getStudentId(), selectedApplication.getScholarshipId());
+            }
+
             loadApplications();
         }
+    }
+
+    private void sendNotificationToStudent(int studentId, int scholarshipId) {
+        NotificationRepository notificationRepo = new NotificationRepository();
+
+        String scholarshipName = getScholarshipNameById(scholarshipId);
+        String message = "Your application for the '" + scholarshipName + "' scholarship has been approved.";
+
+        CreateNotificationDTO notificationDTO = new CreateNotificationDTO(
+                studentId,
+                message,
+                new Timestamp(System.currentTimeMillis()),
+                false,
+                false // not broadcast
+        );
+
+        notificationRepo.create(notificationDTO);
     }
 
     private String getStudentNameById(int studentId){

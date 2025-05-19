@@ -74,15 +74,16 @@ public class NotificationRepository extends BaseRepository<Notification, CreateN
     }
 
 
-    public List<Notification> getNotificationsForStudents() {
+    public List<Notification> getNotificationsByStudentId(int studentId) {
         List<Notification> notifications = new ArrayList<>();
         String sql = """
-                SELECT * FROM notification
-                WHERE is_broadcast = true
-                ORDER BY created_at DESC
-            """;
+                    SELECT * FROM notification
+                    WHERE student_id = ? OR is_broadcast = true
+                    ORDER BY created_at DESC
+                """;
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, studentId);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {

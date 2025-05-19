@@ -1,6 +1,8 @@
 package controllers;
 
 import Repository.NotificationRepository;
+import Services.CurrentUser;
+import Services.NotificationService;
 import Services.SceneManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -74,12 +76,15 @@ public class StudentNotificationController implements Initializable {
         }
     }
 
-    private void loadNotifications() {
-        List<Notification> notificationList = notificationRepository.getNotificationsForStudents();
+    private final NotificationService notificationService = new NotificationService();
 
+    @FXML
+    public void loadNotifications() {
+        List<Notification> notificationList = notificationService.getNotificationsForCurrentStudent();
         ObservableList<Notification> observableList = FXCollections.observableArrayList(notificationList);
         notificationTable.setItems(observableList);
     }
+
 
     @FXML
     private void handleLogout(){
