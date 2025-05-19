@@ -283,28 +283,28 @@ public class UsersRepository {
     }
   
    public Map<String, Integer> countUsersByStatus() {
-        String query = """
-            SELECT status, COUNT(*) AS user_count
-            FROM users
-            GROUP BY status
-            """;
+       String query = """
+               SELECT status, COUNT(*) AS user_count
+               FROM users
+               GROUP BY status
+               """;
 
-        Map<String, Integer> statusCounts = new HashMap<>();
+       Map<String, Integer> statusCounts = new HashMap<>();
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
+       try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery()) {
 
-            while (resultSet.next()) {
-                String status = resultSet.getString("status");
-                int count = resultSet.getInt("user_count");
-                statusCounts.put(status, count);
-            }
+           while (resultSet.next()) {
+               String status = resultSet.getString("status");
+               int count = resultSet.getInt("user_count");
+               statusCounts.put(status, count);
+           }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+       } catch (SQLException e) {
+           e.printStackTrace();
+       }
 
-        return statusCounts;
-
+       return statusCounts;
+   }
 
 }
