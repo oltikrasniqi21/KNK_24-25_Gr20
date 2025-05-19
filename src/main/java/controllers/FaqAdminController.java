@@ -1,6 +1,7 @@
 package controllers;
 
 import Repository.FaqRepository;
+import Services.FaqService;
 import Services.SceneManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,7 +18,7 @@ public class FaqAdminController {
     @FXML private TextField txtQuestion;
     @FXML private TextArea txtAnswer;
 
-    private final FaqRepository faqRepo = new FaqRepository();
+    private final FaqService faqService = new FaqService();
     private ObservableList<Faq> faqList;
 
     @FXML
@@ -36,13 +37,14 @@ public class FaqAdminController {
     }
 
     private void loadFAQs() {
-        faqList = FXCollections.observableArrayList(faqRepo.getAll());
+        faqList = FXCollections.observableArrayList(faqService.getAllFaqs());
         faqTable.setItems(faqList);
     }
 
     @FXML
     private void handleAdd() {
-        if (faqRepo.addFaq(txtQuestion.getText(), txtAnswer.getText())) {
+        Faq created = faqService.createFaq(txtQuestion.getText(), txtAnswer.getText());
+        if (created != null) {
             loadFAQs();
             clearFields();
         }
@@ -52,7 +54,8 @@ public class FaqAdminController {
     private void handleUpdate() {
         Faq selected = faqTable.getSelectionModel().getSelectedItem();
         if (selected != null) {
-            if (faqRepo.update(selected.getFaq_id(), txtQuestion.getText(), txtAnswer.getText())) {
+            Faq updated = faqService.updateFaq(selected.getFaq_id(), txtQuestion.getText(), txtAnswer.getText());
+            if (updated != null) {
                 loadFAQs();
                 clearFields();
             }
@@ -62,11 +65,9 @@ public class FaqAdminController {
     @FXML
     private void handleDelete() {
         Faq selected = faqTable.getSelectionModel().getSelectedItem();
-        if (selected != null) {
-            if (faqRepo.delete(selected.getFaq_id())) {
-                loadFAQs();
-                clearFields();
-            }
+        if (selected != null && faqService.deleteFaq(selected.getFaq_id())) {
+            loadFAQs();
+            clearFields();
         }
     }
 
