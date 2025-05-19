@@ -3,6 +3,7 @@ package Services;
 import Repository.UniversitiesRepository;
 import Repository.FacultiesRepository;
 import Repository.MajorsRepository;
+import Repository.UsersRepository;
 import javafx.scene.control.ComboBox;
 import models.Universities;
 import models.Faculties;
@@ -23,16 +24,15 @@ import static utils.AlertMessages.ERROR;
 import static utils.AlertMessages.showAlert;
 
 public class SignupService {
-    private final Connection connection;
     private final UniversitiesRepository universitiesRepository;
     private final FacultiesRepository facultiesRepository;
     private final MajorsRepository majorsRepository;
+    private final UsersRepository usersRepository = new UsersRepository();
 
     private final Map<String, Integer> universityNameToId = new HashMap<>();
     private final Map<String, Integer> facultyNameToId = new HashMap<>();
 
     public SignupService(Connection connection) {
-        this.connection = connection;
         this.universitiesRepository = new UniversitiesRepository();
         this.facultiesRepository = new FacultiesRepository();
         this.majorsRepository = new MajorsRepository();
@@ -69,47 +69,7 @@ public class SignupService {
         String hashedPassword = PasswordUtils.hashPassword(password, salt);
         String passwordToStore = salt + "$" + hashedPassword;
 
-        connection.setAutoCommit(false);
-        try {
-            String insertUserSQL = """
-            INSERT INTO users (password, first_name, last_name, email, role)
-            VALUES (?, ?, ?, ?, 'student')
-            """;
-            try (PreparedStatement userStmt = connection.prepareStatement(insertUserSQL, Statement.RETURN_GENERATED_KEYS)) {
-                userStmt.setString(1, passwordToStore);
-                userStmt.setString(2, firstName);
-                userStmt.setString(3, lastName);
-                userStmt.setString(4, email);
-                userStmt.executeUpdate();
-
-                ResultSet rs = userStmt.getGeneratedKeys();
-                if (rs.next()) {
-                    int userId = rs.getInt(1);
-
-                    String insertStudentSQL = """
-                    INSERT INTO students (id, gpa, year_of_study, university, faculty, major, priority, document_path)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-                   """;
-                    try (PreparedStatement studentStmt = connection.prepareStatement(insertStudentSQL)) {
-                        studentStmt.setInt(1, userId);
-                        studentStmt.setNull(2, java.sql.Types.DOUBLE);
-                        studentStmt.setInt(3, yearOfStudy);
-                        studentStmt.setString(4, university);
-                        studentStmt.setString(5, faculty);
-                        studentStmt.setString(6, major);
-                        studentStmt.setNull(7, java.sql.Types.VARCHAR);
-                        studentStmt.setString(8, documentPath);
-                        studentStmt.executeUpdate();
-                    }
-                }
-            }
-            connection.commit();
-        } catch (SQLException e) {
-            connection.rollback();
-            throw e;
-        } finally {
-            connection.setAutoCommit(true);
-        }
+        usersRepository.signupStudent(passwordToStore, firstName, lastName, email, yearOfStudy, university, faculty, major, documentPath);
     }
 
     public void loadUniversities(ComboBox<String> universityComboBox) {
