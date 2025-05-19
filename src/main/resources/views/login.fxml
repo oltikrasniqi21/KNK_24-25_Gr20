@@ -33,51 +33,90 @@
 -->
 
 <?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox stylesheets="@../css/login_view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane prefHeight="407.0" prefWidth="669.0">
+      <HBox alignment="CENTER_LEFT" layoutX="10.4" layoutY="10.4" nodeOrientation="LEFT_TO_RIGHT" prefHeight="77.0" prefWidth="600.0" AnchorPane.bottomAnchor="313.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="10.0">
          <children>
-            <Label alignment="CENTER" layoutX="253.0" layoutY="63.0" style="&#10;" styleClass="loginTitle" stylesheets="@../css/login_view.css" text="%login.title" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#handleENLanguageClick" prefHeight="27.0" prefWidth="109.0" text="%english.button">
+                     <styleClass>
+                        <String fx:value="englishButton" />
+                        <String fx:value="Button" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#handleSQLanguageClick" prefHeight="27.0" prefWidth="100.0" text="%shqip.button">
+                     <styleClass>
+                        <String fx:value="shqipButton" />
+                        <String fx:value="Button" />
+                     </styleClass>
+                  </Button>
+               </children>
+               <HBox.margin>
+                  <Insets right="110.0" />
+               </HBox.margin>
+            </VBox>
+            <Label alignment="CENTER" style="&#10;" styleClass="loginTitle" stylesheets="@../css/login_view.css" text="%login.title" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
                <font>
                   <Font size="29.0" />
                </font>
             </Label>
-            <TextField fx:id="txtUsername" layoutX="224.0" layoutY="131.0" prefHeight="34.0" prefWidth="210.0" promptText="%login.username" styleClass="nameInput" />
-            <PasswordField fx:id="pwdPassword" layoutX="224.0" layoutY="183.0" prefHeight="34.0" prefWidth="210.0" promptText="%login.password" styleClass="passwordInput" />
-            <Button layoutX="186.0" layoutY="241.0" mnemonicParsing="false" onAction="#handleLoginClick" text="%login.button">
-               <styleClass>
-                  <String fx:value="loginButton" />
-                  <String fx:value="Button" />
-               </styleClass>
-            </Button>
-            <Button layoutX="339.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleLoginCancel" text="%cancel.button">
-               <styleClass>
-                  <String fx:value="cancelButton" />
-                  <String fx:value="Button" />
-               </styleClass>
-            </Button>
-            <Button layoutX="26.0" layoutY="36.0" mnemonicParsing="false" onAction="#handleENLanguageClick" prefHeight="27.0" prefWidth="109.0" text="%english.button">
-               <styleClass>
-                  <String fx:value="englishButton" />
-                  <String fx:value="Button" />
-               </styleClass>
-            </Button>
-            <Button layoutX="26.0" layoutY="75.0" mnemonicParsing="false" onAction="#handleSQLanguageClick" prefHeight="27.0" prefWidth="109.0" text="%shqip.button">
-               <styleClass>
-                  <String fx:value="shqipButton" />
-                  <String fx:value="Button" />
-               </styleClass>
-            </Button>
-            <Label fx:id="lblSignup" layoutX="225.0" layoutY="301.0" onMouseClicked="#handleSignupRedirect" prefHeight="16.0" prefWidth="210.0" styleClass="signupLink" text="%signup.redirect" textAlignment="CENTER" />
          </children>
-      </Pane>
+      </HBox>
+      <VBox layoutX="-3.0" layoutY="100.0" prefHeight="303.0" prefWidth="606.0" stylesheets="@../css/login_view.css" AnchorPane.bottomAnchor="-3.1999999999999886" AnchorPane.leftAnchor="-3.0" AnchorPane.rightAnchor="-3.199999999999932" AnchorPane.topAnchor="100.0">
+         <children>
+            <AnchorPane prefHeight="150.0" prefWidth="606.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox layoutX="177.0" layoutY="-3.1999999999999993" prefHeight="177.0" prefWidth="234.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="177.0" AnchorPane.rightAnchor="196.0" AnchorPane.topAnchor="-23.0">
+                     <children>
+                        <TextField fx:id="txtUsername" prefHeight="34.0" prefWidth="210.0" promptText="%login.username" styleClass="nameInput">
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <PasswordField fx:id="pwdPassword" prefHeight="34.0" prefWidth="210.0" promptText="%login.password" styleClass="passwordInput" />
+                     </children>
+                     <padding>
+                        <Insets top="35.0" />
+                     </padding>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+            </AnchorPane>
+            <AnchorPane prefHeight="118.0" prefWidth="606.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Button layoutX="154.0" layoutY="16.0" mnemonicParsing="false" onAction="#handleLoginClick" text="%login.button">
+                     <styleClass>
+                        <String fx:value="loginButton" />
+                        <String fx:value="Button" />
+                     </styleClass>
+                  </Button>
+                  <Button layoutX="315.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleLoginCancel" text="%cancel.button">
+                     <styleClass>
+                        <String fx:value="cancelButton" />
+                        <String fx:value="Button" />
+                     </styleClass>
+                  </Button>
+                  <Label fx:id="lblSignup" layoutX="198.0" layoutY="61.0" onMouseClicked="#handleSignupRedirect" prefHeight="16.0" prefWidth="210.0" styleClass="signupLink" text="%signup.redirect" textAlignment="CENTER" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
    </children>
-</VBox>
+</AnchorPane>
