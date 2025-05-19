@@ -20,6 +20,9 @@ import models.Universities;
 import java.net.URL;
 import java.util.*;
 
+import static utils.AlertMessages.ERROR;
+import static utils.AlertMessages.showAlert;
+
 public class ManageUniversitiesController implements Initializable {
     private final UniversitiesRepository universitiesRepository = new UniversitiesRepository();
     private final FacultiesRepository facultiesRepository = new FacultiesRepository();
@@ -27,8 +30,6 @@ public class ManageUniversitiesController implements Initializable {
 
     private final Map<String, Integer> universityNameToId = new HashMap<>();
     private final Map<String, Integer> facultyNameToId = new HashMap<>();
-    private final Map<Integer, String> universityIdToName = new HashMap<>();
-    private final Map<Integer, String> facultyIdToName = new HashMap<>();
 
     private final ObservableList<UniversityItem> universityItems = FXCollections.observableArrayList();
     private final ObservableList<FacultyItem> facultyItems = FXCollections.observableArrayList();
@@ -120,23 +121,19 @@ public class ManageUniversitiesController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // University TableView columns
         universityNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         universityCityColumn.setCellValueFactory(new PropertyValueFactory<>("city"));
         universityCountryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
         universityTable.setItems(universityItems);
 
-        // Faculty TableView columns
         facultyNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         facultyTable.setItems(facultyItems);
 
-        // Major TableView columns
         majorNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         majorTable.setItems(majorItems);
 
         loadUniversities();
 
-        // Listeners for ComboBoxes
         universityFilterForFaculty.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) loadFacultiesByUniversity(universityNameToId.get(newVal));
         });
@@ -147,7 +144,6 @@ public class ManageUniversitiesController implements Initializable {
             if (newVal != null) loadMajorsByFaculty(facultyNameToId.get(newVal));
         });
 
-        // Table selection listeners
         universityTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
             if (newSel != null) {
                 universityNameField.setText(newSel.getName());
@@ -168,14 +164,12 @@ public class ManageUniversitiesController implements Initializable {
             List<Universities> universities = universitiesRepository.getAll();
             universityItems.clear();
             universityNameToId.clear();
-            universityIdToName.clear();
             ObservableList<String> universityNames = FXCollections.observableArrayList();
 
             for (var uni : universities) {
                 universityItems.add(new UniversityItem(uni.getUniversityId(), uni.getName(), uni.getCity(), uni.getCountry()));
                 universityNames.add(uni.getName());
                 universityNameToId.put(uni.getName(), uni.getUniversityId());
-                universityIdToName.put(uni.getUniversityId(), uni.getName());
             }
 
             universityFilterForFaculty.setItems(universityNames);
@@ -186,7 +180,7 @@ public class ManageUniversitiesController implements Initializable {
                 universityFilterForMajor.getSelectionModel().selectFirst();
             }
         } catch (Exception e) {
-            showAlert("Error loading universities: " + e.getMessage());
+            showAlert(ERROR, "Error loading universities: " + e.getMessage());
         }
     }
 
@@ -197,7 +191,7 @@ public class ManageUniversitiesController implements Initializable {
         String country = universityCountryField.getText().trim();
 
         if (name.isEmpty() || city.isEmpty() || country.isEmpty()) {
-            showAlert("Please fill in all university fields.");
+            showAlert(ERROR, "Please fill in all university fields.");
             return;
         }
 
@@ -208,12 +202,16 @@ public class ManageUniversitiesController implements Initializable {
                 universityNameField.clear();
                 universityCityField.clear();
                 universityCountryField.clear();
+
                 loadUniversities();
+
+                universityFilterForFaculty.getSelectionModel().select(newUni.getName());
+                universityFilterForMajor.getSelectionModel().select(newUni.getName());
             } else {
-                showAlert("Failed to add university.");
+                showAlert(ERROR, "Failed to add university.");
             }
         } catch (Exception e) {
-            showAlert("Error adding university: " + e.getMessage());
+            showAlert(ERROR, "Error adding university: " + e.getMessage());
         }
     }
 
@@ -221,21 +219,36 @@ public class ManageUniversitiesController implements Initializable {
     public void onDeleteUniversity(ActionEvent event) {
         UniversityItem selected = universityTable.getSelectionModel().getSelectedItem();
         if (selected == null) {
-            showAlert("Please select a university to delete.");
+            showAlert(ERROR, "Please select a university to delete.");
             return;
         }
         try {
-            boolean deleted = universitiesRepository.delete(selected.getId());
+            int universityId = selected.getId();
+
+            List<Faculties> faculties = facultiesRepository.getAll().stream()
+                    .filter(f -> f.getUniversityId() == universityId)
+                    .toList();
+            for (Faculties faculty : faculties) {
+                List<Majors> majors = majorsRepository.getAll().stream()
+                        .filter(m -> m.getFacultyId() == faculty.getFacultyId())
+                        .toList();
+                for (Majors major : majors) {
+                    majorsRepository.delete(major.getMajorId());
+                }
+                facultiesRepository.delete(faculty.getFacultyId());
+            }
+
+            boolean deleted = universitiesRepository.delete(universityId);
             if (deleted) {
                 universityNameField.clear();
                 universityCityField.clear();
                 universityCountryField.clear();
                 loadUniversities();
             } else {
-                showAlert("Failed to delete university. It may have faculties.");
+                showAlert(ERROR, "Failed to delete university.");
             }
         } catch (Exception e) {
-            showAlert("Error deleting university: " + e.getMessage());
+            showAlert(ERROR, "Error deleting university: " + e.getMessage());
         }
     }
 
@@ -247,7 +260,7 @@ public class ManageUniversitiesController implements Initializable {
 
             facultyItems.clear();
             facultyNameToId.clear();
-            facultyIdToName.clear();
+            ObservableList<String> facultyNames = FXCollections.observableArrayList();
 
             for (var faculty : faculties) {
                 facultyItems.add(new FacultyItem(
@@ -256,12 +269,20 @@ public class ManageUniversitiesController implements Initializable {
                         faculty.getUniversityId()
                 ));
                 facultyNameToId.put(faculty.getName(), faculty.getFacultyId());
-                facultyIdToName.put(faculty.getFacultyId(), faculty.getName());
+                facultyNames.add(faculty.getName());
             }
 
             facultyTable.setItems(facultyItems);
+            facultyFilterForMajor.setItems(facultyNames);
+
+            if (!facultyNames.isEmpty()) {
+                facultyFilterForMajor.getSelectionModel().selectFirst();
+            } else {
+                majorItems.clear();
+                majorTable.setItems(majorItems);
+            }
         } catch (Exception e) {
-            showAlert("Error loading faculties: " + e.getMessage());
+            showAlert(ERROR, "Error loading faculties: " + e.getMessage());
         }
     }
 
@@ -288,7 +309,7 @@ public class ManageUniversitiesController implements Initializable {
                 majorTable.setItems(majorItems);
             }
         } catch (Exception e) {
-            showAlert("Error loading faculties: " + e.getMessage());
+            showAlert(ERROR, "Error loading faculties: " + e.getMessage());
         }
     }
 
@@ -310,9 +331,10 @@ public class ManageUniversitiesController implements Initializable {
 
             majorTable.setItems(majorItems);
         } catch (Exception e) {
-            showAlert("Error loading majors: " + e.getMessage());
+            showAlert(ERROR, "Error loading majors: " + e.getMessage());
         }
     }
+
 
     @FXML
     public void onAddFaculty(ActionEvent event) {
@@ -320,7 +342,7 @@ public class ManageUniversitiesController implements Initializable {
         String selectedUniversity = universityFilterForFaculty.getValue();
 
         if (facultyName.isEmpty() || selectedUniversity == null) {
-            showAlert("Please enter a faculty name and select a university.");
+            showAlert(ERROR, "Please enter a faculty name and select a university.");
             return;
         }
 
@@ -333,11 +355,14 @@ public class ManageUniversitiesController implements Initializable {
             if (newFaculty != null) {
                 facultyNameField.clear();
                 loadFacultiesByUniversity(universityId);
+                loadFacultiesDropdown(universityId);
+
+                facultyFilterForMajor.getSelectionModel().select(newFaculty.getName());
             } else {
-                showAlert("Failed to add faculty.");
+                showAlert(ERROR, "Failed to add faculty.");
             }
         } catch (Exception e) {
-            showAlert("Error adding faculty: " + e.getMessage());
+            showAlert(ERROR, "Error adding faculty: " + e.getMessage());
         }
     }
 
@@ -346,21 +371,28 @@ public class ManageUniversitiesController implements Initializable {
         FacultyItem selectedFaculty = facultyTable.getSelectionModel().getSelectedItem();
 
         if (selectedFaculty == null) {
-            showAlert("Please select a faculty to delete.");
+            showAlert(ERROR, "Please select a faculty to delete.");
             return;
         }
 
         try {
+            List<Majors> majors = majorsRepository.getAll().stream()
+                    .filter(m -> m.getFacultyId() == selectedFaculty.getId())
+                    .toList();
+            for (Majors major : majors) {
+                majorsRepository.delete(major.getMajorId());
+            }
             boolean deleted = facultiesRepository.delete(selectedFaculty.getId());
 
             if (deleted) {
                 facultyNameField.clear();
                 loadFacultiesByUniversity(selectedFaculty.getUniversityId());
+                loadFacultiesDropdown(selectedFaculty.getUniversityId());
             } else {
-                showAlert("Failed to delete faculty. It may be referenced by majors.");
+                showAlert(ERROR, "Failed to delete faculty. It may be referenced by majors.");
             }
         } catch (Exception e) {
-            showAlert("Error deleting faculty: " + e.getMessage());
+            showAlert(ERROR, "Error deleting faculty: " + e.getMessage());
         }
     }
 
@@ -370,7 +402,7 @@ public class ManageUniversitiesController implements Initializable {
         String selectedFaculty = facultyFilterForMajor.getValue();
 
         if (majorName.isEmpty() || selectedFaculty == null) {
-            showAlert("Please enter a major name and select a faculty.");
+            showAlert(ERROR, "Please enter a major name and select a faculty.");
             return;
         }
 
@@ -384,10 +416,10 @@ public class ManageUniversitiesController implements Initializable {
                 majorNameField.clear();
                 loadMajorsByFaculty(facultyId);
             } else {
-                showAlert("Failed to add major.");
+                showAlert(ERROR, "Failed to add major.");
             }
         } catch (Exception e) {
-            showAlert("Error adding major: " + e.getMessage());
+            showAlert(ERROR, "Error adding major: " + e.getMessage());
         }
     }
 
@@ -396,7 +428,7 @@ public class ManageUniversitiesController implements Initializable {
         MajorItem selectedMajor = majorTable.getSelectionModel().getSelectedItem();
 
         if (selectedMajor == null) {
-            showAlert("Please select a major to delete.");
+            showAlert(ERROR, "Please select a major to delete.");
             return;
         }
 
@@ -407,18 +439,10 @@ public class ManageUniversitiesController implements Initializable {
                 majorNameField.clear();
                 loadMajorsByFaculty(selectedMajor.getFacultyId());
             } else {
-                showAlert("Failed to delete major.");
+                showAlert(ERROR, "Failed to delete major.");
             }
         } catch (Exception e) {
-            showAlert("Error deleting major: " + e.getMessage());
+            showAlert(ERROR, "Error deleting major: " + e.getMessage());
         }
-    }
-
-    private void showAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }

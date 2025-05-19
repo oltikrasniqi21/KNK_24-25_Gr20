@@ -32,14 +32,14 @@ CREATE TABLE scholarships(
 	required_major VARCHAR(50)
 );
 
-CREATE TABLE applications(
+CREATE TABLE applications (
 	id SERIAL PRIMARY KEY,
 	student_id INTEGER NOT NULL REFERENCES students(id) ON DELETE CASCADE,
 	scholarship_id INTEGER NOT NULL REFERENCES scholarships(id) ON DELETE CASCADE,
 	application_date DATE NOT NULL DEFAULT CURRENT_DATE,
 	gpa INTEGER NOT NULL,
 	transcript_path TEXT,
-	status VARCHAR(10) NOT NULL CHECK (LOWER(status) IN ('pending', 'approved', 'rejected'))
+	status VARCHAR(10) NOT NULL DEFAULT 'pending' CHECK (LOWER(status) IN ('pending', 'approved', 'rejected'))
 );
 
 CREATE TABLE review(
