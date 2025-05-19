@@ -1,92 +1,61 @@
-/* Root container style */
-.container {
-    -fx-background-color: #f7f7f7;
-    -fx-padding: 40;
+#backgroundPane{
+    -fx-background-color: #00A859;
 }
 
-.root{
-    -fx-font-family: "Segoe UI", Arial, sans-serif;
+#rightVBox {
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 30px;
+    -fx-padding: 30px;
+    -fx-spacing: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 12, 0.5, 0, 2);
 }
 
-/* Title Label */
-.loginTitle {
-    -fx-font-size: 28px;
+/* Title text */
+#loginTitle {
+    -fx-font-size: 26px;
     -fx-font-weight: bold;
-    -fx-text-fill: #00A859;
-}
-
-/* Input Fields */
-.nameInput, .passwordInput {
-    -fx-background-radius: 6;
-    -fx-border-radius: 6;
-    -fx-border-color: #ccc;
-    -fx-border-width: 1;
-    -fx-padding: 6 10;
-    -fx-font-size: 14px;
-    -fx-background-color: white;
     -fx-text-fill: #333;
+    -fx-padding: 30px;
 }
 
-.nameInput:focused, .passwordInput:focused {
-    -fx-border-color: #00A859;
-    -fx-effect: dropshadow(three-pass-box, #00A85955, 8, 0.2, 0, 2);
+/* Text input fields */
+.nameInput, .passwordInput {
+    -fx-padding: 10 14;
+    -fx-margin: 20;
+    -fx-font-size: 14px;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-background-color: white;
 }
 
-/* Login Button */
-.loginButton {
+/* Login and Cancel buttons */
+.loginButton, .cancelButton {
     -fx-background-color: #00A859;
     -fx-text-fill: white;
-    -fx-background-radius: 6;
-    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
     -fx-font-size: 14px;
-    -fx-cursor: hand;
-    -fx-padding: 6 20;
+    -fx-padding: 6 12;
 }
 
-.loginButton:hover {
-    -fx-background-color: #00914a;
-}
-
-/* Cancel Button */
 .cancelButton {
-    -fx-background-color: transparent;
-    -fx-border-color: #00A859;
-    -fx-text-fill: #00A859;
-    -fx-border-radius: 6;
-    -fx-background-radius: 6;
-    -fx-font-weight: bold;
-    -fx-font-size: 14px;
-    -fx-padding: 6 20;
+    -fx-background-color: #aaaaaa;
 }
 
-.cancelButton:hover {
-    -fx-background-color: #eafaf2;
-}
-
-/* Language Buttons */
+/* Language buttons */
 .englishButton, .shqipButton {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #00A859;
-    -fx-text-fill: #00A859;
-    -fx-border-radius: 6;
+    -fx-background-color: #dddddd;
+    -fx-background-radius: 8px;
+    -fx-text-fill: #333;
     -fx-font-size: 12px;
-    -fx-font-weight: bold;
-    -fx-cursor: hand;
-    -fx-padding: 4 12;
 }
 
-.englishButton:hover, .shqipButton:hover {
-    -fx-background-color: #eafaf2;
-}
-
-/* Sign-up Label as link */
+/* Signup link */
 .signupLink {
     -fx-text-fill: #00A859;
     -fx-underline: true;
-    -fx-font-size: 13px;
     -fx-cursor: hand;
-}
-
-.signupLink:hover {
-    -fx-text-fill: #00763f;
+    -fx-font-size: 13px;
+    -fx-padding: 10 0 0 0;
 }

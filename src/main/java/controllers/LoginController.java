@@ -6,10 +6,16 @@ import Services.LanguageManager;
 import Services.LoginService;
 import Services.SceneManager;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import utils.SceneLocator;
+import javafx.scene.layout.VBox;
+
 
 
 import java.sql.Connection;
@@ -29,8 +35,24 @@ public class LoginController {
     @FXML
     private PasswordField pwdPassword;
 
+    @FXML
+    private VBox rightVBox;
+
+    @FXML
+    private HBox languagesHbox;
+
+    @FXML
+    private Label lblSignup;
+
     public LoginController() {
 
+    }
+
+    @FXML
+    public void initialize() {
+        VBox.setMargin(lblSignup, new Insets(0, 0, 60, 0));
+        VBox.setMargin(txtUsername, new Insets(0, 0, 15, 0));
+        VBox.setMargin(pwdPassword, new Insets(0, 0, 15, 0));
     }
 
     @FXML
