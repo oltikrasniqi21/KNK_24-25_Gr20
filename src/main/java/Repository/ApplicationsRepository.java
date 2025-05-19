@@ -7,6 +7,8 @@ import models.ApplicationsDetails;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ApplicationsRepository extends BaseRepository<Applications, CreateApplicationDto, UpdateApplicationsDTO>{
 
@@ -109,5 +111,30 @@ public class ApplicationsRepository extends BaseRepository<Applications, CreateA
             e.printStackTrace();
         }
         return null;
+    }
+
+    public Map<String, Integer> countApplicationsByStatus(){
+        String query = """
+                SELECT status, COUNT(*) AS application_count
+                FROM applications
+                GROUP BY status
+                """;
+
+        Map<String, Integer> applicationCount = new HashMap<>();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()){
+
+            while (resultSet.next()){
+                String status = resultSet.getString("status");
+                int count = resultSet.getInt("application_count");
+                applicationCount.put(status, count);
+            }
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return  applicationCount;
     }
 }

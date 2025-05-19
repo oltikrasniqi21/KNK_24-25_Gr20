@@ -8,6 +8,7 @@ import models.Applications;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ApplicationService {
     private final ApplicationsRepository repository;
@@ -68,4 +69,5 @@ public class ApplicationService {
     public Applications getApplicationById(int id){
         return repository.getById(id);
     }
+
 }
