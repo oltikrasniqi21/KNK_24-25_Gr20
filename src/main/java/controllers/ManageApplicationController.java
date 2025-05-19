@@ -120,30 +120,41 @@ public class ManageApplicationController {
             UpdateApplicationsDTO updateDTO = new UpdateApplicationsDTO(appId, status);
             applicationsRepository.update(updateDTO);
 
+            // Send notification based on status
             if ("Approved".equalsIgnoreCase(status)) {
-                sendNotificationToStudent(selectedApplication.getStudentId(), selectedApplication.getScholarshipId());
+                sendNotificationToStudent(selectedApplication.getStudentId(), selectedApplication.getScholarshipId(), "approved");
+            } else if ("Rejected".equalsIgnoreCase(status)) {
+                sendNotificationToStudent(selectedApplication.getStudentId(), selectedApplication.getScholarshipId(), "rejected");
             }
 
             loadApplications();
         }
     }
 
-    private void sendNotificationToStudent(int studentId, int scholarshipId) {
+
+    private void sendNotificationToStudent(int studentId, int scholarshipId, String status) {
         NotificationRepository notificationRepo = new NotificationRepository();
 
         String scholarshipName = getScholarshipNameById(scholarshipId);
-        String message = "Your application for the '" + scholarshipName + "' scholarship has been approved.";
+        String message;
+
+        if ("approved".equalsIgnoreCase(status)) {
+            message = "Your application for the '" + scholarshipName + "' scholarship has been approved.";
+        } else {
+            message = "Your application for the '" + scholarshipName + "' scholarship has been rejected.";
+        }
 
         CreateNotificationDTO notificationDTO = new CreateNotificationDTO(
                 studentId,
                 message,
                 new Timestamp(System.currentTimeMillis()),
-                false,
-                false // not broadcast
+                false, // not seen yet
+                false  // not broadcast
         );
 
         notificationRepo.create(notificationDTO);
     }
+
 
     private String getStudentNameById(int studentId){
         return usersRepository.getStudentNameById(studentId);
