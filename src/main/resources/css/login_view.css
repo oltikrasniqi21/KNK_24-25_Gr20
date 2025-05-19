@@ -1,3 +1,8 @@
+.root {
+    -fx-font-family: "Poppins", sans-serif;
+    -fx-font-size: 14px; /* you can adjust the font size */
+}
+
 #backgroundPane{
     -fx-background-color: #00A859;
 }
@@ -16,6 +21,8 @@
     -fx-font-weight: bold;
     -fx-text-fill: #333;
     -fx-padding: 30px;
+    -fx-font-weight: bold;
+
 }
 
 /* Text input fields */

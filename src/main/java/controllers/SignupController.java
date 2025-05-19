@@ -3,7 +3,9 @@ package controllers;
 import Services.SceneManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import Database.DBCustomConnector;
 import Services.SignupService;
@@ -37,7 +39,12 @@ public class SignupController implements Initializable {
     private Label lblSelectedFile;
     @FXML
     private Label passwordHintLabel;
-
+    @FXML
+    private VBox titleVbox;
+    @FXML
+    private VBox buttonVbox1;
+    @FXML
+    private VBox buttonVbox2;
     @FXML
     private ComboBox<String> universityComboBox;
     @FXML
@@ -51,6 +58,7 @@ public class SignupController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         signupService.loadUniversities(universityComboBox);
         yearComboBox.getItems().addAll("1", "2", "3", "4", "5", "6");
 
@@ -77,6 +85,8 @@ public class SignupController implements Initializable {
                 signupService.loadMajors(selectedFaculty, majorComboBox);
             }
         });
+        VBox.setMargin(buttonVbox1, new Insets(20, 0, 5, 0));
+        VBox.setMargin(buttonVbox2, new Insets(5, 0, 0, 0));
     }
 
 
