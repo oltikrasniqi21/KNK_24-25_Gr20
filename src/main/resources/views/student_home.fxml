@@ -13,6 +13,7 @@
             <Button fx:id="btnViewNotifications" mnemonicParsing="false" onAction="#onViewNotificationsClicked" prefHeight="26.0" prefWidth="260.0" text="%viewNotificationsBtn" />
             <Button fx:id="btnViewApplication" mnemonicParsing="false" onAction="#onViewApplicationClicked" prefHeight="26.0" prefWidth="260.0" text="%viewApplication" />
             <Button fx:id="btnViewProfile" mnemonicParsing="false" onAction="#handleViewProfileClick" prefHeight="26.0" prefWidth="260.0" text="%viewProfile" />
+            <Button mnemonicParsing="false" onAction="#loadNewsStudent" prefHeight="33.0" prefWidth="216.0" text="Button" />
          </children>
       </VBox>
    </left>

@@ -20,11 +20,11 @@
     -fx-padding: 5 20 5 5;
 }
 
-.button:hover {
+.leftButton:hover {
     -fx-background-color: rgba(255, 255, 255, 0.2);
 }
 
-.button:selected, .button:focused {
+.leftButton:selected, .leftButton:focused {
     -fx-background-color: #f0f2f5;
     -fx-text-fill: #00A859;
     -fx-background-radius: 20 0 0 20;

@@ -174,4 +174,10 @@ public class StudentHomePageController implements Initializable {
     private void onViewApplicationClicked(){
         loadCenterContent(SceneLocator.APPLICATION_FORM);
     }
+
+    @FXML
+    private void loadNewsStudent() {
+        loadCenterContent(SceneLocator.NEWS_STUDENT);
+    }
+
 }

@@ -7,7 +7,10 @@ import Repository.NewsRepository;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import models.News;
 import utils.SceneLocator;
@@ -17,7 +20,7 @@ import utils.SceneLocator;
 public class NewsController {
 
     @FXML
-    private TextArea titleField;
+    private TextField titleField;
     @FXML
     private TextArea contentField;
 
@@ -33,7 +36,13 @@ public class NewsController {
     @FXML
     private TableColumn<News, Void> newsActionCol;
     @FXML
+    private TableColumn<News, String> newsSummaryCol;
+    @FXML
     private TextArea summaryField;
+    @FXML
+    private VBox LVbox;
+    @FXML
+    private VBox RVbox;
 
 
     private final NewsRepository newsRepository = new NewsRepository();
@@ -102,13 +111,20 @@ public class NewsController {
     public void initialize() {
         // Set up columns
         newsTitleCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
+        newsSummaryCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSummary()));
         newsScholarshipCol.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getScholarshipTagId())));
 
         // Load news data into table
         loadNews();
         addDeleteButtonToTable();
         newsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        HBox.setMargin(LVbox, new Insets(30, 30, 30, 70));
+        HBox.setMargin(RVbox, new Insets(30, 30, 30, 70));
+        HBox.setMargin(titleField, new Insets(60, 0, 70, 0));
     }
+
+
 
     private void loadNews() {
         ObservableList<News> newsData = FXCollections.observableArrayList(newsRepository.getAllNews());

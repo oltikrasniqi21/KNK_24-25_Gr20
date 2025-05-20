@@ -22,4 +22,5 @@ public class SceneLocator {
     public static final String MY_PROFILE_PAGE = "/views/my_profile.fxml";
     public static final String MANAGE_UNIVERSITIES = "/views/manage_universities.fxml";
     public static final String STATISTICS = "/views/statistics.fxml";
+    public static final String NEWS_STUDENT = "/views/news_student.fxml";
 }
