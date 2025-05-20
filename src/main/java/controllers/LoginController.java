@@ -12,15 +12,12 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import utils.SceneLocator;
 import javafx.scene.layout.VBox;
 
 
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.Locale;
 
 import static utils.AlertMessages.showAlert;
@@ -72,7 +69,7 @@ public class LoginController {
 
             if (role != null) {
                 // You may want to fetch the user ID too if it's not a superadmin
-                int userId = fetchUserIdByEmail(conn, email);
+                int userId = loginService.fetchUserIdByEmail(conn, email);
                 CurrentUser.setUser(userId, role);
 
                 if (role.equalsIgnoreCase("admin")) {
@@ -89,19 +86,10 @@ public class LoginController {
         }
     }
 
-    private int fetchUserIdByEmail(Connection conn, String email) throws Exception {
-        String query = "SELECT id FROM users WHERE email = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setString(1, email);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt("id");
-                }
-            }
-        }
-        return -1; // For superadmin you might use -1 or 0, as they might not be in DB
+    @FXML
+    private void handleLoginCancel(){
+        SceneManager.getInstance().loadScene(SceneLocator.SIGNUP_PAGE);
     }
-
 
 
     @FXML

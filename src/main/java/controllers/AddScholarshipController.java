@@ -24,12 +24,11 @@ public class AddScholarshipController {
     @FXML private TextField yearField;
     @FXML private TextField majorField;
 
-    private ScholarshipsRepository scholarshipsRepository;
-    private ScholarshipService scholarshipService;
+    private final ScholarshipService scholarshipService;
+    private final ScholarshipsRepository scholarshipsRepository = new ScholarshipsRepository();
 
     public AddScholarshipController(){
         this.scholarshipService = new ScholarshipService();
-        this.scholarshipsRepository = new ScholarshipsRepository();
     }
 
     @FXML private void handleBackClick(){
@@ -102,5 +101,9 @@ public class AddScholarshipController {
         yearField.clear();
         gpaField.clear();
         deadlineField.setValue(null);
+    }
+
+    public ScholarshipsRepository getScholarshipsRepository() {
+        return scholarshipsRepository;
     }
 }

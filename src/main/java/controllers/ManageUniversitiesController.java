@@ -3,30 +3,23 @@ package controllers;
 import CreateDTO.CreateFacultiesDTO;
 import CreateDTO.CreateMajorsDTO;
 import CreateDTO.CreateUniversitiesDTO;
-import Repository.FacultiesRepository;
-import Repository.MajorsRepository;
-import Repository.UniversitiesRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import models.Faculties;
-import models.Majors;
 import models.Universities;
+import Services.ManageUniversitiesService;
 
-import java.net.URL;
 import java.util.*;
 
 import static utils.AlertMessages.ERROR;
 import static utils.AlertMessages.showAlert;
 
-public class ManageUniversitiesController implements Initializable {
-    private final UniversitiesRepository universitiesRepository = new UniversitiesRepository();
-    private final FacultiesRepository facultiesRepository = new FacultiesRepository();
-    private final MajorsRepository majorsRepository = new MajorsRepository();
+public class ManageUniversitiesController {
+
+    private final ManageUniversitiesService universityService = new ManageUniversitiesService();
 
     private final Map<String, Integer> universityNameToId = new HashMap<>();
     private final Map<String, Integer> facultyNameToId = new HashMap<>();
@@ -35,53 +28,32 @@ public class ManageUniversitiesController implements Initializable {
     private final ObservableList<FacultyItem> facultyItems = FXCollections.observableArrayList();
     private final ObservableList<MajorItem> majorItems = FXCollections.observableArrayList();
 
-    @FXML
-    private TableView<UniversityItem> universityTable;
-    @FXML
-    private TableColumn<UniversityItem, String> universityNameColumn;
-    @FXML
-    private TableColumn<UniversityItem, String> universityCityColumn;
-    @FXML
-    private TableColumn<UniversityItem, String> universityCountryColumn;
-    @FXML
-    private TextField universityNameField;
-    @FXML
-    private TextField universityCityField;
-    @FXML
-    private TextField universityCountryField;
+    @FXML private TableView<UniversityItem> universityTable;
+    @FXML private TableColumn<UniversityItem, String> universityNameColumn;
+    @FXML private TableColumn<UniversityItem, String> universityCityColumn;
+    @FXML private TableColumn<UniversityItem, String> universityCountryColumn;
+    @FXML private TextField universityNameField;
+    @FXML private TextField universityCityField;
+    @FXML private TextField universityCountryField;
 
-    @FXML
-    private ComboBox<String> universityFilterForFaculty;
-    @FXML
-    private TableView<FacultyItem> facultyTable;
-    @FXML
-    private TextField facultyNameField;
-    @FXML
-    private TableColumn<FacultyItem, String> facultyNameColumn;
+    @FXML private ComboBox<String> universityFilterForFaculty;
+    @FXML private TableView<FacultyItem> facultyTable;
+    @FXML private TextField facultyNameField;
+    @FXML private TableColumn<FacultyItem, String> facultyNameColumn;
 
-    @FXML
-    private ComboBox<String> universityFilterForMajor;
-    @FXML
-    private ComboBox<String> facultyFilterForMajor;
-    @FXML
-    private TableView<MajorItem> majorTable;
-    @FXML
-    private TableColumn<MajorItem, String> majorNameColumn;
-    @FXML
-    private TextField majorNameField;
-
+    @FXML private ComboBox<String> universityFilterForMajor;
+    @FXML private ComboBox<String> facultyFilterForMajor;
+    @FXML private TableView<MajorItem> majorTable;
+    @FXML private TableColumn<MajorItem, String> majorNameColumn;
+    @FXML private TextField majorNameField;
 
     public static class UniversityItem {
         private final int id;
         private final String name;
         private final String city;
         private final String country;
-
         public UniversityItem(int id, String name, String city, String country) {
-            this.id = id;
-            this.name = name;
-            this.city = city;
-            this.country = country;
+            this.id = id; this.name = name; this.city = city; this.country = country;
         }
         public int getId() { return id; }
         public String getName() { return name; }
@@ -93,11 +65,8 @@ public class ManageUniversitiesController implements Initializable {
         private final int id;
         private final String name;
         private final int universityId;
-
         public FacultyItem(int id, String name, int universityId) {
-            this.id = id;
-            this.name = name;
-            this.universityId = universityId;
+            this.id = id; this.name = name; this.universityId = universityId;
         }
         public int getId() { return id; }
         public String getName() { return name; }
@@ -108,19 +77,16 @@ public class ManageUniversitiesController implements Initializable {
         private final int id;
         private final String name;
         private final int facultyId;
-
         public MajorItem(int id, String name, int facultyId) {
-            this.id = id;
-            this.name = name;
-            this.facultyId = facultyId;
+            this.id = id; this.name = name; this.facultyId = facultyId;
         }
         public int getId() { return id; }
         public String getName() { return name; }
         public int getFacultyId() { return facultyId; }
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    @FXML
+    public void initialize() {
         universityNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         universityCityColumn.setCellValueFactory(new PropertyValueFactory<>("city"));
         universityCountryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
@@ -137,9 +103,11 @@ public class ManageUniversitiesController implements Initializable {
         universityFilterForFaculty.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) loadFacultiesByUniversity(universityNameToId.get(newVal));
         });
+
         universityFilterForMajor.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) loadFacultiesDropdown(universityNameToId.get(newVal));
         });
+
         facultyFilterForMajor.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) loadMajorsByFaculty(facultyNameToId.get(newVal));
         });
@@ -151,9 +119,11 @@ public class ManageUniversitiesController implements Initializable {
                 universityCountryField.setText(newSel.getCountry());
             }
         });
+
         facultyTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
             if (newSel != null) facultyNameField.setText(newSel.getName());
         });
+
         majorTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
             if (newSel != null) majorNameField.setText(newSel.getName());
         });
@@ -161,7 +131,7 @@ public class ManageUniversitiesController implements Initializable {
 
     private void loadUniversities() {
         try {
-            List<Universities> universities = universitiesRepository.getAll();
+            List<Universities> universities = universityService.getAllUniversities();
             universityItems.clear();
             universityNameToId.clear();
             ObservableList<String> universityNames = FXCollections.observableArrayList();
@@ -196,15 +166,14 @@ public class ManageUniversitiesController implements Initializable {
         }
 
         try {
-            CreateUniversitiesDTO dto = new CreateUniversitiesDTO(name, city, country);
-            Universities newUni = universitiesRepository.create(dto);
+            var dto = new CreateUniversitiesDTO(name, city, country);
+            var newUni = universityService.createUniversity(dto);
+
             if (newUni != null) {
                 universityNameField.clear();
                 universityCityField.clear();
                 universityCountryField.clear();
-
                 loadUniversities();
-
                 universityFilterForFaculty.getSelectionModel().select(newUni.getName());
                 universityFilterForMajor.getSelectionModel().select(newUni.getName());
             } else {
@@ -222,23 +191,9 @@ public class ManageUniversitiesController implements Initializable {
             showAlert(ERROR, "Please select a university to delete.");
             return;
         }
+
         try {
-            int universityId = selected.getId();
-
-            List<Faculties> faculties = facultiesRepository.getAll().stream()
-                    .filter(f -> f.getUniversityId() == universityId)
-                    .toList();
-            for (Faculties faculty : faculties) {
-                List<Majors> majors = majorsRepository.getAll().stream()
-                        .filter(m -> m.getFacultyId() == faculty.getFacultyId())
-                        .toList();
-                for (Majors major : majors) {
-                    majorsRepository.delete(major.getMajorId());
-                }
-                facultiesRepository.delete(faculty.getFacultyId());
-            }
-
-            boolean deleted = universitiesRepository.delete(universityId);
+            boolean deleted = universityService.deleteUniversity(selected.getId());
             if (deleted) {
                 universityNameField.clear();
                 universityCityField.clear();
@@ -254,22 +209,15 @@ public class ManageUniversitiesController implements Initializable {
 
     private void loadFacultiesByUniversity(int universityId) {
         try {
-            List<Faculties> faculties = facultiesRepository.getAll().stream()
-                    .filter(f -> f.getUniversityId() == universityId)
-                    .toList();
-
+            var faculties = universityService.getFacultiesByUniversityId(universityId);
             facultyItems.clear();
             facultyNameToId.clear();
             ObservableList<String> facultyNames = FXCollections.observableArrayList();
 
             for (var faculty : faculties) {
-                facultyItems.add(new FacultyItem(
-                        faculty.getFacultyId(),
-                        faculty.getName(),
-                        faculty.getUniversityId()
-                ));
-                facultyNameToId.put(faculty.getName(), faculty.getFacultyId());
+                facultyItems.add(new FacultyItem(faculty.getFacultyId(), faculty.getName(), faculty.getUniversityId()));
                 facultyNames.add(faculty.getName());
+                facultyNameToId.put(faculty.getName(), faculty.getFacultyId());
             }
 
             facultyTable.setItems(facultyItems);
@@ -288,12 +236,9 @@ public class ManageUniversitiesController implements Initializable {
 
     private void loadFacultiesDropdown(int universityId) {
         try {
-            List<Faculties> faculties = facultiesRepository.getAll().stream()
-                    .filter(f -> f.getUniversityId() == universityId)
-                    .toList();
-
-            ObservableList<String> facultyNames = FXCollections.observableArrayList();
+            var faculties = universityService.getFacultiesByUniversityId(universityId);
             facultyNameToId.clear();
+            ObservableList<String> facultyNames = FXCollections.observableArrayList();
 
             for (var faculty : faculties) {
                 facultyNames.add(faculty.getName());
@@ -315,18 +260,11 @@ public class ManageUniversitiesController implements Initializable {
 
     private void loadMajorsByFaculty(int facultyId) {
         try {
-            List<Majors> majors = majorsRepository.getAll().stream()
-                    .filter(m -> m.getFacultyId() == facultyId)
-                    .toList();
-
+            var majors = universityService.getMajorsByFacultyId(facultyId);
             majorItems.clear();
 
-            for (Majors major : majors) {
-                majorItems.add(new MajorItem(
-                        major.getMajorId(),
-                        major.getName(),
-                        major.getFacultyId()
-                ));
+            for (var major : majors) {
+                majorItems.add(new MajorItem(major.getMajorId(), major.getName(), major.getFacultyId()));
             }
 
             majorTable.setItems(majorItems);
@@ -334,7 +272,6 @@ public class ManageUniversitiesController implements Initializable {
             showAlert(ERROR, "Error loading majors: " + e.getMessage());
         }
     }
-
 
     @FXML
     public void onAddFaculty(ActionEvent event) {
@@ -349,14 +286,13 @@ public class ManageUniversitiesController implements Initializable {
         int universityId = universityNameToId.get(selectedUniversity);
 
         try {
-            CreateFacultiesDTO dto = new CreateFacultiesDTO(universityId, facultyName);
-            Faculties newFaculty = facultiesRepository.create(dto);
+            var dto = new CreateFacultiesDTO(universityId, facultyName);
+            var newFaculty = universityService.createFaculty(dto);
 
             if (newFaculty != null) {
                 facultyNameField.clear();
                 loadFacultiesByUniversity(universityId);
                 loadFacultiesDropdown(universityId);
-
                 facultyFilterForMajor.getSelectionModel().select(newFaculty.getName());
             } else {
                 showAlert(ERROR, "Failed to add faculty.");
@@ -367,29 +303,22 @@ public class ManageUniversitiesController implements Initializable {
     }
 
     @FXML
-    public void onDeleteFaculty(ActionEvent actionEvent) {
-        FacultyItem selectedFaculty = facultyTable.getSelectionModel().getSelectedItem();
-
-        if (selectedFaculty == null) {
+    public void onDeleteFaculty(ActionEvent event) {
+        FacultyItem selected = facultyTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
             showAlert(ERROR, "Please select a faculty to delete.");
             return;
         }
 
         try {
-            List<Majors> majors = majorsRepository.getAll().stream()
-                    .filter(m -> m.getFacultyId() == selectedFaculty.getId())
-                    .toList();
-            for (Majors major : majors) {
-                majorsRepository.delete(major.getMajorId());
-            }
-            boolean deleted = facultiesRepository.delete(selectedFaculty.getId());
+            boolean deleted = universityService.deleteFaculty(selected.getId());
 
             if (deleted) {
                 facultyNameField.clear();
-                loadFacultiesByUniversity(selectedFaculty.getUniversityId());
-                loadFacultiesDropdown(selectedFaculty.getUniversityId());
+                loadFacultiesByUniversity(selected.getUniversityId());
+                loadFacultiesDropdown(selected.getUniversityId());
             } else {
-                showAlert(ERROR, "Failed to delete faculty. It may be referenced by majors.");
+                showAlert(ERROR, "Failed to delete faculty.");
             }
         } catch (Exception e) {
             showAlert(ERROR, "Error deleting faculty: " + e.getMessage());
@@ -397,7 +326,7 @@ public class ManageUniversitiesController implements Initializable {
     }
 
     @FXML
-    public void onAddMajor(ActionEvent actionEvent) {
+    public void onAddMajor(ActionEvent event) {
         String majorName = majorNameField.getText().trim();
         String selectedFaculty = facultyFilterForMajor.getValue();
 
@@ -409,8 +338,8 @@ public class ManageUniversitiesController implements Initializable {
         int facultyId = facultyNameToId.get(selectedFaculty);
 
         try {
-            CreateMajorsDTO dto = new CreateMajorsDTO(facultyId, majorName);
-            Majors newMajor = majorsRepository.create(dto);
+            var dto = new CreateMajorsDTO(facultyId, majorName);
+            var newMajor = universityService.createMajor(dto);
 
             if (newMajor != null) {
                 majorNameField.clear();
@@ -424,20 +353,19 @@ public class ManageUniversitiesController implements Initializable {
     }
 
     @FXML
-    public void onDeleteMajor(ActionEvent actionEvent) {
-        MajorItem selectedMajor = majorTable.getSelectionModel().getSelectedItem();
-
-        if (selectedMajor == null) {
+    public void onDeleteMajor(ActionEvent event) {
+        MajorItem selected = majorTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
             showAlert(ERROR, "Please select a major to delete.");
             return;
         }
 
         try {
-            boolean deleted = majorsRepository.delete(selectedMajor.getId());
+            boolean deleted = universityService.deleteMajor(selected.getId());
 
             if (deleted) {
                 majorNameField.clear();
-                loadMajorsByFaculty(selectedMajor.getFacultyId());
+                loadMajorsByFaculty(selected.getFacultyId());
             } else {
                 showAlert(ERROR, "Failed to delete major.");
             }

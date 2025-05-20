@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ScholarshipService{
-    private ScholarshipsRepository scholarshipRepository;
+    private final ScholarshipsRepository scholarshipRepository;
 
     public ScholarshipService(){
         this.scholarshipRepository = new ScholarshipsRepository();

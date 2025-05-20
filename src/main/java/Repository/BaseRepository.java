@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 abstract class BaseRepository<Model, CreateModelDto, UpdateModelDto> {
     protected Connection connection;
-    private String tableName;
+    private final String tableName;
 
     public BaseRepository(String tableName){
         this.connection = DBCustomConnector.getConnection();

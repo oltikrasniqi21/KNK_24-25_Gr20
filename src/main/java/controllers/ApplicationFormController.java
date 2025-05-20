@@ -33,14 +33,12 @@ public class ApplicationFormController {
 
     private File transcriptFile;
     private final ScholarshipsRepository scholarshipsRepository;
-    private final ApplicationsRepository applicationsRepository;
     private final UsersRepository usersRepository;
     private final ApplicationService applicationService;
 
 
     public ApplicationFormController(){
         scholarshipsRepository = new ScholarshipsRepository();
-        applicationsRepository = new ApplicationsRepository();
         usersRepository = new UsersRepository();
         applicationService = new ApplicationService();
     }

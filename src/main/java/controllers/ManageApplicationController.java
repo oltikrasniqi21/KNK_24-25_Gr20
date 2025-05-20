@@ -51,9 +51,9 @@ public class ManageApplicationController {
     @FXML private TextField currentYearField;
     @FXML private TextField applicationDateField;
 
-    private ApplicationsRepository applicationsRepository;
-    private UsersRepository usersRepository;
-    private ScholarshipsRepository scholarshipsRepository;
+    private final ApplicationsRepository applicationsRepository;
+    private final UsersRepository usersRepository;
+    private final ScholarshipsRepository scholarshipsRepository;
 
     public ManageApplicationController(){
         applicationsRepository = new ApplicationsRepository();

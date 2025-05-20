@@ -17,9 +17,9 @@ import utils.SceneLocator;
 import java.time.LocalDate;
 
 public class EditScholarshipController {
-    private ScholarshipsRepository scholarshipsRepository;
-    private ScholarshipService scholarshipService;
-    private Scholarships passedScholarship = ManageScholarshipsController.passedSelectedScholarship;
+
+    private final ScholarshipService scholarshipService;
+    private final Scholarships passedScholarship = ManageScholarshipsController.passedSelectedScholarship;
 
     @FXML private TextField nameField;
     @FXML private TextField providerField;
@@ -30,7 +30,6 @@ public class EditScholarshipController {
     @FXML private TextField majorField;
 
     public EditScholarshipController() {
-        this.scholarshipsRepository = new ScholarshipsRepository();
         this.scholarshipService = new ScholarshipService();
     }
 
