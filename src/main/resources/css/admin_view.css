@@ -38,30 +38,37 @@ Pane {
 }
 
 .card-title {
-    -fx-font-size: 20px;
-    -fx-text-fill: #333;
-    -fx-font-weight: bold;
+    -fx-font-size: 18px;        /* Slightly smaller for better hierarchy */
+    -fx-text-fill: #555;        /* Softer color */
+    -fx-font-weight: 600;       /* Semi-bold instead of bold */
+    -fx-padding: 0 0 8px 0;    /* Space between title and number */
 }
 
 .card-number {
-    -fx-font-size: 36px;
+    -fx-font-size: 32px;        /* Slightly smaller */
     -fx-text-fill: #222;
     -fx-font-weight: bold;
 }
 
 #totalUsersCard, #totalScholarshipsCard, #totalApplicationsCard {
-    -fx-background-color: #FFFFFF;
-
-    -fx-padding: 15;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 12, 0.5, 0, 2);
+        -fx-background-color: #FFFFFF;
+        -fx-background-radius: 15px; /* Rounded corners */
+        -fx-border-radius: 15px;     /* Rounded corners for border if used */
+        -fx-padding: 5px 25px;     /* Better padding: 20px top/bottom, 25px left/right */
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 12, 0.5, 0, 2);
+        -fx-min-width: 200px;       /* Minimum width for better proportions */
+        -fx-min-height: 120px;      /* Minimum height for better proportions */
 }
 
-#centerVbox{
-    -fx-padding: 70px;
+
+#centerVbox {
+    -fx-padding: 10px 40px;     /* 40px top/bottom, 70px left/right */
+    -fx-spacing: 30px;          /* Space between elements */
 }
+
 .pie-chart {
     -fx-background-color: transparent;
-    -fx-padding: 30px;
+    -fx-padding: 15px;
     -fx-border-color: #ccc;
     -fx-border-radius: 8px;
     -fx-background-radius: 8px;
@@ -107,6 +114,13 @@ Pane {
 .pie-chart .chart-pie:hover {
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
+}
+
+#pieChartHbox, #barChartHbox {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 15px; /* Rounded corners */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 12, 0.5, 0, 2);
+    -fx-spacing: 20px;          /* Space between charts if multiple */
 }
 
 

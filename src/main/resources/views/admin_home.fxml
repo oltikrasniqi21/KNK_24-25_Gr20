@@ -80,14 +80,26 @@
             </children>
          </HBox>
 
-         <HBox alignment="CENTER" prefHeight="350">
+         <HBox fx:id="pieChartHbox" alignment="CENTER" prefHeight="350" prefWidth="631.0">
                  <children>
                   <PieChart fx:id="usersStatusPieChart" prefHeight="300" prefWidth="300" title="%userStatus.pieChart" />
                   <Region HBox.hgrow="ALWAYS" />
                   <PieChart fx:id="applicationStatusPieChart" prefHeight="300" prefWidth="300" title="%applicationStatus.pieChart" />
                   <Region HBox.hgrow="ALWAYS" />
-                  <PieChart fx:id="userRolePieChart" prefHeight="300" prefWidth="300" title="%userRole.pieChart" />
+                  <PieChart fx:id="userRolePieChart" prefHeight="300" prefWidth="200" title="%userRole.pieChart" />
                </children>
+         </HBox>
+         <HBox fx:id="barChartHbox" minHeight="-Infinity" prefHeight="250.0" prefWidth="600.0">
+            <children>
+               <BarChart fx:id="studentsPerUniversityBarChart" legendVisible="false" prefHeight="200.0" prefWidth="350.0">
+                  <xAxis>
+                     <CategoryAxis label="University" />
+                  </xAxis>
+                  <yAxis>
+                     <NumberAxis label="Students" />
+                  </yAxis>
+               </BarChart>
+            </children>
          </HBox>
       </VBox>
    </center>

@@ -33,7 +33,7 @@ public class DashboardService {
         return applicationsRepository.getRowCount();
     }
 
-    public void getCurrentUserName(){
-        //e boj logjiken dikur
+    public Map<String, Integer> getStudentCountsByUniversity(){
+        return usersRepository.countStudentsByUniversity();
     }
 }
