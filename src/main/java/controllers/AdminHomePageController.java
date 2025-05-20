@@ -7,7 +7,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -53,6 +56,9 @@ public class AdminHomePageController {
     @FXML
     private Label totalScholarshipsLabel;
 
+    @FXML
+    private BarChart<String, Number> studentsPerUniversityBarChart;
+
 
 
     private DashboardService dashboardService = new DashboardService();
@@ -91,6 +97,21 @@ public class AdminHomePageController {
         HBox.setMargin(usersStatusPieChart, new Insets(40, 0, 20, 0));
         HBox.setMargin(applicationStatusPieChart, new Insets(40, 0, 20, 0));
         HBox.setMargin(userRolePieChart, new Insets(40, 0, 20, 0));
+
+        Map<String, Integer> universityCounts = dashboardService.getStudentCountsByUniversity();
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Students Per University");
+
+        universityCounts.forEach((university, count) -> {
+            series.getData().add(new XYChart.Data<>(university, count));
+        });
+
+        studentsPerUniversityBarChart.getData().add(series);
+
+// Optional: Rotate X axis labels for readability if many universities
+        CategoryAxis xAxis = (CategoryAxis) studentsPerUniversityBarChart.getXAxis();
+        xAxis.setTickLabelRotation(45);
 
     }
 
