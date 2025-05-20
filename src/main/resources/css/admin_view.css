@@ -8,8 +8,7 @@
     -fx-padding: 20 0 20 20;
     -fx-background-radius: 0 20 20 0;
 }
-
-.button {
+.leftButton {
     -fx-background-color: transparent;
     -fx-text-fill: white;
     -fx-background-radius: 10px;

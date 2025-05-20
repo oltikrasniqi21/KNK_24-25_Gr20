@@ -40,18 +40,18 @@
    <left>
       <VBox fx:id="leftVbox" prefHeight="470.0" prefWidth="249.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="dashboardBtn" onAction="#handleDashboardClick" prefHeight="45.0" prefWidth="293.0" text="%dashboard.label" />
-            <Button mnemonicParsing="false" onAction="#handleStatistics" prefHeight="43.0" prefWidth="294.0" text="%btn.statistics" />
-            <Button mnemonicParsing="false" onAction="#handleNotification" prefHeight="43.0" prefWidth="328.0" text="%btn.notification" />
-            <Button mnemonicParsing="false" onAction="#handleManageScholarships" prefHeight="43.0" prefWidth="421.0" text="%btn.manageScholarship" />
-            <Button mnemonicParsing="false" onAction="#handleViewApplications" prefHeight="43.0" prefWidth="301.0" text="%btn.viewApplication" />
-            <Button mnemonicParsing="false" onAction="#handleManageUsers" prefHeight="43.0" prefWidth="248.0" text="%btn.manageUsers" />
-            <Button mnemonicParsing="false" onAction="#handleNews" prefHeight="43.0" prefWidth="356.0" text="%btn.news" />
-            <Button mnemonicParsing="false" onAction="#handleManageStudents" prefHeight="43.0" prefWidth="368.0" text="%btn.listStudents" />
-            <Button mnemonicParsing="false" onAction="#handleFAQ" prefHeight="43.0" prefWidth="337.0" text="%btn.faq" />
-            <Button mnemonicParsing="false" onAction="#handleFeedback" prefHeight="43.0" prefWidth="434.0" text="%btn.feedback" />
-            <Button mnemonicParsing="false" onAction="#handleAddUniversities" prefHeight="43.0" prefWidth="296.0" text="%btn.addUniversities" />
-            <Button mnemonicParsing="false" onAction="#handleLogout" prefHeight="43.0" prefWidth="331.0" text="%btn.logout" />
+            <Button fx:id="dashboardBtn" onAction="#handleDashboardClick" prefHeight="45.0" prefWidth="293.0" text="%dashboard.label" styleClass="leftButton"/>
+            <Button mnemonicParsing="false" onAction="#handleStatistics" prefHeight="43.0" prefWidth="294.0" text="%btn.statistics" styleClass="leftButton" />
+            <Button mnemonicParsing="false" onAction="#handleNotification" prefHeight="43.0" prefWidth="328.0" text="%btn.notification" styleClass="leftButton" />
+            <Button mnemonicParsing="false" onAction="#handleManageScholarships" prefHeight="43.0" prefWidth="421.0" text="%btn.manageScholarship" styleClass="leftButton" />
+            <Button mnemonicParsing="false" onAction="#handleViewApplications" prefHeight="43.0" prefWidth="301.0" text="%btn.viewApplication" styleClass="leftButton" />
+            <Button mnemonicParsing="false" onAction="#handleManageUsers" prefHeight="43.0" prefWidth="248.0" text="%btn.manageUsers" styleClass="leftButton" />
+            <Button mnemonicParsing="false" onAction="#handleNews" prefHeight="43.0" prefWidth="356.0" text="%btn.news" styleClass="leftButton" />
+            <Button mnemonicParsing="false" onAction="#handleManageStudents" prefHeight="43.0" prefWidth="368.0" text="%btn.listStudents" styleClass="leftButton" />
+            <Button mnemonicParsing="false" onAction="#handleFAQ" prefHeight="43.0" prefWidth="337.0" text="%btn.faq" styleClass="leftButton" />
+            <Button mnemonicParsing="false" onAction="#handleFeedback" prefHeight="43.0" prefWidth="434.0" text="%btn.feedback" styleClass="leftButton"/>
+            <Button mnemonicParsing="false" onAction="#handleAddUniversities" prefHeight="43.0" prefWidth="296.0" text="%btn.addUniversities" styleClass="leftButton" />
+            <Button mnemonicParsing="false" onAction="#handleLogout" prefHeight="43.0" prefWidth="331.0" text="%btn.logout" styleClass="leftButton"/>
          </children>
       </VBox>
    </left>
@@ -86,7 +86,7 @@
                   <Region HBox.hgrow="ALWAYS" />
                   <PieChart fx:id="applicationStatusPieChart" prefHeight="300" prefWidth="300" title="%applicationStatus.pieChart" />
                   <Region HBox.hgrow="ALWAYS" />
-                  <PieChart fx:id="userRolePieChart" prefHeight="300" prefWidth="200" title="%userRole.pieChart" />
+                  <PieChart fx:id="userRolePieChart" prefHeight="300" prefWidth="300" title="%userRole.pieChart" />
                </children>
          </HBox>
          <HBox fx:id="barChartHbox" minHeight="-Infinity" prefHeight="250.0" prefWidth="600.0">

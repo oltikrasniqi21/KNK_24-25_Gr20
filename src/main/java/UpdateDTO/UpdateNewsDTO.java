@@ -7,12 +7,14 @@ public class UpdateNewsDTO {
     private String title;
     private String content;
     private Integer scholarshipTagId;
+    private String summary;
 
-    public UpdateNewsDTO(int newsId, String title, String content, Integer scholarshipTagId) {
+    public UpdateNewsDTO(int newsId, String title, String content, Integer scholarshipTagId, String summary) {
         this.newsId = newsId;
         this.title = title;
         this.content = content;
         this.scholarshipTagId = scholarshipTagId;
+        this.summary = summary;
     }
 
     public void setNewsId(int newsId) {
@@ -31,6 +33,9 @@ public class UpdateNewsDTO {
         this.scholarshipTagId = scholarshipTagId;
     }
 
+    public void setSummary(String summary){
+        this.summary = summary;
+    }
 
 
     public int getNewsId() {
@@ -47,6 +52,10 @@ public class UpdateNewsDTO {
 
     public Integer getScholarshipTagId() {
         return scholarshipTagId;
+    }
+
+    public String getSummary(){
+        return summary;
     }
 
 }
