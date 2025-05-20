@@ -349,4 +349,29 @@ public class UsersRepository{
 
         return totalUsers;
     }
+
+    public Map<String, Integer> countStudentsByUniversity() {
+        String query = """
+            SELECT university, COUNT(*) AS student_count
+            FROM students
+            GROUP BY university
+            """;
+
+        Map<String, Integer> universityCounts = new HashMap<>();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                String university = resultSet.getString("university");
+                int count = resultSet.getInt("student_count");
+                universityCounts.put(university, count);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return universityCounts;
+    }
 }

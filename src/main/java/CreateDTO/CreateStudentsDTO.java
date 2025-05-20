@@ -12,6 +12,7 @@ public class CreateStudentsDTO {
     private String major;
     private String priority;
 
+
     public CreateStudentsDTO(String firstName, String lastName, String email, String password, Double gpa, Integer yearOfStudy, String university, String faculty, String major, String priority) {
         this.firstName = firstName;
         this.lastName = lastName;
