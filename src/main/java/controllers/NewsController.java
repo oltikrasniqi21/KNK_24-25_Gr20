@@ -22,7 +22,7 @@ public class NewsController {
     private TextArea contentField;
 
     @FXML
-    private ChoiceBox<Integer> scholarshipChoiceBox;
+    private ChoiceBox<Integer> scholarshipTagChoiceBox;
 
     @FXML
     private TableView<News> newsTable;
@@ -32,6 +32,8 @@ public class NewsController {
     private TableColumn<News, String> newsScholarshipCol;
     @FXML
     private TableColumn<News, Void> newsActionCol;
+    @FXML
+    private TextArea summaryField;
 
 
     private final NewsRepository newsRepository = new NewsRepository();
@@ -41,15 +43,16 @@ public class NewsController {
         // Get the values from the form fields
         String title = titleField.getText();
         String content = contentField.getText();
+        String summary = summaryField.getText();
 
         // If the scholarshipChoiceBox is not null, get selected value
-        Integer scholarshipTagId = scholarshipChoiceBox.getValue() != null ? scholarshipChoiceBox.getValue() : null;
+        Integer scholarshipTagId = scholarshipTagChoiceBox.getValue() != null ? scholarshipTagChoiceBox.getValue() : null;
 
         // Assuming the logged-in user ID is available, this could be hardcoded or fetched from the session
         int postedBy = 1; // Replace with actual user ID logic
 
         // Create the DTO object with the gathered data
-        CreateNewsDTO createNewsDTO = new CreateNewsDTO(title, content, scholarshipTagId, postedBy);
+        CreateNewsDTO createNewsDTO = new CreateNewsDTO(title, content, scholarshipTagId, postedBy, summary);
 
         // Call the repository to insert the news into the database
         newsRepository.create(createNewsDTO);
@@ -62,7 +65,8 @@ public class NewsController {
         // Clear the form fields after publishing
         titleField.clear();
         contentField.clear();
-        scholarshipChoiceBox.setValue(null);
+        summaryField.clear();
+        scholarshipTagChoiceBox.setValue(null);
     }
 
     private void addDeleteButtonToTable() {
