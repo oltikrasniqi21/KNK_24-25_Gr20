@@ -35,11 +35,11 @@ public class MyProfileController {
     @FXML private Label passMatchLabel;
     @FXML private Label passwordHintLabel;
 
-    private UsersRepository usersRepository;
-    private Integer currentUserId;
-    private SignupService signupService;
+    private final UsersRepository usersRepository;
+    private final Integer currentUserId;
+    private final SignupService signupService;
     private Connection connection = DBCustomConnector.getConnection();
-    private Users currUser;
+    private final Users currUser;
     private boolean editable = false;
 
     public MyProfileController(){

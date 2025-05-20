@@ -37,4 +37,17 @@ public class LoginService {
             }
         }
     }
+    public int fetchUserIdByEmail(Connection conn, String email) throws Exception {
+        String query = "SELECT id FROM users WHERE email = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, email);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("id");
+                }
+            }
+        }
+        return -1; // For superadmin you might use -1 or 0, as they might not be in DB
+    }
+
 }

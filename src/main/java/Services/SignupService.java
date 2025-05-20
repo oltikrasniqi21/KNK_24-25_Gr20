@@ -14,7 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.sql.*;
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +27,7 @@ public class SignupService {
     private final UniversitiesRepository universitiesRepository;
     private final FacultiesRepository facultiesRepository;
     private final MajorsRepository majorsRepository;
-    private final UsersRepository usersRepository = new UsersRepository();
+    private final UsersRepository usersRepository;
 
     private final Map<String, Integer> universityNameToId = new HashMap<>();
     private final Map<String, Integer> facultyNameToId = new HashMap<>();
@@ -36,11 +36,18 @@ public class SignupService {
         this.universitiesRepository = new UniversitiesRepository();
         this.facultiesRepository = new FacultiesRepository();
         this.majorsRepository = new MajorsRepository();
+        this.usersRepository = new UsersRepository();
     }
 
     public boolean isValidStudentEmail(String email) {
         String regex = "^[\\w.-]+@student\\.uni-[a-z]{2,10}\\.edu$";
         return Pattern.matches(regex, email);
+    }
+
+    public boolean emailContainsNameAndSurname(String email, String firstName, String lastName) {
+        if (email == null || firstName == null || lastName == null) return false;
+        String emailLower = email.toLowerCase();
+        return emailLower.contains(firstName.toLowerCase()) && emailLower.contains(lastName.toLowerCase());
     }
 
     public boolean isValidPassword(String password) {

@@ -33,8 +33,8 @@ public class ManageScholarshipsController {
     @FXML private TextField searchStudent;
     @FXML private Button btnEdit;
 
-    private ScholarshipsRepository scholarshipsRepository;
-    private ScholarshipService scholarshipService;
+    private final ScholarshipsRepository scholarshipsRepository;
+    private final ScholarshipService scholarshipService;
     public static Scholarships passedSelectedScholarship;
 
     public ManageScholarshipsController(){
