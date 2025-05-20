@@ -58,6 +58,25 @@ abstract class BaseRepository<Model, CreateModelDto, UpdateModelDto> {
         return false;
     }
 
+    public int getRowCount(){
+        String query = "SELECT COUNT(*) AS count FROM "  + this.tableName;
+                ;
+        int totalCount = 0;
+
+        try(PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery()){
+
+            while(resultSet.next()) {
+                totalCount = resultSet.getInt("count");
+            }
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return totalCount;
+    }
+
     abstract Model create(CreateModelDto createDto);
     abstract Model update(UpdateModelDto updateDto);
 }

@@ -1,3 +1,8 @@
+.root {
+    -fx-font-family: "Poppins", sans-serif;
+    -fx-font-size: 14px;
+}
+
 #leftVbox {
     -fx-background-color: #00A859;
     -fx-padding: 20 0 20 20;
@@ -31,5 +36,79 @@
 Pane {
     -fx-background-color: #f0f2f5;
 }
+
+.card-title {
+    -fx-font-size: 20px;
+    -fx-text-fill: #333;
+    -fx-font-weight: bold;
+}
+
+.card-number {
+    -fx-font-size: 36px;
+    -fx-text-fill: #222;
+    -fx-font-weight: bold;
+}
+
+#totalUsersCard, #totalScholarshipsCard, #totalApplicationsCard {
+    -fx-background-color: #FFFFFF;
+
+    -fx-padding: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 12, 0.5, 0, 2);
+}
+
+#centerVbox{
+    -fx-padding: 70px;
+}
+.pie-chart {
+    -fx-background-color: transparent;
+    -fx-padding: 30px;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.1), 4, 0, 2, 2 );
+}
+
+
+
+#usersStatusPieChart .default-color0 {
+    -fx-pie-color: #FF6B6B;
+}
+#usersStatusPieChart .default-color1 {
+    -fx-pie-color: #00C04B;
+}
+
+
+#applicationStatusPieChart .default-color0 {
+    -fx-pie-color: #FF6B6B;
+}
+#applicationStatusPieChart .default-color1 {
+    -fx-pie-color: #00C04B;
+}
+
+#userRolePieChart .default-color0 {
+    -fx-pie-color: #1abc9c;
+}
+#userRolePieChart .default-color1 {
+    -fx-pie-color: #f39c12;
+}
+
+
+.pie-chart .chart-legend-item {
+    -fx-font-size: 12px;
+    -fx-text-fill: #444;
+}
+
+.pie-chart .chart-pie-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-fill: #333;
+}
+
+.pie-chart .chart-pie:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+
 
 

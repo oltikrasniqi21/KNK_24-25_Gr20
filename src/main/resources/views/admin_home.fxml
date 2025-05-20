@@ -56,17 +56,39 @@
       </VBox>
    </left>
    <center>
-      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <content>
-            <VBox prefHeight="234.0" prefWidth="558.0">
-               <children>
-                  <HBox prefHeight="234.0" prefWidth="200.0">
-                     <children>
-                        <PieChart fx:id="usersStatusPieChart" prefHeight="262.0" prefWidth="251.0" title="%userStatus.pieChart" />
-                        <PieChart fx:id="applicationStatusPieChart" prefHeight="234.0" prefWidth="306.0" title="%applicationStatus.pieChart" />
-                     </children></HBox>
+      <VBox fx:id="centerVbox" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <HBox alignment="CENTER" spacing="20" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+            <children>
+               <!-- Card for Total Users -->
+               <VBox fx:id="totalUsersCard" alignment="CENTER" prefHeight="150" prefWidth="260" spacing="10">
+                  <Label styleClass="card-title" text="Total Users" />
+                  <Label fx:id="totalUsersLabel" styleClass="card-number" />
+               </VBox>
+               <Region HBox.hgrow="ALWAYS" />
+
+               <!-- Card for Total Scholarships -->
+               <VBox fx:id="totalScholarshipsCard" alignment="CENTER" prefHeight="150" prefWidth="260" spacing="10">
+                  <Label styleClass="card-title" text="Total Scholarships" />
+                  <Label fx:id="totalScholarshipsLabel" styleClass="card-number" />
+               </VBox>
+               <Region HBox.hgrow="ALWAYS" />
+               <!-- Card for Total Applications -->
+               <VBox fx:id="totalApplicationsCard" alignment="CENTER" prefHeight="150" prefWidth="260" spacing="10">
+                  <Label styleClass="card-title" text="Total Applications" />
+                  <Label fx:id="totalApplicationsLabel" styleClass="card-number" />
+               </VBox>
+            </children>
+         </HBox>
+
+         <HBox alignment="CENTER" prefHeight="350">
+                 <children>
+                  <PieChart fx:id="usersStatusPieChart" prefHeight="300" prefWidth="300" title="%userStatus.pieChart" />
+                  <Region HBox.hgrow="ALWAYS" />
+                  <PieChart fx:id="applicationStatusPieChart" prefHeight="300" prefWidth="300" title="%applicationStatus.pieChart" />
+                  <Region HBox.hgrow="ALWAYS" />
+                  <PieChart fx:id="userRolePieChart" prefHeight="300" prefWidth="300" title="%userRole.pieChart" />
                </children>
-            </VBox>
-         </content></ScrollPane>
+         </HBox>
+      </VBox>
    </center>
 </BorderPane>

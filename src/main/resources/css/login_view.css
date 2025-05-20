@@ -1,6 +1,6 @@
 .root {
     -fx-font-family: "Poppins", sans-serif;
-    -fx-font-size: 14px; /* you can adjust the font size */
+    -fx-font-size: 14px;
 }
 
 #backgroundPane{

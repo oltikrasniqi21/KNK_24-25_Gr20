@@ -137,4 +137,5 @@ public class ApplicationsRepository extends BaseRepository<Applications, CreateA
 
         return  applicationCount;
     }
+
 }
