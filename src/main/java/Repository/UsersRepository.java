@@ -11,10 +11,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UsersRepository {
+public class UsersRepository{
 
     private final Connection connection;
+
     public UsersRepository() {
+        super();
         this.connection = DBCustomConnector.getConnection();
     }
 
@@ -40,10 +42,10 @@ public class UsersRepository {
         String query = "SELECT * FROM USERS WHERE id = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1,id);
+            preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            if(resultSet.next()) {
+            if (resultSet.next()) {
                 return Users.getInstance(resultSet);
             }
             return null;
@@ -53,15 +55,15 @@ public class UsersRepository {
         }
     }
 
-    public String getHashedPassword(int id){
+    public String getHashedPassword(int id) {
         String query = "SELECT password FROM users where id = ?";
 
-        try{
+        try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 return resultSet.getString("password");
             }
             return null;
@@ -72,14 +74,14 @@ public class UsersRepository {
         }
     }
 
-    public String getStudentNameById(int studentId){
+    public String getStudentNameById(int studentId) {
         String query = "SELECT first_name, last_name FROM users WHERE id = ?";
-        try{
+        try {
             PreparedStatement preparedStatement = this.connection.prepareStatement(query);
             preparedStatement.setInt(1, studentId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 String firstName = resultSet.getString("first_name");
                 String lastName = resultSet.getString("last_name");
                 return firstName + " " + lastName;
@@ -106,7 +108,6 @@ public class UsersRepository {
         }
         return students;
     }
-
 
 
     public List<Students> searchStudents(String searchTerm) {
@@ -178,19 +179,19 @@ public class UsersRepository {
         return users;
     }
 
-    public void updateStudentGPA(int studentId, double gpa){
+    public void updateStudentGPA(int studentId, double gpa) {
         String query = "UPDATE students SET gpa = ? WHERE id = ?";
-        try{
+        try {
             PreparedStatement preparedStatement = this.connection.prepareStatement(query);
-            preparedStatement.setDouble(1,gpa);
+            preparedStatement.setDouble(1, gpa);
             preparedStatement.setInt(2, studentId);
             preparedStatement.execute();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public Users updateInfo(UpdateUserDTO updateUserDTO){
+    public Users updateInfo(UpdateUserDTO updateUserDTO) {
         String query = """
                 UPDATE users SET
                 first_name = ?,
@@ -199,7 +200,7 @@ public class UsersRepository {
                 role = ?
                 WHERE ID = ?
                 """;
-        try{
+        try {
             PreparedStatement preparedStatement = this.connection.prepareStatement(query);
             preparedStatement.setString(1, updateUserDTO.getFirstName());
             preparedStatement.setString(2, updateUserDTO.getLastName());
@@ -207,7 +208,7 @@ public class UsersRepository {
             preparedStatement.setString(4, updateUserDTO.getRole());
             preparedStatement.setInt(5, updateUserDTO.getId());
             int updateRow = preparedStatement.executeUpdate();
-            if(updateRow == 1){
+            if (updateRow == 1) {
                 return this.getById(updateUserDTO.getId());
             }
         } catch (SQLException e) {
@@ -216,18 +217,18 @@ public class UsersRepository {
         return null;
     }
 
-    public Users updatePassword(UpdateUserDTO updateUserDTO){
+    public Users updatePassword(UpdateUserDTO updateUserDTO) {
         String query = """
                 UPDATE users SET
                 password = ?
                 WHERE ID = ?
                 """;
-        try{
+        try {
             PreparedStatement preparedStatement = this.connection.prepareStatement(query);
-            preparedStatement.setString(1,updateUserDTO.getPassword());
+            preparedStatement.setString(1, updateUserDTO.getPassword());
             preparedStatement.setInt(2, updateUserDTO.getId());
             int updateRow = preparedStatement.executeUpdate();
-            if(updateRow == 1){
+            if (updateRow == 1) {
                 return this.getById(updateUserDTO.getId());
             }
         } catch (SQLException e) {
@@ -241,9 +242,9 @@ public class UsersRepository {
         connection.setAutoCommit(false);
         try {
             String insertUserSQL = """
-        INSERT INTO users (password, first_name, last_name, email, role)
-        VALUES (?, ?, ?, ?, 'student')
-        """;
+                    INSERT INTO users (password, first_name, last_name, email, role)
+                    VALUES (?, ?, ?, ?, 'student')
+                    """;
             try (PreparedStatement userStmt = connection.prepareStatement(insertUserSQL, Statement.RETURN_GENERATED_KEYS)) {
                 userStmt.setString(1, passwordToStore);
                 userStmt.setString(2, firstName);
@@ -256,9 +257,9 @@ public class UsersRepository {
                     int userId = rs.getInt(1);
 
                     String insertStudentSQL = """
-                INSERT INTO students (id, gpa, year_of_study, university, faculty, major, priority, document_path)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-                """;
+                            INSERT INTO students (id, gpa, year_of_study, university, faculty, major, priority, document_path)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                            """;
                     try (PreparedStatement studentStmt = connection.prepareStatement(insertStudentSQL)) {
                         studentStmt.setInt(1, userId);
                         studentStmt.setNull(2, java.sql.Types.DOUBLE);
@@ -281,30 +282,71 @@ public class UsersRepository {
         }
 
     }
-  
-   public Map<String, Integer> countUsersByStatus() {
-       String query = """
-               SELECT status, COUNT(*) AS user_count
-               FROM users
-               GROUP BY status
-               """;
 
-       Map<String, Integer> statusCounts = new HashMap<>();
+    public Map<String, Integer> countUsersByStatus() {
+        String query = """
+                SELECT status, COUNT(*) AS user_count
+                FROM users
+                GROUP BY status
+                """;
 
-       try (PreparedStatement preparedStatement = connection.prepareStatement(query);
-            ResultSet resultSet = preparedStatement.executeQuery()) {
+        Map<String, Integer> statusCounts = new HashMap<>();
 
-           while (resultSet.next()) {
-               String status = resultSet.getString("status");
-               int count = resultSet.getInt("user_count");
-               statusCounts.put(status, count);
-           }
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
 
-       } catch (SQLException e) {
-           e.printStackTrace();
-       }
+            while (resultSet.next()) {
+                String status = resultSet.getString("status");
+                int count = resultSet.getInt("user_count");
+                statusCounts.put(status, count);
+            }
 
-       return statusCounts;
-   }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
+        return statusCounts;
+    }
+
+    public Map<String, Integer> countUsersByRole() {
+        String query = """
+                SELECT role, COUNT(*) AS role_count
+                FROM users
+                GROUP BY role
+                """;
+        Map<String, Integer> roleCounts = new HashMap<>();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                String role = resultSet.getString("role");
+                int count = resultSet.getInt("role_count");
+                roleCounts.put(role, count);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return roleCounts;
+    }
+
+    public int getUserCount() {
+        String query = """
+                SELECT COUNT(*) AS total_users FROM users;
+                """;
+        int totalUsers = 0;
+
+        try(PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery()){
+
+            while(resultSet.next()) {
+                totalUsers = resultSet.getInt("total_users");
+            }
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return totalUsers;
+    }
 }

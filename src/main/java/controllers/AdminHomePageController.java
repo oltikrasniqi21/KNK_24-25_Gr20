@@ -9,7 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
 import javafx.scene.layout.BorderPane;
 import utils.SceneLocator;
-
+import javafx.scene.control.Label;
 import java.io.IOException;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -38,6 +38,20 @@ public class AdminHomePageController {
     @FXML
     private PieChart applicationStatusPieChart;
 
+    @FXML
+    private PieChart userRolePieChart;
+
+    @FXML
+    private Label totalUsersLabel;
+
+    @FXML
+    private Label totalApplicationsLabel;
+
+    @FXML
+    private Label totalScholarshipsLabel;
+
+
+
     private DashboardService dashboardService = new DashboardService();
 
     public void initialize(){
@@ -54,6 +68,22 @@ public class AdminHomePageController {
             PieChart.Data slice = new PieChart.Data(status, count);
             applicationStatusPieChart.getData().add(slice);
         });
+
+        Map<String, Integer> roleContent = dashboardService.getUserRoleCounts();
+
+        roleContent.forEach((status,count)->{
+            PieChart.Data slice = new PieChart.Data(status, count);
+            userRolePieChart.getData().add(slice);
+        });
+
+        int userCount = dashboardService.getUserCount();
+        totalUsersLabel.setText(String.valueOf(userCount));
+
+        int scholarshipCount = dashboardService.getScholarshipCount();
+        totalScholarshipsLabel.setText(String.valueOf(scholarshipCount));
+
+        int applicationCount = dashboardService.getApplicationCount();
+        totalApplicationsLabel.setText(String.valueOf(applicationCount));
 
     }
 
