@@ -80,13 +80,13 @@
             </children>
          </HBox>
 
-         <HBox alignment="CENTER" prefHeight="234.0">
+         <HBox alignment="CENTER" prefHeight="350">
                  <children>
-                  <PieChart fx:id="usersStatusPieChart" prefHeight="262.0" prefWidth="251.0" title="%userStatus.pieChart" />
+                  <PieChart fx:id="usersStatusPieChart" prefHeight="300" prefWidth="300" title="%userStatus.pieChart" />
                   <Region HBox.hgrow="ALWAYS" />
-                  <PieChart fx:id="applicationStatusPieChart" prefHeight="234.0" prefWidth="111.0" title="%applicationStatus.pieChart" />
+                  <PieChart fx:id="applicationStatusPieChart" prefHeight="300" prefWidth="300" title="%applicationStatus.pieChart" />
                   <Region HBox.hgrow="ALWAYS" />
-                  <PieChart fx:id="userRolePieChart" prefHeight="234.0" prefWidth="253.0" title="%userRole.pieChart" />
+                  <PieChart fx:id="userRolePieChart" prefHeight="300" prefWidth="300" title="%userRole.pieChart" />
                </children>
          </HBox>
       </VBox>

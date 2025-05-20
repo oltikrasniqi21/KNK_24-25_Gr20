@@ -5,9 +5,12 @@ import Services.LanguageManager;
 import Services.SceneManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import utils.SceneLocator;
 import javafx.scene.control.Label;
 import java.io.IOException;
@@ -84,6 +87,10 @@ public class AdminHomePageController {
 
         int applicationCount = dashboardService.getApplicationCount();
         totalApplicationsLabel.setText(String.valueOf(applicationCount));
+
+        HBox.setMargin(usersStatusPieChart, new Insets(40, 0, 20, 0));
+        HBox.setMargin(applicationStatusPieChart, new Insets(40, 0, 20, 0));
+        HBox.setMargin(userRolePieChart, new Insets(40, 0, 20, 0));
 
     }
 
