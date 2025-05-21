@@ -1,12 +1,10 @@
 package controllers;
 
 import Services.CreateUserService;
-import Services.SceneManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import utils.SceneLocator;
 
 public class CreateUsersController {
     @FXML private TextField txtEmri;
