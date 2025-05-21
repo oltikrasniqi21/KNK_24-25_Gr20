@@ -1,8 +1,11 @@
 package controllers;
 
 import CreateDTO.CreateApplicationDto;
+import Exceptions.EmptyFieldException;
+import Exceptions.InvalidFieldException;
 import Services.ApplicationService;
 import Services.CurrentUser;
+import Services.LocaleAlertMessages;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
@@ -10,10 +13,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import models.Scholarships;
+import utils.AlertMessages;
 
 import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
 
 public class ApplicationFormController {
 
@@ -67,27 +72,39 @@ public class ApplicationFormController {
 
             String error = applicationService.submitApplication(applicationDto);
             if (error != null){
-                showAlert("Gabim", error);
+                LocaleAlertMessages.showErrorAlert(AlertMessages.ERROR);
                 return;
             }
 
-            showAlert("Sukses", "Aplikimi u krye me sukses!");
+            LocaleAlertMessages.showInformationAlert(AlertMessages.SUCCESSFUL_APPLICATION_BUNDLE);
             resetForm();
         }catch (Exception e){
             e.printStackTrace();
-            showAlert("Gabim", "Ndodhi nje gabim i papritur.");
+            LocaleAlertMessages.showErrorAlert(AlertMessages.SOMETHING_WRONG);
         }
     }
 
     private boolean valideInput(){
         if (scholarshipComboBox.getItems() == null){
-            showAlert("Gabim", "Ju lutem zgjedheni nje burse");
-            return false;
+            throw new InvalidFieldException(AlertMessages.SCHOLARSHIP);
+        }
+
+        if (gpaField.getText().isEmpty()){
+            throw new InvalidFieldException(AlertMessages.GPA);
+        }
+
+        try{
+            double gpa = Double.parseDouble(gpaField.getText());
+            if (gpa <= 6 || gpa >= 10){
+                LocaleAlertMessages.showInformationAlert(AlertMessages.GPA_VALIDATION);
+                return false;
+            }
+        }catch (NumberFormatException e){
+            throw new InvalidFieldException(AlertMessages.GPA);
         }
 
         if (transcriptFile == null){
-            showAlert("Gabim", "Ju lutem ngarkoni transkripten tuaj");
-            return false;
+            throw new EmptyFieldException("Transcript");
         }
         return true;
     }
@@ -107,13 +124,5 @@ public class ApplicationFormController {
     private void resetForm(){
         scholarshipComboBox.setValue(null);
         gpaField.clear();
-    }
-
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }

@@ -1,10 +1,12 @@
 package controllers;
 
 import Services.CreateUserService;
+import Services.LocaleAlertMessages;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import utils.AlertMessages;
 
 public class CreateUsersController {
     @FXML private TextField txtEmri;
@@ -30,10 +32,10 @@ public class CreateUsersController {
         }
 
         if (createUserService.createAdminUser(firstName, lastName, email, password)) {
-            showAlert("Success", "Admin user added successfully.");
+            LocaleAlertMessages.showInformationAlert(AlertMessages.SUCCESSFUL_ADD_BUNDLE);
             clearFields();
         } else {
-            showAlert("Error", "Failed to add user.");
+            LocaleAlertMessages.showErrorAlert(AlertMessages.FAILED_ADD_BUNDLE);
         }
     }
 

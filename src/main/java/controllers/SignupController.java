@@ -1,5 +1,7 @@
 package controllers;
 
+import Exceptions.EmptyFieldException;
+import Exceptions.InvalidFieldException;
 import Services.SceneManager;
 import Services.UniversityService;
 import javafx.fxml.FXML;
@@ -8,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import Services.SignupService;
+import utils.AlertMessages;
 import utils.SceneLocator;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
@@ -52,7 +55,7 @@ public class SignupController {
     @FXML
     private ComboBox<String> yearComboBox;
 
-    private SignupService signupService = new SignupService();
+    private final SignupService signupService ;
 
     private File selectedPdfFile;
 
@@ -101,13 +104,11 @@ public class SignupController {
 
         if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty() ||
                 university == null || faculty == null || major == null || year == null || selectedPdfFile == null) {
-            showAlert(MISSING_INFO, FILL_ALL_FIELDS);
-            return;
+            throw new EmptyFieldException();
         }
 
         if (!signupService.isValidStudentEmail(email)) {
-            showAlert(INVALID_EMAIL, EMAIL_REQUIREMENTS);
-            return;
+            throw new InvalidFieldException(EMAIL);
         }
         if (!signupService.emailContainsNameAndSurname(email, firstName, lastName)) {
             showAlert(INVALID_EMAIL, "Email must contain your first and last name.");
@@ -115,8 +116,7 @@ public class SignupController {
         }
 
         if (!signupService.isValidPassword(password)) {
-            showAlert(INVALID_PASSWORD, PASSWORD_REQUIREMENTS);
-            return;
+            throw new InvalidFieldException(PASSWORD_REQUIREMENTS);
         }
 
         String filePath = null;
