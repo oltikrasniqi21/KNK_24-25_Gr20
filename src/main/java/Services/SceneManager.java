@@ -13,7 +13,7 @@ public class SceneManager {
     private String currentPath;
     private LanguageManager languageManager;
 
-    private static final String DEFAULT_START_PAGE = SceneLocator.ADMIN_HOME_PAGE;
+    private static final String DEFAULT_START_PAGE = SceneLocator.STUDENT_HOME_PAGE;
 
     private SceneManager(){
         this.languageManager = LanguageManager.getInstance();

@@ -60,6 +60,19 @@
     -fx-effect: dropshadow( gaussian, rgba(0,168,89,0.5), 6, 0, 0, 2);
 }
 
+#chooseNewsImage{
+        -fx-background-color: #00A859;
+        -fx-text-fill: white;
+        -fx-font-weight: 600;
+        -fx-background-radius: 15px;
+        -fx-padding: 8 20;
+        -fx-cursor: hand;
+        -fx-border-color: transparent;
+        -fx-font-size: 14px;
+        -fx-effect: dropshadow( gaussian, rgba(0,168,89,0.5), 6, 0, 0, 2);
+        -fx-padding: 5px;
+}
+
 .button:hover {
     -fx-background-color: #00914e; /* slightly darker green */
     -fx-effect: dropshadow(gaussian, rgba(0,168,89,0.7), 8, 0.5, 0, 3);

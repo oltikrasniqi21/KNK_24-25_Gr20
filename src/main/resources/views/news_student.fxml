@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="352.0" prefWidth="430.0" stylesheets="@../css/news_student_view.css" vbarPolicy="AS_NEEDED" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StudentNewsController">
+   <content>
+       <GridPane fx:id="newsGrid" alignment="CENTER" hgap="20" vgap="20">
+       <columnConstraints>
+       </columnConstraints>
+       </GridPane>
+   </content>
+</ScrollPane>

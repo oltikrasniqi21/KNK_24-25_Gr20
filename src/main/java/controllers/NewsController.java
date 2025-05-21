@@ -6,15 +6,21 @@ import CreateDTO.CreateNewsDTO;
 import Repository.NewsRepository;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import models.News;
 import utils.SceneLocator;
 
+import java.io.File;
 
 
 public class NewsController {
@@ -43,6 +49,10 @@ public class NewsController {
     private VBox LVbox;
     @FXML
     private VBox RVbox;
+    @FXML
+    private Label lblSelectedImage;
+    @FXML
+    private File selectedImageFile;
 
 
     private final NewsRepository newsRepository = new NewsRepository();
@@ -54,19 +64,27 @@ public class NewsController {
         String content = contentField.getText();
         String summary = summaryField.getText();
 
+
+        if (selectedImageFile == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Image Selected");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select an image before publishing.");
+            alert.showAndWait();
+            return; // stop publishing if no image
+        }
+
+        String imagePath = selectedImageFile.getPath();
+
         // If the scholarshipChoiceBox is not null, get selected value
         Integer scholarshipTagId = scholarshipTagChoiceBox.getValue() != null ? scholarshipTagChoiceBox.getValue() : null;
 
-        // Assuming the logged-in user ID is available, this could be hardcoded or fetched from the session
         int postedBy = 1; // Replace with actual user ID logic
 
-        // Create the DTO object with the gathered data
-        CreateNewsDTO createNewsDTO = new CreateNewsDTO(title, content, scholarshipTagId, postedBy, summary);
+        CreateNewsDTO createNewsDTO = new CreateNewsDTO(title, content, scholarshipTagId, postedBy, summary, imagePath);
 
-        // Call the repository to insert the news into the database
         newsRepository.create(createNewsDTO);
 
-        // Optionally, show a confirmation message or reset the form fields
         System.out.println("News published successfully!");
 
         loadNews();
@@ -76,7 +94,9 @@ public class NewsController {
         contentField.clear();
         summaryField.clear();
         scholarshipTagChoiceBox.setValue(null);
-    }
+        selectedImageFile = null;
+        lblSelectedImage.setText("No file selected");
+}
 
     private void addDeleteButtonToTable() {
         Callback<TableColumn<News, Void>, TableCell<News, Void>> cellFactory = new Callback<>() {
@@ -160,5 +180,22 @@ public class NewsController {
     @FXML
     private void backToAdmin(javafx.event.ActionEvent event){
         SceneManager.getInstance().loadScene(SceneLocator.ADMIN_HOME_PAGE);
+    }
+
+
+    @FXML
+    private void handleChooseImage() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Image File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
+        );
+        File file = fileChooser.showOpenDialog(null);
+        if (file != null) {
+            selectedImageFile = file;
+            lblSelectedImage.setText(file.getName());
+        } else {
+            lblSelectedImage.setText("No file selected");
+        }
     }
 }

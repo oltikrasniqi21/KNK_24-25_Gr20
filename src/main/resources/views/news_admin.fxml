@@ -79,6 +79,10 @@
                         <ChoiceBox fx:id="scholarshipTagChoiceBox" maxHeight="-Infinity" maxWidth="500.0" prefHeight="26.0" prefWidth="300.0" />
                      </children>
                   </VBox>
+                  <HBox spacing="10">
+                     <Button fx:id="chooseNewsImage" onAction="#handleChooseImage" text="%choose.news.image" />
+                     <Label fx:id="lblSelectedImage" text="No file selected" />
+                  </HBox>
                   <HBox prefHeight="4.0" prefWidth="279.0">
                      <children>
                         <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" text="%btn.newsCancel" />

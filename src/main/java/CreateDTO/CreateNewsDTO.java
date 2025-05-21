@@ -9,14 +9,16 @@ public class CreateNewsDTO {
     private Integer scholarshipTagId; //Integer pasiqe mundet me qene null
     private int postedBy;
     private String summary;
+    private String imagePath;
 
 
-    public CreateNewsDTO(String title, String content, Integer scholarshipTagId, int postedBy, String summary) {
+    public CreateNewsDTO(String title, String content, Integer scholarshipTagId, int postedBy, String summary, String imagePath) {
         this.title = title;
         this.content = content;
         this.scholarshipTagId = scholarshipTagId;
         this.postedBy = postedBy;
         this.summary = summary;
+        this.imagePath = imagePath;
     }
 
     public String getTitle() {
@@ -39,7 +41,8 @@ public class CreateNewsDTO {
         return summary;
     }
 
-
-
+    public String getImagePath(){
+        return imagePath;
+    }
 
 }
