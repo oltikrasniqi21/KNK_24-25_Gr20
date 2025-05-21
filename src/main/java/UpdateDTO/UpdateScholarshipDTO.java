@@ -10,16 +10,16 @@ public class UpdateScholarshipDTO {
     private LocalDate deadline_date;
     private double required_gpa;
     private int required_year;
-    private String requred_major;
+    private String requred_faculties;
     private String status;
 
-    public UpdateScholarshipDTO(int scholarship_id, int amount, LocalDate deadline_date,double required_gpa, int required_year, String requred_major) {
+    public UpdateScholarshipDTO(int scholarship_id, int amount, LocalDate deadline_date,double required_gpa, int required_year, String requred_faculties) {
         this.scholarship_id = scholarship_id;
         this.amount = amount;
         this.deadline_date = deadline_date;
         this.required_gpa = required_gpa;
         this.required_year = required_year;
-        this.requred_major = requred_major;
+        this.requred_faculties = requred_faculties;
         this.status = "active";
     }
 
@@ -29,7 +29,7 @@ public class UpdateScholarshipDTO {
         this.deadline_date = scholarship.getDeadline_date();
         this.required_gpa = scholarship.getRequired_gpa();
         this.required_year = scholarship.getRequired_year();
-        this.requred_major = scholarship.getRequred_major();
+        this.requred_faculties = scholarship.getRequired_faculties();
         this.status = "active";
     }
 
@@ -53,8 +53,8 @@ public class UpdateScholarshipDTO {
         this.required_year = required_year;
     }
 
-    public void setRequred_major(String requred_major) {
-        this.requred_major = requred_major;
+    public void setRequred_faculties(String requred_faculties) {
+        this.requred_faculties = requred_faculties;
     }
 
     public int getScholarship_id() {
@@ -77,8 +77,8 @@ public class UpdateScholarshipDTO {
         return required_year;
     }
 
-    public String getRequred_major() {
-        return requred_major;
+    public String getRequred_faculties() {
+        return requred_faculties;
     }
 
     public void setActiveStatus(Boolean status) {

@@ -24,18 +24,10 @@ import static utils.AlertMessages.ERROR;
 import static utils.AlertMessages.showAlert;
 
 public class SignupService {
-    private final UniversitiesRepository universitiesRepository;
-    private final FacultiesRepository facultiesRepository;
-    private final MajorsRepository majorsRepository;
     private final UsersRepository usersRepository;
 
-    private final Map<String, Integer> universityNameToId = new HashMap<>();
-    private final Map<String, Integer> facultyNameToId = new HashMap<>();
 
-    public SignupService(Connection connection) {
-        this.universitiesRepository = new UniversitiesRepository();
-        this.facultiesRepository = new FacultiesRepository();
-        this.majorsRepository = new MajorsRepository();
+    public SignupService() {
         this.usersRepository = new UsersRepository();
     }
 
@@ -77,55 +69,6 @@ public class SignupService {
         String passwordToStore = salt + "$" + hashedPassword;
 
         usersRepository.signupStudent(passwordToStore, firstName, lastName, email, yearOfStudy, university, faculty, major, documentPath);
-    }
-
-    public void loadUniversities(ComboBox<String> universityComboBox) {
-        try {
-            List<Universities> universities = universitiesRepository.getAll();
-            universityComboBox.getItems().clear();
-            universityNameToId.clear();
-            for (Universities uni : universities) {
-                universityComboBox.getItems().add(uni.getName());
-                universityNameToId.put(uni.getName(), uni.getUniversityId());
-            }
-        } catch (Exception e) {
-            showAlert(ERROR, "Failed to load universities: " + e.getMessage());
-        }
-    }
-
-    public void loadFaculties(String selectedUniversity, ComboBox<String> facultyComboBox, ComboBox<String> majorComboBox) {
-        try {
-            int universityId = universityNameToId.get(selectedUniversity);
-            List<Faculties> faculties = facultiesRepository.getAll();
-            facultyComboBox.getItems().clear();
-            facultyNameToId.clear();
-            for (Faculties fac : faculties) {
-                if (fac.getUniversityId() == universityId) {
-                    facultyComboBox.getItems().add(fac.getName());
-                    facultyNameToId.put(fac.getName(), fac.getFacultyId());
-                }
-            }
-            facultyComboBox.setValue(null);
-            majorComboBox.getItems().clear();
-        } catch (Exception e) {
-            showAlert(ERROR, "Failed to load faculties: " + e.getMessage());
-        }
-    }
-
-    public void loadMajors(String selectedFaculty, ComboBox<String> majorComboBox) {
-        try {
-            int facultyId = facultyNameToId.get(selectedFaculty);
-            List<Majors> majors = majorsRepository.getAll();
-            majorComboBox.getItems().clear();
-            for (var major : majors) {
-                if (major.getFacultyId() == facultyId) {
-                    majorComboBox.getItems().add(major.getName());
-                }
-            }
-            majorComboBox.setValue(null);
-        } catch (Exception e) {
-            showAlert(ERROR, "Failed to load majors: " + e.getMessage());
-        }
     }
 
 }

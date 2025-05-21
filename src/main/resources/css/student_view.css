@@ -21,6 +21,11 @@
     -fx-cursor: hand;
 }
 
+.wrapped-text {
+    -fx-padding: 6px;
+    -fx-font-size: 14px;
+}
+
 #topHbox .button:hover {
     -fx-background-color: rgba(255, 255, 255, 0.2);
 }
@@ -36,3 +41,37 @@
 Pane {
     -fx-background-color: #f0f2f5;
 }
+
+#notificationTable {
+    -fx-font-size: 13px;
+    -fx-table-cell-border-color: transparent;
+    -fx-background-color: #f5f5f5;
+}
+
+.table-cell {
+    -fx-wrap-text: true;
+    -fx-alignment: TOP_LEFT;
+    -fx-padding: 5px;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #e0e0e0;
+}
+
+.table-view .column-header,
+.table-view .filler {
+    -fx-size: 32px;
+    -fx-border-color: transparent;
+}
+
+.table-column#dateColumn .table-cell {
+    -fx-alignment: CENTER_RIGHT;
+    -fx-text-fill: #555555;
+}
+
+.table-column#messageColumn .table-cell {
+    -fx-wrap-text: true;
+    -fx-text-fill: #333333;
+    -fx-alignment: TOP_LEFT;
+}
+

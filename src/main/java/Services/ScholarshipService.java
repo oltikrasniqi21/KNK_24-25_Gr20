@@ -24,7 +24,7 @@ public class ScholarshipService{
         for(Scholarships scholarship : scholarshipsArray){
             if(scholarship.getScholarship_name() == scholarshipDTO.getScholarship_name()
             && scholarship.getProvider() == scholarshipDTO.getProvider()){
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Kjo burse ekziston!");
+                LocaleAlertMessages.showErrorAlert(AlertMessages.ALREADY_EXIST_SCHOLARSHIP);
                 return null;
             }
         }
@@ -43,8 +43,7 @@ public class ScholarshipService{
 
 
         System.out.println("Service working...");
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, LocaleAlertMessages.getLocalizedMessage(AlertMessages.SUCCESSFUL_ADD_BUNDLE));
-        alert.showAndWait();
+        LocaleAlertMessages.showInformationAlert(AlertMessages.SUCCESSFUL_ADD_BUNDLE);
         return scholarshipRepository.create(scholarshipDTO); //Funksioni create e kthen Scholarships model
     }
 
@@ -61,11 +60,8 @@ public class ScholarshipService{
             throw new InvalidFieldException(AlertMessages.YEAR);
         }
 
-
         System.out.println("Service Update working...");
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, LocaleAlertMessages.getLocalizedMessage(AlertMessages.SUCCESSFUL_EDIT_BUNDLE));
-        alert.showAndWait();
+        LocaleAlertMessages.showInformationAlert(AlertMessages.SUCCESSFUL_EDIT_BUNDLE);
         return scholarshipRepository.update(scholarshipDTO); //Funksioni update e kthen Scholarships model
     }
-
 }

@@ -1,71 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageScholarshipsController">
-    <children>
-        <MenuBar VBox.vgrow="NEVER">
-            <menus>
-                <Menu mnemonicParsing="false" text="%menu.file">
-                    <items>
-                        <MenuItem text="%menuitem.new" />
-                        <MenuItem text="%menuitem.open" />
-                        <Menu text="%menuitem.openrecent" />
-                        <SeparatorMenuItem />
-                        <MenuItem text="%menuitem.close" />
-                        <MenuItem text="%menuitem.save" />
-                        <MenuItem text="%menuitem.save_as" />
-                        <MenuItem text="%menuitem.revert" />
-                        <SeparatorMenuItem />
-                        <MenuItem text="%menuitem.preferences" />
-                        <SeparatorMenuItem />
-                        <MenuItem text="%menuitem.quit" />
-                    </items>
-                </Menu>
-                <Menu text="%menu.edit">
-                    <items>
-                        <MenuItem text="%menuitem.undo" />
-                        <MenuItem text="%menuitem.redo" />
-                        <SeparatorMenuItem />
-                        <MenuItem text="%menuitem.cut" />
-                        <MenuItem text="%menuitem.copy" />
-                        <MenuItem text="%menuitem.paste" />
-                        <MenuItem text="%menuitem.delete" />
-                        <SeparatorMenuItem />
-                        <MenuItem text="%menuitem.select_all" />
-                        <MenuItem text="%menuitem.unselect_all" />
-                    </items>
-                </Menu>
-                <Menu text="%menu.help">
-                    <items>
-                        <MenuItem text="%menuitem.about" />
-                    </items>
-                </Menu>
-            </menus>
-        </MenuBar>
-        <AnchorPane VBox.vgrow="ALWAYS">
-            <children>
-                <Button fx:id="btnAddScholarship" layoutX="227.0" layoutY="21.0" onAction="#handleAddScholarshipClick" text="%add_scholarship" />
-                <Label layoutX="34.0" layoutY="20.0" text="%manage_scholarships">
-                    <font>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageScholarshipsController">
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="48.0" prefWidth="600.0">
+               <children>
+                  <Label text="%manage_scholarships">
+                     <font>
                         <Font size="18.0" />
-                    </font>
-                </Label>
-                <TextField fx:id="searchStudent" layoutX="34.0" layoutY="58.0" promptText="%search_scholarship" />
-                <Button fx:id="btnSearch" layoutX="200.0" layoutY="58.0" onAction="#handleSearchClick" text="%search" />
-                <TableView fx:id="scholarshipsTable" layoutX="8.0" layoutY="105.0" prefHeight="240.0" prefWidth="622.0">
-                    <columns>
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="600.0">
+               <children>
+                  <TextField fx:id="searchStudent" promptText="%search_scholarship" />
+                  <Button fx:id="btnSearch" onAction="#handleSearchClick" text="%search" />
+               </children>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </HBox>
+            <HBox prefHeight="252.0" prefWidth="600.0">
+               <children>
+                  <TableView fx:id="scholarshipsTable" prefHeight="189.0" prefWidth="600.0">
+                     <columns>
                         <TableColumn fx:id="scholarshipsIdColumn" prefWidth="39.200042724609375" text="%column.id" />
                         <TableColumn fx:id="scholarshipsNameColumn" prefWidth="71.20001220703125" text="%column.name" />
                         <TableColumn fx:id="scholarshipsProviderColumn" text="%column.institute" />
@@ -73,14 +46,22 @@
                         <TableColumn fx:id="scholarshipsDeadlineColumn" prefWidth="85.60003662109375" text="%column.deadline" />
                         <TableColumn fx:id="scholarshipsGpaColumn" prefWidth="59.199951171875" text="%gpa" />
                         <TableColumn fx:id="scholarshipsYearColumn" prefWidth="58.4000244140625" text="%col.year" />
-                        <TableColumn fx:id="scholarshipsMajorColumn" prefWidth="75.99993896484375" text="%column.drejtimi" />
-                  <TableColumn fx:id="scholarshipsStatusColumn" prefWidth="75.0" text="%col.status" />
-                    </columns>
-                </TableView>
-                <Button fx:id="btnBack" layoutX="528.0" layoutY="21.0" onAction="#handleBackClick" prefHeight="26.0" prefWidth="80.0" text="%back" />
-            <Button fx:id="btnEdit" layoutX="310.0" layoutY="57.0" mnemonicParsing="false" onAction="#handleEditClick" prefHeight="26.0" prefWidth="60.0" text="%edit" />
-            <Button layoutX="385.0" layoutY="58.0" mnemonicParsing="false" onAction="#handleDeleteClick" text="%key.delete" />
-            </children>
-        </AnchorPane>
-    </children>
-</VBox>
+                        <TableColumn fx:id="scholarshipsFacultiesColumn" prefWidth="75.99993896484375" text="%column.drejtimi" />
+                        <TableColumn fx:id="scholarshipsStatusColumn" prefWidth="75.0" text="%col.status" />
+                     </columns>
+                  </TableView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="62.0" prefWidth="600.0">
+               <children>
+                  <Button fx:id="btnAddScholarship" onAction="#handleAddScholarshipClick" prefHeight="26.0" prefWidth="120.0" text="%add_scholarship" />
+                  <Region prefHeight="200.0" prefWidth="65.0" />
+                  <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#handleEditClick" prefHeight="26.0" prefWidth="119.0" text="%edit" />
+                  <Region prefHeight="200.0" prefWidth="65.0" />
+                  <Button mnemonicParsing="false" onAction="#handleDeleteClick" prefHeight="26.0" prefWidth="120.0" text="%key.delete" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

@@ -22,6 +22,10 @@ public class Faculties {
         return new Faculties(facultyId, universityId, name);
     }
 
+    public String toString(){
+        return this.getName().toUpperCase();
+    }
+
     public int getFacultyId() {
         return facultyId;
     }
