@@ -29,7 +29,8 @@ CREATE TABLE scholarships(
 	deadline_date DATE NOT NULL,
 	required_gpa NUMERIC(3,2) CHECK (required_gpa IS NULL OR (required_gpa BETWEEN 6.00 AND 10.00)),
 	required_year INTEGER CHECK (required_year IS NULL OR (required_year BETWEEN 1 AND 5)),
-	required_major VARCHAR(50)
+	required_major VARCHAR(50),
+	status VARCHAR(20)
 );
 
 CREATE TABLE applications (
@@ -84,10 +85,12 @@ CREATE TABLE scholarship_tags (
 CREATE TABLE News (
   id SERIAL PRIMARY KEY,
   title TEXT NOT NULL,
+  summary TEXT NOT NULL,
   content TEXT NOT NULL,
-  scholarship_tag_id INT REFERENCES scholarship_tags(id) ON DELETE SET NULL,
-  posted_by INT REFERENCES Users(id),
-  posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  scholarship_tag_id INT REFERENCES scholarship_tags(tag_id) ON DELETE SET NULL,
+  posted_by INT REFERENCES Users(user_id),
+  posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  imagepath TEXT NOT NULL
 );
 
 CREATE TABLE Universities (

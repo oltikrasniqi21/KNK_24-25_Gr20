@@ -21,7 +21,7 @@ public class NewsRepository extends BaseRepository<News, CreateNewsDTO, UpdateNe
     }
     @Override
     public News create(CreateNewsDTO dto) {
-        String query = "INSERT INTO news(title,content,scholarship_tag_id,posted_by, summary) VALUES (?, ?, ?, ?, ?) RETURNING *";
+        String query = "INSERT INTO news(title,content,scholarship_tag_id,posted_by, summary, imagePath) VALUES (?, ?, ?, ?, ?, ?) RETURNING *";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setString(1, dto.getTitle());
@@ -33,6 +33,7 @@ public class NewsRepository extends BaseRepository<News, CreateNewsDTO, UpdateNe
             }
             stmt.setInt(4, dto.getPostedBy());
             stmt.setString(5, dto.getSummary());
+            stmt.setString(6, dto.getImagePath());
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
@@ -46,7 +47,7 @@ public class NewsRepository extends BaseRepository<News, CreateNewsDTO, UpdateNe
 
     @Override
     public News update(UpdateNewsDTO dto) {
-        String query = "UPDATE news SET  title = ?, content = ?, scholarship_tag_id = ?, summary = ? WHERE id = ? RETURNING *";
+        String query = "UPDATE news SET  title = ?, content = ?, scholarship_tag_id = ?, summary = ?, imagePath=? WHERE id = ? RETURNING *";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setString(1, dto.getTitle());
@@ -58,6 +59,7 @@ public class NewsRepository extends BaseRepository<News, CreateNewsDTO, UpdateNe
             }
             stmt.setString(4,dto.getSummary());
             stmt.setInt(5, dto.getNewsId());
+            stmt.setString(6, dto.getImagePath());
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {

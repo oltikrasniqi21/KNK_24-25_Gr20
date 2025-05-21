@@ -1,0 +1,120 @@
+.root {
+    -fx-font-family: "Poppins", sans-serif;
+    -fx-font-size: 14px;
+    -fx-background-color: #f0f2f5;
+}
+
+
+
+.v-box {
+    -fx-spacing: 15px;
+    -fx-padding: 20;
+    -fx-background-color: white;
+    -fx-background-radius: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0.5, 0, 2);
+}
+
+
+.label {
+    -fx-text-fill: #222;
+    -fx-font-weight: 600;
+}
+
+.label[text="%add.news.title"] {
+    -fx-font-size: 22px;
+    -fx-text-fill: #00A859;
+    -fx-padding: 0 0 10 0;
+}
+
+
+.text-area {
+    -fx-background-color: #fff;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 8;
+    -fx-font-size: 14px;
+    -fx-text-fill: #222;
+}
+
+
+.choice-box {
+    -fx-background-color: white;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 4 10;
+    -fx-font-size: 14px;
+}
+
+
+.button {
+    -fx-background-color: #00A859;
+    -fx-text-fill: white;
+    -fx-font-weight: 600;
+    -fx-background-radius: 15px;
+    -fx-padding: 8 20;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow( gaussian, rgba(0,168,89,0.5), 6, 0, 0, 2);
+}
+
+#chooseNewsImage{
+        -fx-background-color: #00A859;
+        -fx-text-fill: white;
+        -fx-font-weight: 600;
+        -fx-background-radius: 15px;
+        -fx-padding: 8 20;
+        -fx-cursor: hand;
+        -fx-border-color: transparent;
+        -fx-font-size: 14px;
+        -fx-effect: dropshadow( gaussian, rgba(0,168,89,0.5), 6, 0, 0, 2);
+        -fx-padding: 5px;
+}
+
+.button:hover {
+    -fx-background-color: #00914e; /* slightly darker green */
+    -fx-effect: dropshadow(gaussian, rgba(0,168,89,0.7), 8, 0.5, 0, 3);
+}
+
+.button:pressed {
+    -fx-background-color: #00793f; /* even darker for click */
+    -fx-effect: none; /* optional: remove shadow when pressed */
+}
+
+
+
+
+
+#newsTitle {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-font-weight: bold;
+
+}
+/* TableView with rounded corners and white background */
+.table-view {
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-effect: dropshadow( gaussian, rgba(0,0,0,0.1), 8, 0.5, 0, 2);
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 16px;
+    -fx-letter-spacing: 0.05em;
+    -fx-padding: 8 12 8 12;
+    -fx-font-family: "Poppins", sans-serif;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.3), 1, 0, 0, 1 );
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
+
+/* Layout spacing for the buttons container (HBox) */
+.h-box {
+    -fx-spacing: 10px;
+    -fx-padding: 10 0 0 0;
+}

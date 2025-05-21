@@ -8,13 +8,16 @@ public class UpdateNewsDTO {
     private String content;
     private Integer scholarshipTagId;
     private String summary;
+    private String imagePath;
 
-    public UpdateNewsDTO(int newsId, String title, String content, Integer scholarshipTagId, String summary) {
+    public UpdateNewsDTO(int newsId, String title, String content,
+                         Integer scholarshipTagId, String summary, String imagePath) {
         this.newsId = newsId;
         this.title = title;
         this.content = content;
         this.scholarshipTagId = scholarshipTagId;
         this.summary = summary;
+        this.imagePath = imagePath;
     }
 
     public void setNewsId(int newsId) {
@@ -35,6 +38,10 @@ public class UpdateNewsDTO {
 
     public void setSummary(String summary){
         this.summary = summary;
+    }
+
+    public void setImagePath(String imagePath){
+        this.imagePath = imagePath;
     }
 
 
@@ -58,4 +65,7 @@ public class UpdateNewsDTO {
         return summary;
     }
 
+    public String getImagePath(){
+        return imagePath;
+    }
 }

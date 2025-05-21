@@ -14,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import models.Notification;
 import utils.SceneLocator;
@@ -31,7 +32,7 @@ public class StudentHomePageController implements Initializable {
     private VBox notificationPane;
 
     @FXML
-    private VBox leftVbox;
+    private HBox topHbox;
 
     private List<javafx.scene.control.Button> menuButtons;
     private int currentIndex = 0;
@@ -106,9 +107,7 @@ public class StudentHomePageController implements Initializable {
         }
     }
 
-    @FXML private void handleViewProfileClick(){
-        SceneManager.getInstance().loadScene(SceneLocator.MY_PROFILE_PAGE);
-    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -127,7 +126,7 @@ public class StudentHomePageController implements Initializable {
         });
 
         // ===== Navigimi me tastierë për VBox me butona =====
-        menuButtons = leftVbox.getChildren().stream()
+        menuButtons = topHbox.getChildren().stream()
                 .filter(node -> node instanceof javafx.scene.control.Button)
                 .map(node -> (javafx.scene.control.Button) node)
                 .toList();
@@ -135,9 +134,9 @@ public class StudentHomePageController implements Initializable {
         if (!menuButtons.isEmpty()) {
             menuButtons.get(currentIndex).requestFocus();
         }
-        leftVbox.setOnKeyPressed(event -> handleKeyPress(event));
+        topHbox.setOnKeyPressed(event -> handleKeyPress(event));
 
-        javafx.application.Platform.runLater(() -> leftVbox.requestFocus());
+        javafx.application.Platform.runLater(() -> topHbox.requestFocus());
     }
 
     private void handleKeyPress(javafx.scene.input.KeyEvent event) {
@@ -174,4 +173,13 @@ public class StudentHomePageController implements Initializable {
     private void onViewApplicationClicked(){
         loadCenterContent(SceneLocator.APPLICATION_FORM);
     }
+
+    @FXML
+    private void loadNewsStudent() {
+        loadCenterContent(SceneLocator.NEWS_STUDENT);
+    }
+
+    @FXML
+    private void handleViewProfileClick(){loadCenterContent(SceneLocator.MY_PROFILE_PAGE);}
+
 }

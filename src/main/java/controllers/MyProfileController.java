@@ -31,7 +31,7 @@ public class MyProfileController {
     @FXML private TextField emailField;
     @FXML private PasswordField oldPasswordField;
     @FXML private PasswordField newPasswordField;
-    @FXML private AnchorPane passwordPane;
+    @FXML private VBox passwordPane;
     @FXML private Label passMatchLabel;
     @FXML private Label passwordHintLabel;
 

@@ -4,6 +4,7 @@ import Services.DashboardService;
 import Services.LanguageManager;
 import Services.SceneManager;
 import javafx.fxml.FXML;
+import Services.LanguageManager;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -17,10 +18,13 @@ import javafx.scene.layout.VBox;
 import utils.SceneLocator;
 import javafx.scene.control.Label;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 
 public class AdminHomePageController {
+    private final LanguageManager languageManager = LanguageManager.getInstance();
+
 
     @FXML
     private BorderPane mainLayout;
@@ -164,6 +168,21 @@ public class AdminHomePageController {
     private void handleAddUniversities(){loadCenterContent(SceneLocator.MANAGE_UNIVERSITIES);}
     @FXML
     private void handleStatistics(){loadCenterContent(SceneLocator.STATISTICS);}
+
+    private void loadLanguage(Locale locale) throws Exception {
+        languageManager.setLocale(locale);
+        SceneManager.reload();
+    }
+
+    @FXML
+    private void handleSQLanguageClick() throws Exception {
+        loadLanguage(new Locale("sq"));
+    }
+
+    @FXML
+    private void handleENLanguageClick() throws Exception {
+        loadLanguage(Locale.ENGLISH);
+    }
 
 }
 

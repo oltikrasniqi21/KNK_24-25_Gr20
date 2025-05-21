@@ -36,45 +36,70 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
-<BorderPane prefHeight="414.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NewsController">
+<BorderPane prefHeight="414.0" prefWidth="580.0" stylesheets="@../css/news_admin_view.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NewsController">
    <center>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="414.0" prefWidth="484.0">
+            <VBox fx:id="LVbox" alignment="CENTER" prefHeight="414.0" prefWidth="484.0">
                <children>
                   <HBox prefHeight="54.0" prefWidth="279.0">
                      <children>
-                        <Label text="%add.news.title">
+                        <Label fx:id="newsTitle" text="%add.news.title">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
-                  <Label prefHeight="18.0" prefWidth="72.0" text="%title.label" />
-                  <TextArea fx:id="titleField" prefHeight="42.0" prefWidth="200.0" />
-                  <Label text="%summary.label" />
-                  <TextArea fx:id="summaryField" prefHeight="55.0" prefWidth="279.0" />
-                  <Label text="%content.label" />
-                  <TextArea fx:id="contentField" prefHeight="71.0" prefWidth="200.0" />
-                  <Label text="%scholarships.label" />
-                  <ChoiceBox fx:id="scholarshipTagChoiceBox" prefHeight="26.0" prefWidth="200.0" />
+                  <VBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="18.0" prefWidth="72.0" text="%title.label" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="titleField" maxHeight="-Infinity" maxWidth="500.0" prefHeight="40.0" prefWidth="300.0" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="%summary.label" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <TextArea fx:id="summaryField" maxHeight="-Infinity" maxWidth="500.0" prefHeight="40.0" prefWidth="300.0" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="%content.label" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <TextArea fx:id="contentField" maxHeight="-Infinity" maxWidth="500.0" prefHeight="70.0" prefWidth="300.0" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="%scholarships.label" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <ChoiceBox fx:id="scholarshipTagChoiceBox" maxHeight="-Infinity" maxWidth="500.0" prefHeight="26.0" prefWidth="300.0" />
+                     </children>
+                  </VBox>
+                  <HBox spacing="10">
+                     <Button fx:id="chooseNewsImage" onAction="#handleChooseImage" text="%choose.news.image" />
+                     <Label fx:id="lblSelectedImage" text="No file selected" />
+                  </HBox>
                   <HBox prefHeight="4.0" prefWidth="279.0">
                      <children>
                         <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" text="%btn.newsCancel" />
+                        <Region HBox.hgrow="ALWAYS" />
                         <Button mnemonicParsing="false" onAction="#publishNews" prefHeight="26.0" prefWidth="96.0" text="%btn.newsPublish" />
                      </children>
                   </HBox>
                </children>
             </VBox>
-            <VBox prefHeight="414.0" prefWidth="505.0">
+            <VBox fx:id="RVbox" alignment="CENTER" prefHeight="414.0" prefWidth="505.0">
                <children>
-                  <HBox prefHeight="71.0" prefWidth="301.0" />
-                  <TableView fx:id="newsTable" prefHeight="291.0" prefWidth="363.0">
+                  <HBox alignment="CENTER" prefHeight="71.0" prefWidth="301.0" />
+                  <TableView fx:id="newsTable" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="500.0">
                     <columns>
                         <TableColumn fx:id="newsTitleCol" text="%news.title.col" />
-                        <TableColumn fx:id="newsScholarshipCol" text="%news.scholarship.col" />
+                       <TableColumn fx:id="newsSummaryCol" text="%news.summary.col" />
+                       <TableColumn fx:id="newsScholarshipCol" text="%news.scholarship.col" />
                         <TableColumn fx:id="newsActionCol" text="%news.action.col" />
                     </columns>
                   </TableView>

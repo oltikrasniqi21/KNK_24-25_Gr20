@@ -40,18 +40,25 @@
    <left>
       <VBox fx:id="leftVbox" prefHeight="470.0" prefWidth="249.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="dashboardBtn" onAction="#handleDashboardClick" prefHeight="45.0" prefWidth="293.0" text="%dashboard.label" styleClass="leftButton"/>
-            <Button mnemonicParsing="false" onAction="#handleStatistics" prefHeight="43.0" prefWidth="294.0" text="%btn.statistics" styleClass="leftButton" />
-            <Button mnemonicParsing="false" onAction="#handleNotification" prefHeight="43.0" prefWidth="328.0" text="%btn.notification" styleClass="leftButton" />
-            <Button mnemonicParsing="false" onAction="#handleManageScholarships" prefHeight="43.0" prefWidth="421.0" text="%btn.manageScholarship" styleClass="leftButton" />
-            <Button mnemonicParsing="false" onAction="#handleViewApplications" prefHeight="43.0" prefWidth="301.0" text="%btn.viewApplication" styleClass="leftButton" />
-            <Button mnemonicParsing="false" onAction="#handleManageUsers" prefHeight="43.0" prefWidth="248.0" text="%btn.manageUsers" styleClass="leftButton" />
-            <Button mnemonicParsing="false" onAction="#handleNews" prefHeight="43.0" prefWidth="356.0" text="%btn.news" styleClass="leftButton" />
-            <Button mnemonicParsing="false" onAction="#handleManageStudents" prefHeight="43.0" prefWidth="368.0" text="%btn.listStudents" styleClass="leftButton" />
-            <Button mnemonicParsing="false" onAction="#handleFAQ" prefHeight="43.0" prefWidth="337.0" text="%btn.faq" styleClass="leftButton" />
-            <Button mnemonicParsing="false" onAction="#handleFeedback" prefHeight="43.0" prefWidth="434.0" text="%btn.feedback" styleClass="leftButton"/>
-            <Button mnemonicParsing="false" onAction="#handleAddUniversities" prefHeight="43.0" prefWidth="296.0" text="%btn.addUniversities" styleClass="leftButton" />
-            <Button mnemonicParsing="false" onAction="#handleLogout" prefHeight="43.0" prefWidth="331.0" text="%btn.logout" styleClass="leftButton"/>
+            <Button fx:id="dashboardBtn" onAction="#handleDashboardClick" prefHeight="45.0" prefWidth="293.0" styleClass="leftButton" text="%dashboard.label" />
+            <Button mnemonicParsing="false" onAction="#handleStatistics" prefHeight="43.0" prefWidth="294.0" styleClass="leftButton" text="%btn.statistics" />
+            <Button mnemonicParsing="false" onAction="#handleNotification" prefHeight="43.0" prefWidth="328.0" styleClass="leftButton" text="%btn.notification" />
+            <Button mnemonicParsing="false" onAction="#handleManageScholarships" prefHeight="43.0" prefWidth="421.0" styleClass="leftButton" text="%btn.manageScholarship" />
+            <Button mnemonicParsing="false" onAction="#handleViewApplications" prefHeight="43.0" prefWidth="301.0" styleClass="leftButton" text="%btn.viewApplication" />
+            <Button mnemonicParsing="false" onAction="#handleManageUsers" prefHeight="43.0" prefWidth="248.0" styleClass="leftButton" text="%btn.manageUsers" />
+            <Button mnemonicParsing="false" onAction="#handleNews" prefHeight="43.0" prefWidth="356.0" styleClass="leftButton" text="%btn.news" />
+            <Button mnemonicParsing="false" onAction="#handleManageStudents" prefHeight="43.0" prefWidth="368.0" styleClass="leftButton" text="%btn.listStudents" />
+            <Button mnemonicParsing="false" onAction="#handleFAQ" prefHeight="43.0" prefWidth="337.0" styleClass="leftButton" text="%btn.faq" />
+            <Button mnemonicParsing="false" onAction="#handleFeedback" prefHeight="43.0" prefWidth="434.0" styleClass="leftButton" text="%btn.feedback" />
+            <Button mnemonicParsing="false" onAction="#handleAddUniversities" prefHeight="43.0" prefWidth="296.0" styleClass="leftButton" text="%btn.addUniversities" />
+            <Button mnemonicParsing="false" onAction="#handleLogout" prefHeight="43.0" prefWidth="331.0" styleClass="leftButton" text="%btn.logout" />
+            <Region VBox.vgrow="ALWAYS" />
+            <HBox alignment="BASELINE_LEFT" prefHeight="96.0" prefWidth="263.0">
+               <children>
+                  <Button fx:id="englishButton" mnemonicParsing="false" onAction="#handleENLanguageClick" text="%english.button" />
+                  <Button fx:id="shqipButton" mnemonicParsing="false" onAction="#handleSQLanguageClick" text="%shqip.button" />
+               </children>
+            </HBox>
          </children>
       </VBox>
    </left>
