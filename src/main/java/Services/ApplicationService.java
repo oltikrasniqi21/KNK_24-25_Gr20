@@ -52,7 +52,7 @@ public class ApplicationService {
             return "Data e aplikimit nuk mund te jete ne te ardhmen!";
         }
 
-        if (dto.getGpa() < 6.0 || dto.getGpa() > 10.0){
+        if (dto.getGpa() < 6 || dto.getGpa() > 10.0){
             return "GPA duhet te jete midis 6 dhe 10!";
         }
 
