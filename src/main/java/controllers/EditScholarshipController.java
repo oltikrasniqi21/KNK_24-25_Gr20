@@ -1,35 +1,40 @@
 package controllers;
 
-import CreateDTO.CreateScholarshipDTO;
 import Exceptions.EmptyFieldException;
 import Exceptions.InvalidFieldException;
-import Repository.ScholarshipsRepository;
+import Repository.FacultiesRepository;
+import Repository.UniversitiesRepository;
 import Services.SceneManager;
 import Services.ScholarshipService;
+import Services.UniversityService;
 import UpdateDTO.UpdateScholarshipDTO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import models.Faculties;
 import models.Scholarships;
 import utils.AlertMessages;
 import utils.SceneLocator;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class EditScholarshipController {
 
     private final ScholarshipService scholarshipService;
+    private final FacultiesRepository facultiesRepository;
     private final Scholarships passedScholarship = ManageScholarshipsController.passedSelectedScholarship;
 
-    @FXML private TextField nameField;
-    @FXML private TextField providerField;
     @FXML private TextField amountField;
     @FXML private DatePicker deadlineField;
     @FXML private TextField gpaField;
-    @FXML private TextField yearField;
-    @FXML private TextField majorField;
+    @FXML private ComboBox<String> yearComboBox;
+    @FXML private ListView<Faculties> facultiesListView;
+    @FXML private Label prevSelected;
 
     public EditScholarshipController() {
+        this.facultiesRepository = new FacultiesRepository();
         this.scholarshipService = new ScholarshipService();
     }
 
@@ -38,26 +43,26 @@ public class EditScholarshipController {
         SceneManager.getInstance().loadScene(SceneLocator.MANAGE_SCHOLARSHIPS_PAGE);
     }
 
+
     public void initialize(){
         if(passedScholarship != null){
-            nameField.setText(passedScholarship.getScholarship_name());
-            nameField.setEditable(false);
-            providerField.setText(passedScholarship.getProvider());
-            providerField.setEditable(false);
-            majorField.setText(passedScholarship.getRequred_major());
             amountField.setText(Integer.toString(passedScholarship.getAmount()));
-            yearField.setText(Integer.toString(passedScholarship.getRequired_year()));
+            yearComboBox.setValue(Integer.toString(passedScholarship.getRequired_year()));
             gpaField.setText(Double.toString(passedScholarship.getRequired_gpa()));
             deadlineField.setValue(passedScholarship.getDeadline_date());
+            prevSelected.setText(passedScholarship.getRequired_faculties());
+
+            facultiesListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+            ObservableList<Faculties> faculties = FXCollections.observableArrayList(facultiesRepository.getAll());
+            facultiesListView.setItems(faculties);
+
         }
     }
 
     private void checkEmptyFields(){
-        if (nameField.getText().isEmpty() ||
-                providerField.getText().isEmpty() ||
-                majorField.getText().isEmpty() ||
+        if (facultiesListView.getSelectionModel() == null||
                 amountField.getText().isEmpty() ||
-                yearField.getText().isEmpty() ||
+                yearComboBox.getValue() ==null ||
                 gpaField.getText().isEmpty() ||
                 deadlineField.getValue() == null) {
             throw new EmptyFieldException();
@@ -65,16 +70,8 @@ public class EditScholarshipController {
     };
 
     private void checkInvalidTypeFields(){
-        if(!majorField.getText().matches("[a-zA-Z\\s]+")){
-            throw new InvalidFieldException(AlertMessages.MAJOR);
-        }
-
         if(!amountField.getText().matches("^\\d{2,4}$")){
             throw new InvalidFieldException(AlertMessages.AMOUNT);
-        }
-
-        if(!yearField.getText().matches("^\\d{1}$")){
-            throw new InvalidFieldException(AlertMessages.YEAR);
         }
 
         if(!gpaField.getText().matches("^[6,7,8,9,10]{1}\\.[0-9]{1,2}$")){
@@ -87,13 +84,21 @@ public class EditScholarshipController {
             checkEmptyFields();
             checkInvalidTypeFields();
 
-            String major = majorField.getText().toLowerCase();
             int amount = Integer.parseInt(amountField.getText());
-            int year = Integer.parseInt(yearField.getText());
+            int year = Integer.parseInt(yearComboBox.getValue());
             double gpa = Double.parseDouble(gpaField.getText());
             LocalDate deadline = deadlineField.getValue();
 
-            UpdateScholarshipDTO scholarshipDTO = new UpdateScholarshipDTO(passedScholarship.getScholarship_id(), amount,deadline,gpa,year,major);
+            ObservableList<Faculties> selectedItems = facultiesListView.getSelectionModel().getSelectedItems();
+            StringBuilder facultiesString = new StringBuilder();
+
+            for(Faculties x: selectedItems){
+                facultiesString.append(x.getName()+" - ");
+                System.out.println("added to StringBuilder");
+            }
+            System.out.println("FINAL: "+facultiesString);
+
+            UpdateScholarshipDTO scholarshipDTO = new UpdateScholarshipDTO(passedScholarship.getScholarship_id(), amount,deadline,gpa,year,facultiesString.toString());
             scholarshipService.update(scholarshipDTO);
             clearFields();
             System.out.println("SaveEdit Working...");
@@ -104,17 +109,15 @@ public class EditScholarshipController {
         }
     }
 
-    @FXML private void handleClearClick(){
+    @FXML private void handleResetClick(){
         clearFields();
     }
 
     private void clearFields(){
-        nameField.clear();
-        providerField.clear();
-        majorField.clear();
-        amountField.clear();
-        yearField.clear();
-        gpaField.clear();
-        deadlineField.setValue(null);
+        facultiesListView.getSelectionModel().clearSelection();
+        amountField.setText(Integer.toString(passedScholarship.getAmount()));
+        yearComboBox.setValue(Integer.toString(passedScholarship.getRequired_year()));
+        gpaField.setText(Double.toString(passedScholarship.getRequired_gpa()));
+        deadlineField.setValue(passedScholarship.getDeadline_date());
     }
 }

@@ -64,5 +64,4 @@ public class ScholarshipService{
         LocaleAlertMessages.showInformationAlert(AlertMessages.SUCCESSFUL_EDIT_BUNDLE);
         return scholarshipRepository.update(scholarshipDTO); //Funksioni update e kthen Scholarships model
     }
-
 }

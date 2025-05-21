@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -30,7 +31,7 @@
       <Button layoutX="463.0" layoutY="150.0" mnemonicParsing="false" onAction="#handleSaveClick" text="%key.save" />
       <Button layoutX="463.0" layoutY="198.0" mnemonicParsing="false" onAction="#handleClearClick" text="%key.clear" />
       <DatePicker fx:id="deadlineField" layoutX="65.0" layoutY="261.0" />
-      <ComboBox fx:id="facultyComboBox" layoutX="249.0" layoutY="198.0" prefWidth="150.0" />
       <ComboBox fx:id="yearComboBox" layoutX="249.0" layoutY="138.0" prefWidth="150.0" />
+      <ListView fx:id="facultiesListView" layoutX="249.0" layoutY="193.0" prefHeight="185.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

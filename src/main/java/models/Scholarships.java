@@ -1,6 +1,5 @@
 package models;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -13,7 +12,7 @@ public class Scholarships {
     private LocalDate deadline_date;
     private double required_gpa;
     private int required_year;
-    private String requred_major;
+    private String required_faculties;
     private String status;
 
 
@@ -25,7 +24,7 @@ public class Scholarships {
         this.deadline_date = deadline_date;
         this.required_gpa = required_gpa;
         this.required_year = required_year;
-        this.requred_major = requred_major;
+        this.required_faculties = requred_major;
         this.status= status;
     }
 
@@ -70,8 +69,8 @@ public class Scholarships {
         return  required_gpa;
     }
 
-    public String getRequred_major() {
-        return requred_major;
+    public String getRequired_faculties() {
+        return required_faculties;
     }
 
     public int getRequired_year() {

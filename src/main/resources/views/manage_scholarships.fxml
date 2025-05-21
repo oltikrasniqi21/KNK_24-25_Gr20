@@ -73,7 +73,7 @@
                         <TableColumn fx:id="scholarshipsDeadlineColumn" prefWidth="85.60003662109375" text="%column.deadline" />
                         <TableColumn fx:id="scholarshipsGpaColumn" prefWidth="59.199951171875" text="%gpa" />
                         <TableColumn fx:id="scholarshipsYearColumn" prefWidth="58.4000244140625" text="%col.year" />
-                        <TableColumn fx:id="scholarshipsMajorColumn" prefWidth="75.99993896484375" text="%column.drejtimi" />
+                        <TableColumn fx:id="scholarshipsFacultiesColumn" prefWidth="75.99993896484375" text="%column.drejtimi" />
                   <TableColumn fx:id="scholarshipsStatusColumn" prefWidth="75.0" text="%col.status" />
                     </columns>
                 </TableView>
