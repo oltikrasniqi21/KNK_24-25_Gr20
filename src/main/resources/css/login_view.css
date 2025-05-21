@@ -50,14 +50,12 @@
     -fx-background-color: #aaaaaa;
 }
 
-
 .englishButton, .shqipButton {
     -fx-background-color: #dddddd;
     -fx-background-radius: 8px;
     -fx-text-fill: #333;
     -fx-font-size: 12px;
 }
-
 
 .signupLink {
     -fx-text-fill: #00A859;

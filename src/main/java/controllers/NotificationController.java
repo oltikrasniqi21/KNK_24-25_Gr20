@@ -1,7 +1,6 @@
 package controllers;
 
 import CreateDTO.CreateNotificationDTO;
-import Repository.NotificationRepository;
 import Services.NotificationService;
 import Services.SceneManager;
 import UpdateDTO.UpdateNotificationDTO;
@@ -43,7 +42,7 @@ public class NotificationController {
             notification.setMessage(event.getNewValue());
 
             UpdateNotificationDTO dto = new UpdateNotificationDTO();
-            dto.setNotificationId(notification.getNotification_id()); // Ensure Notification model has getId()
+            dto.setNotificationId(notification.getNotification_id());
             dto.setMessage(notification.getMessage());
             dto.setRead_status(notification.isRead_status());
 
@@ -72,7 +71,7 @@ public class NotificationController {
         addEditButtonToTable();
 
         notificationTable.setEditable(true);
-        loadNotifications(); // Load initial data
+        loadNotifications();
     }
 
     private void loadNotifications() {
@@ -87,7 +86,7 @@ public class NotificationController {
             {
                 editButton.setOnAction(e -> {
                     Notification n = getTableView().getItems().get(getIndex());
-                    showEditDialog(n); // Optional dialog method
+                    showEditDialog(n);
                 });
             }
 
@@ -136,8 +135,8 @@ public class NotificationController {
         }
 
         CreateNotificationDTO dto = new CreateNotificationDTO();
-        dto.setStudent_id(null); // Broadcast message
-        dto.setMessage(title + ": " + message); // Combine title and message
+        dto.setStudent_id(null);
+        dto.setMessage(title + ": " + message);
         dto.setCreated_at(new Timestamp(System.currentTimeMillis()));
         dto.setRead_status(false);
         dto.setIs_broadcast(true);

@@ -23,32 +23,9 @@ public class CreateScholarshipDTO {
         this.status = "active";
     }
 
-    public void setScholarship_name(String scholarship_name) {
-        this.scholarship_name = scholarship_name;
-    }
-
-    public void setProvider(String provider) {
-        this.provider = provider;
-    }
 
     public void setAmount(int amount) {
         this.amount = amount;
-    }
-
-    public void setDeadline_date(LocalDate deadline_date) {
-        this.deadline_date = deadline_date;
-    }
-
-    public void setRequired_gpa(double required_gpa) {
-        this.required_gpa = required_gpa;
-    }
-
-    public void setRequired_year(int required_year) {
-        this.required_year = required_year;
-    }
-
-    public void setRequired_faculties(String required_faculties) {
-        this.required_faculties = required_faculties;
     }
 
     public String getScholarship_name() {

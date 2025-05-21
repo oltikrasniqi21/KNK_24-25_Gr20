@@ -6,8 +6,6 @@ import models.Faculties;
 import models.Universities;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class UniversitiesRepository extends BaseRepository<Universities, CreateUniversitiesDTO, UpdateUniversitiesDTO> {
     public UniversitiesRepository() {
@@ -63,19 +61,4 @@ public class UniversitiesRepository extends BaseRepository<Universities, CreateU
         return null;
     }
 
-    public Faculties getfacultyfromName(String name){
-        String query = "SELECT * FROM faculties WHERE name=?";
-
-        try{
-            PreparedStatement prep = this.connection.prepareStatement(query);
-            prep.setString(1, name);
-            ResultSet resultSet = prep.executeQuery();
-            if(resultSet.next()){
-                return Faculties.getInstance(resultSet);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 }

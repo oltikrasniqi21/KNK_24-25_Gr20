@@ -1,27 +1,13 @@
 package Services;
 
-import Repository.UniversitiesRepository;
-import Repository.FacultiesRepository;
-import Repository.MajorsRepository;
 import Repository.UsersRepository;
-import javafx.scene.control.ComboBox;
-import models.Universities;
-import models.Faculties;
-import models.Majors;
 import utils.PasswordUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.sql.Connection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
-
-import static utils.AlertMessages.ERROR;
-import static utils.AlertMessages.showAlert;
 
 public class SignupService {
     private final UsersRepository usersRepository;

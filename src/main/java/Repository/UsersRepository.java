@@ -268,7 +268,7 @@ public class UsersRepository{
                         studentStmt.setString(4, university);
                         studentStmt.setString(5, faculty);
                         studentStmt.setString(6, major);
-                        studentStmt.setString(7, documentPath); // Only set this once
+                        studentStmt.setString(7, documentPath);
                         studentStmt.executeUpdate();
                     }
                 }
@@ -427,11 +427,11 @@ public class UsersRepository{
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, newStatus);
             ps.setInt(2, userId);
-            return ps.executeUpdate(); // returns number of rows updated
+            return ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return 0; // or -1 to indicate failure
+        return 0;
     }
     public boolean emailExists(String email) {
         String query = "SELECT 1 FROM users WHERE email = ?";

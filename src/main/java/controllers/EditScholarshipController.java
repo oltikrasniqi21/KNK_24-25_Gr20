@@ -3,10 +3,8 @@ package controllers;
 import Exceptions.EmptyFieldException;
 import Exceptions.InvalidFieldException;
 import Repository.FacultiesRepository;
-import Repository.UniversitiesRepository;
 import Services.SceneManager;
 import Services.ScholarshipService;
-import Services.UniversityService;
 import UpdateDTO.UpdateScholarshipDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +16,6 @@ import utils.AlertMessages;
 import utils.SceneLocator;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class EditScholarshipController {
 
@@ -40,7 +37,7 @@ public class EditScholarshipController {
 
     @FXML
     private void handleBackClick(){
-        SceneManager.getInstance().loadScene(SceneLocator.MANAGE_SCHOLARSHIPS_PAGE);
+        SceneManager.loadCenterContent(SceneLocator.MANAGE_SCHOLARSHIPS_PAGE);
     }
 
 

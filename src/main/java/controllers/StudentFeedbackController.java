@@ -33,11 +33,10 @@ public class StudentFeedbackController {
     private void handleSubmitFeedback() {
         String message = feedbackTextArea.getText().trim();
         if (message.isEmpty()) {
-            statusLabel.setText(resources.getString("emptyFeedbackWarning")); // optional message
+            statusLabel.setText(resources.getString("emptyFeedbackWarning"));
             return;
         }
 
-        // Assume user_id is obtained from session or context
         Integer userId = CurrentUser.getUserId();
         if (userId == null) {
             statusLabel.setText("User not recognized. Please log in.");
@@ -76,15 +75,14 @@ public class StudentFeedbackController {
             if (fb.getUser_id() == userId) {
                 String response = fb.getResponse();
                 if (response != null && !response.isEmpty()) {
-                    responseTextArea.setText(response); // or responseLabel.setText(response);
+                    responseTextArea.setText(response);
                 } else {
-                    responseTextArea.setText("No answer yet..."); // or responseLabel.setText("No answer yet...");
+                    responseTextArea.setText("No answer yet...");
                 }
                 return;
             }
         }
 
-        // No feedback found for this user
         responseTextArea.setText("No feedback found."); // optional
     }
 }

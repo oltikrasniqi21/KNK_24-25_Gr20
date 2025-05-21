@@ -17,10 +17,6 @@ public class UpdateUniversitiesDTO {
         return universityId;
     }
 
-    public void setUniversityId(int universityId) {
-        this.universityId = universityId;
-    }
-
     public String getName() {
         return name;
     }
@@ -33,15 +29,8 @@ public class UpdateUniversitiesDTO {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public String getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
 }

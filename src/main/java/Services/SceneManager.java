@@ -1,14 +1,18 @@
 package Services;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import utils.SceneLocator;
 
+import java.util.ResourceBundle;
+
 public class SceneManager {
     private static SceneManager instance;
-
+    private static BorderPane mainLayout;
     private Scene scene;
     private String currentPath;
     private LanguageManager languageManager;
@@ -27,6 +31,10 @@ public class SceneManager {
         return instance;
     }
 
+    public void setMainLayout(BorderPane mainLayout){
+        this.mainLayout = mainLayout;
+    }
+
     private Scene initializeScene(){
         try{
             Parent root = loadFXML(getCurrentPath());
@@ -34,6 +42,22 @@ public class SceneManager {
         }catch (Exception e){
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public static void loadCenterContent(String path){
+        if (mainLayout == null){
+            System.out.println("Main layout is not set. Call setMainLayout() first.");
+            return;
+        }
+
+        try {
+            ResourceBundle bundle = LanguageManager.getInstance().getResourceBundle();
+            FXMLLoader loader = new FXMLLoader(SceneManager.class.getResource(path), bundle);
+            Node content = loader.load();
+            mainLayout.setCenter(content);
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -62,13 +86,6 @@ public class SceneManager {
         );
         loader.setResources(this.languageManager.getResourceBundle());
         return loader.load();
-    }
-
-    private FXMLLoader loadFXMLLoader(String path) throws Exception { //used to pass selected data to another controller (edit scholarships)
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource(path));
-        loader.setResources(this.languageManager.getResourceBundle());
-        loader.load();
-        return loader;
     }
 
     public static void reload() throws Exception{
