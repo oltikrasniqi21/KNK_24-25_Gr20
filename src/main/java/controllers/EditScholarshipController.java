@@ -50,7 +50,7 @@ public class EditScholarshipController {
             yearComboBox.setValue(Integer.toString(passedScholarship.getRequired_year()));
             gpaField.setText(Double.toString(passedScholarship.getRequired_gpa()));
             deadlineField.setValue(passedScholarship.getDeadline_date());
-            prevSelected.setText(passedScholarship.getRequired_faculties());
+            prevSelected.setText("Prev.: "+ passedScholarship.getRequired_faculties());
 
             facultiesListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
             ObservableList<Faculties> faculties = FXCollections.observableArrayList(facultiesRepository.getAll());
