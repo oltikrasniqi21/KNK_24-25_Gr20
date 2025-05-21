@@ -1,4 +1,4 @@
-/* Style for the VBox that represents the entire card */
+
 .news-card {
     -fx-background-color: #ffffff;
     -fx-background-radius: 12;
@@ -8,7 +8,7 @@
     -fx-border-color: #e0e0e0;
 }
 
-/* Style for the ImageView */
+
 .news-card .image-view {
     -fx-background-color: #f0f0f0;
     -fx-background-radius: 8;
@@ -17,19 +17,19 @@
     -fx-fit-height: 150;
 }
 
-/* Title styling */
+
 .news-card .label {
     -fx-font-size: 14px;
     -fx-text-fill: #333;
 }
 
-/* Optional: specific styles if needed */
+
 .news-card .label#titleLabel {
     -fx-font-weight: bold;
     -fx-font-size: 16px;
 }
 
-/* Summary label */
+
 .news-card .label#summaryLabel {
     -fx-text-fill: #666;
     -fx-font-size: 13px;
