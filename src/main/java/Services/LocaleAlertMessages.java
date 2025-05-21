@@ -28,11 +28,17 @@ public class LocaleAlertMessages {
     }
 
     public static void showErrorAlert(String message){
-        Alert alert = new Alert(Alert.AlertType.ERROR, getLocalizedMessage(message));
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(getLocalizedMessage(message));
+        alert.setContentText(null);
         alert.showAndWait();
     }
     public static void showInformationAlert(String message){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, getLocalizedMessage(message));
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText(getLocalizedMessage(message));
+        alert.setContentText(null);
         alert.showAndWait();
     }
 }

@@ -1,29 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainLayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditScholarshipController">
-    <children>
-        <Label alignment="TOP_CENTER" layoutX="214.0" layoutY="14.0" text="%label.editScholarship">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Label>
-        <TextField fx:id="amountField" layoutX="46.0" layoutY="81.0" />
-        <Label layoutX="46.0" layoutY="57.0" text="%label.amount" />
-        <Label layoutX="46.0" layoutY="125.0" text="%label.deadline" />
-        <TextField fx:id="gpaField" layoutX="47.0" layoutY="217.0" />
-        <Label layoutX="47.0" layoutY="193.0" text="%label.gpa" />
-        <Label layoutX="47.0" layoutY="252.0" text="%label.year" />
-        <Label layoutX="249.0" layoutY="60.0" text="%label.faculty" />
-        <Button layoutX="499.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleBackClick" text="%key.back" />
-        <Button layoutX="463.0" layoutY="150.0" mnemonicParsing="false" onAction="#handleSaveClick" text="%key.saveChanges" />
-        <Button layoutX="463.0" layoutY="187.0" mnemonicParsing="false" onAction="#handleResetClick" text="%reset.button" />
-        <DatePicker fx:id="deadlineField" layoutX="46.0" layoutY="143.0" />
-      <ListView fx:id="facultiesListView" layoutX="249.0" layoutY="79.0" prefHeight="230.0" prefWidth="200.0" />
-      <ComboBox fx:id="yearComboBox" layoutX="45.0" layoutY="277.0" prefWidth="150.0" />
-      <Label fx:id="prevSelected" layoutX="254.0" layoutY="321.0" text="%before.selected" />
-    </children>
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/edit_scholarships.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditScholarshipController">
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="58.0" prefWidth="600.0">
+               <children>
+                  <Region prefHeight="54.0" prefWidth="218.0" />
+                  <Label alignment="TOP_CENTER" text="%label.editScholarship" styleClass="section-title">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Region prefHeight="54.0" prefWidth="111.0" />
+                  <Button mnemonicParsing="false" onAction="#handleBackClick" prefHeight="26.0" prefWidth="106.0" text="%key.back" />
+               </children>
+            </HBox>
+            <HBox prefHeight="306.0" prefWidth="600.0">
+               <children>
+                  <VBox prefHeight="302.0" prefWidth="339.0">
+                     <children>
+                        <Label text="%label.amount" />
+                        <TextField fx:id="amountField">
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label text="%label.gpa" />
+                        <TextField fx:id="gpaField">
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label text="%label.year" />
+                        <ComboBox fx:id="yearComboBox" prefWidth="150.0">
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </ComboBox>
+                        <Label text="%label.deadline" />
+                        <DatePicker fx:id="deadlineField" />
+                     </children>
+                     <padding>
+                        <Insets right="20.0" />
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="302.0" prefWidth="296.0">
+                     <children>
+                        <Label text="%label.faculty" />
+                        <ListView fx:id="facultiesListView" prefHeight="230.0" prefWidth="200.0" />
+                        <Label fx:id="prevSelected" text="%before.selected" />
+                     </children>
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="600.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#handleSaveClick" prefHeight="26.0" prefWidth="127.0" text="%key.saveChanges" />
+                  <Region prefHeight="46.0" prefWidth="52.0" />
+                  <Button mnemonicParsing="false" onAction="#handleResetClick" prefHeight="26.0" prefWidth="130.0" text="%reset.button" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
