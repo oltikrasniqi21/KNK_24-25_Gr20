@@ -1,9 +1,7 @@
 package controllers;
 
-import Repository.UsersRepository;
+import Services.ManageUsersService;
 import Services.SceneManager;
-import Database.DBCustomConnector;
-import Services.StudentDocumentService;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
@@ -12,63 +10,41 @@ import javafx.util.Callback;
 import models.Users;
 import utils.SceneLocator;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 
 public class ManageUsersController {
-    @FXML
-    private Button validateButton;
+    @FXML private Button validateButton;
+    @FXML private Button rejectButton;
+    @FXML private TextField searchTextField;
+    @FXML private TableView<Users> usersTable;
+    @FXML private TableColumn<Users, Integer> userIdColumn;
+    @FXML private TableColumn<Users, String> userNameColumn;
+    @FXML private TableColumn<Users, String> userEmailColumn;
+    @FXML private TableColumn<Users, String> userStatusColumn;
+    @FXML private TableColumn<Users, Void> actionButtonColumn;
 
-    @FXML
-    private Button rejectButton;
-
-    @FXML
-    private TextField searchTextField;
-
-    @FXML
-    private TableView<Users> usersTable;
-
-    @FXML
-    private TableColumn<Users, Integer> userIdColumn;
-
-    @FXML
-    private TableColumn<Users, String> userNameColumn;
-
-    @FXML
-    private TableColumn<Users, String> userEmailColumn;
-
-    @FXML
-    private TableColumn<Users, String> userStatusColumn;
-
-    @FXML
-    private TableColumn<Users, Void> actionButtonColumn;
-
-    private final UsersRepository usersRepository;
-    private final StudentDocumentService documentService;
+    private final ManageUsersService manageUsersService;
 
     public ManageUsersController() {
-        this.usersRepository = new UsersRepository();
-        this.documentService = new StudentDocumentService(DBCustomConnector.getConnection());
+        this.manageUsersService = new ManageUsersService();
     }
 
     @FXML
     public void initialize() {
-        userIdColumn.setCellValueFactory(cellData ->
-                new SimpleIntegerProperty(cellData.getValue().getUser_id()).asObject());
-
-        userNameColumn.setCellValueFactory(cellData ->
-                new SimpleStringProperty(cellData.getValue().getFirst_name() + " " + cellData.getValue().getLast_name()));
-
-        userEmailColumn.setCellValueFactory(cellData ->
-                new SimpleStringProperty(cellData.getValue().getEmail()));
-
-        userStatusColumn.setCellValueFactory(cellData ->
-                new SimpleStringProperty(cellData.getValue().getStatus()));
-
+        setupTableColumns();
         addActionButtonToTable();
         loadUsers();
+    }
+
+    private void setupTableColumns() {
+        userIdColumn.setCellValueFactory(cellData ->
+                new SimpleIntegerProperty(cellData.getValue().getUser_id()).asObject());
+        userNameColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getFirst_name() + " " + cellData.getValue().getLast_name()));
+        userEmailColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getEmail()));
+        userStatusColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getStatus()));
     }
 
     private void addActionButtonToTable() {
@@ -82,8 +58,7 @@ public class ManageUsersController {
                         btn.setStyle("-fx-background-color: #b0b0b0; -fx-text-fill: black; -fx-font-weight: bold;");
                         btn.setOnAction(event -> {
                             Users user = getTableView().getItems().get(getIndex());
-                            int userId = user.getUser_id();
-                            openUserPdf(userId);
+                            manageUsersService.openStudentDocument(user.getUser_id());
                         });
                     }
 
@@ -101,19 +76,8 @@ public class ManageUsersController {
         });
     }
 
-    private void openUserPdf(int userId) {
-        new Thread(() -> {
-            documentService.openStudentDocument(userId);
-        }).start();
-    }
-
     private void loadUsers() {
-        try {
-            List<Users> users = usersRepository.getAllStudentUsers();
-            usersTable.getItems().setAll(users);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        usersTable.getItems().setAll(manageUsersService.getAllStudentUsers());
     }
 
     @FXML
@@ -129,26 +93,22 @@ public class ManageUsersController {
     @FXML
     private void handleSearchClick() {
         String searchTerm = searchTextField.getText().trim();
-
-        if (searchTerm.isEmpty()) {
-            loadUsers();
-        } else {
-            try {
-                List<Users> filteredUsers = usersRepository.searchUsers(searchTerm);
-                usersTable.getItems().setAll(filteredUsers);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        List<Users> users = searchTerm.isEmpty()
+                ? manageUsersService.getAllStudentUsers()
+                : manageUsersService.searchUsers(searchTerm);
+        usersTable.getItems().setAll(users);
     }
 
     @FXML
     private void handleValidate() {
         Users selectedUser = usersTable.getSelectionModel().getSelectedItem();
         if (selectedUser != null) {
-            updateStudentStatus(selectedUser.getUser_id(), "validated");
+            if (manageUsersService.updateUserStatus(selectedUser.getUser_id(), "validated")) {
+                manageUsersService.showAlert("Success", "Status updated to validated.");
+                loadUsers();
+            }
         } else {
-            showAlert("No user selected", "Please select a user to validate.");
+            manageUsersService.showAlert("No user selected", "Please select a user to validate.");
         }
     }
 
@@ -156,41 +116,12 @@ public class ManageUsersController {
     private void handleReject() {
         Users selectedUser = usersTable.getSelectionModel().getSelectedItem();
         if (selectedUser != null) {
-            updateStudentStatus(selectedUser.getUser_id(), "rejected");
-        } else {
-            showAlert("No user selected", "Please select a user to reject.");
-        }
-    }
-
-    private void updateStudentStatus(int userId, String newStatus) {
-        String query = "UPDATE users SET status = ? WHERE id = ?";
-        Connection conn = DBCustomConnector.getConnection();
-
-        try (PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setString(1, newStatus);
-            stmt.setInt(2, userId);
-            int rowsAffected = stmt.executeUpdate();
-
-            if (rowsAffected > 0) {
-                showAlert("Success", "Status updated to " + newStatus + ".");
+            if (manageUsersService.updateUserStatus(selectedUser.getUser_id(), "rejected")) {
+                manageUsersService.showAlert("Success", "Status updated to rejected.");
                 loadUsers();
-            } else {
-                showAlert("Update failed", "No rows were updated.");
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            showAlert("Database Error", e.getMessage());
+        } else {
+            manageUsersService.showAlert("No user selected", "Please select a user to reject.");
         }
-    }
-
-    private void showAlert(String title, String message) {
-        javafx.application.Platform.runLater(() -> {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle(title);
-            alert.setHeaderText(null);
-            alert.setContentText(message);
-            alert.showAndWait();
-        });
     }
 }

@@ -94,9 +94,10 @@ public class UsersRepository{
 
     public List<Students> getAllStudents() {
         String query = "SELECT u.id, u.password, u.first_name, u.last_name, u.email, u.role, u.status, " +
-                "s.gpa, s.year_of_study, s.university, s.faculty, s.major, s.priority " +
+                "s.gpa, s.year_of_study, s.university, s.faculty, s.major " +
                 "FROM users u JOIN students s ON u.id = s.id " +
                 "WHERE u.role = 'student' AND u.status = 'validated'";
+
         List<Students> students = new ArrayList<>();
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query)) {
@@ -112,11 +113,13 @@ public class UsersRepository{
 
     public List<Students> searchStudents(String searchTerm) {
         String query = "SELECT u.id, u.password, u.first_name, u.last_name, u.email, u.role, u.status, " +
-                "s.gpa, s.year_of_study, s.university, s.faculty, s.major, s.priority " +
+                "s.gpa, s.year_of_study, s.university, s.faculty, s.major " +
                 "FROM users u JOIN students s ON u.id = s.id " +
-                "WHERE u.role = 'student' AND " +
-                "(LOWER(u.first_name) LIKE ? OR " +
+                "WHERE u.role = 'student' AND (" +
+                "CAST(u.id AS TEXT) LIKE ? OR " +
+                "LOWER(u.first_name) LIKE ? OR " +
                 "LOWER(u.last_name) LIKE ? OR " +
+                "LOWER(CONCAT(u.first_name, ' ', u.last_name)) LIKE ? OR " +
                 "LOWER(s.university) LIKE ? OR " +
                 "LOWER(s.faculty) LIKE ? OR " +
                 "LOWER(s.major) LIKE ?)";
@@ -125,7 +128,7 @@ public class UsersRepository{
         String likeTerm = "%" + searchTerm.toLowerCase() + "%";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            for (int i = 1; i <= 5; i++) {
+            for (int i = 1; i <= 7; i++) {
                 preparedStatement.setString(i, likeTerm);
             }
 
@@ -138,6 +141,7 @@ public class UsersRepository{
         }
         return students;
     }
+
 
     public List<Users> getAllStudentUsers() {
         String query = "SELECT * FROM users WHERE role = 'student' ORDER BY id";
@@ -156,9 +160,11 @@ public class UsersRepository{
 
     public List<Users> searchUsers(String searchTerm) {
         String query = "SELECT * FROM users WHERE role = 'student' AND (" +
+                "CAST(id AS TEXT) LIKE ? OR " +
                 "LOWER(first_name) LIKE ? OR " +
                 "LOWER(last_name) LIKE ? OR " +
-                "LOWER(email) LIKE ?)";
+                "LOWER(email) LIKE ? OR " +
+                "LOWER(CONCAT(first_name, ' ', last_name)) LIKE ?)";
 
         List<Users> users = new ArrayList<>();
         String likeTerm = "%" + searchTerm.toLowerCase() + "%";
@@ -167,6 +173,8 @@ public class UsersRepository{
             ps.setString(1, likeTerm);
             ps.setString(2, likeTerm);
             ps.setString(3, likeTerm);
+            ps.setString(4, likeTerm);
+            ps.setString(5, likeTerm);
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -257,8 +265,8 @@ public class UsersRepository{
                     int userId = rs.getInt(1);
 
                     String insertStudentSQL = """
-                            INSERT INTO students (id, gpa, year_of_study, university, faculty, major, priority, document_path)
-                            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                            INSERT INTO students (id, gpa, year_of_study, university, faculty, major, document_path)
+                            VALUES (?, ?, ?, ?, ?, ?, ?)
                             """;
                     try (PreparedStatement studentStmt = connection.prepareStatement(insertStudentSQL)) {
                         studentStmt.setInt(1, userId);
@@ -373,5 +381,53 @@ public class UsersRepository{
         }
 
         return universityCounts;
+    }
+
+
+
+    public boolean emailExists(String email) {
+        String sql = "SELECT COUNT(*) FROM users WHERE email = ?";
+        try (Connection conn = DBCustomConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean createAdminUser(String password, String firstName, String lastName,
+                                   String email, String role, String status) {
+        String query = "INSERT INTO users (password, first_name, last_name, email, role, status) VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection conn = DBCustomConnector.getConnection();
+             PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setString(1, password);
+            statement.setString(2, firstName);
+            statement.setString(3, lastName);
+            statement.setString(4, email);
+            statement.setString(5, role);
+            if (status == null) {
+                statement.setNull(6, java.sql.Types.VARCHAR);
+            } else {
+                statement.setString(6, status);
+            }
+            return statement.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public int updateUserStatus(int userId, String newStatus) throws SQLException {
+        String query = "UPDATE users SET status = ? WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, newStatus);
+            stmt.setInt(2, userId);
+            return stmt.executeUpdate();
+        }
     }
 }

@@ -10,18 +10,18 @@ public class Students extends Users {
     private String university;
     private String faculty;
     private String major;
-    private String priority;
+
 
 
     private Students(int user_id, String password, String first_name, String last_name, String email, String role, String status,
-                     Double gpa, int year_of_study, String university, String faculty, String major, String priority) {
+                     Double gpa, int year_of_study, String university, String faculty, String major) {
         super(user_id, password,first_name, last_name,email,role,status);
         this.gpa = gpa;
         this.year_of_study = year_of_study;
         this.university = university;
         this.faculty = faculty;
         this.major = major;
-        this.priority = priority;
+
 
 
     }
@@ -46,9 +46,7 @@ public class Students extends Users {
         return major;
     }
 
-    public String getPriority() {
-        return priority;
-    }
+
 
 
     public static Students getInstance(ResultSet resultSet) throws SQLException{
@@ -65,11 +63,11 @@ public class Students extends Users {
         String university = resultSet.getString("university");
         String faculty = resultSet.getString("faculty");
         String major = resultSet.getString("major");
-        String priority = resultSet.getString("priority");
+
         String status = resultSet.getString("status");
 
 return new Students(user_id,password_hash,first_name,last_name,email,role,status,
-        gpa,year_of_study, university, faculty,major, priority);
+        gpa,year_of_study, university, faculty,major);
 
     }
 
