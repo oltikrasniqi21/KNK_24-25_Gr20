@@ -2,6 +2,7 @@ package Services;
 
 import CreateDTO.CreateApplicationDto;
 import Repository.ApplicationsRepository;
+import Repository.UsersRepository;
 import UpdateDTO.UpdateApplicationsDTO;
 import models.Applications;
 
@@ -12,12 +13,20 @@ import java.util.Map;
 
 public class ApplicationService {
     private final ApplicationsRepository repository;
+    private final UsersRepository usersRepository;
 
     public ApplicationService() {
         this.repository = new ApplicationsRepository();
+        this.usersRepository = new UsersRepository();
     }
 
     public String validateApplication(CreateApplicationDto dto){
+
+        boolean isValid = usersRepository.isValid(CurrentUser.getUserId());
+
+        if (!isValid){
+            return "Llogaria juaj nuk eshte validuar ende nga administratori.";
+        }
         if(dto.getApplication_date().isAfter(LocalDate.now())){
             return "Data e aplikimit nuk mund te jete ne te ardhmen!";
         }

@@ -374,4 +374,22 @@ public class UsersRepository{
 
         return universityCounts;
     }
+
+    public boolean isValid(int studentId){
+        String query = "SELECT status FROM users WHERE id = ?";
+
+        try {
+            PreparedStatement statement = this.connection.prepareStatement(query);
+            statement.setInt(1,studentId);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()){
+                String status = resultSet.getString("status");
+                return "approved".equalsIgnoreCase(status);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
