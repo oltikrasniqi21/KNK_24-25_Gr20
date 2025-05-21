@@ -79,7 +79,7 @@ public class StudentHomePageController implements Initializable {
 
     private void loadCenterContent(String fxmlFile) {
         try {
-            ResourceBundle bundle = ResourceBundle.getBundle("languages.message");
+            ResourceBundle bundle = ResourceBundle.getBundle("languages.message", languageManager.getLocale());
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile), bundle);
             Node content = loader.load();
