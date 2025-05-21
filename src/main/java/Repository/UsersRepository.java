@@ -382,10 +382,25 @@ public class UsersRepository{
 
         return universityCounts;
     }
+public boolean isValid(int studentId){
+        String query = "SELECT status FROM users WHERE id = ?";
 
+        try {
+            PreparedStatement statement = this.connection.prepareStatement(query);
+            statement.setInt(1,studentId);
+            ResultSet resultSet = statement.executeQuery();
 
+            if (resultSet.next()){
+                String status = resultSet.getString("status");
+                return "approved".equalsIgnoreCase(status);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
 
-    public boolean emailExists(String email) {
+  public boolean emailExists(String email) {
         String sql = "SELECT COUNT(*) FROM users WHERE email = ?";
         try (Connection conn = DBCustomConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -399,8 +414,7 @@ public class UsersRepository{
         }
         return false;
     }
-
-    public boolean createAdminUser(String password, String firstName, String lastName,
+ public boolean createAdminUser(String password, String firstName, String lastName,
                                    String email, String role, String status) {
         String query = "INSERT INTO users (password, first_name, last_name, email, role, status) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = DBCustomConnector.getConnection();
