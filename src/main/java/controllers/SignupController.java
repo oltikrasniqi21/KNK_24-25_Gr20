@@ -23,7 +23,7 @@ public class SignupController {
 
     public SignupController() {
         this.universityService = new UniversityService();
-        this.signupService = new SignupService(DBCustomConnector.getConnection());
+        this.signupService = new SignupService();
     }
 
     @FXML
@@ -53,7 +53,7 @@ public class SignupController {
     @FXML
     private ComboBox<String> yearComboBox;
 
-    private SignupService signupService = new SignupService(DBCustomConnector.getConnection());
+    private SignupService signupService = new SignupService();
 
     private File selectedPdfFile;
 

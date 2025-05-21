@@ -26,7 +26,8 @@ import static utils.AlertMessages.showAlert;
 public class SignupService {
     private final UsersRepository usersRepository;
 
-    public SignupService(Connection connection) {
+
+    public SignupService() {
         this.usersRepository = new UsersRepository();
     }
 
