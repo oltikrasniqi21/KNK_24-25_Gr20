@@ -36,7 +36,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="554.0" prefWidth="738.0" stylesheets="@../css/manage_applications.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageApplicationController">
+<BorderPane fx:id="mainLayout" prefHeight="554.0" prefWidth="738.0" stylesheets="@../css/manage_applications.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageApplicationController">
    <center>
       <VBox alignment="CENTER" prefHeight="349.0" prefWidth="397.0" spacing="30">
          <children>

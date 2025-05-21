@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane stylesheets="@../css/create_users.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CreateUsersController">
+<BorderPane fx:id="mainLayout" stylesheets="@../css/create_users.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CreateUsersController">
    <center>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
       

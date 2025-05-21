@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="377.0" prefWidth="421.0" stylesheets="@../css/student_application.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ApplicationFormController">
+<VBox fx:id="mainLayout" alignment="CENTER" prefHeight="377.0" prefWidth="421.0" stylesheets="@../css/student_application.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ApplicationFormController">
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%applyScholarship">
          <font>

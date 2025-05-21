@@ -35,7 +35,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="497.0" prefWidth="875.0" stylesheets="@../css/admin_notification.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NotificationController">
+<BorderPane fx:id="mainLayout" prefHeight="497.0" prefWidth="875.0" stylesheets="@../css/admin_notification.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NotificationController">
    <center>
       <VBox alignment="CENTER" spacing="30">
          <children>

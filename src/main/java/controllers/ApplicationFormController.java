@@ -72,39 +72,32 @@ public class ApplicationFormController {
 
             String error = applicationService.submitApplication(applicationDto);
             if (error != null){
-                LocaleAlertMessages.showErrorAlert(AlertMessages.ERROR);
+                showAlert("Gabim", error);
                 return;
             }
 
-            LocaleAlertMessages.showInformationAlert(AlertMessages.SUCCESSFUL_APPLICATION_BUNDLE);
+            showAlert("Sukses", "Aplikimi u krye me sukses!");
             resetForm();
         }catch (Exception e){
             e.printStackTrace();
-            LocaleAlertMessages.showErrorAlert(AlertMessages.SOMETHING_WRONG);
+            showAlert("Gabim", "Ndodhi nje gabim i papritur.");
         }
     }
 
     private boolean valideInput(){
         if (scholarshipComboBox.getItems() == null){
-            throw new InvalidFieldException(AlertMessages.SCHOLARSHIP);
+            showAlert("Gabim", "Ju lutem zgjedheni nje burse");
+            return false;
         }
 
         if (gpaField.getText().isEmpty()){
-            throw new InvalidFieldException(AlertMessages.GPA);
-        }
-
-        try{
-            double gpa = Double.parseDouble(gpaField.getText());
-            if (gpa <= 6 || gpa >= 10){
-                LocaleAlertMessages.showInformationAlert(AlertMessages.GPA_VALIDATION);
-                return false;
-            }
-        }catch (NumberFormatException e){
-            throw new InvalidFieldException(AlertMessages.GPA);
+            showAlert("Gabim", "Ju lutem shkruani GPA-n tuaj");
+            return false;
         }
 
         if (transcriptFile == null){
-            throw new EmptyFieldException("Transcript");
+            showAlert("Gabim", "Ju lutem ngarkoni transkripten tuaj");
+            return false;
         }
         return true;
     }
@@ -120,9 +113,16 @@ public class ApplicationFormController {
         );
     }
 
-
     private void resetForm(){
         scholarshipComboBox.setValue(null);
         gpaField.clear();
     }
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 }

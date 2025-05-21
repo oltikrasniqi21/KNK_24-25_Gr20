@@ -35,7 +35,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="331.0" prefWidth="585.0" stylesheets="@../css/admin_feedback.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FeedbackController">
+<BorderPane fx:id="mainLayout" prefHeight="331.0" prefWidth="585.0" stylesheets="@../css/admin_feedback.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FeedbackController">
    <center>
       <VBox>
          <children>

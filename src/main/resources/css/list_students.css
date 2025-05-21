@@ -1,13 +1,10 @@
-#topHbox {
-    -fx-padding: 0 200 0 200;
-}
+
 
 #searchField {
     -fx-background-color: #fff;
     -fx-border-color: #d1d5db;
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
-    -fx-padding: 6 10;
     -fx-font-size: 14px;
     -fx-text-fill: #222;
 }
@@ -17,7 +14,6 @@
     -fx-text-fill: white;
     -fx-font-weight: 600;
     -fx-background-radius: 12px;
-    -fx-padding: 6 16;
     -fx-cursor: hand;
     -fx-border-color: transparent;
     -fx-font-size: 14px;
@@ -40,10 +36,6 @@
     -fx-text-fill: #333;
 }
 
-VBox, HBox {
-    -fx-spacing: 12px;
-    -fx-padding: 12px;
-}
 
 #studentslistTable {
     -fx-background-color: white;
@@ -54,7 +46,6 @@ VBox, HBox {
 
 #studentslistTable .column-header .label {
     -fx-font-size: 15px;
-    -fx-padding: 8 10;
     -fx-font-family: "Poppins", sans-serif;
     -fx-font-weight: bold;
     -fx-text-fill: black;

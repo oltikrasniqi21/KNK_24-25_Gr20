@@ -16,6 +16,7 @@ public class AlertMessages {
     public static final String ALREADY_EXIST_SCHOLARSHIP = "alreadyExist.Schoalarship";
     public static final String DEACTIVE_CONFIRMATION = "deactive.Schoalarship";
     public static final String INCORRECT_CREDENTIALS = "incorrect.credentials";
+    public static final String NO_VALIDATION = "noValidation";
 
     public static final String GPA = "label.gpa";
     public static final String SCHOLARSHIP = "label.scholarship";
