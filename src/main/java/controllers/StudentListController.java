@@ -95,9 +95,4 @@ public class StudentListController {
             studentslistTable.getItems().setAll(filteredStudents);
         }
     }
-
-    @FXML
-    private void handleClose() {
-        SceneManager.getInstance().loadScene(SceneLocator.ADMIN_HOME_PAGE);
-    }
 }

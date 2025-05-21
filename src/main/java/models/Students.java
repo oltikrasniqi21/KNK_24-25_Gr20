@@ -50,8 +50,8 @@ public class Students extends Users {
 
 
     public static Students getInstance(ResultSet resultSet) throws SQLException{
-        //These can change depending on what the SQL table rows are named, not necessary but good to do for easier to undestand code
-        int user_id = resultSet.getInt("id"); //user_id can change to UserId as above
+
+        int user_id = resultSet.getInt("id");
         String password_hash = resultSet.getString("password");
         String first_name = resultSet.getString("first_name");
         String last_name = resultSet.getString("last_name");
