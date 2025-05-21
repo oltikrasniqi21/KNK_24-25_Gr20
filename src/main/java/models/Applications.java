@@ -1,6 +1,5 @@
 package models;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -42,10 +41,6 @@ public class Applications {
         return applicationId;
     }
 
-    public void setApplicationId(int applicationId) {
-        this.applicationId = applicationId;
-    }
-
     public int getStudentId() {
         return studentId;
     }
@@ -58,16 +53,8 @@ public class Applications {
         return scholarshipId;
     }
 
-    public void setScholarshipId(int scholarshipId) {
-        this.scholarshipId = scholarshipId;
-    }
-
     public LocalDate getApplicationDate() {
         return applicationDate;
-    }
-
-    public void setApplicationDate(LocalDate applicationDate) {
-        this.applicationDate = applicationDate;
     }
 
     public String getStatus() {
@@ -76,14 +63,6 @@ public class Applications {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public String getTranscriptPath() {
-        return transcriptPath;
-    }
-
-    public void setTranscriptPath(String transcriptPath) {
-        this.transcriptPath = transcriptPath;
     }
 
     public double getGpa() {

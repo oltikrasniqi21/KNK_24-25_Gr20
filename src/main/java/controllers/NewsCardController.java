@@ -2,7 +2,6 @@ package controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -10,8 +9,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class NewsCardController {
 
@@ -28,7 +25,7 @@ public class NewsCardController {
         private Label scholarshipTagLabel;
 
         @FXML
-        private VBox rootVBox; // add fx:id="rootVBox" in your VBox in FXML
+        private VBox rootVBox;
 
         private String currentImagePath;
 
@@ -74,7 +71,6 @@ public class NewsCardController {
 
 
             if (imagePath != null && !imagePath.isEmpty()) {
-                // Convert Windows file path to URL
                 String imageUrl = imagePath;
                 if (imagePath.matches("^[a-zA-Z]:\\\\.*")) {  // crude check for Windows path
                     imageUrl = "file:///" + imagePath.replace("\\", "/");
@@ -84,7 +80,7 @@ public class NewsCardController {
             }
 
 
-            newsImageView.setPreserveRatio(false);  // false so image fills the box without stretching proportionally
+            newsImageView.setPreserveRatio(false);
             newsImageView.setSmooth(true);
 
             this.currentImagePath = imagePath;

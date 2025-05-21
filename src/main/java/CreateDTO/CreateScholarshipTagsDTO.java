@@ -11,7 +11,4 @@ public class CreateScholarshipTagsDTO {
         return tagName;
     }
 
-    public void setTagName(String tagName) {
-        this.tagName = tagName;
-    }
 }

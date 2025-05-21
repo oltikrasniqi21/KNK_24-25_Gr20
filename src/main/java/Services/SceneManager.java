@@ -88,13 +88,6 @@ public class SceneManager {
         return loader.load();
     }
 
-    private FXMLLoader loadFXMLLoader(String path) throws Exception { //used to pass selected data to another controller (edit scholarships)
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource(path));
-        loader.setResources(this.languageManager.getResourceBundle());
-        loader.load();
-        return loader;
-    }
-
     public static void reload() throws Exception{
         load(instance.getCurrentPath());
     }

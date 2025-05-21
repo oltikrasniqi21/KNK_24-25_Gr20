@@ -38,10 +38,6 @@ public class Notification {
         return id;
     }
 
-    public int getStudent_id() {
-        return student_id;
-    }
-
     public String getMessage() {
         return message;
     }

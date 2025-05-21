@@ -1,11 +1,9 @@
 package CreateDTO;
 
-import java.sql.Date;
-import java.sql.Timestamp;
 
 public class CreateNewsDTO {
     private String title;
-    private Integer scholarshipTagId; //Integer pasiqe mundet me qene null
+    private Integer scholarshipTagId;
     private int postedBy;
     private String summary;
     private String imagePath;

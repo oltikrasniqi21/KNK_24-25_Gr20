@@ -4,7 +4,6 @@ import Services.DashboardService;
 import Services.LanguageManager;
 import Services.SceneManager;
 import javafx.fxml.FXML;
-import Services.LanguageManager;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -14,7 +13,6 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import utils.SceneLocator;
 import javafx.scene.control.Label;
 import java.io.IOException;
@@ -102,7 +100,6 @@ public class AdminHomePageController {
 
         studentsPerUniversityBarChart.getData().add(series);
 
-// Optional: Rotate X axis labels for readability if many universities
         CategoryAxis xAxis = (CategoryAxis) studentsPerUniversityBarChart.getXAxis();
         xAxis.setTickLabelRotation(45);
 

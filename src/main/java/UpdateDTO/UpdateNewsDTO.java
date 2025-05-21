@@ -1,6 +1,5 @@
 package UpdateDTO;
 
-import java.sql.Date;
 
 public class UpdateNewsDTO {
     private int newsId;
@@ -20,10 +19,6 @@ public class UpdateNewsDTO {
         this.imagePath = imagePath;
     }
 
-    public void setNewsId(int newsId) {
-        this.newsId = newsId;
-    }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -32,18 +27,9 @@ public class UpdateNewsDTO {
         this.content = content;
     }
 
-    public void setScholarshipTagId(Integer scholarshipTagId) {
-        this.scholarshipTagId = scholarshipTagId;
-    }
-
     public void setSummary(String summary){
         this.summary = summary;
     }
-
-    public void setImagePath(String imagePath){
-        this.imagePath = imagePath;
-    }
-
 
     public int getNewsId() {
         return newsId;
