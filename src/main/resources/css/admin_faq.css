@@ -1,0 +1,90 @@
+.root {
+    -fx-font-family: "Poppins", sans-serif;
+    -fx-font-size: 14px;
+    -fx-background-color: #f0f2f5;
+}
+
+.v-box {
+    -fx-spacing: 20px;
+    -fx-padding: 30;
+    -fx-background-color: white;
+    -fx-background-radius: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0.5, 0, 2);
+}
+
+.h-box {
+    -fx-spacing: 20px;
+    -fx-alignment: center;
+    -fx-padding: 10 0 0 0;
+}
+
+.label {
+    -fx-text-fill: #222;
+    -fx-font-weight: 600;
+    -fx-font-size: 14px;
+}
+
+.label[text="%FAQ"] {
+    -fx-font-size: 22px;
+    -fx-text-fill: #00A859;
+    -fx-padding: 0 0 10 0;
+}
+
+.text-field {
+    -fx-background-color: white;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 8;
+    -fx-font-size: 14px;
+    -fx-text-fill: #222;
+}
+
+.text-area {
+    -fx-background-color: white;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 8;
+    -fx-font-size: 14px;
+    -fx-text-fill: #222;
+}
+
+.button {
+    -fx-background-color: #00A859;
+    -fx-text-fill: white;
+    -fx-font-weight: 600;
+    -fx-background-radius: 15px;
+    -fx-padding: 8 20;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 168, 89, 0.5), 6, 0, 0, 2);
+}
+
+.button:hover {
+    -fx-background-color: #00914e;
+    -fx-effect: dropshadow(gaussian, rgba(0, 168, 89, 0.7), 8, 0.5, 0, 3);
+}
+
+.button:pressed {
+    -fx-background-color: #00793f;
+    -fx-effect: none;
+}
+
+.table-view {
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0.5, 0, 2);
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 16px;
+    -fx-letter-spacing: 0.05em;
+    -fx-padding: 8 12;
+    -fx-font-family: "Poppins", sans-serif;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 1, 0, 0, 1);
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}

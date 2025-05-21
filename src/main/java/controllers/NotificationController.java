@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.text.Text;
 import models.Notification;
 import utils.SceneLocator;
 
@@ -52,6 +53,20 @@ public class NotificationController {
             }
 
             notificationTable.refresh();
+        });
+
+        messageColumn.setCellFactory(tc -> new TableCell<>() {
+            private final Text text = new Text();
+            {
+                text.wrappingWidthProperty().bind(messageColumn.widthProperty().subtract(10));
+                text.getStyleClass().add("wrapped-text");
+                setGraphic(text);
+            }
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                text.setText(empty || item == null ? "" : item);
+            }
         });
 
         addEditButtonToTable();
