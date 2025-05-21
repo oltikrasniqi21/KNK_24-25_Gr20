@@ -21,19 +21,18 @@ public class NewsRepository extends BaseRepository<News, CreateNewsDTO, UpdateNe
     }
     @Override
     public News create(CreateNewsDTO dto) {
-        String query = "INSERT INTO news(title,content,scholarship_tag_id,posted_by, summary, imagePath) VALUES (?, ?, ?, ?, ?, ?) RETURNING *";
+        String query = "INSERT INTO news(title,scholarship_tag_id,posted_by, summary, imagePath) VALUES (?, ?, ?, ?, ?) RETURNING *";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setString(1, dto.getTitle());
-            stmt.setString(2, dto.getContent());
             if (dto.getScholarshipTagId() != null) {
-                stmt.setInt(3, dto.getScholarshipTagId());
+                stmt.setInt(2, dto.getScholarshipTagId());
             } else {
-                stmt.setNull(3, java.sql.Types.INTEGER);
+                stmt.setNull(2, java.sql.Types.INTEGER);
             }
-            stmt.setInt(4, dto.getPostedBy());
-            stmt.setString(5, dto.getSummary());
-            stmt.setString(6, dto.getImagePath());
+            stmt.setInt(3, dto.getPostedBy());
+            stmt.setString(4, dto.getSummary());
+            stmt.setString(5, dto.getImagePath());
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
@@ -47,19 +46,18 @@ public class NewsRepository extends BaseRepository<News, CreateNewsDTO, UpdateNe
 
     @Override
     public News update(UpdateNewsDTO dto) {
-        String query = "UPDATE news SET  title = ?, content = ?, scholarship_tag_id = ?, summary = ?, imagePath=? WHERE id = ? RETURNING *";
+        String query = "UPDATE news SET  title = ?, scholarship_tag_id = ?, summary = ?, imagePath=? WHERE id = ? RETURNING *";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setString(1, dto.getTitle());
-            stmt.setString(2, dto.getContent());
             if (dto.getScholarshipTagId() != null) {
-                stmt.setInt(3, dto.getScholarshipTagId());
+                stmt.setInt(2, dto.getScholarshipTagId());
             } else {
-                stmt.setNull(3, java.sql.Types.INTEGER);
+                stmt.setNull(2, java.sql.Types.INTEGER);
             }
-            stmt.setString(4,dto.getSummary());
-            stmt.setInt(5, dto.getNewsId());
-            stmt.setString(6, dto.getImagePath());
+            stmt.setString(3,dto.getSummary());
+            stmt.setInt(4, dto.getNewsId());
+            stmt.setString(5, dto.getImagePath());
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
