@@ -5,20 +5,20 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/scholarship_view.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageScholarshipsController">
+<BorderPane fx:id="mainLayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="762.0" prefWidth="1378.0" stylesheets="@../css/scholarship_view.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageScholarshipsController">
    <center>
       <VBox BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER">
                <children>
-                  <Label text="%manage_scholarships" styleClass="section-title">
+                  <Label styleClass="section-title" text="%manage_scholarships">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT">
+            <HBox alignment="CENTER">
                <children>
                   <TextField fx:id="searchStudent" promptText="%search_scholarship" />
                   <Button fx:id="btnSearch" onAction="#handleSearchClick" text="%search" />
@@ -27,7 +27,7 @@
                   <Insets left="20.0" />
                </padding>
             </HBox>
-            <HBox>
+            <HBox alignment="CENTER">
                <children>
                   <TableView fx:id="scholarshipsTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1000">
                      <columns>

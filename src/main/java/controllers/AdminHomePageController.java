@@ -116,7 +116,7 @@ public class AdminHomePageController {
     }
 
     @FXML
-    private void handleDashboardClick(){SceneManager.loadCenterContent(SceneLocator.ADMIN_HOME_PAGE);}
+    private void handleDashboardClick(){SceneManager.getInstance().loadScene(SceneLocator.ADMIN_HOME_PAGE);}
     @FXML
     private void handleManageScholarships(){
         SceneManager.loadCenterContent(SceneLocator.MANAGE_SCHOLARSHIPS_PAGE);
