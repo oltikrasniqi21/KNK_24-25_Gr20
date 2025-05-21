@@ -29,19 +29,6 @@ public class AdminHomePageController {
     @FXML
     private BorderPane mainLayout;
 
-    private void loadCenterContent(String fxmlFile) {
-        try {
-
-            ResourceBundle bundle = LanguageManager.getInstance().getResourceBundle();
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile), bundle);
-            Node content = loader.load();
-            mainLayout.setCenter(content);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     @FXML
     private PieChart usersStatusPieChart;
 
@@ -68,6 +55,8 @@ public class AdminHomePageController {
     private DashboardService dashboardService = new DashboardService();
 
     public void initialize(){
+        SceneManager.getInstance().setMainLayout(mainLayout);
+
         Map<String, Integer> statusContent = dashboardService.getUserStatusCounts();
 
         statusContent.forEach((status, count) -> {
@@ -121,34 +110,34 @@ public class AdminHomePageController {
 
     @FXML
     private void handleManageUsers(){
-        loadCenterContent(SceneLocator.MANAGE_USERS_PAGE);
+        SceneManager.loadCenterContent(SceneLocator.MANAGE_USERS_PAGE);
     }
 
     @FXML
-    private void handleManageStudents(){
-        loadCenterContent(SceneLocator.LIST_STUDENTS_PAGE);
+    private void handleManageStudents() {
+        SceneManager.loadCenterContent(SceneLocator.LIST_STUDENTS_PAGE);
     }
 
     @FXML
-    private void handleDashboardClick(){SceneManager.getInstance().loadScene(SceneLocator.ADMIN_HOME_PAGE);}
+    private void handleDashboardClick(){SceneManager.loadCenterContent(SceneLocator.ADMIN_HOME_PAGE);}
     @FXML
     private void handleManageScholarships(){
-        loadCenterContent(SceneLocator.MANAGE_SCHOLARSHIPS_PAGE);
+        SceneManager.loadCenterContent(SceneLocator.MANAGE_SCHOLARSHIPS_PAGE);
     }
 
     @FXML
     private void handleViewApplications(){
-        loadCenterContent(SceneLocator.MANAGE_APPLICATIONS_PAGE);
+        SceneManager.loadCenterContent(SceneLocator.MANAGE_APPLICATIONS_PAGE);
     }
 
     @FXML
     private void handleFeedback(){
-        loadCenterContent(SceneLocator.MANAGE_ADMIN_FEEDBACK_PAGE);
+        SceneManager.loadCenterContent(SceneLocator.MANAGE_ADMIN_FEEDBACK_PAGE);
     }
 
     @FXML
     private void handleNotification(){
-        loadCenterContent(SceneLocator.MANAGE_ADMIN_NOTIFICATION_PAGE);
+        SceneManager.loadCenterContent(SceneLocator.MANAGE_ADMIN_NOTIFICATION_PAGE);
     }
 
     @FXML
@@ -158,14 +147,18 @@ public class AdminHomePageController {
 
     @FXML
     private void handleFAQ() {
-        loadCenterContent(SceneLocator.MANAGE_FAQ_PAGE);
+        SceneManager.loadCenterContent(SceneLocator.MANAGE_FAQ_PAGE);
     }
 
     @FXML
-    private void handleNews(){loadCenterContent(SceneLocator.NEWS_ADMIN);}
+    private void handleNews() {
+        SceneManager.loadCenterContent(SceneLocator.NEWS_ADMIN);
+    }
 
     @FXML
-    private void handleAddUniversities(){loadCenterContent(SceneLocator.MANAGE_UNIVERSITIES);}
+    private void handleAddUniversities() {
+        SceneManager.loadCenterContent(SceneLocator.MANAGE_UNIVERSITIES);
+    }
 
     private void loadLanguage(Locale locale) throws Exception {
         languageManager.setLocale(locale);
