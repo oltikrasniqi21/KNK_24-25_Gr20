@@ -69,7 +69,8 @@ public class AddScholarshipController {
             throw new InvalidFieldException(AlertMessages.AMOUNT);
         }
 
-        if(!gpaField.getText().matches("^[6,7,8,9,10]{1}\\.[0-9]{1,2}$")){
+        if(!gpaField.getText().matches("^[6,7,8,9,10]{1}\\.[0-9]{1,2}$")
+        && gpaField.getText() == null && gpaField.getText().isEmpty()){
             throw new InvalidFieldException(AlertMessages.GPA);
         }
     };
