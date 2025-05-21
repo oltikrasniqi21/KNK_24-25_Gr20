@@ -36,7 +36,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="414.0" prefWidth="580.0" stylesheets="@../css/news_admin_view.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NewsController">
+<BorderPane fx:id="mainLayout" prefHeight="414.0" prefWidth="580.0" stylesheets="@../css/news_admin_view.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NewsController">
    <center>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -91,10 +91,10 @@
                   <HBox alignment="CENTER" prefHeight="71.0" prefWidth="301.0" />
                   <TableView fx:id="newsTable" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="500.0">
                     <columns>
-                        <TableColumn maxWidth="125" fx:id="newsTitleCol" text="%news.title.col" />
-                       <TableColumn maxWidth="125" fx:id="newsSummaryCol" text="%news.summary.col" />
-                       <TableColumn maxWidth="125" fx:id="newsScholarshipCol" text="%news.scholarship.col" />
-                        <TableColumn maxWidth="125" fx:id="newsActionCol" text="%news.action.col" />
+                        <TableColumn fx:id="newsTitleCol" maxWidth="125" text="%news.title.col" />
+                       <TableColumn fx:id="newsSummaryCol" maxWidth="125" text="%news.summary.col" />
+                       <TableColumn fx:id="newsScholarshipCol" maxWidth="125" text="%news.scholarship.col" />
+                        <TableColumn fx:id="newsActionCol" maxWidth="125" text="%news.action.col" />
                     </columns>
                   </TableView>
                </children>

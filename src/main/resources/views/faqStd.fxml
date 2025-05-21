@@ -35,7 +35,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" prefHeight="400.0" prefWidth="640.0" stylesheets="@../css/student_faq.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StudentFaqController">
+<VBox fx:id="mainLayout" alignment="CENTER" prefHeight="400.0" prefWidth="640.0" stylesheets="@../css/student_faq.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StudentFaqController">
   <children>
       <Label text="%FAQ" />
       <Accordion fx:id="faqAccordion" prefHeight="242.0" prefWidth="414.0" />

@@ -35,7 +35,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" prefHeight="400.0" prefWidth="640.0" spacing="40" stylesheets="@../css/admin_faq.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FaqAdminController">
+<VBox fx:id="mainLayout" alignment="CENTER" prefHeight="400.0" prefWidth="640.0" spacing="40" stylesheets="@../css/admin_faq.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FaqAdminController">
   <children>
       <HBox alignment="CENTER" prefHeight="38.0" prefWidth="640.0">
          <children>
