@@ -57,7 +57,6 @@ public class MyProfileController {
         }
 
         Users user = usersRepository.getById(currentUserId);
-        System.out.println("usere email "+user.getEmail());
         String[] nameLast = usersRepository.getStudentNameById(currentUserId).split(" ");
         String name = nameLast[0];
         String lastName = nameLast[1];
@@ -70,62 +69,9 @@ public class MyProfileController {
         emailField.setEditable(false);
     }
 
-    @FXML private void handleBackClick() {
-        SceneManager.getInstance().loadScene(SceneLocator.STUDENT_HOME_PAGE);
-    }
-
-    @FXML private void handleEditClick(){
-            firstNameField.setEditable(true);
-            lastNameField.setEditable(true);
-            emailField.setEditable(true);
-            editable=true;
-    }
-
     @FXML private void handleSaveClick(){
         if(passwordPane.isVisible()==true){
             handlePasswordChange();
-            handleInfoChange();
-        }else{
-            handleInfoChange();
-        }
-    }
-
-    private void handleInfoChange(){
-        if(editable==true){
-            String firstName = firstNameField.getText().trim();
-            String lastName = lastNameField.getText().trim();
-            String email = emailField.getText().trim();
-
-
-            if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty()) {
-                handleCancelClick();
-                throw new EmptyFieldException();
-            }
-
-            if(!signupService.isValidStudentEmail(email)){
-                handleCancelClick();
-                throw new InvalidFieldException(AlertMessages.EMAIL);
-            }
-
-            if(!firstName.matches("^[A-Z][a-z]{1,29}$")){
-                handleCancelClick();
-                throw new InvalidFieldException(AlertMessages.NAME);
-            }
-
-            if(!lastName.matches("^[A-Z][a-z]{1,29}$")){
-                handleCancelClick();
-                throw new InvalidFieldException(AlertMessages.LAST_NAME);
-            }
-
-
-            UpdateUserDTO updateUserDTO = new UpdateUserDTO(currUser);
-            updateUserDTO.setEmail(email);
-            updateUserDTO.setFirstName(firstName);
-            updateUserDTO.setLastName(lastName);
-
-            usersRepository.updateInfo(updateUserDTO);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, LocaleAlertMessages.getLocalizedMessage(AlertMessages.SUCCESSFUL_EDIT_BUNDLE));
-            alert.showAndWait();
         }
     }
 
@@ -146,12 +92,10 @@ public class MyProfileController {
         newPasswordField.clear();
     }
 
-
     @FXML private void handleChangePasswordClick(){
         if(passwordPane.isVisible()==true){
             passwordPane.setVisible(false);
-            oldPasswordField.clear();
-            newPasswordField.clear();
+            resetPasswordSection();
         }else{
             passMatchLabel.setText(" ");
             passwordPane.setVisible(true);
@@ -192,23 +136,27 @@ public class MyProfileController {
                 updateUserDTO.setPassword(finalNewPassword);
 
                 usersRepository.updatePassword(updateUserDTO);
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, LocaleAlertMessages.getLocalizedMessage(AlertMessages.SUCCESSFUL_EDIT_BUNDLE));
-                alert.showAndWait();
+                LocaleAlertMessages.showInformationAlert(AlertMessages.SUCCESSFUL_EDIT_BUNDLE);
+
+                resetPasswordSection();
             }else{
-                Alert alert = new Alert(Alert.AlertType.ERROR, LocaleAlertMessages.getLocalizedMessage(AlertMessages.WEAK_PASSWORD));
-                alert.showAndWait();
+                LocaleAlertMessages.showErrorAlert(WEAK_PASSWORD);
             }
         }
         else{
-            Alert alert = new Alert(Alert.AlertType.ERROR, LocaleAlertMessages.getLocalizedMessage(AlertMessages.NO_MATCH));
-            oldPasswordField.clear();
-            newPasswordField.clear();
-            passwordHintLabel.setStyle("-fx-text-fill: black;");
-            passwordHintLabel.setText(LocaleAlertMessages.getLocalizedMessage(PASSWORD_HINT));
-            passMatchLabel.setStyle("-fx-text-fill: black;");
-            passMatchLabel.setText(" ");
-            alert.showAndWait();
+            LocaleAlertMessages.showErrorAlert(AlertMessages.NO_MATCH);
+            resetPasswordSection();
+
         }
+    }
+
+    public void resetPasswordSection(){
+        oldPasswordField.clear();
+        newPasswordField.clear();
+        passwordHintLabel.setStyle("-fx-text-fill: black;");
+        passwordHintLabel.setText(LocaleAlertMessages.getLocalizedMessage(PASSWORD_HINT));
+        passMatchLabel.setStyle("-fx-text-fill: black;");
+        passMatchLabel.setText(" ");
     }
 
 }
