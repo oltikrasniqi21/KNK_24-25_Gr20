@@ -1,23 +1,21 @@
 package controllers;
 
 import Services.SceneManager;
+import Services.ScholarshipTagsService;
 import javafx.collections.ObservableList;
 import CreateDTO.CreateNewsDTO;
-import Repository.NewsRepository;
+import Services.NewsService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import models.News;
+import models.ScholarshipTags;
 import utils.SceneLocator;
 
 import java.io.File;
@@ -27,11 +25,9 @@ public class NewsController {
 
     @FXML
     private TextField titleField;
-    @FXML
-    private TextArea contentField;
 
     @FXML
-    private ChoiceBox<Integer> scholarshipTagChoiceBox;
+    private ChoiceBox<ScholarshipTags> scholarshipTagChoiceBox;
 
     @FXML
     private TableView<News> newsTable;
@@ -55,13 +51,13 @@ public class NewsController {
     private File selectedImageFile;
 
 
-    private final NewsRepository newsRepository = new NewsRepository();
+    private final NewsService newsService = new NewsService();
+    private final ScholarshipTagsService scholarshipTagsService = new ScholarshipTagsService();
 
     @FXML
     private void publishNews() {
         // Get the values from the form fields
         String title = titleField.getText();
-        String content = contentField.getText();
         String summary = summaryField.getText();
 
 
@@ -77,13 +73,15 @@ public class NewsController {
         String imagePath = selectedImageFile.getPath();
 
         // If the scholarshipChoiceBox is not null, get selected value
-        Integer scholarshipTagId = scholarshipTagChoiceBox.getValue() != null ? scholarshipTagChoiceBox.getValue() : null;
+        ScholarshipTags selectedTag = scholarshipTagChoiceBox.getValue();
+        Integer scholarshipTagId = selectedTag != null ? selectedTag.getTagId() : null;
 
         int postedBy = 1; // Replace with actual user ID logic
 
-        CreateNewsDTO createNewsDTO = new CreateNewsDTO(title, content, scholarshipTagId, postedBy, summary, imagePath);
+        CreateNewsDTO createNewsDTO = new CreateNewsDTO(title, scholarshipTagId, postedBy, summary, imagePath);
 
-        newsRepository.create(createNewsDTO);
+        newsService.publishNews(createNewsDTO);
+
 
         System.out.println("News published successfully!");
 
@@ -91,7 +89,6 @@ public class NewsController {
 
         // Clear the form fields after publishing
         titleField.clear();
-        contentField.clear();
         summaryField.clear();
         scholarshipTagChoiceBox.setValue(null);
         selectedImageFile = null;
@@ -132,10 +129,15 @@ public class NewsController {
         // Set up columns
         newsTitleCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
         newsSummaryCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSummary()));
-        newsScholarshipCol.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getScholarshipTagId())));
+        newsScholarshipCol.setCellValueFactory(cellData -> {
+            int tagId = cellData.getValue().getScholarshipTagId();
+            String tagName = scholarshipTagsService.getTagNameById(tagId);
+            return new SimpleStringProperty(tagName);
+        });
 
         // Load news data into table
         loadNews();
+        loadScholarshipTags();
         addDeleteButtonToTable();
         newsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
@@ -147,8 +149,7 @@ public class NewsController {
 
 
     private void loadNews() {
-        ObservableList<News> newsData = FXCollections.observableArrayList(newsRepository.getAllNews());
-        newsTable.setItems(newsData);
+        newsTable.setItems(newsService.getAllNewsObservable());
     }
 
     private void handleDelete(News news) {
@@ -160,7 +161,8 @@ public class NewsController {
 
         if (alert.showAndWait().get() == ButtonType.OK) {
             // Delete the item from the database
-            boolean isDeleted = newsRepository.delete(news.getNewsId());
+            boolean isDeleted = newsService.deleteNews(news.getNewsId());
+
             if (isDeleted) {
                 // Remove from the table as well
                 newsTable.getItems().remove(news);
@@ -198,4 +200,26 @@ public class NewsController {
             lblSelectedImage.setText("No file selected");
         }
     }
+
+
+    private void loadScholarshipTags() {
+        ObservableList<ScholarshipTags> tags = FXCollections.observableArrayList(scholarshipTagsService.getAllScholarshipTags());
+
+        scholarshipTagChoiceBox.setItems(tags);
+
+        // Show the tagName instead of the default toString()
+        scholarshipTagChoiceBox.setConverter(new javafx.util.StringConverter<>() {
+            @Override
+            public String toString(ScholarshipTags tag) {
+                return tag == null ? "" : tag.getTagName();
+            }
+
+            @Override
+            public ScholarshipTags fromString(String string) {
+                // Not needed for ChoiceBox usage, so can return null or throw exception
+                return null;
+            }
+        });
+    }
+
 }
