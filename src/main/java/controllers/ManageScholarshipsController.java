@@ -1,22 +1,29 @@
 package controllers;
 
 import Repository.ScholarshipsRepository;
+import Services.LanguageManager;
 import Services.LocaleAlertMessages;
 import Services.SceneManager;
 import Services.ScholarshipService;
 import UpdateDTO.UpdateScholarshipDTO;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 
+import javafx.scene.layout.BorderPane;
 import models.Scholarships;
 import utils.AlertMessages;
 import utils.SceneLocator;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 public class ManageScholarshipsController {
+    @FXML private BorderPane mainLayout;
     @FXML private TableView<Scholarships> scholarshipsTable;
     @FXML private TableColumn<Scholarships, Integer> scholarshipsIdColumn;
     @FXML private TableColumn<Scholarships, String> scholarshipsNameColumn;
@@ -136,7 +143,7 @@ public class ManageScholarshipsController {
     }
 
     @FXML private void handleAddScholarshipClick(){
-        SceneManager.getInstance().loadScene(SceneLocator.ADD_SCHOLARSHIPS_PAGE);
+        loadCenterContent(SceneLocator.ADD_SCHOLARSHIPS_PAGE);
     }
 
     @FXML private void handleEditClick(){
@@ -197,6 +204,18 @@ public class ManageScholarshipsController {
             }catch (Exception e){
                 e.getMessage();
             }
+        }
+    }
+
+    private void loadCenterContent(String fxmlFile) {
+        try {
+            ResourceBundle bundle = LanguageManager.getInstance().getResourceBundle();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile), bundle);
+            Node content = loader.load();
+            mainLayout.setCenter(content);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

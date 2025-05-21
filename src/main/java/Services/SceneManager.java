@@ -1,10 +1,15 @@
 package Services;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import utils.SceneLocator;
+
+import java.io.IOException;
+import java.util.ResourceBundle;
 
 public class SceneManager {
     private static SceneManager instance;
