@@ -38,7 +38,7 @@ CREATE TABLE applications (
 	student_id INTEGER NOT NULL REFERENCES students(id) ON DELETE CASCADE,
 	scholarship_id INTEGER NOT NULL REFERENCES scholarships(id) ON DELETE CASCADE,
 	application_date DATE NOT NULL DEFAULT CURRENT_DATE,
-	gpa INTEGER NOT NULL,
+	gpa DECIMAL(3,2) NOT NULL,
 	transcript_path TEXT,
 	status VARCHAR(10) NOT NULL DEFAULT 'pending' CHECK (LOWER(status) IN ('pending', 'approved', 'rejected'))
 );
