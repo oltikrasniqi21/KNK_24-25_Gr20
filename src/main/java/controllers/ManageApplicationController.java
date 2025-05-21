@@ -42,6 +42,8 @@ public class ManageApplicationController {
     @FXML private TextField studentField;
     @FXML private TextField emailField;
     @FXML private TextField gpaField;
+    @FXML private TextField majorField;
+    @FXML private TextField requiredMajorField;
     @FXML private TextField priorityField;
     @FXML private TextField scholarshipField;
     @FXML private TextField requiredGpaField;
@@ -170,7 +172,8 @@ public class ManageApplicationController {
             studentField.setText(details.studentName);
             emailField.setText(details.email);
             gpaField.setText(String.valueOf(details.gpa));
-            priorityField.setText(details.priority);
+            majorField.setText(details.major);
+            requiredMajorField.setText(details.requiredMajor);
             scholarshipField.setText(details.scholarshipName);
             requiredGpaField.setText(String.valueOf(details.requiredGpa));
             requiredYearField.setText(String.valueOf(details.requiredYear));
@@ -214,8 +217,4 @@ public class ManageApplicationController {
         handleStatusUpdate("Rejected");
     }
 
-    @FXML
-    private void handleClose(){
-        SceneManager.getInstance().loadScene(SceneLocator.ADMIN_HOME_PAGE);
-    }
 }
