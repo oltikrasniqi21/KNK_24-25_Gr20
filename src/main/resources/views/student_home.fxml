@@ -25,7 +25,7 @@
          <children>
             <Button mnemonicParsing="false" onAction="#handleLogout" text="%btn.logout" />
             <Region HBox.hgrow="ALWAYS" />
-            <Button mnemonicParsing="false" onAction="#loadNewsStudent" text="News" />
+            <Button mnemonicParsing="false" onAction="#loadNewsStudent" text="%newsStdHome" />
             <Region HBox.hgrow="ALWAYS" />
             <Button mnemonicParsing="false" onAction="#loadFAQ" text="%viewFaq" />
             <Region HBox.hgrow="ALWAYS" />
