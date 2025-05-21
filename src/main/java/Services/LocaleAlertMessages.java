@@ -1,5 +1,7 @@
 package Services;
 
+import javafx.scene.control.Alert;
+
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
@@ -23,5 +25,14 @@ public class LocaleAlertMessages {
 
         String messageString = bundle.getString(message); //merr njeren nga static final Strings ne language properties qe permban nje placeholder
         return messageString;
+    }
+
+    public static void showErrorAlert(String message){
+        Alert alert = new Alert(Alert.AlertType.ERROR, getLocalizedMessage(message));
+        alert.showAndWait();
+    }
+    public static void showInformationAlert(String message){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, getLocalizedMessage(message));
+        alert.showAndWait();
     }
 }

@@ -144,8 +144,7 @@ public class ManageScholarshipsController {
     @FXML private void handleEditClick(){
         passedSelectedScholarship = scholarshipsTable.getSelectionModel().getSelectedItem();
         if(passedSelectedScholarship == null){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, LocaleAlertMessages.getLocalizedMessage(AlertMessages.SELECT_ROW_BUNDLE));
-            alert.showAndWait();
+            LocaleAlertMessages.showInformationAlert(AlertMessages.SELECT_ROW_BUNDLE);
         }else{
             SceneManager.getInstance().loadScene(SceneLocator.EDIT_SCHOLARSHIPS_PAGE);
         }
@@ -156,8 +155,7 @@ public class ManageScholarshipsController {
         passedSelectedScholarship = scholarshipsTable.getSelectionModel().getSelectedItem();
 
         if(passedSelectedScholarship == null){
-            Alert alert = new Alert(Alert.AlertType.ERROR, LocaleAlertMessages.getLocalizedMessage(AlertMessages.SELECT_ROW_BUNDLE));
-            alert.showAndWait();
+            LocaleAlertMessages.showErrorAlert(AlertMessages.SELECT_ROW_BUNDLE);
         }else{
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, LocaleAlertMessages.getLocalizedMessage(AlertMessages.DELETE_CONFIRMATION, AlertMessages.SCHOLARSHIP));
             Optional<ButtonType> result = alert.showAndWait();
