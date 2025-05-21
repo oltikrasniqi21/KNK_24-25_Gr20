@@ -1,5 +1,7 @@
 package Services;
 
+import Exceptions.EmptyFieldException;
+import Exceptions.InvalidFieldException;
 import Repository.UsersRepository;
 import javafx.scene.control.Alert;
 import utils.PasswordUtils;
@@ -15,8 +17,7 @@ public class CreateUserService {
 
     public boolean validateFields(String firstName, String lastName, String email, String password) {
         if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            showAlert("Error", "Please fill all fields.");
-            return false;
+            throw new EmptyFieldException();
         }
 
         String emailRegex = "^[^@\\s]+@admin\\.uni\\-[a-z]{2,3}\\.edu$";
