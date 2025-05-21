@@ -1,6 +1,5 @@
 package controllers;
 
-import Database.DBCustomConnector;
 import Exceptions.EmptyFieldException;
 import Exceptions.InvalidFieldException;
 import Repository.UsersRepository;
@@ -20,10 +19,7 @@ import utils.PasswordUtils;
 import utils.SceneLocator;
 import javafx.scene.layout.*;
 
-import java.sql.Connection;
-
 import static utils.AlertMessages.*;
-
 
 public class MyProfileController {
     @FXML private TextField firstNameField;
@@ -35,19 +31,13 @@ public class MyProfileController {
     @FXML private Label passMatchLabel;
     @FXML private Label passwordHintLabel;
 
-    private final UsersRepository usersRepository;
-    private final Integer currentUserId;
-    private final SignupService signupService;
-    private Connection connection = DBCustomConnector.getConnection();
-    private final Users currUser;
+    private final UsersRepository usersRepository = new UsersRepository();
+    private final SignupService signupService = new SignupService();
+    private final Integer currentUserId = CurrentUser.getUserId();
+    private final Users currUser = usersRepository.getById(currentUserId);
     private boolean editable = false;
 
-    public MyProfileController(){
-        usersRepository = new UsersRepository();
-        currentUserId = CurrentUser.getUserId();
-        signupService = new SignupService(this.connection);
-        currUser = usersRepository.getById(currentUserId);
-    }
+    public MyProfileController() {}
 
     public void initialize(){
         passwordPane.setVisible(false);
@@ -75,14 +65,14 @@ public class MyProfileController {
     }
 
     @FXML private void handleEditClick(){
-            firstNameField.setEditable(true);
-            lastNameField.setEditable(true);
-            emailField.setEditable(true);
-            editable=true;
+        firstNameField.setEditable(true);
+        lastNameField.setEditable(true);
+        emailField.setEditable(true);
+        editable=true;
     }
 
     @FXML private void handleSaveClick(){
-        if(passwordPane.isVisible()==true){
+        if(passwordPane.isVisible()){
             handlePasswordChange();
             handleInfoChange();
         }else{
@@ -91,11 +81,10 @@ public class MyProfileController {
     }
 
     private void handleInfoChange(){
-        if(editable==true){
+        if(editable){
             String firstName = firstNameField.getText().trim();
             String lastName = lastNameField.getText().trim();
             String email = emailField.getText().trim();
-
 
             if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty()) {
                 handleCancelClick();
@@ -116,7 +105,6 @@ public class MyProfileController {
                 handleCancelClick();
                 throw new InvalidFieldException(AlertMessages.LAST_NAME);
             }
-
 
             UpdateUserDTO updateUserDTO = new UpdateUserDTO(currUser);
             updateUserDTO.setEmail(email);
@@ -146,9 +134,8 @@ public class MyProfileController {
         newPasswordField.clear();
     }
 
-
     @FXML private void handleChangePasswordClick(){
-        if(passwordPane.isVisible()==true){
+        if(passwordPane.isVisible()){
             passwordPane.setVisible(false);
             oldPasswordField.clear();
             newPasswordField.clear();
@@ -157,7 +144,6 @@ public class MyProfileController {
             passwordPane.setVisible(true);
 
             String oldPassword = usersRepository.getHashedPassword(CurrentUser.getUserId());
-            //Ndryshimi dinamik i label
             oldPasswordField.textProperty().addListener((obs, oldVal, newVal) -> {
                 if (PasswordUtils.checkPasswordMatch(newVal, oldPassword)) {
                     passMatchLabel.setText(LocaleAlertMessages.getLocalizedMessage(AlertMessages.MATCH));
@@ -182,7 +168,7 @@ public class MyProfileController {
 
     private void handlePasswordChange(){
         if(passMatchLabel.getText().equals(LocaleAlertMessages.getLocalizedMessage(AlertMessages.MATCH))){
-            if(passwordHintLabel.getText() == LocaleAlertMessages.getLocalizedMessage(AlertMessages.STRONG_PASSWORD)){
+            if(passwordHintLabel.getText().equals(LocaleAlertMessages.getLocalizedMessage(AlertMessages.STRONG_PASSWORD))){
                 String newPasswordInput = newPasswordField.getText();
                 String newSalt = PasswordUtils.getSalt();
                 String newHashedPassword = PasswordUtils.hashPassword(newPasswordInput, newSalt);
@@ -210,5 +196,4 @@ public class MyProfileController {
             alert.showAndWait();
         }
     }
-
 }

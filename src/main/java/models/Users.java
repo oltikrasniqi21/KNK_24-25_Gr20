@@ -34,10 +34,6 @@ public class Users {
         return new Users(user_id,password_hash,first_name,last_name,email,role,status);
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public int getUser_id() {
         return user_id;
     }
@@ -61,4 +57,9 @@ public class Users {
     public String getStatus() {
         return status;
     }
+    public String getPassword() {
+        return password;
+    }
+
+
 }

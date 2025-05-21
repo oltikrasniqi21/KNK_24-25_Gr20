@@ -14,7 +14,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.sql.Connection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,20 +23,14 @@ import static utils.AlertMessages.ERROR;
 import static utils.AlertMessages.showAlert;
 
 public class SignupService {
-    private final UniversitiesRepository universitiesRepository;
-    private final FacultiesRepository facultiesRepository;
-    private final MajorsRepository majorsRepository;
-    private final UsersRepository usersRepository;
+    private final UniversitiesRepository universitiesRepository = new UniversitiesRepository();
+    private final FacultiesRepository facultiesRepository = new FacultiesRepository();
+    private final MajorsRepository majorsRepository = new MajorsRepository();
+    private final UsersRepository usersRepository = new UsersRepository();
 
     private final Map<String, Integer> universityNameToId = new HashMap<>();
     private final Map<String, Integer> facultyNameToId = new HashMap<>();
 
-    public SignupService(Connection connection) {
-        this.universitiesRepository = new UniversitiesRepository();
-        this.facultiesRepository = new FacultiesRepository();
-        this.majorsRepository = new MajorsRepository();
-        this.usersRepository = new UsersRepository();
-    }
 
     public boolean isValidStudentEmail(String email) {
         String regex = "^[\\w.-]+@student\\.uni-[a-z]{2,10}\\.edu$";

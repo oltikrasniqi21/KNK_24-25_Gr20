@@ -14,16 +14,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import utils.SceneLocator;
 import javafx.scene.layout.VBox;
-
-
-
-import java.sql.Connection;
 import java.util.Locale;
 
 import static utils.AlertMessages.showAlert;
 
 public class LoginController {
     private SceneManager sceneManager;
+    private LoginService loginService;
     private final LanguageManager languageManager = LanguageManager.getInstance();
 
     @FXML
@@ -58,9 +55,7 @@ public class LoginController {
         String password = pwdPassword.getText();
 
         try {
-            Connection conn = DBCustomConnector.getConnection();
-            LoginService loginService = new LoginService(conn);
-
+            LoginService loginService = new LoginService();
             String role = loginService.authenticate(email, password);
 
             if (sceneManager == null) {
@@ -68,8 +63,7 @@ public class LoginController {
             }
 
             if (role != null) {
-                // You may want to fetch the user ID too if it's not a superadmin
-                int userId = loginService.fetchUserIdByEmail(conn, email);
+                int userId = loginService.fetchUserIdByEmail(email);
                 CurrentUser.setUser(userId, role);
 
                 if (role.equalsIgnoreCase("admin")) {
