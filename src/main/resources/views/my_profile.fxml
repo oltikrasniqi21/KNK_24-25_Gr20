@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/profile_view.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MyProfileController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/profile_view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MyProfileController">
    <children>
       <Label prefHeight="35.0" styleClass="title" text="%profile.title" textAlignment="CENTER">
          <font>
@@ -13,26 +19,24 @@
       </Label>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%signup.firstName" />
+            <Label text="%signup.firstName" />
              <Region HBox.hgrow="ALWAYS" />
-            <TextField fx:id="firstNameField" promptText="%signup.firstName" styleClass="input" />
+            <TextField fx:id="firstNameField" prefHeight="33.0" prefWidth="223.0" promptText="%signup.firstName" styleClass="input" />
          </children></HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%signup.email" wrappingWidth="77.40380859375" />
+            <Label text="%signup.lastName" />
+             <Region HBox.hgrow="ALWAYS" />
+            <TextField fx:id="lastNameField" prefHeight="33.0" prefWidth="232.0" promptText="%signup.lastName" styleClass="input" />
+         </children></HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label text="%signup.email" />
              <Region HBox.hgrow="ALWAYS" />
             <TextField fx:id="emailField" promptText="%signup.email" styleClass="input" />
          </children></HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%signup.lastName" />
-             <Region HBox.hgrow="ALWAYS" />
-            <TextField fx:id="lastNameField" promptText="%signup.lastName" styleClass="input" />
-         </children></HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <Button mnemonicParsing="false" onAction="#handleEditClick" styleClass="editButton" text="%key.edit" />
-             <Region HBox.hgrow="ALWAYS" />
             <Button mnemonicParsing="false" onAction="#handleSaveClick" styleClass="saveButton" text="%key.save" />
              <Region HBox.hgrow="ALWAYS" />
             <Button mnemonicParsing="false" onAction="#handleCancelClick" styleClass="cancelButton" text="%key.cancel" />
@@ -43,7 +47,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%oldPassword" />
+                  <Label text="%oldPassword" />
                    <Region HBox.hgrow="ALWAYS" />
                   <PasswordField fx:id="oldPasswordField" promptText="%oldPassword" styleClass="input" />
                </children>

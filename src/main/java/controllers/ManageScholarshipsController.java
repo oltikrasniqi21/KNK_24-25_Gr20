@@ -8,14 +8,12 @@ import UpdateDTO.UpdateScholarshipDTO;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import models.Applications;
 import models.Scholarships;
 import utils.AlertMessages;
 import utils.SceneLocator;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 public class ManageScholarshipsController {
@@ -27,7 +25,7 @@ public class ManageScholarshipsController {
     @FXML private TableColumn<Scholarships, String> scholarshipsDeadlineColumn;
     @FXML private TableColumn<Scholarships, Double> scholarshipsGpaColumn;
     @FXML private TableColumn<Scholarships, Integer> scholarshipsYearColumn;
-    @FXML private TableColumn<Scholarships, String> scholarshipsMajorColumn;
+    @FXML private TableColumn<Scholarships, String> scholarshipsFacultiesColumn;
     @FXML private TableColumn<Scholarships, String> scholarshipsStatusColumn;
 
     @FXML private TextField searchStudent;
@@ -81,9 +79,9 @@ public class ManageScholarshipsController {
             return new javafx.beans.property.SimpleIntegerProperty(scholarships.getRequired_year()).asObject();
         });
 
-        scholarshipsMajorColumn.setCellValueFactory(cellData ->{
+        scholarshipsFacultiesColumn.setCellValueFactory(cellData ->{
             Scholarships scholarship = cellData.getValue();
-            return new javafx.beans.property.SimpleStringProperty(scholarship.getRequred_major());
+            return new javafx.beans.property.SimpleStringProperty(scholarship.getRequired_faculties());
         });
 
         scholarshipsStatusColumn.setCellValueFactory(cellData ->{
@@ -144,22 +142,43 @@ public class ManageScholarshipsController {
     @FXML private void handleEditClick(){
         passedSelectedScholarship = scholarshipsTable.getSelectionModel().getSelectedItem();
         if(passedSelectedScholarship == null){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, LocaleAlertMessages.getLocalizedMessage(AlertMessages.SELECT_ROW_BUNDLE));
-            alert.showAndWait();
+            LocaleAlertMessages.showInformationAlert(AlertMessages.SELECT_ROW_BUNDLE);
         }else{
             SceneManager.getInstance().loadScene(SceneLocator.EDIT_SCHOLARSHIPS_PAGE);
         }
 
     }
 
+    private void refreshTable(){
+        ArrayList<Scholarships> scholarships = scholarshipsRepository.getAll();
+        scholarshipsTable.getItems().setAll(scholarships);
+    }
+
     @FXML private void handleDeleteClick(){
         passedSelectedScholarship = scholarshipsTable.getSelectionModel().getSelectedItem();
 
-        if(passedSelectedScholarship == null){
-            Alert alert = new Alert(Alert.AlertType.ERROR, LocaleAlertMessages.getLocalizedMessage(AlertMessages.SELECT_ROW_BUNDLE));
-            alert.showAndWait();
-        }else{
+        if(passedSelectedScholarship.getStatus().equals("deactive")){
+            System.out.println("DEACTIVE...");
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, LocaleAlertMessages.getLocalizedMessage(AlertMessages.DELETE_CONFIRMATION, AlertMessages.SCHOLARSHIP));
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                scholarshipsRepository.delete(passedSelectedScholarship.getScholarship_id());
+                refreshTable();
+                return;
+            } else {
+                System.out.println("User cancelled the action.");
+            }
+        }else{
+            passedSelectedScholarship.getStatus();
+            System.out.println("Bursa nuk eshte deaktive");
+        }
+
+        if(passedSelectedScholarship == null){
+            LocaleAlertMessages.showErrorAlert(AlertMessages.SELECT_ROW_BUNDLE);
+        }else{
+            System.out.println("ACTIVE...");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, LocaleAlertMessages.getLocalizedMessage(AlertMessages.DEACTIVE_CONFIRMATION, AlertMessages.SCHOLARSHIP));
             Optional<ButtonType> result = alert.showAndWait();
 
             if (result.isPresent() && result.get() == ButtonType.OK) {
@@ -167,6 +186,8 @@ public class ManageScholarshipsController {
                 updateScholarshipDTO.setActiveStatus(false);
                 scholarshipService.update(updateScholarshipDTO);
                 System.out.println("Status Changed");
+                refreshTable();
+                return;
             } else {
                 System.out.println("User cancelled the action.");
             }
@@ -176,7 +197,6 @@ public class ManageScholarshipsController {
             }catch (Exception e){
                 e.getMessage();
             }
-
         }
     }
 }

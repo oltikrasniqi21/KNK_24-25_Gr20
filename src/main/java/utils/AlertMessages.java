@@ -10,7 +10,8 @@ public class AlertMessages {
     public static final String SUCCESSFUL_EDIT_BUNDLE = "successfulEdit.field";
     public static final String SELECT_ROW_BUNDLE = "selectRow.field";
     public static final String DELETE_CONFIRMATION = "confirmation.field";
-
+    public static final String ALREADY_EXIST_SCHOLARSHIP = "alreadyExist.Schoalarship";
+    public static final String DEACTIVE_CONFIRMATION = "deactive.Schoalarship";
 
     public static final String GPA = "label.gpa";
     public static final String SCHOLARSHIP = "label.scholarship";

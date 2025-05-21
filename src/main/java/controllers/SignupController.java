@@ -1,6 +1,7 @@
 package controllers;
 
 import Services.SceneManager;
+import Services.UniversityService;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -18,8 +19,10 @@ import java.io.IOException;
 import static utils.AlertMessages.*;
 
 public class SignupController {
+    private final UniversityService universityService;
 
     public SignupController() {
+        this.universityService = new UniversityService();
         this.signupService = new SignupService(DBCustomConnector.getConnection());
     }
 
@@ -56,7 +59,7 @@ public class SignupController {
 
     @FXML
     public void initialize() {
-        signupService.loadUniversities(universityComboBox);
+        universityService.loadUniversities(universityComboBox);
         yearComboBox.getItems().addAll("1", "2", "3", "4", "5", "6");
 
         passwordField.textProperty().addListener((obs, oldVal, newVal) -> {
@@ -72,14 +75,14 @@ public class SignupController {
         universityComboBox.setOnAction(e -> {
             String selectedUniversity = universityComboBox.getValue();
             if (selectedUniversity != null) {
-                signupService.loadFaculties(selectedUniversity, facultyComboBox, majorComboBox);
+                universityService.loadFaculties(selectedUniversity, facultyComboBox, majorComboBox);
             }
         });
 
         facultyComboBox.setOnAction(e -> {
             String selectedFaculty = facultyComboBox.getValue();
             if (selectedFaculty != null) {
-                signupService.loadMajors(selectedFaculty, majorComboBox);
+                universityService.loadMajors(selectedFaculty, majorComboBox);
             }
         });
         VBox.setMargin(buttonVbox1, new Insets(20, 0, 5, 0));
