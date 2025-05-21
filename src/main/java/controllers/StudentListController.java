@@ -1,7 +1,7 @@
 package controllers;
 
-import Repository.UsersRepository;
 import Services.SceneManager;
+import Services.StudentListService;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -16,7 +16,7 @@ import java.util.List;
 
 public class StudentListController {
     @FXML
-    private TableView<Students> studentslitsTable;
+    private TableView<Students> studentslistTable;
     @FXML
     private TextField searchField;
 
@@ -35,18 +35,20 @@ public class StudentListController {
     @FXML
     private TableColumn<Students, String> studentMajorColumn;
     @FXML
-    private TableColumn<Students, String> studentPriorityColumn;
-    @FXML
     private TableColumn<Students, String> studentsStringTableColumnStatus;
 
-    private UsersRepository usersRepository;
+    private StudentListService studentListService;
 
     public StudentListController() {
-        usersRepository = new UsersRepository();
+        studentListService = new StudentListService();
     }
 
     public void initialize() {
+        setupTableColumns();
+        loadStudents();
+    }
 
+    private void setupTableColumns() {
         StudentIdColumn.setCellValueFactory(cellData ->
                 new SimpleIntegerProperty(cellData.getValue().getUser_id()).asObject());
 
@@ -70,25 +72,18 @@ public class StudentListController {
         studentMajorColumn.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getMajor()));
 
-        studentPriorityColumn.setCellValueFactory(cellData ->
-                new SimpleStringProperty(cellData.getValue().getPriority()));
-
         studentsStringTableColumnStatus.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getStatus()));
-
-        loadStudents();
     }
-
 
     private void loadStudents() {
         try {
-            List<Students> students = usersRepository.getAllStudents();
-            studentslitsTable.getItems().setAll(students);
+            List<Students> students = studentListService.getAllStudents();
+            studentslistTable.getItems().setAll(students);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
     @FXML
     private void handleSearch() {
@@ -96,8 +91,8 @@ public class StudentListController {
         if (searchTerm.isEmpty()) {
             loadStudents();
         } else {
-            List<Students> filteredStudents = usersRepository.searchStudents(searchTerm);
-            studentslitsTable.getItems().setAll(filteredStudents);
+            List<Students> filteredStudents = studentListService.searchStudents(searchTerm);
+            studentslistTable.getItems().setAll(filteredStudents);
         }
     }
 
