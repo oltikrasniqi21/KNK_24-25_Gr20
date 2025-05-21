@@ -128,7 +128,14 @@ END $$;
 //boni qit query per modifikim t kolonave te scholarships
 ALTER TABLE scholarships
 ADD COLUMN status VARCHAR(20);
+
+
+--alter for news table
+ALTER TABLE news DROP COLUMN content
 -------------------------------------------------------------------------------------------------------------------------
+
+
+
 - PASTRIMI I RRESHTAVE EKZISTUES
 TRUNCATE TABLE applications, faculties, faq, feedback, majors, news, notification, review, scholarship_tags, scholarships, students, universities, users RESTART IDENTITY CASCADE;
 
@@ -380,9 +387,25 @@ UPDATE feedback
 SET response = 'Na vjen keq per problemin e hasur. Do ta shqyrtojme shpejte!'
 WHERE id = 2;
 
+-- me query shtoni scholarship tags
+INSERT INTO scholarship_tags (tag_name) VALUES
+('STEM'),
+('Humanities'),
+('International'),
+('GENERAL'),
+('Merit-Based'),
+('Women in Tech'),
+('Research'),
+('Erasmus');
+
+-- MANUALISHT shtoni news
 
 
---alter for news table
-ALTER TABLE news DROP COLUMN content
+
+
+
+
+
+
 
 
