@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 import models.Feedback;
 import utils.SceneLocator;
 
@@ -34,6 +35,34 @@ public class FeedbackController {
         messageCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getMessage()));
         timeStampCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getSubmitted_at()));
         responseCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getResponse()));
+
+        messageCol.setCellFactory(tc -> new TableCell<>() {
+            private final Text text = new Text();
+            {
+                text.wrappingWidthProperty().bind(messageCol.widthProperty().subtract(10));
+                text.getStyleClass().add("wrapped-text");
+                setGraphic(text);
+            }
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                text.setText(empty || item == null ? "" : item);
+            }
+        });
+
+        responseCol.setCellFactory(tc -> new TableCell<>() {
+            private final Text text = new Text();
+            {
+                text.wrappingWidthProperty().bind(responseCol.widthProperty().subtract(10));
+                text.getStyleClass().add("wrapped-text");
+                setGraphic(text);
+            }
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                text.setText(empty || item == null ? "" : item);
+            }
+        });
 
         loadFeedback();
     }

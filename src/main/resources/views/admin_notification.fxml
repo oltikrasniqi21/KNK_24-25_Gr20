@@ -32,76 +32,48 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NotificationController">
-  <children>
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+<BorderPane prefHeight="497.0" prefWidth="875.0" stylesheets="@../css/admin_notification.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NotificationController">
+   <center>
+      <VBox alignment="CENTER" spacing="30">
          <children>
-            <Label layoutX="266.0" layoutY="14.0" text="%notificationHeader" />
-            <Label layoutX="61.0" layoutY="74.0" text="%title" />
-            <TextField fx:id="titleFieldNotification" layoutX="141.0" layoutY="70.0" />
-            <TextArea fx:id="messageAreaNotification" layoutX="141.0" layoutY="108.0" prefHeight="72.0" prefWidth="149.0" />
-            <Label layoutX="63.0" layoutY="108.0" text="%message" />
-            <Button fx:id="sendBtnNotification" layoutX="159.0" layoutY="187.0" mnemonicParsing="false" onAction="#handleSendNotification" text="%sendNotification" />
-            <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleBack" text="%btnBack" />
-            <TableView fx:id="notificationTable" layoutX="328.0" layoutY="58.0" prefHeight="255.0" prefWidth="298.0">
-              <columns>
-                <TableColumn fx:id="messageColumn" prefWidth="221.3333740234375" text="%notificationHeader" />
-                <TableColumn fx:id="editColumn" minWidth="0.0" prefWidth="75.33331298828125" text="%notificationModify" />
-              </columns>
-            </TableView>
+            <Label fx:id="notificationHeader" text="%notificationHeader" />
+            <HBox alignment="CENTER" spacing="30">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="255.0" prefWidth="304.0" spacing="20">
+                     <children>
+                        <HBox>
+                           <children>
+                              <Label text="%title" />
+                             <Region HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="titleFieldNotification" prefWidth="200.0" />
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                              <Label text="%message" />
+                             <Region HBox.hgrow="ALWAYS" />
+                              <TextArea fx:id="messageAreaNotification" prefHeight="70.0" prefWidth="200.0" />
+                           </children>
+                        </HBox>
+                        <Button fx:id="sendBtnNotification" mnemonicParsing="false" onAction="#handleSendNotification" text="%sendNotification" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <TableView fx:id="notificationTable" prefHeight="255.0" prefWidth="500.0">
+                          <columns>
+                            <TableColumn fx:id="messageColumn" prefWidth="350" text="%notificationHeader" />
+                            <TableColumn fx:id="editColumn" minWidth="0.0" prefWidth="130.0" text="%notificationModify" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
          </children>
-    </AnchorPane>
-  </children>
-</VBox>
+      </VBox>
+   </center>
+</BorderPane>
