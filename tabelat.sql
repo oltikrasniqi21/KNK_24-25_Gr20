@@ -87,8 +87,8 @@ CREATE TABLE News (
   title TEXT NOT NULL,
   summary TEXT NOT NULL,
   content TEXT NOT NULL,
-  scholarship_tag_id INT REFERENCES scholarship_tags(tag_id) ON DELETE SET NULL,
-  posted_by INT REFERENCES Users(user_id),
+  scholarship_tag_id INT REFERENCES scholarship_tags(id) ON DELETE SET NULL,
+  posted_by INT REFERENCES Users(id),
   posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   imagepath TEXT NOT NULL
 );
