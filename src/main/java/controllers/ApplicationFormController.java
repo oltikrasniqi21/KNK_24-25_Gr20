@@ -110,6 +110,12 @@ public class ApplicationFormController {
                     gpa
             );
 
+            String validationStatus = applicationService.validateApplication(applicationDto);
+            if (validationStatus != null){
+                showAlert("Gabim", validationStatus);
+                return;
+            }
+
             String validationMessage = applicationService.validateApplication(applicationDto);
             if (validationMessage != null){
                 showAlert("Gabim", validationMessage);
