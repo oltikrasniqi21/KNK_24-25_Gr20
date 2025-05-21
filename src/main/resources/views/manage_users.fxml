@@ -4,47 +4,47 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="382.0" prefWidth="565.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageUsersController">
+<BorderPane prefHeight="382.0" prefWidth="565.0" stylesheets="@../css/manage_user.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageUsersController">
    <center>
-      <VBox prefHeight="382.0" prefWidth="593.0" BorderPane.alignment="CENTER">
+      <VBox spacing="20" alignment="CENTER" prefHeight="382.0" prefWidth="593.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="111.0" prefWidth="487.0">
+            <HBox  fx:id="topHbox" alignment="CENTER" spacing="20" prefHeight="111.0" prefWidth="487.0">
                <children>
-                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <VBox alignment="CENTER">
                      <children>
                     <Label text="%label.manage_users">
                       <font>
                         <Font size="18.0" />
                       </font>
                     </Label>
-                        <HBox prefHeight="54.0" prefWidth="100.0" />
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <HBox prefHeight="22.0" prefWidth="131.0" />
+                        <HBox prefHeight="65.0" prefWidth="116.0">
                            <children>
                           <TextField fx:id="searchTextField" promptText="%textfield.search_user" />
-                          <Button fx:id="btnSearch" onAction="#handleSearchClick" text="%button.search" />
+                          <Button fx:id="btnSearch" onAction="#handleSearchClick" text="..." />
                            </children>
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox prefHeight="111.0" prefWidth="129.0" />
-                  <VBox prefHeight="200.0" prefWidth="100.0">
+                   <Region HBox.hgrow="ALWAYS" />
+                  <VBox alignment="CENTER">
                      <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="42.0" prefWidth="56.0" />
-                    <Button fx:id="btnAddUser" onAction="#handleAddUserClick" text="%button.add_user" />
-                        <VBox prefHeight="36.0" prefWidth="56.0" />
+                    <Button fx:id="btnAddUser" alignment="CENTER" onAction="#handleAddUserClick" text="%button.add_user" />
                      </children>
                   </VBox>
-                  <VBox prefHeight="111.0" prefWidth="114.0" />
-                  <VBox alignment="CENTER" prefHeight="111.0" prefWidth="121.0">
+                   <Region HBox.hgrow="ALWAYS" />
+                  <VBox alignment="CENTER">
                      <children>
-                        <Button fx:id="validateButton" mnemonicParsing="false" onAction="#handleValidate" prefHeight="25.0" prefWidth="63.0" text="%button.validate" underline="true" />
+                        <Button fx:id="validateButton" mnemonicParsing="false" onAction="#handleValidate" prefHeight="25.0" text="%button.validate" underline="true" />
+                        <HBox prefHeight="18.0" prefWidth="108.0" />
                         <Button fx:id="rejectButton" mnemonicParsing="false" onAction="#handleReject" text="%button.reject" underline="true" />
                      </children>
                   </VBox>
                </children>
             </HBox>
-            <HBox prefHeight="271.0" prefWidth="508.0">
+            <HBox alignment="CENTER" prefHeight="271.0" prefWidth="508.0">
                <children>
+                   <Region HBox.hgrow="ALWAYS" />
               <TableView fx:id="usersTable" prefHeight="271.0" prefWidth="567.0">
                 <columns>
                   <TableColumn fx:id="userIdColumn" prefWidth="80" text="%column.id" />
@@ -54,6 +54,7 @@
                   <TableColumn fx:id="actionButtonColumn" prefWidth="142.0" text="%column.document" />
                 </columns>
               </TableView>
+                   <Region HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
          </children>

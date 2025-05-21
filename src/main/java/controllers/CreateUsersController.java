@@ -54,8 +54,5 @@ public class CreateUsersController {
         pwdPassword.clear();
     }
 
-    @FXML
-    private void handleBackClick() {
-        SceneManager.getInstance().loadScene(SceneLocator.MANAGE_USERS_PAGE);
-    }
+
 }

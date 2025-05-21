@@ -80,10 +80,7 @@ public class ManageUsersController {
         usersTable.getItems().setAll(manageUsersService.getAllStudentUsers());
     }
 
-    @FXML
-    private void handleBackClick() {
-        SceneManager.getInstance().loadScene(SceneLocator.ADMIN_HOME_PAGE);
-    }
+
 
     @FXML
     private void handleAddUserClick() {
