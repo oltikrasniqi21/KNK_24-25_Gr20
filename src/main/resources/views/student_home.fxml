@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import java.lang.String?>
 <BorderPane fx:id="mainLayout" stylesheets="@../css/student_view.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StudentHomePageController">
    <right>
        <VBox fx:id="notificationPane" layoutX="253.0" layoutY="71.0" prefHeight="342.0" prefWidth="191.0">
@@ -18,11 +19,33 @@
        </VBox>
    </right>
    <center>
-      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="410.0" prefWidth="635.0">
+               <children>
+                  <Label text="%welcome.label" fx:id="welcome"/>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </center>
    <top>
       <HBox fx:id="topHbox" alignment="CENTER" prefHeight="61.0" prefWidth="826.0" BorderPane.alignment="CENTER">
          <children>
+             <VBox fx:id="languagesHbox" alignment="CENTER" maxWidth="Infinity" spacing="10">
+                 <Button layoutX="31.0" layoutY="9.0" mnemonicParsing="false" onAction="#handleENLanguageClick" prefHeight="27.0" prefWidth="109.0" text="%english.button">
+                     <styleClass>
+                         <String fx:value="englishButton" />
+                         <String fx:value="Button" />
+                     </styleClass>
+                 </Button>
+                 <Button layoutX="152.0" layoutY="9.0" mnemonicParsing="false" onAction="#handleSQLanguageClick" prefHeight="27.0" prefWidth="100.0" text="%shqip.button">
+                     <styleClass>
+                         <String fx:value="shqipButton" />
+                         <String fx:value="Button" />
+                     </styleClass>
+                 </Button>
+             </VBox>
             <Button mnemonicParsing="false" onAction="#handleLogout" text="%btn.logout" />
             <Region HBox.hgrow="ALWAYS" />
             <Button mnemonicParsing="false" onAction="#loadNewsStudent" text="%newsStdHome" />

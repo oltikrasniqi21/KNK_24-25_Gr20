@@ -4,9 +4,11 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="rootVBox"  prefWidth="360" prefHeight="320" maxWidth="360" maxHeight="320" minWidth="360" minHeight="320"
+<VBox fx:id="rootVBox" prefWidth="360" prefHeight="320" maxWidth="360" maxHeight="320" minWidth="360" minHeight="320"
       styleClass="news-card" spacing="5" stylesheets="@../css/news_card.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NewsCardController">
-    <ImageView fx:id="newsImageView" fitWidth="320" fitHeight="220" preserveRatio="false" smooth="true" cache="true"/>
+    <StackPane>
+        <ImageView fx:id="newsImageView" fitWidth="360" fitHeight="180" preserveRatio="false" smooth="true" cache="true"/>
+    </StackPane>
     <Label fx:id="titleLabel" wrapText="true" />
     <Label fx:id="summaryLabel" wrapText="true" />
     <Label fx:id="scholarshipTagLabel" />
