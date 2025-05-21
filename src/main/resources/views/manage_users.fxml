@@ -4,71 +4,59 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageUsersController">
-  <children>
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="%menu.file">
-          <items>
-            <MenuItem text="%menuitem.new" />
-            <MenuItem text="%menuitem.open" />
-            <Menu text="%menuitem.openrecent" />
-            <SeparatorMenuItem />
-            <MenuItem text="%menuitem.close" />
-            <MenuItem text="%menuitem.save" />
-            <MenuItem text="%menuitem.save_as" />
-            <MenuItem text="%menuitem.revert" />
-            <SeparatorMenuItem />
-            <MenuItem text="%menuitem.preferences" />
-            <SeparatorMenuItem />
-            <MenuItem text="%menuitem.quit" />
-          </items>
-        </Menu>
-        <Menu text="%menu.edit">
-          <items>
-            <MenuItem text="%menuitem.undo" />
-            <MenuItem text="%menuitem.redo" />
-            <SeparatorMenuItem />
-            <MenuItem text="%menuitem.cut" />
-            <MenuItem text="%menuitem.copy" />
-            <MenuItem text="%menuitem.paste" />
-            <MenuItem text="%menuitem.delete" />
-            <SeparatorMenuItem />
-            <MenuItem text="%menuitem.select_all" />
-            <MenuItem text="%menuitem.unselect_all" />
-          </items>
-        </Menu>
-        <Menu text="%menu.help">
-          <items>
-            <MenuItem text="%menuitem.about" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <AnchorPane VBox.vgrow="ALWAYS">
-      <children>
-        <Label layoutX="34.0" layoutY="20.0" text="%label.manage_users">
-          <font>
-            <Font size="18.0" />
-          </font>
-        </Label>
-        <TextField fx:id="searchTextField" layoutX="34.0" layoutY="58.0" promptText="%textfield.search_user" />
-        <Button fx:id="btnSearch" layoutX="200.0" layoutY="58.0" onAction="#handleSearchClick" text="%button.search" />
-        <TableView fx:id="usersTable" layoutX="34.0" layoutY="105.0" prefHeight="240.0" prefWidth="574.0">
-          <columns>
-            <TableColumn fx:id="userIdColumn" prefWidth="80" text="%column.id" />
-            <TableColumn fx:id="userNameColumn" prefWidth="113.0" text="%column.name" />
-            <TableColumn fx:id="userEmailColumn" prefWidth="135.0" text="%column.email" />
-            <TableColumn fx:id="userStatusColumn" prefWidth="103.0" text="%column.status" />
-            <TableColumn fx:id="actionButtonColumn" prefWidth="142.0" text="%column.document" />
-          </columns>
-        </TableView>
-        <Button fx:id="btnAddUser" layoutX="220.0" layoutY="21.0" onAction="#handleAddUserClick" text="%button.add_user" />
-        <Button fx:id="btnBack" layoutX="558.0" layoutY="21.0" onAction="#handleBackClick" prefHeight="25.0" prefWidth="49.0" text="%button.back" />
-            <Button fx:id="validateButton" layoutX="377.0" layoutY="21.0" mnemonicParsing="false" onAction="#handleValidate" prefHeight="25.0" prefWidth="63.0" text="%button.validate" underline="true" />
-            <Button fx:id="rejectButton" layoutX="452.0" layoutY="21.0" mnemonicParsing="false" onAction="#handleReject" text="%button.reject" underline="true" />
-      </children>
-    </AnchorPane>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" />
-  </children>
-</VBox>
+<BorderPane prefHeight="382.0" prefWidth="565.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageUsersController">
+   <center>
+      <VBox prefHeight="382.0" prefWidth="593.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="111.0" prefWidth="487.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                    <Label text="%label.manage_users">
+                      <font>
+                        <Font size="18.0" />
+                      </font>
+                    </Label>
+                        <HBox prefHeight="54.0" prefWidth="100.0" />
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                          <TextField fx:id="searchTextField" promptText="%textfield.search_user" />
+                          <Button fx:id="btnSearch" onAction="#handleSearchClick" text="%button.search" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="111.0" prefWidth="129.0" />
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" prefHeight="42.0" prefWidth="56.0" />
+                    <Button fx:id="btnAddUser" onAction="#handleAddUserClick" text="%button.add_user" />
+                        <VBox prefHeight="36.0" prefWidth="56.0" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="111.0" prefWidth="114.0" />
+                  <VBox alignment="CENTER" prefHeight="111.0" prefWidth="121.0">
+                     <children>
+                        <Button fx:id="validateButton" mnemonicParsing="false" onAction="#handleValidate" prefHeight="25.0" prefWidth="63.0" text="%button.validate" underline="true" />
+                        <Button fx:id="rejectButton" mnemonicParsing="false" onAction="#handleReject" text="%button.reject" underline="true" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="271.0" prefWidth="508.0">
+               <children>
+              <TableView fx:id="usersTable" prefHeight="271.0" prefWidth="567.0">
+                <columns>
+                  <TableColumn fx:id="userIdColumn" prefWidth="80" text="%column.id" />
+                  <TableColumn fx:id="userNameColumn" prefWidth="113.0" text="%column.name" />
+                  <TableColumn fx:id="userEmailColumn" prefWidth="135.0" text="%column.email" />
+                  <TableColumn fx:id="userStatusColumn" prefWidth="103.0" text="%column.status" />
+                  <TableColumn fx:id="actionButtonColumn" prefWidth="142.0" text="%column.document" />
+                </columns>
+              </TableView>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
