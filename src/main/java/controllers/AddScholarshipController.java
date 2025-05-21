@@ -67,8 +67,8 @@ public class AddScholarshipController {
 
     @FXML private void handleSaveClick(){
             try{
-                checkEmptyFields(); //throws EmptyFieldExcpetion
-                checkInvalidTypeFields(); //throws InvalidFieldExcpetion
+                checkEmptyFields(); //can throw EmptyFieldExcpetion
+                checkInvalidTypeFields(); //can throw InvalidFieldExcpetion
 
                 String name = nameField.getText().toLowerCase();
                 String provider = providerField.getText().toLowerCase();

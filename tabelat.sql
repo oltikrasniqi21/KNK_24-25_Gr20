@@ -130,6 +130,4 @@ END $$;
 ALTER TABLE scholarships
 ADD COLUMN status VARCHAR(20);
 
-
-
 //kolona
