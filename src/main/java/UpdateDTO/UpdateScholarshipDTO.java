@@ -33,28 +33,9 @@ public class UpdateScholarshipDTO {
         this.status = "active";
     }
 
-    public void setScholarship_id(int scholarship_id) {
-        this.scholarship_id = scholarship_id;
-    }
 
     public void setAmount(int amount) {
         this.amount = amount;
-    }
-
-    public void setDeadline_date(LocalDate deadline_date) {
-        this.deadline_date = deadline_date;
-    }
-
-    public void setRequired_gpa(double required_gpa) {
-        this.required_gpa = required_gpa;
-    }
-
-    public void setRequired_year(int required_year) {
-        this.required_year = required_year;
-    }
-
-    public void setRequred_faculties(String requred_faculties) {
-        this.requred_faculties = requred_faculties;
     }
 
     public int getScholarship_id() {

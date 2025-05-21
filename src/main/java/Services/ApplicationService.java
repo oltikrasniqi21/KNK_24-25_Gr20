@@ -85,18 +85,6 @@ public class ApplicationService {
         return applicationsRepository.update(dto);
     }
 
-    public List<Applications> getApplicationsByStudentId(int studentId){
-        List<Applications> result = new ArrayList<>();
-        List<Applications> allApps = applicationsRepository.getAll();
-
-        for(Applications app : allApps){
-            if(app.getStudentId() == studentId){
-                result.add(app);
-            }
-        }
-
-        return result;
-    }
 
     public Applications getApplicationById(int id){
         return applicationsRepository.getById(id);

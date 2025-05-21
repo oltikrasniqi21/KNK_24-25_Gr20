@@ -7,7 +7,6 @@ import models.Scholarships;
 import java.sql.*;
 
 public class ScholarshipsRepository extends BaseRepository<Scholarships, CreateScholarshipDTO, UpdateScholarshipDTO>{
-    //connection krijohet tek BaseRepository
 
     public ScholarshipsRepository(){
         super("scholarships");
