@@ -1,10 +1,14 @@
 #topHbox {
-    -fx-background-color: #00A859; /* A brighter green */
+    -fx-background-color: #00A859;
     -fx-padding: 20 0 20 20;
-    -fx-spacing: 10; /* spacing between buttons */
+    -fx-spacing: 10;
 }
 
-/* Buttons only inside #topHbox */
+#welcome{
+    -fx-font-size: 36px;
+    -fx-text-fill: #555555;
+    -fx-font-weight: bold;
+}
 #topHbox .button {
     -fx-background-color: transparent;
     -fx-text-fill: white;
@@ -13,9 +17,8 @@
     -fx-border-color: transparent;
     -fx-font-size: 14px;
     -fx-alignment: CENTER;
-    -fx-padding: 5 15; /* vertical 5, horizontal 15 */
+    -fx-padding: 5 15;
     -fx-cursor: hand;
-    /* Remove translate-x, let buttons flow naturally */
 }
 
 #topHbox .button:hover {
@@ -25,12 +28,11 @@
 #topHbox .button:selected, #topHbox .button:focused {
     -fx-background-color: #f0f2f5;
     -fx-text-fill: #00A859;
-    -fx-background-radius: 10px; /* fully rounded */
+    -fx-background-radius: 10px;
     -fx-border-radius: 10px;
     -fx-border-color: #f0f2f5;
 }
 
-/* Overall background */
 Pane {
-    -fx-background-color: #f0f2f5; /* light gray, similar to right panel */
+    -fx-background-color: #f0f2f5;
 }

@@ -187,15 +187,17 @@ public class UsersRepository{
         return users;
     }
 
-    public void updateStudentGPA(int studentId, double gpa) {
+    public boolean updateStudentGPA(int studentId, double gpa) {
         String query = "UPDATE students SET gpa = ? WHERE id = ?";
         try {
             PreparedStatement preparedStatement = this.connection.prepareStatement(query);
             preparedStatement.setDouble(1, gpa);
             preparedStatement.setInt(2, studentId);
-            preparedStatement.execute();
+            int affectedRows = preparedStatement.executeUpdate();
+            return affectedRows > 0;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
 
@@ -392,7 +394,7 @@ public boolean isValid(int studentId){
 
             if (resultSet.next()){
                 String status = resultSet.getString("status");
-                return "approved".equalsIgnoreCase(status);
+                return "validated".equalsIgnoreCase(status);
             }
         }catch (Exception e){
             e.printStackTrace();
