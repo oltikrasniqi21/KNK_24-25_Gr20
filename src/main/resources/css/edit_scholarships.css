@@ -1,0 +1,64 @@
+.root {
+    -fx-font-family: "Poppins", sans-serif;
+    -fx-font-size: 14px;
+    -fx-background-color: #f0f2f5;
+}
+
+.v-box {
+    -fx-spacing: 15px;
+    -fx-padding: 20;
+    -fx-background-color: white;
+    -fx-background-radius: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0.5, 0, 2);
+}
+
+.label {
+    -fx-text-fill: #222;
+    -fx-font-weight: 600;
+}
+
+.label[text="%label.editScholarship"] {
+    -fx-font-size: 22px;
+    -fx-text-fill: #00A859; /* Different color to indicate edit mode */
+    -fx-padding: 0 0 10 0;
+}
+
+.text-field,
+.date-picker,
+.combo-box,
+.list-view {
+    -fx-background-color: #fff;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 8;
+    -fx-font-size: 14px;
+    -fx-text-fill: #222;
+}
+
+.button {
+    -fx-background-color: #00A859; /* Orange tone for edit action */
+    -fx-text-fill: white;
+    -fx-font-weight: 600;
+    -fx-background-radius: 15px;
+    -fx-padding: 8 20;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0.5, 0, 2);
+}
+
+.button:hover {
+    -fx-background-color: #00914e;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0.5, 0, 2);
+}
+
+.button:pressed {
+    -fx-background-color: #00793f;
+    -fx-effect: none;
+}
+
+.h-box {
+    -fx-spacing: 10px;
+    -fx-padding: 10 0 0 0;
+}
