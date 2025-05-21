@@ -5,22 +5,18 @@ import Repository.ApplicationsRepository;
 import Repository.NotificationRepository;
 import Repository.ScholarshipsRepository;
 import Repository.UsersRepository;
-import Services.SceneManager;
 import UpdateDTO.UpdateApplicationsDTO;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import models.Applications;
 import models.ApplicationsDetails;
-import utils.SceneLocator;
 
 import java.awt.*;
 import java.io.File;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 public class ManageApplicationController {
@@ -44,7 +40,6 @@ public class ManageApplicationController {
     @FXML private TextField gpaField;
     @FXML private TextField majorField;
     @FXML private TextField requiredMajorField;
-    @FXML private TextField priorityField;
     @FXML private TextField scholarshipField;
     @FXML private TextField requiredGpaField;
     @FXML private TextField requiredYearField;

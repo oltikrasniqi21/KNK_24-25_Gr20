@@ -35,19 +35,13 @@ public class MyProfileController {
     @FXML private Label passMatchLabel;
     @FXML private Label passwordHintLabel;
 
-    private final UsersRepository usersRepository;
-    private final Integer currentUserId;
-    private final SignupService signupService;
-    private Connection connection = DBCustomConnector.getConnection();
-    private final Users currUser;
+    private final UsersRepository usersRepository = new UsersRepository();
+    private final SignupService signupService = new SignupService();
+    private final Integer currentUserId = CurrentUser.getUserId();
+    private final Users currUser = usersRepository.getById(currentUserId);
     private boolean editable = false;
 
-    public MyProfileController(){
-        usersRepository = new UsersRepository();
-        currentUserId = CurrentUser.getUserId();
-        signupService = new SignupService(this.connection);
-        currUser = usersRepository.getById(currentUserId);
-    }
+    public MyProfileController() {}
 
     public void initialize(){
         passwordPane.setVisible(false);

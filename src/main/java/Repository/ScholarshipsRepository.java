@@ -36,7 +36,7 @@ public class ScholarshipsRepository extends BaseRepository<Scholarships, CreateS
             statement.setDate(4, java.sql.Date.valueOf(create.getDeadline_date()));
             statement.setDouble(5,create.getRequired_gpa());
             statement.setInt(6,create.getRequired_year());
-            statement.setString(7,create.getRequired_major());
+            statement.setString(7,create.getRequired_faculties());
             statement.execute();
             ResultSet set =statement.getGeneratedKeys();
             if(set.next()){
@@ -68,7 +68,7 @@ public class ScholarshipsRepository extends BaseRepository<Scholarships, CreateS
             statement.setDate(2, java.sql.Date.valueOf(update.getDeadline_date()));
             statement.setDouble(3, update.getRequired_gpa());
             statement.setInt(4, update.getRequired_year());
-            statement.setString(5, update.getRequred_major());
+            statement.setString(5, update.getRequred_faculties());
             statement.setString(6, update.getStatus());
             statement.setInt(7, update.getScholarship_id());
             int updateRow = statement.executeUpdate();
@@ -82,5 +82,4 @@ public class ScholarshipsRepository extends BaseRepository<Scholarships, CreateS
 
         return null;
     }
-
 }

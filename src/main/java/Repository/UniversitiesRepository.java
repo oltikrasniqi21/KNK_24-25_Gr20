@@ -2,6 +2,7 @@ package Repository;
 
 import CreateDTO.CreateUniversitiesDTO;
 import UpdateDTO.UpdateUniversitiesDTO;
+import models.Faculties;
 import models.Universities;
 
 import java.sql.*;
@@ -55,6 +56,22 @@ public class UniversitiesRepository extends BaseRepository<Universities, CreateU
             int affected = statement.executeUpdate();
             if (affected == 1) {
                 return this.getById(dto.getUniversityId());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Faculties getfacultyfromName(String name){
+        String query = "SELECT * FROM faculties WHERE name=?";
+
+        try{
+            PreparedStatement prep = this.connection.prepareStatement(query);
+            prep.setString(1, name);
+            ResultSet resultSet = prep.executeQuery();
+            if(resultSet.next()){
+                return Faculties.getInstance(resultSet);
             }
         } catch (SQLException e) {
             e.printStackTrace();
