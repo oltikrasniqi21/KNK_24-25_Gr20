@@ -130,6 +130,10 @@ END $$;
 ALTER TABLE scholarships
 ADD COLUMN status VARCHAR(20);
 
-
+--alter for news table
+ALTER TABLE news DROP COLUMN content
 
 //kolona
+
+
+
