@@ -28,7 +28,7 @@ CREATE TABLE scholarships(
 	deadline_date DATE NOT NULL,
 	required_gpa NUMERIC(3,2) CHECK (required_gpa IS NULL OR (required_gpa BETWEEN 6.00 AND 10.00)),
 	required_year INTEGER CHECK (required_year IS NULL OR (required_year BETWEEN 1 AND 5)),
-	required_major VARCHAR(50),
+	required_major VARCHAR(250),
 	status VARCHAR(20)
 );
 
