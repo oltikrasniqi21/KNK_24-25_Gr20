@@ -41,7 +41,6 @@
       <VBox fx:id="leftVbox" prefHeight="470.0" prefWidth="249.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="dashboardBtn" onAction="#handleDashboardClick" prefHeight="45.0" prefWidth="293.0" styleClass="leftButton" text="%dashboard.label" />
-            <Button mnemonicParsing="false" onAction="#handleStatistics" prefHeight="43.0" prefWidth="294.0" styleClass="leftButton" text="%btn.statistics" />
             <Button mnemonicParsing="false" onAction="#handleNotification" prefHeight="43.0" prefWidth="328.0" styleClass="leftButton" text="%btn.notification" />
             <Button mnemonicParsing="false" onAction="#handleManageScholarships" prefHeight="43.0" prefWidth="421.0" styleClass="leftButton" text="%btn.manageScholarship" />
             <Button mnemonicParsing="false" onAction="#handleViewApplications" prefHeight="43.0" prefWidth="301.0" styleClass="leftButton" text="%btn.viewApplication" />
