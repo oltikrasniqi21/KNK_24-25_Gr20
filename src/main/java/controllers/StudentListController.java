@@ -95,5 +95,3 @@ public class StudentListController {
             studentslistTable.getItems().setAll(filteredStudents);
         }
     }
-
-}

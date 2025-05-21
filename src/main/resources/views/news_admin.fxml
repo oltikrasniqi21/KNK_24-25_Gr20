@@ -91,10 +91,10 @@
                   <HBox alignment="CENTER" prefHeight="71.0" prefWidth="301.0" />
                   <TableView fx:id="newsTable" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="500.0">
                     <columns>
-                        <TableColumn fx:id="newsTitleCol" text="%news.title.col" />
-                       <TableColumn fx:id="newsSummaryCol" text="%news.summary.col" />
-                       <TableColumn fx:id="newsScholarshipCol" text="%news.scholarship.col" />
-                        <TableColumn fx:id="newsActionCol" text="%news.action.col" />
+                        <TableColumn maxWidth="125" fx:id="newsTitleCol" text="%news.title.col" />
+                       <TableColumn maxWidth="125" fx:id="newsSummaryCol" text="%news.summary.col" />
+                       <TableColumn maxWidth="125" fx:id="newsScholarshipCol" text="%news.scholarship.col" />
+                        <TableColumn maxWidth="125" fx:id="newsActionCol" text="%news.action.col" />
                     </columns>
                   </TableView>
                </children>

@@ -15,6 +15,7 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 12, 0.5, 0, 2);
 }
 
+
 #loginTitle {
     -fx-font-size: 26px;
     -fx-font-weight: bold;
@@ -23,6 +24,7 @@
     -fx-font-weight: bold;
 
 }
+
 
 .nameInput, .passwordInput {
     -fx-padding: 10 14;
@@ -34,6 +36,7 @@
     -fx-border-width: 1px;
     -fx-background-color: white;
 }
+
 
 .loginButton, .cancelButton {
     -fx-background-color: #00A859;

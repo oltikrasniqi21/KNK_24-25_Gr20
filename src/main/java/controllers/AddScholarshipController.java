@@ -35,7 +35,7 @@ public class AddScholarshipController {
     }
 
     @FXML private void handleBackClick(){
-        SceneManager.getInstance().loadScene(SceneLocator.MANAGE_SCHOLARSHIPS_PAGE);
+        SceneManager.loadCenterContent(SceneLocator.MANAGE_SCHOLARSHIPS_PAGE);
     }
 
     @FXML public void initialize(){

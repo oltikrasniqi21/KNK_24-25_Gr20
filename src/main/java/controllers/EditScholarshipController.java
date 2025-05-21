@@ -37,7 +37,7 @@ public class EditScholarshipController {
 
     @FXML
     private void handleBackClick(){
-        SceneManager.getInstance().loadScene(SceneLocator.MANAGE_SCHOLARSHIPS_PAGE);
+        SceneManager.loadCenterContent(SceneLocator.MANAGE_SCHOLARSHIPS_PAGE);
     }
 
 

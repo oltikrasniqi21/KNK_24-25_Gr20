@@ -13,13 +13,13 @@ VBox {
     -fx-alignment: CENTER;
 }
 
+
 Label {
     -fx-font-size: 14px;
     -fx-text-fill: #555;
     -fx-font-weight: 500;
     -fx-padding: 5px 0 5px 0;
 }
-
 
 TextField, PasswordField {
     -fx-background-color: #FFFFFF;

@@ -7,6 +7,7 @@
     -fx-border-color: #e0e0e0;
 }
 
+
 .news-card .image-view {
     -fx-background-color: #f0f0f0;
     -fx-background-radius: 8;
@@ -15,15 +16,18 @@
     -fx-fit-height: 150;
 }
 
+
 .news-card .label {
     -fx-font-size: 14px;
     -fx-text-fill: #333;
 }
 
+
 .news-card .label#titleLabel {
     -fx-font-weight: bold;
     -fx-font-size: 16px;
 }
+
 
 .news-card .label#summaryLabel {
     -fx-text-fill: #666;

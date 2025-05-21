@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import java.lang.String?>
 <BorderPane fx:id="mainLayout" stylesheets="@../css/student_view.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StudentHomePageController">
    <right>
-       <VBox fx:id="notificationPane" layoutX="253.0" layoutY="71.0" prefHeight="342.0" prefWidth="191.0">
+       <VBox fx:id="notificationPane" layoutX="253.0" layoutY="71.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="342.0" prefWidth="500.0">
        <children>
-            <TableView fx:id="notificationTable" prefHeight="200.0" prefWidth="163.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="notificationTable" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="340.0" prefWidth="500.0" BorderPane.alignment="CENTER">
                 <columns>
-                    <TableColumn fx:id="messageColumn" prefWidth="75.0" text="%messageNotificationStd" />
-                     <TableColumn fx:id="dateColumn" prefWidth="75.0" text="%dateNotificationStd" />
+                    <TableColumn fx:id="messageColumn" prefWidth="340" text="%messageNotificationStd" />
+                     <TableColumn fx:id="dateColumn" prefWidth="160" text="%dateNotificationStd" />
                  </columns>
              </TableView>
-            <Pane prefHeight="171.0" prefWidth="169.0" />
        </children>
        </VBox>
    </right>
@@ -23,7 +22,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="410.0" prefWidth="635.0">
                <children>
-                  <Label text="%welcome.label" fx:id="welcome"/>
+                  <Label fx:id="welcome" text="%welcome.label" />
                </children>
             </HBox>
          </children>
