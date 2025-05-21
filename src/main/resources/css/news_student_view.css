@@ -9,3 +9,19 @@
     -fx-vgap: 0px;             /* vertical gap between cards */
     -fx-alignment: center;
 }
+
+#labelHbox {
+    -fx-pref-height: 300px;            /* Fixed height for the banner */
+    -fx-background-color: #f0f4f8;     /* Light subtle background color */
+    -fx-alignment: center;             /* Center content horizontally and vertically */
+    -fx-padding: 20px;                 /* Padding around the label */
+}
+
+#welcomeText {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+    -fx-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
+}
