@@ -20,7 +20,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="51.0" prefWidth="600.0">
                <children>
                   <Region prefHeight="200.0" prefWidth="200.0" />
-                  <Label alignment="TOP_CENTER" prefHeight="26.0" prefWidth="221.0" text="%label.addScholarship">
+                  <Label alignment="TOP_CENTER" prefHeight="26.0" prefWidth="221.0" text="%label.addScholarship" styleClass="section-title">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
