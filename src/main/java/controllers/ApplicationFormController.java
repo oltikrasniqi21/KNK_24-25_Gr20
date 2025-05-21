@@ -96,7 +96,8 @@ public class ApplicationFormController {
         }
 
         if (transcriptFile == null){
-            throw new EmptyFieldException("Transcript");
+            showAlert("Gabim", "Ju lutem ngarkoni transkripten tuaj");
+            return false;
         }
         return true;
     }
