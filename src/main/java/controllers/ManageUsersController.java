@@ -1,20 +1,25 @@
 package controllers;
 
+import Services.LanguageManager;
 import Services.ManageUsersService;
 import Services.SceneManager;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.util.Callback;
 import models.Users;
 import utils.SceneLocator;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class ManageUsersController {
-    @FXML private Button validateButton;
-    @FXML private Button rejectButton;
+    @FXML private BorderPane mainLayout;
     @FXML private TextField searchTextField;
     @FXML private TableView<Users> usersTable;
     @FXML private TableColumn<Users, Integer> userIdColumn;
@@ -84,7 +89,7 @@ public class ManageUsersController {
 
     @FXML
     private void handleAddUserClick() {
-        SceneManager.getInstance().loadScene(SceneLocator.CREATE_USERS_PAGE);
+        loadCenterContent(SceneLocator.CREATE_USERS_PAGE);
     }
 
     @FXML
@@ -119,6 +124,19 @@ public class ManageUsersController {
             }
         } else {
             manageUsersService.showAlert("No user selected", "Please select a user to reject.");
+        }
+    }
+
+    private void loadCenterContent(String fxmlFile) {
+        try {
+
+            ResourceBundle bundle = LanguageManager.getInstance().getResourceBundle();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile), bundle);
+            Node content = loader.load();
+            mainLayout.setCenter(content);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

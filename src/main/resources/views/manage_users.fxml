@@ -4,11 +4,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="382.0" prefWidth="565.0" stylesheets="@../css/manage_user.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageUsersController">
+<BorderPane fx:id="mainLayout" prefHeight="382.0" prefWidth="565.0" stylesheets="@../css/manage_user.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageUsersController">
    <center>
-      <VBox spacing="20" alignment="CENTER" prefHeight="382.0" prefWidth="593.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="382.0" prefWidth="593.0" spacing="20" BorderPane.alignment="CENTER">
          <children>
-            <HBox  fx:id="topHbox" alignment="CENTER" spacing="20" prefHeight="111.0" prefWidth="487.0">
+            <HBox fx:id="topHbox" alignment="CENTER" prefHeight="111.0" prefWidth="487.0" spacing="20">
                <children>
                   <VBox alignment="CENTER">
                      <children>
