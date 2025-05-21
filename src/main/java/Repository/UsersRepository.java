@@ -94,9 +94,10 @@ public class UsersRepository{
 
     public List<Students> getAllStudents() {
         String query = "SELECT u.id, u.password, u.first_name, u.last_name, u.email, u.role, u.status, " +
-                "s.gpa, s.year_of_study, s.university, s.faculty, s.major, s.priority " +
+                "s.gpa, s.year_of_study, s.university, s.faculty, s.major " +
                 "FROM users u JOIN students s ON u.id = s.id " +
                 "WHERE u.role = 'student' AND u.status = 'validated'";
+
         List<Students> students = new ArrayList<>();
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query)) {
@@ -242,9 +243,9 @@ public class UsersRepository{
         connection.setAutoCommit(false);
         try {
             String insertUserSQL = """
-                    INSERT INTO users (password, first_name, last_name, email, role)
-                    VALUES (?, ?, ?, ?, 'student')
-                    """;
+                INSERT INTO users (password, first_name, last_name, email, role)
+                VALUES (?, ?, ?, ?, 'student')
+                """;
             try (PreparedStatement userStmt = connection.prepareStatement(insertUserSQL, Statement.RETURN_GENERATED_KEYS)) {
                 userStmt.setString(1, passwordToStore);
                 userStmt.setString(2, firstName);
@@ -257,9 +258,9 @@ public class UsersRepository{
                     int userId = rs.getInt(1);
 
                     String insertStudentSQL = """
-                            INSERT INTO students (id, gpa, year_of_study, university, faculty, major, priority, document_path)
-                            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-                            """;
+                        INSERT INTO students (id, gpa, year_of_study, university, faculty, major, document_path)
+                        VALUES (?, ?, ?, ?, ?, ?, ?)
+                        """;
                     try (PreparedStatement studentStmt = connection.prepareStatement(insertStudentSQL)) {
                         studentStmt.setInt(1, userId);
                         studentStmt.setNull(2, java.sql.Types.DOUBLE);
@@ -267,8 +268,7 @@ public class UsersRepository{
                         studentStmt.setString(4, university);
                         studentStmt.setString(5, faculty);
                         studentStmt.setString(6, major);
-                        studentStmt.setNull(7, java.sql.Types.VARCHAR);
-                        studentStmt.setString(8, documentPath);
+                        studentStmt.setString(7, documentPath); // Only set this once
                         studentStmt.executeUpdate();
                     }
                 }
@@ -280,7 +280,6 @@ public class UsersRepository{
         } finally {
             connection.setAutoCommit(true);
         }
-
     }
 
     public Map<String, Integer> countUsersByStatus() {
@@ -373,5 +372,108 @@ public class UsersRepository{
         }
 
         return universityCounts;
+    }
+
+    public boolean isValid(int studentId){
+        String query = "SELECT status FROM users WHERE id = ?";
+
+        try {
+            PreparedStatement statement = this.connection.prepareStatement(query);
+            statement.setInt(1,studentId);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()){
+                String status = resultSet.getString("status");
+                return "validated".equalsIgnoreCase(status);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public Users findByEmail(String email) {
+        String query = "SELECT * FROM users WHERE email = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return Users.getInstance(rs);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public int getUserIdByEmail(String email) {
+        String query = "SELECT id FROM users WHERE email = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("id");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public int updateUserStatus(int userId, String newStatus) {
+        String query = "UPDATE users SET status = ? WHERE id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, newStatus);
+            ps.setInt(2, userId);
+            return ps.executeUpdate(); // returns number of rows updated
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0; // or -1 to indicate failure
+    }
+    public boolean emailExists(String email) {
+        String query = "SELECT 1 FROM users WHERE email = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean createAdminUser(String passwordToStore, String firstName, String lastName, String email, String admin, Object o) {
+        String query = "INSERT INTO users (password, first_name, last_name, email, role) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, passwordToStore);
+            ps.setString(2, firstName);
+            ps.setString(3, lastName);
+            ps.setString(4, email);
+            ps.setString(5, admin); // assuming 'admin' is the role string
+            int rows = ps.executeUpdate();
+            return rows > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public String getStudentDocumentPathById(int studentId) {
+        String query = "SELECT document_path FROM students WHERE id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, studentId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getString("document_path");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

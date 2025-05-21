@@ -32,11 +32,17 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<VBox prefHeight="589.0" prefWidth="719.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageApplicationController">
+<VBox prefHeight="589.0" prefWidth="719.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageApplicationController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="481.0" prefWidth="719.0" VBox.vgrow="ALWAYS">
       <children>
@@ -47,30 +53,24 @@
             </Text>
             <Separator layoutX="20.0" layoutY="45.0" prefHeight="0.0" prefWidth="611.0" />
             <TextField fx:id="studentField" editable="false" layoutX="132.0" layoutY="84.0" />
-            <TextField fx:id="priorityField" editable="false" layoutX="132.0" layoutY="243.0" />
-            <TextField fx:id="gpaField" editable="false" layoutX="132.0" layoutY="125.0" />
-            <TextField fx:id="emailField" editable="false" layoutX="422.0" layoutY="495.0" />
-            <TextField fx:id="requiredYearField" editable="false" layoutX="481.0" layoutY="163.0" />
-            <TextField fx:id="requiredGpaField" editable="false" layoutX="481.0" layoutY="125.0" />
+            <TextField fx:id="gpaField" editable="false" layoutX="131.0" layoutY="167.0" />
+            <TextField fx:id="emailField" editable="false" layoutX="131.0" layoutY="284.0" />
+            <TextField fx:id="requiredYearField" editable="false" layoutX="481.0" layoutY="205.0" />
+            <TextField fx:id="requiredGpaField" editable="false" layoutX="481.0" layoutY="167.0" />
             <TextField fx:id="scholarshipField" editable="false" layoutX="481.0" layoutY="84.0" />
-            <TextField fx:id="deadlineField" editable="false" layoutX="481.0" layoutY="203.0" />
-            <TextField fx:id="statusField" editable="false" layoutX="481.0" layoutY="243.0" />
+            <TextField fx:id="deadlineField" editable="false" layoutX="481.0" layoutY="245.0" />
+            <TextField fx:id="statusField" editable="false" layoutX="481.0" layoutY="285.0" />
             <Text layoutX="20.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%studentname">
                <font>
                   <Font size="13.0" />
                </font>
             </Text>
-            <Text layoutX="328.0" layoutY="509.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:">
+            <Text layoutX="23.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:">
                <font>
                   <Font size="13.0" />
                </font>
             </Text>
-            <Text layoutX="22.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GPA:">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Text>
-            <Text layoutX="22.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Priority:">
+            <Text layoutX="21.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GPA:">
                <font>
                   <Font size="13.0" />
                </font>
@@ -80,27 +80,27 @@
                   <Font size="13.0" />
                </font>
             </Text>
-            <Text layoutX="381.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%requiredgpa">
+            <Text layoutX="381.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%requiredgpa">
                <font>
                   <Font size="13.0" />
                </font>
             </Text>
-            <Text layoutX="381.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%requiredyear">
+            <Text layoutX="381.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%requiredyear">
                <font>
                   <Font size="13.0" />
                </font>
             </Text>
-            <Text layoutX="381.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%deadline">
+            <Text layoutX="381.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%deadline">
                <font>
                   <Font size="13.0" />
                </font>
             </Text>
-            <Text layoutX="381.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%status">
+            <Text layoutX="381.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%status">
                <font>
                   <Font size="13.0" />
                </font>
             </Text>
-            <TableView fx:id="applicationsTable" layoutX="20.0" layoutY="288.0" prefHeight="165.0" prefWidth="521.0">
+            <TableView fx:id="applicationsTable" layoutX="17.0" layoutY="352.0" prefHeight="165.0" prefWidth="663.0">
                <columns>
                   <TableColumn fx:id="applicationIdColumn" text="%applicationID" />
                   <TableColumn fx:id="studentNameColumn" text="%studentname" />
@@ -110,27 +110,38 @@
                   <TableColumn fx:id="statusColumn" text="%status" />
                </columns>
             </TableView>
-            <Button fx:id="btnApprove" layoutX="561.0" layoutY="305.0" onAction="#handleApprove" prefHeight="37.0" prefWidth="69.0" style="-fx-background-color: green; -fx-text-fill: white;" text="%approve" />
-            <Button fx:id="btnReject" layoutX="561.0" layoutY="354.0" onAction="#handleReject" prefHeight="37.0" prefWidth="69.0" style="-fx-background-color: red; -fx-text-fill: white;" text="%reject" />
-            <Button layoutX="561.0" layoutY="398.0" onAction="#handleClose" prefHeight="37.0" prefWidth="69.0" text="%menu.close" />
+            <Button fx:id="btnApprove" layoutX="36.0" layoutY="527.0" onAction="#handleApprove" prefHeight="37.0" prefWidth="69.0" style="-fx-background-color: green; -fx-text-fill: white;" text="%approve" />
+            <Button fx:id="btnReject" layoutX="120.0" layoutY="527.0" onAction="#handleReject" prefHeight="37.0" prefWidth="69.0" style="-fx-background-color: red; -fx-text-fill: white;" text="%reject" />
             <Text layoutX="467.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%scholarshipdetails">
                <font>
                   <Font size="23.0" />
                </font>
             </Text>
-            <TextField fx:id="currentYearField" editable="false" layoutX="132.0" layoutY="163.0" />
-            <Text layoutX="22.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%currentyear">
+            <TextField fx:id="currentYearField" editable="false" layoutX="131.0" layoutY="205.0" />
+            <Text layoutX="21.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%currentyear">
                <font>
                   <Font size="13.0" />
                </font>
             </Text>
-            <TextField fx:id="applicationDateField" editable="false" layoutX="132.0" layoutY="203.0" />
-            <Text layoutX="22.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%applicationdate">
+            <TextField fx:id="applicationDateField" editable="false" layoutX="131.0" layoutY="245.0" />
+            <Text layoutX="21.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%applicationdate">
                <font>
                   <Font size="13.0" />
                </font>
             </Text>
-            <Button fx:id="viewTranscriptButton" layoutX="561.0" layoutY="453.0" onAction="#handleViewTranscript" prefHeight="37.0" prefWidth="110.0" style="-fx-background-color: blue; -fx-text-fill: white;" text="%transcript" />
+            <Button fx:id="viewTranscriptButton" layoutX="206.0" layoutY="527.0" onAction="#handleViewTranscript" prefHeight="37.0" prefWidth="110.0" style="-fx-background-color: blue; -fx-text-fill: white;" text="%transcript" />
+            <TextField fx:id="requiredMajorField" editable="false" layoutX="481.0" layoutY="124.0" />
+            <Text layoutX="381.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%requiredmajor">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Text>
+            <TextField fx:id="majorField" editable="false" layoutX="133.0" layoutY="124.0" />
+            <Text layoutX="21.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%major">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Text>
       </children>
     </AnchorPane>
   </children>

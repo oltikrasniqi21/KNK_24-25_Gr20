@@ -1,0 +1,38 @@
+.modal-container {
+    -fx-padding: 20px;
+    -fx-background-color: white;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+}
+
+.modal-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.modal-summary {
+    -fx-font-size: 16px;
+    -fx-text-fill: #666666;
+}
+
+.modal-tag {
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-background-color: #00A859;
+    -fx-background-radius: 12px;
+    -fx-padding: 4px 12px;
+}
+
+.close-button {
+    -fx-background-color: #4a90e2;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 16px;
+    -fx-background-radius: 4px;
+}
+
+.close-button:hover {
+    -fx-background-color: #3a7bc8;
+}

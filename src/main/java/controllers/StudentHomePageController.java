@@ -2,7 +2,7 @@ package controllers;
 
 
 import Repository.NotificationRepository;
-import Services.CurrentUser;
+import Services.LanguageManager;
 import Services.SceneManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -24,10 +25,13 @@ import java.net.URL;
 import java.sql.Timestamp;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import Services.NotificationService;
 
 public class StudentHomePageController implements Initializable {
+
+    private final LanguageManager languageManager = LanguageManager.getInstance();
     @FXML
     private VBox notificationPane;
 
@@ -181,5 +185,20 @@ public class StudentHomePageController implements Initializable {
 
     @FXML
     private void handleViewProfileClick(){loadCenterContent(SceneLocator.MY_PROFILE_PAGE);}
+
+    @FXML
+    private void handleSQLanguageClick() throws Exception {
+        loadLanguage(new Locale("sq"));
+    }
+
+    @FXML
+    private void handleENLanguageClick() throws Exception {
+        loadLanguage(Locale.ENGLISH);
+    }
+
+    private void loadLanguage(Locale locale) throws Exception {
+        languageManager.setLocale(locale);
+        SceneManager.reload();
+    }
 
 }

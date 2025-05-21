@@ -1,0 +1,72 @@
+
+#topHbox{
+    -fx-padding:0 200 0 200;
+
+}
+#searchTextField {
+    -fx-background-color: #fff;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 6 10;
+    -fx-font-size: 14px;
+    -fx-text-fill: #222;
+}
+
+#btnSearch,
+#btnAddUser,
+#validateButton,
+#rejectButton {
+    -fx-background-color: #00A859;
+    -fx-text-fill: white;
+    -fx-font-weight: 600;
+    -fx-background-radius: 12px;
+    -fx-padding: 6 16;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0,168,89,0.5), 6, 0, 0, 2);
+}
+
+#btnSearch:hover,
+#btnAddUser:hover,
+#validateButton:hover,
+#rejectButton:hover {
+    -fx-background-color: #00914e;
+    -fx-effect: dropshadow(gaussian, rgba(0,168,89,0.7), 8, 0.5, 0, 3);
+}
+
+#btnSearch:pressed,
+#btnAddUser:pressed,
+#validateButton:pressed,
+#rejectButton:pressed {
+    -fx-background-color: #00793f;
+    -fx-effect: none;
+}
+
+.label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+#usersTable {
+    -fx-background-color: white;
+    -fx-background-radius: 15px;
+    -fx-border-radius: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0.5, 0, 2);
+}
+
+#usersTable .column-header .label {
+    -fx-font-size: 15px;
+    -fx-padding: 8 10;
+    -fx-font-family: "Poppins", sans-serif;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 1, 0, 0, 1);
+}
+
+.v-box, .h-box {
+    -fx-spacing: 12px;
+    -fx-padding: 12px;
+}

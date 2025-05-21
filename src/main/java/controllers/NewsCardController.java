@@ -1,11 +1,17 @@
 package controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class NewsCardController {
 
@@ -24,39 +30,48 @@ public class NewsCardController {
         @FXML
         private VBox rootVBox; // add fx:id="rootVBox" in your VBox in FXML
 
+        private String currentImagePath;
+
         @FXML
-
-        public void setImage(Image image) {
-            newsImageView.setImage(image);
-
-            double iw = image.getWidth();
-            double ih = image.getHeight();
-
-            double vw = newsImageView.getFitWidth();
-            double vh = newsImageView.getFitHeight();
-
-            // Calculate scale to fill imageView area
-            double scale = Math.max(vw / iw, vh / ih);
-
-            // Calculate size of viewport in image pixels
-            double viewportWidth = vw / scale;
-            double viewportHeight = vh / scale;
-
-            // Crop viewport centered
-            double viewportX = (iw - viewportWidth) / 2;
-            double viewportY = (ih - viewportHeight) / 2;
-
-            Rectangle2D viewport = new Rectangle2D(viewportX, viewportY, viewportWidth, viewportHeight);
-            newsImageView.setViewport(viewport);
-
-            newsImageView.setPreserveRatio(false);
+        public void initialize(){
+        rootVBox.setOnMouseClicked(e -> {
+        if (e.getClickCount() == 1) {
+            openModal();
         }
+    });
+        }
+    private void openModal() {
+        System.out.println("Image path for modal: " + currentImagePath);
 
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/news_modal.fxml"));
+            VBox modalRoot = loader.load();
 
-    public void setData(String title, String summary, int scholarshipTag, String imagePath) {
+            NewsModalController controller = loader.getController();
+            controller.setModalData(
+                    titleLabel.getText(),
+                    summaryLabel.getText(),
+                    scholarshipTagLabel.getText().replace("Scholarship Tag: ", ""),
+                    currentImagePath
+            );
+
+            Stage modalStage = new Stage();
+            modalStage.initModality(Modality.APPLICATION_MODAL);
+            modalStage.setScene(new Scene(modalRoot));
+            modalStage.setTitle("News Details");
+            modalStage.showAndWait();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setData(String title, String summary, String scholarshipTagName, String imagePath) {
             titleLabel.setText(title);
             summaryLabel.setText(summary);
-            scholarshipTagLabel.setText("Scholarship Tag: " + scholarshipTag);
+            scholarshipTagLabel.setText(scholarshipTagName);
+
+
 
             if (imagePath != null && !imagePath.isEmpty()) {
                 // Convert Windows file path to URL
@@ -67,11 +82,16 @@ public class NewsCardController {
                 Image image = new Image(imageUrl);
                 newsImageView.setImage(image);
             }
-            newsImageView.setFitWidth(200);
-            newsImageView.setFitHeight(150);
+
+
             newsImageView.setPreserveRatio(false);  // false so image fills the box without stretching proportionally
             newsImageView.setSmooth(true);
-        }
+
+            this.currentImagePath = imagePath;
+
+    }
+
+
 
     }
 

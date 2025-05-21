@@ -10,7 +10,7 @@ public class SceneManagerTest extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Font.loadFont(getClass().getResourceAsStream("/Poppins/Poppins-Medium.ttf"), 14);
-
+        stage.setTitle("Scholarship Application 1.0");
         SceneManager sceneManager = SceneManager.getInstance();
         stage.setScene(sceneManager.getScene());
         stage.show();

@@ -67,13 +67,6 @@
                   </VBox>
                   <VBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="%content.label" />
-                        <Region HBox.hgrow="ALWAYS" />
-                        <TextArea fx:id="contentField" maxHeight="-Infinity" maxWidth="500.0" prefHeight="70.0" prefWidth="300.0" />
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
                         <Label text="%scholarships.label" />
                         <Region HBox.hgrow="ALWAYS" />
                         <ChoiceBox fx:id="scholarshipTagChoiceBox" maxHeight="-Infinity" maxWidth="500.0" prefHeight="26.0" prefWidth="300.0" />
@@ -83,6 +76,7 @@
                      <Button fx:id="chooseNewsImage" onAction="#handleChooseImage" text="%choose.news.image" />
                      <Label fx:id="lblSelectedImage" text="No file selected" />
                   </HBox>
+                  <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="200.0" />
                   <HBox prefHeight="4.0" prefWidth="279.0">
                      <children>
                         <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" text="%btn.newsCancel" />

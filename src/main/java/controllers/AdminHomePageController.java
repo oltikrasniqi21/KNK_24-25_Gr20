@@ -166,8 +166,6 @@ public class AdminHomePageController {
 
     @FXML
     private void handleAddUniversities(){loadCenterContent(SceneLocator.MANAGE_UNIVERSITIES);}
-    @FXML
-    private void handleStatistics(){loadCenterContent(SceneLocator.STATISTICS);}
 
     private void loadLanguage(Locale locale) throws Exception {
         languageManager.setLocale(locale);

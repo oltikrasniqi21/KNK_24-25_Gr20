@@ -38,7 +38,6 @@
                </font>
             </Text>
             <Label fx:id="selectedFileLabel" mnemonicParsing="false" onMouseClicked="#handleUploadTranscript" text="%choosepdf" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Asnje skedar i zgjedhur" />
          </children>
       </HBox>
       <Button mnemonicParsing="false" onAction="#handleSubmitApplication" text="%applybtn" />
