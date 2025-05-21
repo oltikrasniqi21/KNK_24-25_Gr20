@@ -20,6 +20,13 @@
     -fx-padding: 5 20 5 5;
 }
 
+#englishButton, #shqipButton {
+    -fx-background-color: #dddddd;
+    -fx-background-radius: 8px;
+    -fx-text-fill: #333;
+    -fx-font-size: 12px;
+}
+
 .leftButton:hover {
     -fx-background-color: rgba(255, 255, 255, 0.2);
 }

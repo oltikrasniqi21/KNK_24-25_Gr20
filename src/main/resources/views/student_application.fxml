@@ -1,39 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400" prefWidth="600" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ApplicationFormController">
+<VBox alignment="CENTER" prefHeight="377.0" prefWidth="421.0" stylesheets="@../css/student_application.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ApplicationFormController">
    <children>
-      <Text layoutX="195.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%applyScholarship">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%applyScholarship">
          <font>
             <Font name="System Bold" size="27.0" />
          </font>
       </Text>
-      <Text layoutX="47.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%chooseScholarship">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Text>
-      <Text layoutX="47.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GPA:">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Text>
-      <Text layoutX="47.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%transcriptupload">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Text>
-      <ComboBox fx:id="scholarshipComboBox" layoutX="195.0" layoutY="105.0" prefHeight="25.0" prefWidth="210.0" />
-      <TextField fx:id="gpaField" layoutX="195.0" layoutY="150.0" prefHeight="25.0" prefWidth="210.0" />
-      <Label fx:id="selectedFileLabel" layoutX="208.0" layoutY="197.0" mnemonicParsing="false" onMouseClicked="#handleUploadTranscript" text="%choosepdf" />
-      <Text layoutX="300.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Asnje skedar i zgjedhur" />
-      <Button layoutX="260.0" layoutY="256.0" mnemonicParsing="false" onAction="#handleSubmitApplication" style="-fx-background-color: green; -fx-text-fill: white;" text="%applybtn" />
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%chooseScholarship">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <ComboBox fx:id="scholarshipComboBox" prefHeight="25.0" prefWidth="210.0" />
+         </children></HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="GPA:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <TextField fx:id="gpaField" prefHeight="25.0" prefWidth="210.0" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%transcriptupload">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Label fx:id="selectedFileLabel" mnemonicParsing="false" onMouseClicked="#handleUploadTranscript" text="%choosepdf" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Asnje skedar i zgjedhur" />
+         </children>
+      </HBox>
+      <Button mnemonicParsing="false" onAction="#handleSubmitApplication" text="%applybtn" />
    </children>
-</AnchorPane>
+</VBox>
