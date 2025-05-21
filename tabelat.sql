@@ -129,3 +129,7 @@ END $$;
 //boni qit query per modifikim t kolonave te scholarships
 ALTER TABLE scholarships
 ADD COLUMN status VARCHAR(20);
+
+
+
+//kolona
