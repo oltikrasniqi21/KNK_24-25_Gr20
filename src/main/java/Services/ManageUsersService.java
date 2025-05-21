@@ -1,6 +1,4 @@
 package Services;
-
-import Database.DBCustomConnector;
 import Repository.UsersRepository;
 import javafx.scene.control.Alert;
 import models.Users;
@@ -13,7 +11,7 @@ public class ManageUsersService {
 
     public ManageUsersService() {
         this.usersRepository = new UsersRepository();
-        this.documentService = new StudentDocumentService(DBCustomConnector.getConnection());
+        this.documentService = new StudentDocumentService();
     }
 
     public List<Users> getAllStudentUsers() {
@@ -25,7 +23,6 @@ public class ManageUsersService {
     }
 
     public boolean updateUserStatus(int userId, String newStatus) {
-        String query = "UPDATE users SET status = ? WHERE id = ?";
         try {
             int rowsAffected = usersRepository.updateUserStatus(userId, newStatus);
             return rowsAffected > 0;

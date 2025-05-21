@@ -74,20 +74,20 @@
             <children>
                <!-- Card for Total Users -->
                <VBox fx:id="totalUsersCard" alignment="CENTER" prefHeight="150" prefWidth="260" spacing="10">
-                  <Label styleClass="card-title" text="%usersStatus.card" />
+                  <Label styleClass="card-title" text="Total Users" />
                   <Label fx:id="totalUsersLabel" styleClass="card-number" />
                </VBox>
                <Region HBox.hgrow="ALWAYS" />
 
                <!-- Card for Total Scholarships -->
                <VBox fx:id="totalScholarshipsCard" alignment="CENTER" prefHeight="150" prefWidth="260" spacing="10">
-                  <Label styleClass="card-title" text="%totalScholarships.card" />
+                  <Label styleClass="card-title" text="Total Scholarships" />
                   <Label fx:id="totalScholarshipsLabel" styleClass="card-number" />
                </VBox>
                <Region HBox.hgrow="ALWAYS" />
                <!-- Card for Total Applications -->
                <VBox fx:id="totalApplicationsCard" alignment="CENTER" prefHeight="150" prefWidth="260" spacing="10">
-                  <Label styleClass="card-title" text="%totalApplications.card" />
+                  <Label styleClass="card-title" text="Total Applications" />
                   <Label fx:id="totalApplicationsLabel" styleClass="card-number" />
                </VBox>
             </children>
@@ -106,10 +106,10 @@
             <children>
                <BarChart fx:id="studentsPerUniversityBarChart" legendVisible="false" prefHeight="200.0" prefWidth="350.0">
                   <xAxis>
-                     <CategoryAxis label="%university.axis" />
+                     <CategoryAxis label="University" />
                   </xAxis>
                   <yAxis>
-                     <NumberAxis label="%student.axis" />
+                     <NumberAxis label="Students" />
                   </yAxis>
                </BarChart>
             </children>

@@ -6,7 +6,6 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import Database.DBCustomConnector;
 import Services.SignupService;
 import utils.SceneLocator;
 import javafx.animation.PauseTransition;
@@ -18,10 +17,6 @@ import java.io.IOException;
 import static utils.AlertMessages.*;
 
 public class SignupController {
-
-    public SignupController() {
-        this.signupService = new SignupService(DBCustomConnector.getConnection());
-    }
 
     @FXML
     private TextField firstNameField;
@@ -50,9 +45,8 @@ public class SignupController {
     @FXML
     private ComboBox<String> yearComboBox;
 
-    private SignupService signupService = new SignupService(DBCustomConnector.getConnection());
-
     private File selectedPdfFile;
+    private final SignupService signupService = new SignupService();
 
     @FXML
     public void initialize() {
