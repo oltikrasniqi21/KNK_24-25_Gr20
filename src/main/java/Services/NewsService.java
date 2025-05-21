@@ -2,11 +2,9 @@ package Services;
 
 import CreateDTO.CreateNewsDTO;
 import Repository.NewsRepository;
-import Repository.ScholarshipTagsRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.News;
-import models.ScholarshipTags;
 
 import java.util.List;
 

@@ -11,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -55,14 +54,12 @@ public class StudentHomePageController implements Initializable {
 
     private boolean notificationsVisible = false;
 
-    private final NotificationRepository notificationRepository = new NotificationRepository();
     private ResourceBundle bundle;
 
 
     @FXML
-    private BorderPane mainLayout; // Reference to the main BorderPane (from FXML)
+    private BorderPane mainLayout;
 
-    // Method to load Notifications into the center
     private final NotificationService notificationService = new NotificationService();
 
     @FXML
@@ -73,16 +70,13 @@ public class StudentHomePageController implements Initializable {
     }
 
 
-    // Method to load FAQ into the center
     @FXML
     public void loadFAQ() {
         loadCenterContent(SceneLocator.MANAGE_FAQ_STUDENT_PAGE);
     }
 
-    // Helper method to load any FXML into the center
     private void loadCenterContent(String fxmlFile) {
         try {
-            // Load the resource bundle inside the method
             ResourceBundle bundle = ResourceBundle.getBundle("languages.message");
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile), bundle);
@@ -129,7 +123,6 @@ public class StudentHomePageController implements Initializable {
             return new SimpleStringProperty(formatted);
         });
 
-        // ===== Navigimi me tastierë për VBox me butona =====
         menuButtons = topHbox.getChildren().stream()
                 .filter(node -> node instanceof javafx.scene.control.Button)
                 .map(node -> (javafx.scene.control.Button) node)
@@ -160,7 +153,7 @@ public class StudentHomePageController implements Initializable {
                 event.consume();
             }
             case ENTER -> {
-                menuButtons.get(currentIndex).fire(); // e aktivizon butonin aktual
+                menuButtons.get(currentIndex).fire();
                 event.consume();
             }
         }

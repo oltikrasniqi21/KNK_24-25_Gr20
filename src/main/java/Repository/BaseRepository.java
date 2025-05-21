@@ -1,7 +1,6 @@
 package Repository;
 
 import Database.DBCustomConnector;
-import models.Notification;
 
 import java.sql.*;
 import java.util.ArrayList;

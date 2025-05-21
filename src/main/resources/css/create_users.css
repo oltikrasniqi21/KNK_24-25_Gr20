@@ -4,7 +4,6 @@
     -fx-background-color: #f0f2f5;
 }
 
-/* Main form container */
 VBox {
     -fx-background-color: #FFFFFF;
     -fx-background-radius: 15px;
@@ -14,7 +13,6 @@ VBox {
     -fx-alignment: CENTER;
 }
 
-/* Labels styling */
 Label {
     -fx-font-size: 14px;
     -fx-text-fill: #555;
@@ -22,7 +20,7 @@ Label {
     -fx-padding: 5px 0 5px 0;
 }
 
-/* Text fields and password field styling */
+
 TextField, PasswordField {
     -fx-background-color: #FFFFFF;
     -fx-background-radius: 8px;
@@ -41,7 +39,6 @@ TextField:focused, PasswordField:focused {
     -fx-effect: dropshadow(gaussian, rgba(0,168,89,0.2), 5, 0, 0, 1);
 }
 
-/* Button styling */
 Button {
     -fx-background-color: #00A859;
     -fx-text-fill: white;
@@ -62,17 +59,14 @@ Button:pressed {
     -fx-background-color: #007C40;
 }
 
-/* Spacer HBox elements */
 HBox {
     -fx-pref-height: 15px;
 }
 
-/* The last spacer before the button */
 HBox:last-child {
     -fx-pref-height: 40px;
 }
 
-/* Right side of BorderPane (where the VBox is placed) */
 BorderPane > .right {
     -fx-padding: 40px;
     -fx-background-color: #f0f2f5;

@@ -66,14 +66,6 @@ public class CreateStudentsDTO {
         this.gpa = gpa;
     }
 
-    public Integer getYearOfStudy() {
-        return yearOfStudy;
-    }
-
-    public void setYearOfStudy(Integer yearOfStudy) {
-        this.yearOfStudy = yearOfStudy;
-    }
-
     public String getUniversity() {
         return university;
     }
@@ -98,12 +90,5 @@ public class CreateStudentsDTO {
         this.major = major;
     }
 
-    public String getPriority() {
-        return priority;
-    }
-
-    public void setPriority(String priority) {
-        this.priority = priority;
-    }
 }
 

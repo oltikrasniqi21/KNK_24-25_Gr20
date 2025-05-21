@@ -96,8 +96,4 @@ public class StudentListController {
         }
     }
 
-    @FXML
-    private void handleClose() {
-        SceneManager.getInstance().loadScene(SceneLocator.ADMIN_HOME_PAGE);
-    }
 }

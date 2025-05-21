@@ -3,7 +3,6 @@ package Services;
 import Repository.FacultiesRepository;
 import Repository.MajorsRepository;
 import Repository.UniversitiesRepository;
-import Repository.UsersRepository;
 import javafx.scene.control.ComboBox;
 import models.Faculties;
 import models.Majors;

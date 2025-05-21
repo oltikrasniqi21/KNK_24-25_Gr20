@@ -31,25 +31,16 @@ public class CreateApplicationDto {
         return sid;
     }
 
-    public void setSid(int sid) {
-        this.sid = sid;
-    }
 
     public int getScid() {
         return scid;
     }
 
-    public void setScid(int scid) {
-        this.scid = scid;
-    }
 
     public LocalDate getApplication_date() {
         return application_date;
     }
 
-    public void setApplication_date(LocalDate application_date) {
-        this.application_date = application_date;
-    }
 
     public double getGpa() {
         return gpa;
@@ -63,7 +54,4 @@ public class CreateApplicationDto {
         return transcript_path;
     }
 
-    public void setTranscript_path(String transcript_path) {
-        this.transcript_path = transcript_path;
-    }
 }

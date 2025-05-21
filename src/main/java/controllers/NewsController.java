@@ -56,7 +56,6 @@ public class NewsController {
 
     @FXML
     private void publishNews() {
-        // Get the values from the form fields
         String title = titleField.getText();
         String summary = summaryField.getText();
 
@@ -67,16 +66,15 @@ public class NewsController {
             alert.setHeaderText(null);
             alert.setContentText("Please select an image before publishing.");
             alert.showAndWait();
-            return; // stop publishing if no image
+            return;
         }
 
         String imagePath = selectedImageFile.getPath();
 
-        // If the scholarshipChoiceBox is not null, get selected value
         ScholarshipTags selectedTag = scholarshipTagChoiceBox.getValue();
         Integer scholarshipTagId = selectedTag != null ? selectedTag.getTagId() : null;
 
-        int postedBy = 1; // Replace with actual user ID logic
+        int postedBy = 1;
 
         CreateNewsDTO createNewsDTO = new CreateNewsDTO(title, scholarshipTagId, postedBy, summary, imagePath);
 
@@ -87,7 +85,6 @@ public class NewsController {
 
         loadNews();
 
-        // Clear the form fields after publishing
         titleField.clear();
         summaryField.clear();
         scholarshipTagChoiceBox.setValue(null);
@@ -135,7 +132,6 @@ public class NewsController {
             return new SimpleStringProperty(tagName);
         });
 
-        // Load news data into table
         loadNews();
         loadScholarshipTags();
         addDeleteButtonToTable();
@@ -164,10 +160,10 @@ public class NewsController {
             boolean isDeleted = newsService.deleteNews(news.getNewsId());
 
             if (isDeleted) {
-                // Remove from the table as well
+
                 newsTable.getItems().remove(news);
             } else {
-                // Show error if deletion failed
+
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                 errorAlert.setTitle("Deletion Failed");
                 errorAlert.setHeaderText("Failed to delete the news item.");
@@ -179,10 +175,6 @@ public class NewsController {
         }
     }
 
-    @FXML
-    private void backToAdmin(javafx.event.ActionEvent event){
-        SceneManager.getInstance().loadScene(SceneLocator.ADMIN_HOME_PAGE);
-    }
 
 
     @FXML
@@ -207,7 +199,6 @@ public class NewsController {
 
         scholarshipTagChoiceBox.setItems(tags);
 
-        // Show the tagName instead of the default toString()
         scholarshipTagChoiceBox.setConverter(new javafx.util.StringConverter<>() {
             @Override
             public String toString(ScholarshipTags tag) {
@@ -216,7 +207,6 @@ public class NewsController {
 
             @Override
             public ScholarshipTags fromString(String string) {
-                // Not needed for ChoiceBox usage, so can return null or throw exception
                 return null;
             }
         });

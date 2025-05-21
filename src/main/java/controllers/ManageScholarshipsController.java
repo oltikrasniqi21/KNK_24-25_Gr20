@@ -101,9 +101,6 @@ public class ManageScholarshipsController {
         }
     }
 
-    @FXML private void handleBackClick(){
-        SceneManager.getInstance().loadScene(SceneLocator.ADMIN_HOME_PAGE);
-    }
 
     @FXML private void handleSearchClick(){
         String currentSearch = searchStudent.getText().toLowerCase();
