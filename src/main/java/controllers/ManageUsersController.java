@@ -2,14 +2,17 @@ package controllers;
 
 import Services.LanguageManager;
 import Services.ManageUsersService;
-import Services.SceneManager;
+
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import models.Users;
 import utils.SceneLocator;
@@ -57,7 +60,7 @@ public class ManageUsersController {
             @Override
             public TableCell<Users, Void> call(final TableColumn<Users, Void> param) {
                 return new TableCell<>() {
-                    private final Button btn = new Button("View PDF");
+                    private final Button btn = new Button("PDF...");
 
                     {
                         btn.setStyle("-fx-background-color: #b0b0b0; -fx-text-fill: black; -fx-font-weight: bold;");
@@ -67,13 +70,15 @@ public class ManageUsersController {
                         });
                     }
 
-                    @Override
                     protected void updateItem(Void item, boolean empty) {
                         super.updateItem(item, empty);
                         if (empty) {
                             setGraphic(null);
                         } else {
-                            setGraphic(btn);
+                            HBox hbox = new HBox(btn);
+                            hbox.setAlignment(Pos.CENTER);
+                            hbox.setPadding(new Insets(5));
+                            setGraphic(hbox);
                         }
                     }
                 };

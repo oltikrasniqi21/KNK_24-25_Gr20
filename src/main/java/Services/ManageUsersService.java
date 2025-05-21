@@ -2,7 +2,6 @@ package Services;
 import Repository.UsersRepository;
 import javafx.scene.control.Alert;
 import models.Users;
-
 import java.util.List;
 
 public class ManageUsersService {
