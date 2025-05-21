@@ -13,10 +13,6 @@ import models.Faq;
 import utils.SceneLocator;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class StudentFaqController implements Initializable {
@@ -46,8 +42,4 @@ public class StudentFaqController implements Initializable {
         }
     }
 
-    @FXML
-    private void handleBackStd() {
-        SceneManager.getInstance().loadScene(SceneLocator.STUDENT_HOME_PAGE);
-    }
 }

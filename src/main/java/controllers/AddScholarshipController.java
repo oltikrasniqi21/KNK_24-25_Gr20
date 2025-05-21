@@ -4,26 +4,17 @@ import CreateDTO.CreateScholarshipDTO;
 import Exceptions.EmptyFieldException;
 import Exceptions.InvalidFieldException;
 import Repository.FacultiesRepository;
-import Repository.ScholarshipsRepository;
-import Repository.UsersRepository;
-import Services.*;
+import Services.SceneManager;
+import Services.ScholarshipService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
 import models.Faculties;
-import models.Students;
-import models.Users;
 import utils.AlertMessages;
 import utils.SceneLocator;
 
-import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 
 public class AddScholarshipController {
@@ -41,6 +32,10 @@ public class AddScholarshipController {
     public AddScholarshipController(){
         this.scholarshipService = new ScholarshipService();
         this.facultiesRepository  =new FacultiesRepository();
+    }
+
+    @FXML private void handleBackClick(){
+        SceneManager.loadCenterContent(SceneLocator.MANAGE_SCHOLARSHIPS_PAGE);
     }
 
     @FXML public void initialize(){
@@ -79,15 +74,10 @@ public class AddScholarshipController {
         }
     };
 
-    @FXML
-    private void handleBackClick(){
-        SceneManager.getInstance().loadScene(SceneLocator.MANAGE_SCHOLARSHIPS_PAGE);
-    }
-
     @FXML private void handleSaveClick(){
             try{
-                checkEmptyFields(); //can throw EmptyFieldExcpetion
-                checkInvalidTypeFields(); //can throw InvalidFieldExcpetion
+                checkEmptyFields();
+                checkInvalidTypeFields();
 
                 String name = nameField.getText().toLowerCase();
                 String provider = providerField.getText().toLowerCase();
@@ -96,7 +86,6 @@ public class AddScholarshipController {
                 double gpa = Double.parseDouble(gpaField.getText());
                 LocalDate deadline = deadlineField.getValue();
 
-                //Kthimi i selected faculties ne arraylist me string te emrave te fakulteteve
                 ObservableList<Faculties> selectedItems = facultiesListView.getSelectionModel().getSelectedItems();
                 StringBuilder facultiesString = new StringBuilder();
 
@@ -131,6 +120,5 @@ public class AddScholarshipController {
         gpaField.clear();
         deadlineField.setValue(null);
     }
-
 
 }

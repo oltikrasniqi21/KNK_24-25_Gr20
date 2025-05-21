@@ -14,16 +14,16 @@ public class LocaleAlertMessages {
         LanguageManager languageManager = LanguageManager.getInstance();
         ResourceBundle bundle = languageManager.getResourceBundle();
 
-        String pattern = bundle.getString(placeholder); //merr njeren nga static final exception Strings nga language.propertiesBundle qe permban nje placeholder
-        String fieldNameBundle = bundle.getString(fieldName); //merr njeren nga static final fieldname strings
-        return MessageFormat.format(pattern, fieldNameBundle); //e vendos fieldname ne placeholder
+        String pattern = bundle.getString(placeholder);
+        String fieldNameBundle = bundle.getString(fieldName);
+        return MessageFormat.format(pattern, fieldNameBundle);
     }
 
     public static String getLocalizedMessage(String message) {
         LanguageManager languageManager = LanguageManager.getInstance();
         ResourceBundle bundle = languageManager.getResourceBundle();
 
-        String messageString = bundle.getString(message); //merr njeren nga static final Strings ne language properties qe permban nje placeholder
+        String messageString = bundle.getString(message);
         return messageString;
     }
 

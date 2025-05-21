@@ -15,7 +15,7 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 12, 0.5, 0, 2);
 }
 
-/* Title text */
+
 #loginTitle {
     -fx-font-size: 26px;
     -fx-font-weight: bold;
@@ -25,7 +25,7 @@
 
 }
 
-/* Text input fields */
+
 .nameInput, .passwordInput {
     -fx-padding: 10 14;
     -fx-margin: 20;
@@ -37,7 +37,7 @@
     -fx-background-color: white;
 }
 
-/* Login and Cancel buttons */
+
 .loginButton, .cancelButton {
     -fx-background-color: #00A859;
     -fx-text-fill: white;
@@ -50,7 +50,6 @@
     -fx-background-color: #aaaaaa;
 }
 
-/* Language buttons */
 .englishButton, .shqipButton {
     -fx-background-color: #dddddd;
     -fx-background-radius: 8px;
@@ -58,7 +57,6 @@
     -fx-font-size: 12px;
 }
 
-/* Signup link */
 .signupLink {
     -fx-text-fill: #00A859;
     -fx-underline: true;

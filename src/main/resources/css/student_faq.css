@@ -13,7 +13,6 @@ VBox > Label {
     -fx-padding: 50 0 10 0;
 }
 
-/* Accordion */
 #faqAccordion {
     -fx-background-color: white;
     -fx-border-color: transparent;

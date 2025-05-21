@@ -1,12 +1,9 @@
 package Repository;
 import CreateDTO.CreateFaqDTO;
 import UpdateDTO.UpdateFaqDTO;
-import UpdateDTO.UpdateScholarshipDTO;
 import models.Faq;
-import models.Scholarships;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 public class FaqRepository extends BaseRepository<Faq, CreateFaqDTO, UpdateFaqDTO> {
 
@@ -56,11 +53,6 @@ public class FaqRepository extends BaseRepository<Faq, CreateFaqDTO, UpdateFaqDT
         return null;
     }
 
-
-    public boolean addFaq(String question, String answer) {
-        CreateFaqDTO dto = new CreateFaqDTO(question, answer);
-        return create(dto) != null;
-    }
 
     public boolean update(int faqId, String question, String answer) {
         UpdateFaqDTO dto = new UpdateFaqDTO(faqId, question, answer);

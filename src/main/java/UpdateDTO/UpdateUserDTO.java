@@ -10,7 +10,6 @@ public class UpdateUserDTO {
     private String role;
     private String password;
 
-    public UpdateUserDTO() {};
 
     public UpdateUserDTO(String firstName, String lastName, String email, String role) {
         this.firstName = firstName;

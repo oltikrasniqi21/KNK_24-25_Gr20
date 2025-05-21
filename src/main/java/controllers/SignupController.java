@@ -9,7 +9,6 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import Database.DBCustomConnector;
 import Services.SignupService;
 import utils.AlertMessages;
 import utils.SceneLocator;

@@ -13,10 +13,6 @@ public class UpdateFacultiesDTO {
         return facultyId;
     }
 
-    public void setFacultyId(int facultyId) {
-        this.facultyId = facultyId;
-    }
-
     public String getName() {
         return name;
     }

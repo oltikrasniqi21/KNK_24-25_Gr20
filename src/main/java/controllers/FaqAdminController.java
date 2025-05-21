@@ -1,13 +1,11 @@
 package controllers;
 
-import Repository.FaqRepository;
 import Services.FaqService;
 import Services.SceneManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import models.Faq;
 import models.Faq;
 import utils.SceneLocator;
 
