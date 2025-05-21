@@ -4,18 +4,8 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane fx:id="mainLayout" stylesheets="@../css/student_view.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StudentHomePageController">
-   <left>
-      <VBox fx:id="leftVbox" prefHeight="342.0" prefWidth="176.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button mnemonicParsing="false" onAction="#handleLogout" prefHeight="26.0" prefWidth="320.0" text="%btn.logout" />
-            <Button mnemonicParsing="false" onAction="#loadFAQ" prefHeight="26.0" prefWidth="307.0" text="%viewFaq" />
-            <Button mnemonicParsing="false" onAction="#loadFeedbackForm" prefHeight="26.0" prefWidth="243.0" text="%giveFeedbackBtn" />
-            <Button fx:id="btnViewNotifications" mnemonicParsing="false" onAction="#onViewNotificationsClicked" prefHeight="26.0" prefWidth="260.0" text="%viewNotificationsBtn" />
-         </children>
-      </VBox>
-   </left>
    <right>
-       <VBox fx:id="notificationPane" layoutX="253.0" layoutY="71.0" prefHeight="342.0" prefWidth="152.0">
+       <VBox fx:id="notificationPane" layoutX="253.0" layoutY="71.0" prefHeight="342.0" prefWidth="191.0">
        <children>
             <TableView fx:id="notificationTable" prefHeight="200.0" prefWidth="163.0" BorderPane.alignment="CENTER">
                 <columns>
@@ -23,7 +13,7 @@
                      <TableColumn fx:id="dateColumn" prefWidth="75.0" text="%dateNotificationStd" />
                  </columns>
              </TableView>
-            <Pane prefHeight="200.0" prefWidth="200.0" />
+            <Pane prefHeight="171.0" prefWidth="169.0" />
        </children>
        </VBox>
    </right>
@@ -31,6 +21,22 @@
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
    <top>
-      <Pane prefHeight="44.0" prefWidth="528.0" BorderPane.alignment="CENTER" />
+      <HBox fx:id="topHbox" alignment="CENTER" prefHeight="61.0" prefWidth="826.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#handleLogout" text="%btn.logout" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onAction="#loadNewsStudent" text="News" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onAction="#loadFAQ" text="%viewFaq" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onAction="#loadFeedbackForm" text="%giveFeedbackBtn" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="btnViewApplication" mnemonicParsing="false" onAction="#onViewApplicationClicked" text="%viewApplication" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="btnViewNotifications" mnemonicParsing="false" onAction="#onViewNotificationsClicked" text="%viewNotificationsBtn" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="btnViewProfile" mnemonicParsing="false" onAction="#handleViewProfileClick" text="%viewProfile" />
+         </children>
+      </HBox>
    </top>
 </BorderPane>

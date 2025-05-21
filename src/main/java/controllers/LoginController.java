@@ -6,21 +6,21 @@ import Services.LanguageManager;
 import Services.LoginService;
 import Services.SceneManager;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import utils.SceneLocator;
-import javafx.stage.Stage;
+import javafx.scene.layout.VBox;
 
 
-import java.net.URL;
+
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.Locale;
-import java.util.ResourceBundle;
+
+import static utils.AlertMessages.showAlert;
 
 public class LoginController {
     private SceneManager sceneManager;
@@ -32,8 +32,24 @@ public class LoginController {
     @FXML
     private PasswordField pwdPassword;
 
+    @FXML
+    private VBox rightVBox;
+
+    @FXML
+    private HBox languagesHbox;
+
+    @FXML
+    private Label lblSignup;
+
     public LoginController() {
 
+    }
+
+    @FXML
+    public void initialize() {
+        VBox.setMargin(lblSignup, new Insets(0, 0, 60, 0));
+        VBox.setMargin(txtUsername, new Insets(0, 0, 15, 0));
+        VBox.setMargin(pwdPassword, new Insets(0, 0, 15, 0));
     }
 
     @FXML
@@ -53,7 +69,7 @@ public class LoginController {
 
             if (role != null) {
                 // You may want to fetch the user ID too if it's not a superadmin
-                int userId = fetchUserIdByEmail(conn, email);
+                int userId = loginService.fetchUserIdByEmail(conn, email);
                 CurrentUser.setUser(userId, role);
 
                 if (role.equalsIgnoreCase("admin")) {
@@ -68,27 +84,6 @@ public class LoginController {
             e.printStackTrace();
             showAlert("Database Error!", e.getMessage());
         }
-    }
-
-    private int fetchUserIdByEmail(Connection conn, String email) throws Exception {
-        String query = "SELECT id FROM users WHERE email = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setString(1, email);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt("id");
-                }
-            }
-        }
-        return -1; // For superadmin you might use -1 or 0, as they might not be in DB
-    }
-
-
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setContentText(message);
-        alert.show();
     }
 
     @FXML

@@ -1,0 +1,59 @@
+VBox {
+    -fx-background-color: #fafafa;
+    -fx-padding: 25;
+    -fx-spacing: 20;
+}
+
+Text {
+    -fx-fill: #222222;
+}
+
+Text[styleClass~="header"] {
+    -fx-font-weight: bold;
+    -fx-font-size: 27px;
+    -fx-fill: #333333;
+}
+
+HBox {
+    -fx-spacing: 15;
+    -fx-alignment: center;
+}
+
+ComboBox, TextField {
+    -fx-pref-height: 28;
+    -fx-pref-width: 210;
+    -fx-font-size: 14px;
+    -fx-border-color: #bbb;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 3 7 3 7;
+}
+
+ComboBox:focused, TextField:focused {
+    -fx-border-color: #4CAF50;
+    -fx-focus-color: #4CAF50;
+}
+
+Label#selectedFileLabel {
+    -fx-text-fill: #0078d7;
+    -fx-underline: true;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+}
+
+Label#selectedFileLabel:hover {
+    -fx-text-fill: #005a9e;
+}
+
+Button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+Button:hover {
+    -fx-background-color: #45a049;
+}

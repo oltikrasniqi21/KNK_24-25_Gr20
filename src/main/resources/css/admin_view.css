@@ -1,10 +1,14 @@
-#leftVbox {
-    -fx-background-color: #00A859; /* A brighter green */
-    -fx-padding: 20 0 20 20;
-    -fx-background-radius: 0 20 20 0; /* rounded on the right side */
+.root {
+    -fx-font-family: "Poppins", sans-serif;
+    -fx-font-size: 14px;
 }
 
-.button {
+#leftVbox {
+    -fx-background-color: #00A859;
+    -fx-padding: 20 0 20 20;
+    -fx-background-radius: 0 20 20 0;
+}
+.leftButton {
     -fx-background-color: transparent;
     -fx-text-fill: white;
     -fx-background-radius: 10px;
@@ -12,24 +16,119 @@
     -fx-border-color: transparent;
     -fx-font-size: 14px;
     -fx-alignment: CENTER_LEFT;
-    -fx-translate-x: 100%; /* Moves it fully to the right */
+    -fx-translate-x: 100%;
     -fx-padding: 5 20 5 5;
 }
 
-.button:hover {
+#englishButton, #shqipButton {
+    -fx-background-color: #dddddd;
+    -fx-background-radius: 8px;
+    -fx-text-fill: #333;
+    -fx-font-size: 12px;
+}
+
+.leftButton:hover {
     -fx-background-color: rgba(255, 255, 255, 0.2);
 }
 
-.button:selected, .button:focused {
+.leftButton:selected, .leftButton:focused {
     -fx-background-color: #f0f2f5;
     -fx-text-fill: #00A859;
-    -fx-background-radius: 20 0 0 20; /* rounded on the right side */
+    -fx-background-radius: 20 0 0 20;
     -fx-border-radius: 20 0 0 20;;
     -fx-border-color: #f0f2f5;
 }
 
-
-/* Overall background */
 Pane {
-    -fx-background-color: #f0f2f5; /* light gray, similar to right panel */
+    -fx-background-color: #f0f2f5;
 }
+
+.card-title {
+    -fx-font-size: 18px;        /* Slightly smaller for better hierarchy */
+    -fx-text-fill: #555;        /* Softer color */
+    -fx-font-weight: 600;       /* Semi-bold instead of bold */
+    -fx-padding: 0 0 8px 0;    /* Space between title and number */
+}
+
+.card-number {
+    -fx-font-size: 32px;        /* Slightly smaller */
+    -fx-text-fill: #222;
+    -fx-font-weight: bold;
+}
+
+#totalUsersCard, #totalScholarshipsCard, #totalApplicationsCard {
+        -fx-background-color: #FFFFFF;
+        -fx-background-radius: 15px; /* Rounded corners */
+        -fx-border-radius: 15px;     /* Rounded corners for border if used */
+        -fx-padding: 5px 25px;     /* Better padding: 20px top/bottom, 25px left/right */
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 12, 0.5, 0, 2);
+        -fx-min-width: 200px;       /* Minimum width for better proportions */
+        -fx-min-height: 120px;      /* Minimum height for better proportions */
+}
+
+
+#centerVbox {
+    -fx-padding: 10px 40px;     /* 40px top/bottom, 70px left/right */
+    -fx-spacing: 30px;          /* Space between elements */
+}
+
+.pie-chart {
+    -fx-background-color: transparent;
+    -fx-padding: 15px;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.1), 4, 0, 2, 2 );
+}
+
+
+
+#usersStatusPieChart .default-color0 {
+    -fx-pie-color: #FF6B6B;
+}
+#usersStatusPieChart .default-color1 {
+    -fx-pie-color: #00C04B;
+}
+
+
+#applicationStatusPieChart .default-color0 {
+    -fx-pie-color: #FF6B6B;
+}
+#applicationStatusPieChart .default-color1 {
+    -fx-pie-color: #00C04B;
+}
+
+#userRolePieChart .default-color0 {
+    -fx-pie-color: #1abc9c;
+}
+#userRolePieChart .default-color1 {
+    -fx-pie-color: #f39c12;
+}
+
+
+.pie-chart .chart-legend-item {
+    -fx-font-size: 12px;
+    -fx-text-fill: #444;
+}
+
+.pie-chart .chart-pie-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-fill: #333;
+}
+
+.pie-chart .chart-pie:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+#pieChartHbox, #barChartHbox {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 15px; /* Rounded corners */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 12, 0.5, 0, 2);
+    -fx-spacing: 20px;          /* Space between charts if multiple */
+}
+
+
+
+

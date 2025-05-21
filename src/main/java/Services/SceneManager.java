@@ -13,7 +13,7 @@ public class SceneManager {
     private String currentPath;
     private LanguageManager languageManager;
 
-    private static final String DEFAULT_START_PAGE = SceneLocator.ADMIN_HOME_PAGE;
+    private static final String DEFAULT_START_PAGE = SceneLocator.STUDENT_HOME_PAGE;
 
     private SceneManager(){
         this.languageManager = LanguageManager.getInstance();
@@ -62,6 +62,13 @@ public class SceneManager {
         );
         loader.setResources(this.languageManager.getResourceBundle());
         return loader.load();
+    }
+
+    private FXMLLoader loadFXMLLoader(String path) throws Exception { //used to pass selected data to another controller (edit scholarships)
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource(path));
+        loader.setResources(this.languageManager.getResourceBundle());
+        loader.load();
+        return loader;
     }
 
     public static void reload() throws Exception{

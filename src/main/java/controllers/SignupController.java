@@ -2,8 +2,9 @@ package controllers;
 
 import Services.SceneManager;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import Database.DBCustomConnector;
 import Services.SignupService;
@@ -11,46 +12,55 @@ import utils.SceneLocator;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 
-
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
-import java.util.ResourceBundle;
-import java.util.regex.Pattern;
 
-public class SignupController implements Initializable {
+import static utils.AlertMessages.*;
 
-    private final SignupService signupService;
+public class SignupController {
 
     public SignupController() {
         this.signupService = new SignupService(DBCustomConnector.getConnection());
     }
 
-    @FXML private TextField firstNameField;
-    @FXML private TextField lastNameField;
-    @FXML private TextField emailField;
-    @FXML private PasswordField passwordField;
-    @FXML private Label lblSelectedFile;
-    @FXML private Label passwordHintLabel;
+    @FXML
+    private TextField firstNameField;
+    @FXML
+    private TextField lastNameField;
+    @FXML
+    private TextField emailField;
+    @FXML
+    private PasswordField passwordField;
+    @FXML
+    private Label lblSelectedFile;
+    @FXML
+    private Label passwordHintLabel;
+    @FXML
+    private VBox titleVbox;
+    @FXML
+    private VBox buttonVbox1;
+    @FXML
+    private VBox buttonVbox2;
+    @FXML
+    private ComboBox<String> universityComboBox;
+    @FXML
+    private ComboBox<String> facultyComboBox;
+    @FXML
+    private ComboBox<String> majorComboBox;
+    @FXML
+    private ComboBox<String> yearComboBox;
 
-    @FXML private ComboBox<String> universityComboBox;
-    @FXML private ComboBox<String> facultyComboBox;
-    @FXML private ComboBox<String> majorComboBox;
-    @FXML private ComboBox<String> yearComboBox;
+    private SignupService signupService = new SignupService(DBCustomConnector.getConnection());
 
     private File selectedPdfFile;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        universityComboBox.getItems().addAll("University of Prishtina", "University of Prizren", "University of Gjilan", "University of Gjakova", "University of Mitrovica");
-        facultyComboBox.getItems().addAll("FIEK", "Medicine", "Law", "Economics", "Arts","FIM","FIN","Architecture","Education");
-        majorComboBox.getItems().addAll("Software Engineer", "Business", "Civil Engineering", "Law", "Dentistry","Robotics Engineering","Data Science","Cyber Security");
+    @FXML
+    public void initialize() {
+        signupService.loadUniversities(universityComboBox);
         yearComboBox.getItems().addAll("1", "2", "3", "4", "5", "6");
 
         passwordField.textProperty().addListener((obs, oldVal, newVal) -> {
-            if (!isValidPassword(newVal)) {
+            if (!signupService.isValidPassword(newVal)) {
                 passwordHintLabel.setText("Weak password");
                 passwordHintLabel.setStyle("-fx-text-fill: red;");
             } else {
@@ -59,6 +69,21 @@ public class SignupController implements Initializable {
             }
         });
 
+        universityComboBox.setOnAction(e -> {
+            String selectedUniversity = universityComboBox.getValue();
+            if (selectedUniversity != null) {
+                signupService.loadFaculties(selectedUniversity, facultyComboBox, majorComboBox);
+            }
+        });
+
+        facultyComboBox.setOnAction(e -> {
+            String selectedFaculty = facultyComboBox.getValue();
+            if (selectedFaculty != null) {
+                signupService.loadMajors(selectedFaculty, majorComboBox);
+            }
+        });
+        VBox.setMargin(buttonVbox1, new Insets(20, 0, 5, 0));
+        VBox.setMargin(buttonVbox2, new Insets(5, 0, 0, 0));
     }
 
     @FXML
@@ -72,60 +97,43 @@ public class SignupController implements Initializable {
         String major = majorComboBox.getValue();
         String year = yearComboBox.getValue();
 
-
         if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty() ||
-                university == null || faculty == null || major == null || year == null){
-            showAlert("Missing Information", "Please fill out all fields.");
+                university == null || faculty == null || major == null || year == null || selectedPdfFile == null) {
+            showAlert(MISSING_INFO, FILL_ALL_FIELDS);
             return;
         }
 
-        if (!isValidStudentEmail(email)) {
-            showAlert("Invalid Email", "Email must be a valid university student address (e.g. user@student.uni-pr.edu)");
+        if (!signupService.isValidStudentEmail(email)) {
+            showAlert(INVALID_EMAIL, EMAIL_REQUIREMENTS);
+            return;
+        }
+        if (!signupService.emailContainsNameAndSurname(email, firstName, lastName)) {
+            showAlert(INVALID_EMAIL, "Email must contain your first and last name.");
             return;
         }
 
-        if (!isValidPassword(password)) {
-            showAlert(
-                    "Invalid Password",
-                    "Password must contain:\n" +
-                            "• At least 8 characters\n" +
-                            "• At least one uppercase letter\n" +
-                            "• At least one lowercase letter\n" +
-                            "• At least one digit\n" +
-                            "• At least one special character (e.g. !@#$%^&*)"
-            );
+        if (!signupService.isValidPassword(password)) {
+            showAlert(INVALID_PASSWORD, PASSWORD_REQUIREMENTS);
             return;
         }
+
         String filePath = null;
-
         if (selectedPdfFile != null) {
             try {
-                File uploadDir = new File("uploads");
-                if (!uploadDir.exists() && !uploadDir.mkdirs()) {
-                    showAlert("Directory Error", "Failed to create upload directory.");
-                    return;
-                }
-
-                File dest = new File(uploadDir, selectedPdfFile.getName());
-                Files.copy(selectedPdfFile.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
-
-                filePath = dest.getAbsolutePath();
-
+                filePath = signupService.saveStudentDocument(selectedPdfFile);
             } catch (IOException e) {
-                showAlert("File Upload Error", "Could not save your document.");
+                showAlert(FILE_UPLOAD_ERROR, FILE_SAVE_FAIL);
                 return;
             }
         }
 
-
-
         try {
             signupService.signupStudent(password, firstName, lastName, email,
-                    Integer.parseInt(year), university, faculty, major);
+                    Integer.parseInt(year), university, faculty, major, filePath);
 
             Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-            successAlert.setTitle("Signup Successful");
-            successAlert.setContentText("Your account has been created.");
+            successAlert.setTitle(SIGNUP_SUCCESS);
+            successAlert.setContentText(SIGNUP_SUCCESS_MESSAGE);
             successAlert.show();
 
             PauseTransition delay = new PauseTransition(Duration.seconds(2));
@@ -139,14 +147,6 @@ public class SignupController implements Initializable {
             e.printStackTrace();
             showAlert("Error", "Signup failed: " + e.getMessage());
         }
-
-    }
-    private boolean isValidPassword(String password) {
-        return password.length() >= 8 &&
-                password.matches(".*[A-Z].*") &&
-                password.matches(".*[a-z].*") &&
-                password.matches(".*\\d.*") &&
-                password.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*");
     }
 
     @FXML
@@ -160,6 +160,7 @@ public class SignupController implements Initializable {
         majorComboBox.setValue(null);
         yearComboBox.setValue(null);
     }
+
     @FXML
     private void handleBackClick() {
         SceneManager.getInstance().loadScene(SceneLocator.LOGIN_PAGE);
@@ -168,7 +169,7 @@ public class SignupController implements Initializable {
     @FXML
     private void handleChooseFile() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select PDF Document");
+        fileChooser.setTitle(SELECT_PDF);
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("PDF Files", "*.pdf")
         );
@@ -177,26 +178,7 @@ public class SignupController implements Initializable {
             selectedPdfFile = file;
             lblSelectedFile.setText(file.getName());
         } else {
-            lblSelectedFile.setText("No file selected");
+            lblSelectedFile.setText(NO_FILE_SELECTED);
         }
-    }
-
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setContentText(message);
-        alert.show();
-    }
-
-    private void showInfo(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setContentText(message);
-        alert.show();
-    }
-
-    private boolean isValidStudentEmail(String email) {
-        String regex = "^[\\w.-]+@student\\.uni-[a-z]{2,10}\\.edu$";
-        return Pattern.matches(regex, email);
     }
 }

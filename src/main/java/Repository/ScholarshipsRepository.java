@@ -26,7 +26,7 @@ public class ScholarshipsRepository extends BaseRepository<Scholarships, CreateS
     public Scholarships create(CreateScholarshipDTO create) {
         String query = """
                 INSERT INTO SCHOLARSHIPS(SCHOLARSHIP_NAME, PROVIDER, AMOUNT, DEADLINE_DATE,
-                    REQUIRED_GPA, REQUIRED_YEAR, REQUIRED_MAJOR) VALUES(?,?,?,?,?,?,?)
+                    REQUIRED_GPA, REQUIRED_YEAR, REQUIRED_MAJOR, STATUS) VALUES(?,?,?,?,?,?,?,'active')
                 """;
         try{
             PreparedStatement statement = this.connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -58,7 +58,8 @@ public class ScholarshipsRepository extends BaseRepository<Scholarships, CreateS
                 DEADLINE_DATE = ?,
                 REQUIRED_GPA = ?,
                 REQUIRED_YEAR = ?,
-                REQUIRED_MAJOR = ?
+                REQUIRED_MAJOR = ?,
+                STATUS = ?
                 WHERE ID = ?
                 """;
         try{
@@ -68,7 +69,8 @@ public class ScholarshipsRepository extends BaseRepository<Scholarships, CreateS
             statement.setDouble(3, update.getRequired_gpa());
             statement.setInt(4, update.getRequired_year());
             statement.setString(5, update.getRequred_major());
-            statement.setInt(6, update.getScholarship_id());
+            statement.setString(6, update.getStatus());
+            statement.setInt(7, update.getScholarship_id());
             int updateRow = statement.executeUpdate();
             if(updateRow == 1){
                 return this.getById(update.getScholarship_id());

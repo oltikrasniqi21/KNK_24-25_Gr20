@@ -40,7 +40,7 @@ public class ScholarshipTagsRepository extends BaseRepository<ScholarshipTags, C
 
     @Override
     ScholarshipTags update(UpdateScholarshipTagsDTO scholarshipTagsDTO) {
-        String query = "UPDATE scholarshipTags SET tag_name = ? WHERE tagId = ?";
+        String query = "UPDATE scholarshipTags SET tag_name = ? WHERE id = ?";
         try {
             PreparedStatement statement = this.connection.prepareStatement(query);
             statement.setString(1, scholarshipTagsDTO.getTagName());

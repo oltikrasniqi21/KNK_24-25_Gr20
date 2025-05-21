@@ -56,7 +56,7 @@
         </MenuBar>
         <AnchorPane VBox.vgrow="ALWAYS">
             <children>
-                <Button fx:id="btnAddUser" layoutX="227.0" layoutY="21.0" onAction="#handleAddScholarshipClick" text="%add_scholarship" />
+                <Button fx:id="btnAddScholarship" layoutX="227.0" layoutY="21.0" onAction="#handleAddScholarshipClick" text="%add_scholarship" />
                 <Label layoutX="34.0" layoutY="20.0" text="%manage_scholarships">
                     <font>
                         <Font size="18.0" />
@@ -64,19 +64,22 @@
                 </Label>
                 <TextField fx:id="searchStudent" layoutX="34.0" layoutY="58.0" promptText="%search_scholarship" />
                 <Button fx:id="btnSearch" layoutX="200.0" layoutY="58.0" onAction="#handleSearchClick" text="%search" />
-                <TableView layoutX="8.0" layoutY="105.0" prefHeight="240.0" prefWidth="622.0">
+                <TableView fx:id="scholarshipsTable" layoutX="8.0" layoutY="105.0" prefHeight="240.0" prefWidth="622.0">
                     <columns>
-                        <TableColumn fx:id="scholarshipsIdColumn" prefWidth="75.0" text="%column.id" />
-                        <TableColumn fx:id="scholarshipsNameColumn" prefWidth="75.0" text="%column.name" />
-                        <TableColumn fx:id="scholarshipsProviderColumn" prefWidth="75.0" text="%column.institute" />
-                        <TableColumn fx:id="scholarshipsAmountColumn" prefWidth="75.0" text="%column.vlera" />
-                        <TableColumn fx:id="scholarshipsDeadlineColumn" prefWidth="75.0" text="%column.deadline" />
-                        <TableColumn fx:id="scholarshipsGpaColumn" prefWidth="75.0" text="%gpa" />
-                        <TableColumn fx:id="scholarshipsYearColumn" prefWidth="75.0" text="%col.year" />
-                        <TableColumn fx:id="scholarshipsMajorColumn" prefWidth="75.0" text="%column.drejtimi" />
+                        <TableColumn fx:id="scholarshipsIdColumn" prefWidth="39.200042724609375" text="%column.id" />
+                        <TableColumn fx:id="scholarshipsNameColumn" prefWidth="71.20001220703125" text="%column.name" />
+                        <TableColumn fx:id="scholarshipsProviderColumn" text="%column.institute" />
+                        <TableColumn fx:id="scholarshipsAmountColumn" prefWidth="72.79998779296875" text="%column.vlera" />
+                        <TableColumn fx:id="scholarshipsDeadlineColumn" prefWidth="85.60003662109375" text="%column.deadline" />
+                        <TableColumn fx:id="scholarshipsGpaColumn" prefWidth="59.199951171875" text="%gpa" />
+                        <TableColumn fx:id="scholarshipsYearColumn" prefWidth="58.4000244140625" text="%col.year" />
+                        <TableColumn fx:id="scholarshipsMajorColumn" prefWidth="75.99993896484375" text="%column.drejtimi" />
+                  <TableColumn fx:id="scholarshipsStatusColumn" prefWidth="75.0" text="%col.status" />
                     </columns>
                 </TableView>
                 <Button fx:id="btnBack" layoutX="528.0" layoutY="21.0" onAction="#handleBackClick" prefHeight="26.0" prefWidth="80.0" text="%back" />
+            <Button fx:id="btnEdit" layoutX="310.0" layoutY="57.0" mnemonicParsing="false" onAction="#handleEditClick" prefHeight="26.0" prefWidth="60.0" text="%edit" />
+            <Button layoutX="385.0" layoutY="58.0" mnemonicParsing="false" onAction="#handleDeleteClick" text="%key.delete" />
             </children>
         </AnchorPane>
     </children>

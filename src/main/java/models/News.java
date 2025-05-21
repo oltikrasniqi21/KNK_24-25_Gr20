@@ -12,15 +12,20 @@ public class News {
     private int scholarshipTagId;
     private int postedBy;
     private Timestamp postedAt;
+    private String summary;
+    private String imagePath;
 
 
-    protected News(int newsId, String title, String content, int scholarshipTagId, int postedBy, Timestamp postedAt) {
+    protected News(int newsId, String title, String content, int scholarshipTagId, int postedBy,
+                   Timestamp postedAt, String summary, String imagePath) {
         this.newsId = newsId;
         this.title = title;
         this.content = content;
         this.scholarshipTagId = scholarshipTagId;
         this.postedBy = postedBy;
         this.postedAt = postedAt;
+        this.summary = summary;
+        this.imagePath=imagePath;
     }
 
         public static News getInstance(ResultSet rs) throws SQLException {
@@ -28,13 +33,12 @@ public class News {
             String title = rs.getString("title");
             String content = rs.getString("content");
             int scholarshipTagId = rs.getInt("scholarship_tag_id");
-            if (rs.wasNull()) {
-                scholarshipTagId = 0; // Default value for null
-            }
+            String summary = rs.getString("summary");
+            String imagePath = rs.getString("imagePath");
             int postedBy = rs.getInt("posted_by");
             Timestamp postedAt = rs.getTimestamp("posted_at");
 
-            return new News(newsId, title, content, scholarshipTagId, postedBy, postedAt);
+            return new News(newsId, title, content, scholarshipTagId, postedBy, postedAt, summary, imagePath);
         }
 
 
@@ -61,4 +65,8 @@ public class News {
     public int getNewsId() {
         return newsId;
     }
+
+    public String getSummary(){return summary;};
+
+    public String getImagePath(){return imagePath;}
 }

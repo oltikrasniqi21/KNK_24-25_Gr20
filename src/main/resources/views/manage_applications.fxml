@@ -32,77 +32,22 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox prefHeight="589.0" prefWidth="719.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageApplicationController">
+<VBox prefHeight="589.0" prefWidth="719.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageApplicationController">
   <children>
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="481.0" prefWidth="719.0" VBox.vgrow="ALWAYS">
       <children>
-            <Text layoutX="20.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Detajet e Aplikimit">
+            <Text layoutX="20.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%applicationdetails">
                <font>
                   <Font size="23.0" />
                </font>
             </Text>
             <Separator layoutX="20.0" layoutY="45.0" prefHeight="0.0" prefWidth="611.0" />
-            <Text layoutX="20.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Application Details">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Text>
             <TextField fx:id="studentField" editable="false" layoutX="132.0" layoutY="84.0" />
             <TextField fx:id="priorityField" editable="false" layoutX="132.0" layoutY="243.0" />
-            <TextField fx:id="coursesLeftField" editable="false" layoutX="108.0" layoutY="529.0" />
             <TextField fx:id="gpaField" editable="false" layoutX="132.0" layoutY="125.0" />
             <TextField fx:id="emailField" editable="false" layoutX="422.0" layoutY="495.0" />
             <TextField fx:id="requiredYearField" editable="false" layoutX="481.0" layoutY="163.0" />
@@ -110,7 +55,7 @@
             <TextField fx:id="scholarshipField" editable="false" layoutX="481.0" layoutY="84.0" />
             <TextField fx:id="deadlineField" editable="false" layoutX="481.0" layoutY="203.0" />
             <TextField fx:id="statusField" editable="false" layoutX="481.0" layoutY="243.0" />
-            <Text layoutX="20.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Name:">
+            <Text layoutX="20.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%studentname">
                <font>
                   <Font size="13.0" />
                </font>
@@ -125,70 +70,67 @@
                   <Font size="13.0" />
                </font>
             </Text>
-            <Text layoutX="14.0" layoutY="546.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Courses Left:">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Text>
             <Text layoutX="22.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Priority:">
                <font>
                   <Font size="13.0" />
                </font>
             </Text>
-            <Text layoutX="381.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scholarship:">
+            <Text layoutX="381.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%scholarship">
                <font>
                   <Font size="13.0" />
                </font>
             </Text>
-            <Text layoutX="381.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Required GPA:">
+            <Text layoutX="381.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%requiredgpa">
                <font>
                   <Font size="13.0" />
                </font>
             </Text>
-            <Text layoutX="381.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Year:">
+            <Text layoutX="381.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%requiredyear">
                <font>
                   <Font size="13.0" />
                </font>
             </Text>
-            <Text layoutX="381.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deadline:">
+            <Text layoutX="381.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%deadline">
                <font>
                   <Font size="13.0" />
                </font>
             </Text>
-            <Text layoutX="381.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status:">
+            <Text layoutX="381.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%status">
                <font>
                   <Font size="13.0" />
                </font>
             </Text>
             <TableView fx:id="applicationsTable" layoutX="20.0" layoutY="288.0" prefHeight="165.0" prefWidth="521.0">
                <columns>
-                  <TableColumn fx:id="applicationIdColumn" text="Application ID" />
-                  <TableColumn fx:id="studentNameColumn" text="Student Name" />
-                  <TableColumn fx:id="scholarshipNameColumn" text="Scholarship Name" />
-                  <TableColumn fx:id="applicationDateColumn" text="Application Date" />
-                  <TableColumn fx:id="statusColumn" text="Status" />
+                  <TableColumn fx:id="applicationIdColumn" text="%applicationID" />
+                  <TableColumn fx:id="studentNameColumn" text="%studentname" />
+                  <TableColumn fx:id="scholarshipNameColumn" text="%scholarship" />
+                  <TableColumn fx:id="applicationDateColumn" text="%applicationdate" />
+                  <TableColumn fx:id="gpaColumn" prefWidth="75.0" text="GPA" />
+                  <TableColumn fx:id="statusColumn" text="%status" />
                </columns>
             </TableView>
-            <Button fx:id="btnApprove" layoutX="561.0" layoutY="305.0" onAction="#handleApprove" prefHeight="37.0" prefWidth="69.0" style="-fx-background-color: green; -fx-text-fill: white;" text="Aprovo" />
-            <Button fx:id="btnReject" layoutX="561.0" layoutY="354.0" onAction="#handleReject" prefHeight="37.0" prefWidth="69.0" style="-fx-background-color: red; -fx-text-fill: white;" text="Refuzo" />
-            <Button layoutX="561.0" layoutY="398.0" onAction="#handleClose" prefHeight="37.0" prefWidth="69.0" text="Mbyll" />
-            <Text layoutX="467.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Detajet e Burses">
+            <Button fx:id="btnApprove" layoutX="561.0" layoutY="305.0" onAction="#handleApprove" prefHeight="37.0" prefWidth="69.0" style="-fx-background-color: green; -fx-text-fill: white;" text="%approve" />
+            <Button fx:id="btnReject" layoutX="561.0" layoutY="354.0" onAction="#handleReject" prefHeight="37.0" prefWidth="69.0" style="-fx-background-color: red; -fx-text-fill: white;" text="%reject" />
+            <Button layoutX="561.0" layoutY="398.0" onAction="#handleClose" prefHeight="37.0" prefWidth="69.0" text="%menu.close" />
+            <Text layoutX="467.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%scholarshipdetails">
                <font>
                   <Font size="23.0" />
                </font>
             </Text>
             <TextField fx:id="currentYearField" editable="false" layoutX="132.0" layoutY="163.0" />
-            <Text layoutX="22.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Year:">
+            <Text layoutX="22.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%currentyear">
                <font>
                   <Font size="13.0" />
                </font>
             </Text>
             <TextField fx:id="applicationDateField" editable="false" layoutX="132.0" layoutY="203.0" />
-            <Text layoutX="22.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Application Date:">
+            <Text layoutX="22.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%applicationdate">
                <font>
                   <Font size="13.0" />
                </font>
             </Text>
+            <Button fx:id="viewTranscriptButton" layoutX="561.0" layoutY="453.0" onAction="#handleViewTranscript" prefHeight="37.0" prefWidth="110.0" style="-fx-background-color: blue; -fx-text-fill: white;" text="%transcript" />
       </children>
     </AnchorPane>
   </children>

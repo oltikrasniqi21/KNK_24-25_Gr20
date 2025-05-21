@@ -23,4 +23,15 @@ public class PasswordUtils {
             throw new RuntimeException(e);
         }
     }
+
+    public static boolean checkPasswordMatch(String newVal, String oldPassword){
+        String[] parts = oldPassword.split("\\$");
+        if(parts.length !=2) return false;
+
+        String salt = parts[0];
+        String oldHash = parts[1];
+
+        String inputHash = PasswordUtils.hashPassword(newVal, salt);
+        return oldHash.equals(inputHash);
+    }
 }

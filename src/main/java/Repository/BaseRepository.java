@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 abstract class BaseRepository<Model, CreateModelDto, UpdateModelDto> {
     protected Connection connection;
-    private String tableName;
+    private final String tableName;
 
     public BaseRepository(String tableName){
         this.connection = DBCustomConnector.getConnection();
@@ -56,6 +56,25 @@ abstract class BaseRepository<Model, CreateModelDto, UpdateModelDto> {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public int getRowCount(){
+        String query = "SELECT COUNT(*) AS count FROM "  + this.tableName;
+                ;
+        int totalCount = 0;
+
+        try(PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery()){
+
+            while(resultSet.next()) {
+                totalCount = resultSet.getInt("count");
+            }
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return totalCount;
     }
 
     abstract Model create(CreateModelDto createDto);

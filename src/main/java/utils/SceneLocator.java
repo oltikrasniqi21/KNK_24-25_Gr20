@@ -9,6 +9,7 @@ public class SceneLocator {
     public static final String MANAGE_USERS_PAGE = "/views/manage_users.fxml";
     public static final String MANAGE_SCHOLARSHIPS_PAGE = "/views/manage_scholarships.fxml";
     public static final String ADD_SCHOLARSHIPS_PAGE = "/views/add_scholarships.fxml";
+    public static final String EDIT_SCHOLARSHIPS_PAGE = "/views/edit_scholarships.fxml";
     public static final String MANAGE_APPLICATIONS_PAGE = "/views/manage_applications.fxml";
     public static final String MANAGE_ADMIN_NOTIFICATION_PAGE = "/views/admin_notification.fxml";
     public static final String MANAGE_FAQ_PAGE = "/views/faq.fxml";
@@ -18,4 +19,10 @@ public class SceneLocator {
     public static final String APPLICATION_FORM = "/views/student_application.fxml";
     public static final String STUDENT_FEEDBACK_PAGE = "/views/student_feedback.fxml";
     public static final String MANAGE_ADMIN_FEEDBACK_PAGE = "/views/admin_feedback.fxml";
+    public static final String MY_PROFILE_PAGE = "/views/my_profile.fxml";
+    public static final String MANAGE_UNIVERSITIES = "/views/manage_universities.fxml";
+    public static final String STATISTICS = "/views/statistics.fxml";
+    public static final String NEWS_STUDENT = "/views/news_student.fxml";
+    public static final String NEWS_CARD = "/views/news_card.fxml";
+
 }

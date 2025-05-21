@@ -2,12 +2,14 @@ package controllers;
 
 import CreateDTO.CreateScholarshipDTO;
 import Exceptions.EmptyFieldException;
+import Exceptions.InvalidFieldException;
 import Repository.ScholarshipsRepository;
 import Services.SceneManager;
 import Services.ScholarshipService;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import utils.AlertMessages;
 import utils.SceneLocator;
 
 import java.time.LocalDate;
@@ -22,12 +24,11 @@ public class AddScholarshipController {
     @FXML private TextField yearField;
     @FXML private TextField majorField;
 
-    private ScholarshipsRepository scholarshipsRepository;
-    private ScholarshipService scholarshipService;
+    private final ScholarshipService scholarshipService;
+    private final ScholarshipsRepository scholarshipsRepository = new ScholarshipsRepository();
 
     public AddScholarshipController(){
         this.scholarshipService = new ScholarshipService();
-        this.scholarshipsRepository = new ScholarshipsRepository();
     }
 
     @FXML private void handleBackClick(){
@@ -46,9 +47,28 @@ public class AddScholarshipController {
         }
     };
 
+    private void checkInvalidTypeFields(){
+        if(!majorField.getText().matches("[a-zA-Z\\s]+")){
+            throw new InvalidFieldException(AlertMessages.MAJOR);
+        }
+
+        if(!amountField.getText().matches("^\\d{2,4}$")){
+            throw new InvalidFieldException(AlertMessages.AMOUNT);
+        }
+
+        if(!yearField.getText().matches("^\\d{1}$")){
+            throw new InvalidFieldException(AlertMessages.YEAR);
+        }
+
+        if(!gpaField.getText().matches("^[6,7,8,9,10]{1}\\.[0-9]{1,2}$")){
+            throw new InvalidFieldException(AlertMessages.GPA);
+        }
+    };
+
     @FXML private void handleSaveClick(){
             try{
-                checkEmptyFields();
+                checkEmptyFields(); //throws EmptyFieldExcpetion
+                checkInvalidTypeFields(); //throws InvalidFieldExcpetion
 
                 String name = nameField.getText().toLowerCase();
                 String provider = providerField.getText().toLowerCase();
@@ -63,6 +83,8 @@ public class AddScholarshipController {
                 clearFields();
                 System.out.println("SaveClick Working...");
             }catch (EmptyFieldException e) {
+                e.getMessage();
+            }catch (InvalidFieldException e){
                 e.getMessage();
             }
     }
@@ -79,5 +101,9 @@ public class AddScholarshipController {
         yearField.clear();
         gpaField.clear();
         deadlineField.setValue(null);
+    }
+
+    public ScholarshipsRepository getScholarshipsRepository() {
+        return scholarshipsRepository;
     }
 }

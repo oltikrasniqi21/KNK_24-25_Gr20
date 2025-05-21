@@ -1,6 +1,8 @@
 package controllers;
 
 import Repository.NotificationRepository;
+import Services.CurrentUser;
+import Services.NotificationService;
 import Services.SceneManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -39,7 +41,6 @@ public class StudentNotificationController implements Initializable {
 
     private boolean notificationsVisible = false;
 
-    private final NotificationRepository notificationRepository = new NotificationRepository();
     private ResourceBundle bundle;
 
     @Override
@@ -60,36 +61,17 @@ public class StudentNotificationController implements Initializable {
     }
 
 
+    private final NotificationService notificationService = new NotificationService();
+
+    //perdoret te homepage controller tash
     @FXML
-    private void onViewNotificationsClicked() {
-        notificationsVisible = !notificationsVisible;
-        notificationPane.setVisible(notificationsVisible);
-        notificationPane.setManaged(notificationsVisible);
-
-        if (notificationsVisible) {
-            loadNotifications();
-            btnViewNotifications.setText(bundle.getString("hideNotificationsBtn"));
-        } else {
-            btnViewNotifications.setText(bundle.getString("viewNotificationsBtn"));
-        }
-    }
-
-    private void loadNotifications() {
-        List<Notification> notificationList = notificationRepository.getNotificationsForStudents();
-
+    public void loadNotifications() {
+        List<Notification> notificationList = notificationService.getNotificationsForCurrentStudent();
         ObservableList<Notification> observableList = FXCollections.observableArrayList(notificationList);
         notificationTable.setItems(observableList);
     }
 
-    @FXML
-    private void handleLogout(){
-        SceneManager.getInstance().loadScene(SceneLocator.LOGIN_PAGE);
-    }
 
-    @FXML
-    private void handleFaqStd() {
-        SceneManager.getInstance().loadScene(SceneLocator.MANAGE_FAQ_STUDENT_PAGE);
-    }
 
 
 }

@@ -14,8 +14,8 @@ public class Majors {
         this.name = name;
     }
     public static Majors getInstance(ResultSet rs) throws SQLException {
-        int majorId = rs.getInt("majorId");
-        int facultyId = rs.getInt("facultyId");
+        int majorId = rs.getInt("id");
+        int facultyId = rs.getInt("faculty_id");
         String name = rs.getString("name");
 
         return new Majors(majorId, facultyId, name);
