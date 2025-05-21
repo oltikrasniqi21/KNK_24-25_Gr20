@@ -1,6 +1,5 @@
 package controllers;
 
-import Database.DBCustomConnector;
 import Services.CurrentUser;
 import Services.LanguageManager;
 import Services.LoginService;
@@ -20,7 +19,7 @@ import static utils.AlertMessages.showAlert;
 
 public class LoginController {
     private SceneManager sceneManager;
-    private LoginService loginService;
+    private final LoginService loginService = new LoginService();
     private final LanguageManager languageManager = LanguageManager.getInstance();
 
     @FXML
@@ -55,7 +54,7 @@ public class LoginController {
         String password = pwdPassword.getText();
 
         try {
-            LoginService loginService = new LoginService();
+
             String role = loginService.authenticate(email, password);
 
             if (sceneManager == null) {

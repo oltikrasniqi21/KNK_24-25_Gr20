@@ -461,4 +461,19 @@ public class UsersRepository{
         }
         return false;
     }
+
+    public String getStudentDocumentPathById(int studentId) {
+        String query = "SELECT document_path FROM students WHERE id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, studentId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getString("document_path");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
