@@ -384,7 +384,7 @@ public class UsersRepository{
 
             if (resultSet.next()){
                 String status = resultSet.getString("status");
-                return "approved".equalsIgnoreCase(status);
+                return "validated".equalsIgnoreCase(status);
             }
         }catch (Exception e){
             e.printStackTrace();

@@ -85,7 +85,6 @@ CREATE TABLE News (
   id SERIAL PRIMARY KEY,
   title TEXT NOT NULL,
   summary TEXT NOT NULL,
-  content TEXT NOT NULL,
   scholarship_tag_id INT REFERENCES scholarship_tags(id) ON DELETE SET NULL,
   posted_by INT REFERENCES Users(id),
   posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -124,14 +123,6 @@ BEGIN
     END LOOP;
 END $$;
 
-
-//boni qit query per modifikim t kolonave te scholarships
-ALTER TABLE scholarships
-ADD COLUMN status VARCHAR(20);
-
-
---alter for news table
-ALTER TABLE news DROP COLUMN content
 -------------------------------------------------------------------------------------------------------------------------
 
 
