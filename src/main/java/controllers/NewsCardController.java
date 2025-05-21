@@ -53,10 +53,12 @@ public class NewsCardController {
         }
 
 
-    public void setData(String title, String summary, int scholarshipTag, String imagePath) {
+    public void setData(String title, String summary, String scholarshipTagName, String imagePath) {
             titleLabel.setText(title);
             summaryLabel.setText(summary);
-            scholarshipTagLabel.setText("Scholarship Tag: " + scholarshipTag);
+            scholarshipTagLabel.setText("Scholarship Tag: " + scholarshipTagName);
+
+
 
             if (imagePath != null && !imagePath.isEmpty()) {
                 // Convert Windows file path to URL
