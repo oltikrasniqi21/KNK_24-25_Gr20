@@ -85,22 +85,6 @@ public class ApplicationFormController {
             return false;
         }
 
-        if (gpaField.getText().isEmpty()){
-            showAlert("Gabim", "Ju lutem shkruani GPA-n tuaj");
-            return false;
-        }
-
-        try{
-            double gpa = Double.parseDouble(gpaField.getText());
-            if (gpa <= 6 || gpa >= 10){
-                showAlert("Gabim", "GPA duhet te jete midis 6 dhe 10");
-                return false;
-            }
-        }catch (NumberFormatException e){
-            showAlert("Gabim", "GPA duhet te jete nje numer valid!");
-            return false;
-        }
-
         if (transcriptFile == null){
             showAlert("Gabim", "Ju lutem ngarkoni transkripten tuaj");
             return false;
