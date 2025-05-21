@@ -1,9 +1,6 @@
 package controllers;
 
-import Services.CurrentUser;
-import Services.LanguageManager;
-import Services.LoginService;
-import Services.SceneManager;
+import Services.*;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -11,6 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import utils.AlertMessages;
 import utils.SceneLocator;
 import javafx.scene.layout.VBox;
 import java.util.Locale;
@@ -71,7 +69,7 @@ public class LoginController {
                     sceneManager.loadScene(SceneLocator.STUDENT_HOME_PAGE);
                 }
             } else {
-                showAlert("Login failed", "Incorrect email or password");
+                LocaleAlertMessages.showErrorAlert(AlertMessages.INCORRECT_CREDENTIALS);
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -2,7 +2,6 @@ package Repository;
 
 import CreateDTO.CreateUniversitiesDTO;
 import UpdateDTO.UpdateUniversitiesDTO;
-import models.Faculties;
 import models.Universities;
 
 import java.sql.*;
