@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="modalRoot" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500" prefWidth="500" spacing="20" styleClass="modal-container" stylesheets="@../css/news_modal.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NewsModalController">
+
+    <ImageView fx:id="modalImageView" fitHeight="250" fitWidth="480" preserveRatio="false" />
+
+    <VBox spacing="10">
+        <Label fx:id="modalTitleLabel" styleClass="modal-title" wrapText="true" />
+        <Label fx:id="modalSummaryLabel" styleClass="modal-summary" wrapText="true" />
+        <Label fx:id="modalTagLabel" styleClass="modal-tag" />
+    </VBox>
+</VBox>
