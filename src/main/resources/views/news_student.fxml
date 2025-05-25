@@ -7,7 +7,7 @@
    <content>
        <VBox>
        <HBox fx:id="labelHbox" alignment="CENTER">
-           <Label fx:id="welcomeText" text="Scholarship Announcements and News"/>
+           <Label fx:id="welcomeText" text="%schAnnouncementsNews"/>
        </HBox>
        <GridPane fx:id="newsGrid" alignment="CENTER" hgap="20" vgap="20">
        <columnConstraints>

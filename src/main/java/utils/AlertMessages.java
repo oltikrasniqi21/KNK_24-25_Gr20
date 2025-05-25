@@ -7,11 +7,16 @@ public class AlertMessages {
     public static final String EMPTY_FIELD_BUNDLE = "empty.field";
     public static final String EMPTY_FIELDS_BUNDLE = "empty.fields";
     public static final String SUCCESSFUL_ADD_BUNDLE = "successfulAdd.field";
+    public static final String FAILED_ADD_BUNDLE = "unSuccessfulAdd.field";
+    public static final String SUCCESSFUL_APPLICATION_BUNDLE = "successfulApplication.field";
+    public static final String SOMETHING_WRONG = "wrong.field";
     public static final String SUCCESSFUL_EDIT_BUNDLE = "successfulEdit.field";
     public static final String SELECT_ROW_BUNDLE = "selectRow.field";
     public static final String DELETE_CONFIRMATION = "confirmation.field";
     public static final String ALREADY_EXIST_SCHOLARSHIP = "alreadyExist.Schoalarship";
     public static final String DEACTIVE_CONFIRMATION = "deactive.Schoalarship";
+    public static final String INCORRECT_CREDENTIALS = "incorrect.credentials";
+    public static final String NO_VALIDATION = "noValidation";
 
     public static final String GPA = "label.gpa";
     public static final String SCHOLARSHIP = "label.scholarship";
@@ -29,6 +34,10 @@ public class AlertMessages {
     public static final String NO_MATCH = "noMatch.password";
     public static final String NO_STRONG_PASS_ERROR = "noStrongPassError.password";
     public static final String PASSWORD_HINT = "signup.passwordHint";
+
+    public static final String GPA_VALIDATION = "validation.gpa";
+
+
 
 
     public static final String INVALID_PASSWORD = "Invalid Password";

@@ -11,6 +11,7 @@ VBox {
     -fx-font-weight: bold;
 }
 
+
 .input {
     -fx-pref-width: 200px;
     -fx-padding: 5 10 5 10;

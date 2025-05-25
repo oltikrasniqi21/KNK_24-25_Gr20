@@ -4,7 +4,6 @@ import CreateDTO.CreateScholarshipDTO;
 import Exceptions.InvalidFieldException;
 import Repository.ScholarshipsRepository;
 import UpdateDTO.UpdateScholarshipDTO;
-import javafx.scene.control.Alert;
 import models.Scholarships;
 import utils.AlertMessages;
 

@@ -32,78 +32,42 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FaqAdminController">
+<VBox fx:id="mainLayout" alignment="CENTER" prefHeight="400.0" prefWidth="640.0" spacing="40" stylesheets="@../css/admin_faq.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FaqAdminController">
   <children>
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-      <children>
-            <Label layoutX="304.0" layoutY="14.0" text="%FAQ" />
-            <TableView fx:id="faqTable" layoutX="203.0" layoutY="161.0" prefHeight="200.0" prefWidth="200.0">
+      <HBox alignment="CENTER" prefHeight="38.0" prefWidth="640.0">
+         <children>
+            <Label text="%FAQ" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30">
+         <children>
+            <Label text="%questionFaq" />
+            <TextField fx:id="txtQuestion" />
+            <Label text="%answerFaq" />
+            <TextArea fx:id="txtAnswer" prefHeight="42.0" prefWidth="190.0" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER">
+         <children>
+            <TableView fx:id="faqTable" prefHeight="300.0" prefWidth="700.0">
               <columns>
-                <TableColumn fx:id="questionCol" prefWidth="99.3333740234375" text="%questionAdmin" />
-                <TableColumn fx:id="answerCol" prefWidth="99.33331298828125" text="%answerAdmin" />
+                <TableColumn fx:id="questionCol" prefWidth="350.0" text="%questionAdmin" />
+                <TableColumn fx:id="answerCol" prefWidth="350.0" text="%answerAdmin" />
               </columns>
             </TableView>
-            <Label layoutX="36.0" layoutY="57.0" text="%questionFaq" />
-            <TextField fx:id="txtQuestion" layoutX="128.0" layoutY="53.0" />
-            <Label layoutX="320.0" layoutY="57.0" text="%answerFaq" />
-            <TextArea fx:id="txtAnswer" layoutX="403.0" layoutY="45.0" prefHeight="42.0" prefWidth="190.0" />
-            <Button layoutX="271.0" layoutY="95.0" mnemonicParsing="false" onAction="#handleAdd" text="%addBtn" />
-            <Button layoutX="155.0" layoutY="95.0" mnemonicParsing="false" onAction="#handleUpdate" text="%updateBtn" />
-            <Button layoutX="370.0" layoutY="95.0" mnemonicParsing="false" onAction="#handleDelete" text="%deleteBtn" />
-            <Button layoutX="14.0" layoutY="19.0" mnemonicParsing="false" onAction="#handleBack" text="%btnBack" />
-      </children>
-    </AnchorPane>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#handleUpdate" text="%updateBtn" />
+            <VBox prefHeight="100.0" prefWidth="90.0" />
+            <Button mnemonicParsing="false" onAction="#handleAdd" text="%addBtn" />
+            <VBox prefHeight="100.0" prefWidth="90.0" />
+            <Button mnemonicParsing="false" onAction="#handleDelete" text="%deleteBtn" />
+         </children>
+      </HBox>
   </children>
 </VBox>

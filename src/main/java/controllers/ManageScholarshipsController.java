@@ -101,9 +101,6 @@ public class ManageScholarshipsController {
         }
     }
 
-    @FXML private void handleBackClick(){
-        SceneManager.getInstance().loadScene(SceneLocator.ADMIN_HOME_PAGE);
-    }
 
     @FXML private void handleSearchClick(){
         String currentSearch = searchStudent.getText().toLowerCase();
@@ -136,7 +133,7 @@ public class ManageScholarshipsController {
     }
 
     @FXML private void handleAddScholarshipClick(){
-        SceneManager.getInstance().loadScene(SceneLocator.ADD_SCHOLARSHIPS_PAGE);
+        SceneManager.loadCenterContent(SceneLocator.ADD_SCHOLARSHIPS_PAGE);
     }
 
     @FXML private void handleEditClick(){
@@ -144,7 +141,7 @@ public class ManageScholarshipsController {
         if(passedSelectedScholarship == null){
             LocaleAlertMessages.showInformationAlert(AlertMessages.SELECT_ROW_BUNDLE);
         }else{
-            SceneManager.getInstance().loadScene(SceneLocator.EDIT_SCHOLARSHIPS_PAGE);
+            SceneManager.loadCenterContent(SceneLocator.EDIT_SCHOLARSHIPS_PAGE);
         }
 
     }

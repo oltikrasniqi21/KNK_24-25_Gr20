@@ -1,8 +1,11 @@
 package controllers;
 
 import CreateDTO.CreateApplicationDto;
+import Exceptions.EmptyFieldException;
+import Exceptions.InvalidFieldException;
 import Services.ApplicationService;
 import Services.CurrentUser;
+import Services.LocaleAlertMessages;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
@@ -10,10 +13,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import models.Scholarships;
+import utils.AlertMessages;
 
 import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
 
 public class ApplicationFormController {
 
@@ -90,17 +95,6 @@ public class ApplicationFormController {
             return false;
         }
 
-        try{
-            double gpa = Double.parseDouble(gpaField.getText());
-            if (gpa <= 6 || gpa >= 10){
-                showAlert("Gabim", "GPA duhet te jete midis 6 dhe 10");
-                return false;
-            }
-        }catch (NumberFormatException e){
-            showAlert("Gabim", "GPA duhet te jete nje numer valid!");
-            return false;
-        }
-
         if (transcriptFile == null){
             showAlert("Gabim", "Ju lutem ngarkoni transkripten tuaj");
             return false;
@@ -119,12 +113,10 @@ public class ApplicationFormController {
         );
     }
 
-
     private void resetForm(){
         scholarshipComboBox.setValue(null);
         gpaField.clear();
     }
-
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -132,4 +124,5 @@ public class ApplicationFormController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
 }

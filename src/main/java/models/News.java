@@ -1,6 +1,5 @@
 package models;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -38,14 +37,6 @@ public class News {
             return new News(newsId, title, scholarshipTagId, postedBy, postedAt, summary, imagePath);
         }
 
-
-    public Timestamp getPostedAt() {
-        return postedAt;
-    }
-
-    public int getPostedBy() {
-        return postedBy;
-    }
 
     public int getScholarshipTagId() {
         return scholarshipTagId;

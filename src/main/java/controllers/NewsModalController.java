@@ -5,7 +5,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 public class NewsModalController {
 
@@ -14,9 +13,6 @@ public class NewsModalController {
     @FXML private Label modalTitleLabel;
     @FXML private Label modalSummaryLabel;
     @FXML private Label modalTagLabel;
-
-    StudentHomePageController studentHomePageController = new StudentHomePageController();
-
 
 
     public void setModalData(String title, String summary, String tag, String imagePath) {

@@ -3,6 +3,8 @@ package controllers;
 import CreateDTO.CreateFacultiesDTO;
 import CreateDTO.CreateMajorsDTO;
 import CreateDTO.CreateUniversitiesDTO;
+import Exceptions.EmptyFieldException;
+import Services.LocaleAlertMessages;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import models.Universities;
 import Services.ManageUniversitiesService;
+import utils.AlertMessages;
 
 import java.util.*;
 
@@ -150,7 +153,7 @@ public class ManageUniversitiesController {
                 universityFilterForMajor.getSelectionModel().selectFirst();
             }
         } catch (Exception e) {
-            showAlert(ERROR, "Error loading universities: " + e.getMessage());
+            LocaleAlertMessages.showErrorAlert(AlertMessages.SOMETHING_WRONG);
         }
     }
 
@@ -161,8 +164,7 @@ public class ManageUniversitiesController {
         String country = universityCountryField.getText().trim();
 
         if (name.isEmpty() || city.isEmpty() || country.isEmpty()) {
-            showAlert(ERROR, "Please fill in all university fields.");
-            return;
+            throw new EmptyFieldException();
         }
 
         try {
@@ -177,10 +179,10 @@ public class ManageUniversitiesController {
                 universityFilterForFaculty.getSelectionModel().select(newUni.getName());
                 universityFilterForMajor.getSelectionModel().select(newUni.getName());
             } else {
-                showAlert(ERROR, "Failed to add university.");
+               LocaleAlertMessages.showErrorAlert(AlertMessages.FAILED_ADD_BUNDLE);
             }
         } catch (Exception e) {
-            showAlert(ERROR, "Error adding university: " + e.getMessage());
+            LocaleAlertMessages.showErrorAlert(AlertMessages.SOMETHING_WRONG);
         }
     }
 
@@ -188,7 +190,7 @@ public class ManageUniversitiesController {
     public void onDeleteUniversity(ActionEvent event) {
         UniversityItem selected = universityTable.getSelectionModel().getSelectedItem();
         if (selected == null) {
-            showAlert(ERROR, "Please select a university to delete.");
+            LocaleAlertMessages.showErrorAlert(AlertMessages.SELECT_ROW_BUNDLE);
             return;
         }
 
@@ -200,10 +202,10 @@ public class ManageUniversitiesController {
                 universityCountryField.clear();
                 loadUniversities();
             } else {
-                showAlert(ERROR, "Failed to delete university.");
+                LocaleAlertMessages.showErrorAlert(AlertMessages.SOMETHING_WRONG);
             }
         } catch (Exception e) {
-            showAlert(ERROR, "Error deleting university: " + e.getMessage());
+            LocaleAlertMessages.showErrorAlert(AlertMessages.SOMETHING_WRONG);
         }
     }
 
@@ -230,7 +232,7 @@ public class ManageUniversitiesController {
                 majorTable.setItems(majorItems);
             }
         } catch (Exception e) {
-            showAlert(ERROR, "Error loading faculties: " + e.getMessage());
+            LocaleAlertMessages.showErrorAlert(AlertMessages.SOMETHING_WRONG);
         }
     }
 
@@ -254,7 +256,7 @@ public class ManageUniversitiesController {
                 majorTable.setItems(majorItems);
             }
         } catch (Exception e) {
-            showAlert(ERROR, "Error loading faculties: " + e.getMessage());
+            LocaleAlertMessages.showErrorAlert(AlertMessages.SOMETHING_WRONG);
         }
     }
 
@@ -269,7 +271,7 @@ public class ManageUniversitiesController {
 
             majorTable.setItems(majorItems);
         } catch (Exception e) {
-            showAlert(ERROR, "Error loading majors: " + e.getMessage());
+            LocaleAlertMessages.showErrorAlert(AlertMessages.SOMETHING_WRONG);
         }
     }
 
@@ -295,10 +297,10 @@ public class ManageUniversitiesController {
                 loadFacultiesDropdown(universityId);
                 facultyFilterForMajor.getSelectionModel().select(newFaculty.getName());
             } else {
-                showAlert(ERROR, "Failed to add faculty.");
+                LocaleAlertMessages.showErrorAlert(AlertMessages.FAILED_ADD_BUNDLE);
             }
         } catch (Exception e) {
-            showAlert(ERROR, "Error adding faculty: " + e.getMessage());
+            LocaleAlertMessages.showErrorAlert(AlertMessages.SOMETHING_WRONG);
         }
     }
 
@@ -306,7 +308,7 @@ public class ManageUniversitiesController {
     public void onDeleteFaculty(ActionEvent event) {
         FacultyItem selected = facultyTable.getSelectionModel().getSelectedItem();
         if (selected == null) {
-            showAlert(ERROR, "Please select a faculty to delete.");
+            LocaleAlertMessages.showErrorAlert(AlertMessages.SELECT_ROW_BUNDLE);
             return;
         }
 
@@ -318,10 +320,10 @@ public class ManageUniversitiesController {
                 loadFacultiesByUniversity(selected.getUniversityId());
                 loadFacultiesDropdown(selected.getUniversityId());
             } else {
-                showAlert(ERROR, "Failed to delete faculty.");
+                LocaleAlertMessages.showErrorAlert(AlertMessages.SELECT_ROW_BUNDLE);
             }
         } catch (Exception e) {
-            showAlert(ERROR, "Error deleting faculty: " + e.getMessage());
+            LocaleAlertMessages.showErrorAlert(AlertMessages.SOMETHING_WRONG);
         }
     }
 

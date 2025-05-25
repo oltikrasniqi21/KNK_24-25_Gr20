@@ -1,6 +1,5 @@
 package controllers;
 
-import Database.DBCustomConnector;
 import Exceptions.EmptyFieldException;
 import Exceptions.InvalidFieldException;
 import Repository.UsersRepository;
@@ -20,7 +19,6 @@ import utils.PasswordUtils;
 import utils.SceneLocator;
 import javafx.scene.layout.*;
 
-import java.sql.Connection;
 
 import static utils.AlertMessages.*;
 
@@ -64,16 +62,6 @@ public class MyProfileController {
         emailField.setEditable(false);
     }
 
-    @FXML private void handleBackClick() {
-        SceneManager.getInstance().loadScene(SceneLocator.STUDENT_HOME_PAGE);
-    }
-
-    @FXML private void handleEditClick(){
-            firstNameField.setEditable(true);
-            lastNameField.setEditable(true);
-            emailField.setEditable(true);
-            editable=true;
-    }
 
     @FXML private void handleSaveClick(){
         if(passwordPane.isVisible()==true){
@@ -151,7 +139,7 @@ public class MyProfileController {
             passwordPane.setVisible(true);
 
             String oldPassword = usersRepository.getHashedPassword(CurrentUser.getUserId());
-            //Ndryshimi dinamik i label
+
             oldPasswordField.textProperty().addListener((obs, oldVal, newVal) -> {
                 if (PasswordUtils.checkPasswordMatch(newVal, oldPassword)) {
                     passMatchLabel.setText(LocaleAlertMessages.getLocalizedMessage(AlertMessages.MATCH));

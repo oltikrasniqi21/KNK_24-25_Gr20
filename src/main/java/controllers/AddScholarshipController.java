@@ -4,24 +4,17 @@ import CreateDTO.CreateScholarshipDTO;
 import Exceptions.EmptyFieldException;
 import Exceptions.InvalidFieldException;
 import Repository.FacultiesRepository;
-import Repository.ScholarshipsRepository;
-import Repository.UsersRepository;
-import Services.CurrentUser;
 import Services.SceneManager;
 import Services.ScholarshipService;
-import Services.UniversityService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import models.Faculties;
-import models.Students;
-import models.Users;
 import utils.AlertMessages;
 import utils.SceneLocator;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 
 public class AddScholarshipController {
@@ -42,7 +35,7 @@ public class AddScholarshipController {
     }
 
     @FXML private void handleBackClick(){
-        SceneManager.getInstance().loadScene(SceneLocator.MANAGE_SCHOLARSHIPS_PAGE);
+        SceneManager.loadCenterContent(SceneLocator.MANAGE_SCHOLARSHIPS_PAGE);
     }
 
     @FXML public void initialize(){
@@ -76,15 +69,16 @@ public class AddScholarshipController {
             throw new InvalidFieldException(AlertMessages.AMOUNT);
         }
 
-        if(!gpaField.getText().matches("^[6,7,8,9,10]{1}\\.[0-9]{1,2}$")){
+        if(!gpaField.getText().matches("^[6,7,8,9,10]{1}\\.[0-9]{1,2}$")
+        && gpaField.getText() == null && gpaField.getText().isEmpty()){
             throw new InvalidFieldException(AlertMessages.GPA);
         }
     };
 
     @FXML private void handleSaveClick(){
             try{
-                checkEmptyFields(); //can throw EmptyFieldExcpetion
-                checkInvalidTypeFields(); //can throw InvalidFieldExcpetion
+                checkEmptyFields();
+                checkInvalidTypeFields();
 
                 String name = nameField.getText().toLowerCase();
                 String provider = providerField.getText().toLowerCase();
@@ -93,7 +87,6 @@ public class AddScholarshipController {
                 double gpa = Double.parseDouble(gpaField.getText());
                 LocalDate deadline = deadlineField.getValue();
 
-                //Kthimi i selected faculties ne arraylist me string te emrave te fakulteteve
                 ObservableList<Faculties> selectedItems = facultiesListView.getSelectionModel().getSelectedItems();
                 StringBuilder facultiesString = new StringBuilder();
 

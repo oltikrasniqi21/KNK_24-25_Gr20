@@ -4,10 +4,12 @@ import Repository.FacultiesRepository;
 import Repository.MajorsRepository;
 import Repository.UniversitiesRepository;
 import Repository.UsersRepository;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import models.Faculties;
 import models.Majors;
 import models.Universities;
+import utils.AlertMessages;
 
 import java.util.HashMap;
 import java.util.List;
@@ -40,7 +42,7 @@ public class UniversityService {
                 universityNameToId.put(uni.getName(), uni.getUniversityId());
             }
         } catch (Exception e) {
-            showAlert(ERROR, "Failed to load universities: " + e.getMessage());
+            LocaleAlertMessages.showErrorAlert(AlertMessages.SOMETHING_WRONG);
         }
     }
 
@@ -59,7 +61,7 @@ public class UniversityService {
             facultyComboBox.setValue(null);
             majorComboBox.getItems().clear();
         } catch (Exception e) {
-            showAlert(ERROR, "Failed to load faculties: " + e.getMessage());
+            LocaleAlertMessages.showErrorAlert(AlertMessages.SOMETHING_WRONG);
         }
     }
 
@@ -75,7 +77,7 @@ public class UniversityService {
             }
             majorComboBox.setValue(null);
         } catch (Exception e) {
-            showAlert(ERROR, "Failed to load majors: " + e.getMessage());
+            LocaleAlertMessages.showErrorAlert(AlertMessages.SOMETHING_WRONG);
         }
     }
 }

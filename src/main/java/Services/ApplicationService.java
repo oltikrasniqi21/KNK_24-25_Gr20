@@ -52,7 +52,7 @@ public class ApplicationService {
             return "Data e aplikimit nuk mund te jete ne te ardhmen!";
         }
 
-        if (dto.getGpa() < 6.0 || dto.getGpa() > 10.0){
+        if (dto.getGpa() < 6 || dto.getGpa() > 10){
             return "GPA duhet te jete midis 6 dhe 10!";
         }
 
@@ -85,18 +85,6 @@ public class ApplicationService {
         return applicationsRepository.update(dto);
     }
 
-    public List<Applications> getApplicationsByStudentId(int studentId){
-        List<Applications> result = new ArrayList<>();
-        List<Applications> allApps = applicationsRepository.getAll();
-
-        for(Applications app : allApps){
-            if(app.getStudentId() == studentId){
-                result.add(app);
-            }
-        }
-
-        return result;
-    }
 
     public Applications getApplicationById(int id){
         return applicationsRepository.getById(id);
